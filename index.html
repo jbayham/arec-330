@@ -1,0 +1,16 @@
+---
+layout: default
+---
+
+
+
+<div class="home">
+	
+<h1>{{ site.subtitle }}</h1>
+
+{% assign img_path = site.baseurl | append: '/_images/banner_900x320.png' %}
+{% include image.html url=img_path width="900" align="center" %}
+
+{{ site.description }}
+
+</div>
