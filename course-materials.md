@@ -8,19 +8,12 @@ You can download course materials from this [sharepoint folder](https://colostat
 
 ## Books
 
-- McCarl & Spreen. *Applied Mathematical Programming Using Algebraic Systems*. [Available here](https://agecoresearch.tamu.edu/mccarl/regbook/)
-- Miranda & Fackler. *Applied Computational Economics and Finance*.  
+- Knaflic, Cole. [Storytelling With Data: A Data Visualization Guide for Business Professionals](https://colostate.primo.exlibrisgroup.com/permalink/01COLSU_INST/via34g/alma991033629559603361), Wiley, 2015. *You can access an online version of this book through the CSU Library*
 
-## Supplemental Readings
-
-Howitt, R.E. (1995). "Positive Mathematical Programming." *American Journal of Agricultural Economics*, 77(2): 329-342. [Link](https://watershed.ucdavis.edu/sites/g/files/dgvnsk8531/files/products/2021-12/Positive%20Math%20Programing.pdf)
-
-Fenichel, E. P., & Abbott, J. K. (2014). Natural capital: from metaphor to measurement. *Journal of the Association of Environmental and Resource Economists*, 1(1/2), 1-27.
-
-Burt, O. R. (1964). Optimal resource use over time with an application to ground water. *Management science*, 11(1), 80-93. 
 
 ## Software
 
 - R: [Download R](https://cran.r-project.org/)
 - RStudio: [Download RStudio](https://posit.co/download/rstudio-desktop/)
+- VS Code: [Download VS Code](https://code.visualstudio.com/)
 

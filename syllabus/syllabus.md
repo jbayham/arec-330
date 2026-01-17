@@ -9,44 +9,95 @@ format:
 
 ## Course Information
 
-- **Location:** Eddy 106  
-- **Time:** Tuesday and Thursday, 9:30–10:45 AM  
+- **Location:** Nutrien 135 (lecture) and Nutrien 103 (labs)  
+- **Time:** Wednesday 1:00 - 1:50 PM and Friday, 1:00 – 2:40 PM  
 - **Instructor:** Jude Bayham  
   - Office: Nutrien 203  
   - Email: [jbayham@colostate.edu](mailto:jbayham@colostate.edu)  
   - Office Hours: Monday and Wednesday 1–2, or by appointment ([book here](https://outlook.office.com/bookwithme/user/8f601447c7934b3fb7dc895f4140ffe4@colostate.edu?anonymous&ismsaljsauthenabled&ep=plink))  
-
+- **Teaching Assistant:** Charlotte Wachter  
+  - Email: [Charlotte.Wachter@colostate.edu](mailto:Charlotte.Wachter@colostate.edu)
+  - Office Hours: TBD
 
 ## Course Description
 
-This course provides graduate students in agricultural, environmental, and resource economics with a rigorous introduction to optimization methods used in economic modeling and policy analysis. Emphasizing both theory and computation, the course covers linear and nonlinear programming, dynamic optimization, and numerical methods essential for solving complex economic problems. Students will learn to formulate, solve, and interpret optimization models using R, with applications drawn from land use planning, natural resource management, agricultural production, and environmental policy design. The course equips students with practical modeling skills and analytical tools that support evidence-based research and decision-making in applied economics.
-
+The world generates 2.5 quintillion bytes of data each day. One of the key modern business challenges is transforming that data into actionable insights that improve decision making (i.e., data-driven decision making). Transforming data into information is not magic. It requires understanding the decision problem, organizing and processing data, analyzing data, and finally presenting information. This course will introduce you to this process of transforming data into actionable insights and build a core set of competencies with modern software. 
 
 ## Learning Objectives
 
 By the end of this course, students should be able to:
 
-1. Formulate and solve numerical optimization models in economics.
-2. Use optimization software to solve economic optimization problems (with a focus on R).
-3. Interpret results from mathematical programming models in applied settings.
+1.  Recognize how to efficiently acquire data from a variety of sources
 
-## Prerequisites
+2.  Implement best practices for using software
 
-AREC 506 or equivalent. I assume students are familiar with basic microeconomic theory (e.g., producer, consumer, general equilibrium) and constrained and unconstrained optimization.
+3.  Demonstrate data literacy
 
-## Textbooks and Readings
+4.  Use R and data visualization tools to read, manipulate, and organize data in a variety of structures and formats
 
-- **Required:**  
-  McCarl, Bruce & Spreen, Thomas. *Applied Mathematical Programming Using Algebraic Systems*.  
-  [Available online](https://agecoresearch.tamu.edu/mccarl/regbook/)
+5.  Examine real-world business and policy questions using appropriate data, analytical techniques, and visualizations
 
-- **Additional References:**  
-  - Judd, Kenneth. *Numerical Methods in Economics*. 1998. [Available online](https://www.business.uzh.ch/dam/jcr:ffffffff-cd5d-ce16-0000-000076c01f71/NumericalMethodsJuddPartIPP1-307.pdf) 
-  - Miranda & Fackler. *Applied Computational Economics and Finance*  
+6.  Support business and policy recommendations by conveying findings as a comprehensive story in a manner appropriate for business settings and policy makers
 
-[Accessible via CSU Sharepoint](https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/EumEAvRXgA9AkUlVJo7OIgQBZbvJ-whH9woXobQ7vLWd4A?e=0rMz0D)
+7.  Construct appropriate summary statistics and analyses to inform business and policy decisions
 
-Supplemental readings and journal articles may be assigned.
+8.  Design interactive data visualizations to inform business and policy decisions
+
+This course will contribute to several DARE Learning Outcomes:
+
+- You will develop **Technical Competence** and **Problem-solving Skills** while studying *Ag Business* and *Environmental and Resource Economics* issues, not to mention, learning to code in R and developing visualizations in Tableau.
+
+- You will develop **Communication Skills** and **Leadership** skills as you work in teams on problem-driven projects and communicate the results of your analyses to the instructors and your peers.
+
+
+## Course Materials and Software
+
+All [course materials](../course-materials) are freely available on the course website. There is no single textbook that you need to purchase. Copyright restricted materials will be posted on the [Canvas site](https://colostate.instructure.com/courses/218386). 
+
+The course will require the use of [R (statistical computing software)](https://www.r-project.org/) and its companion [RStudio (integrated development environment)](https://posit.co/download/rstudio-desktop/). You can download R from the Comprehensive R Archive Network (CRAN) here: <https://cran.r-project.org/mirrors.html>. After installing R, you can download and install RStudio from here: <https://posit.co/download/rstudio-desktop/>. Detailed instructions for installing R and RStudio are here : <https://rstudio-education.github.io/hopr/starting.html>.
+. R is an open source platform free to anyone. You will need to use these tools outside of class, so we recommend installing them on your own computer. Otherwise, it will be your responsibility to use the computer labs outside of class to complete assignments.
+
+We will also use Github throughout the semester. Please sign up for a github education account to get free access to these tools: <https://github.com/education/students>. A bonus of using github is that you will have access to GitHub Copilot, an AI coding assistant that can help you write code faster and with less effort.
+
+
+
+We will use iClicker software to take attendance at lecture and assess understanding of the material. If you have not already joined the course, you can do so using this link: <https://join.iclicker.com/NBFG>>
+
+## Course Structure
+
+The course is designed to introduce you to essential data analysis skills as well as effective communication of data insights. The first half of the course will focus on building foundational skills in data acquisition, cleaning, manipulation, and visualization using R. The second half of the course will emphasize applying these skills to real-world problems through projects and presentations.
+
+### Assignments
+
+The first part of the course will consist of problem sets that will help you build your skills in R and data analysis. 
+
+### Exams
+
+There will be a midterm and final exam to assess your understanding of the course material. The exams will focus on concepts covered in the course. These exams will be on paper in class.
+
+### Projects
+
+The second part of the course will involve a modeling project where you will apply the skills learned in class to a real-world problem. You will work in teams to complete the project, which will culminate in a written report and presentation.
+
+Many careers require teamwork in some form. In this course, you will work in teams to complete your assignments and present your work. Team projects will train students to collaborate with peers as they likely will do in the workplace. Group work can also lead to freeriding so, students will evaluate themselves and each other after each project. The evaluation will provide the students the opportunity to explain their contribution and those of their peers. The instructors will be available to resolve disputes within a team. However, the most productive arrangement for this class (and in your future workplace) is to communicate expectations with your colleagues and do your part of the project.
+
+### Student Websites 
+
+Students will create a website that will serve as a repository for their project and assignments. If this is your first time creating a website, we recommend [google sites](https://sites.google.com) - a free and easy to use website editing and hosting tool. It will also serve as a record of their work in a presentable format that can be shared within or outside of CSU. *There are many other tools for building and hosting websites. Please come talk to us if you have another option in mind or would like learn a more advanced option.*
+
+### Attendance and Participation 
+
+There will be iClicker questions incorporated into most lecture materials. These questions are intended to test understanding of lecture materials and provide the instructors with real-time feedback on comprehension. Responses will account for a small portion of the overall course grade.
+
+
+
+
+## Course Expectations and Policies
+
+We will communicate with you through your CSU email and through Canvas. Email is the best way to reach us. When many students have the same kind of question, we may reply to the entire class or post documents on the class website.
+
+During class, please limit use of phones and tablets to class-relevant activity. Be respectful of each other and your instructors/TA. Much of the course content will require the use of computers. Please use laptops and lab computers appropriately (do not watch media in class).
+
 
 ## Assignments and Grading
 
