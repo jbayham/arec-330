@@ -23,6 +23,9 @@ github_username:  jbayham
 # Build settings
 markdown: kramdown
 
+kramdown:
+  toc_levels: 2..2
+
 # Other options
 permalink: blog/:year/:month/:title
 excerpt_separator: "<!--more-->"

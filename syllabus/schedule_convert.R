@@ -3,8 +3,8 @@ library(readxl)
 library(dplyr)
 
 # Load the CSV
-schedule <- read_excel("syllabus/AREC 615 Class Schedule.xlsx",sheet = "FA2025") %>%
-  select(-week) %>%
+schedule <- read_excel("syllabus/class_schedule.xlsx",sheet = "Sp2026") %>%
+  #select(-week) %>%
   mutate(across(topic:due, ~ ifelse(is.na(.), "", .)))
 
 # Convert date to character for YAML compatibility

@@ -7,10 +7,11 @@ permalink: /schedule/
 <table>
   <thead>
     <tr>
-      <th style="width: 10%;">Date</th>
-      <th style="width: 55%;">Topic</th>
-      <th style="width: 20%;">Reading</th>
-      <th style="width: 15%;">Due</th>
+      <th style="width: 5%;">Week</th>
+      <th style="width: 7%;">Date</th>
+      <th style="width: 30%;">Topic</th>
+      <th style="width: 20%;">Lab</th>
+      <th style="width: 10%;">Due</th>
     </tr>
   </thead>
   <tbody>
@@ -23,9 +24,10 @@ permalink: /schedule/
     {% else %}
       <tr>
     {% endif %}
+      <td>{{ item.week }}</td>
       <td>{{ item.date | date: "%b %d" }}</td>
       <td>{{ item.topic }}</td>
-      <td>{{ item.reading }}</td>
+      <td>{{ item.lab }}</td>
       <td>{{ item.due }}</td>
     </tr>
     {% endfor %}

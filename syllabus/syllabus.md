@@ -7,6 +7,9 @@ format:
     pdf-engine: xelatex
 ---
 
+This syllabus is a living document. I will update it as needed throughout the semester. Please check back periodically for updates.
+
+
 ## Course Information
 
 - **Location:** Nutrien 135 (lecture) and Nutrien 103 (labs)  
@@ -19,6 +22,10 @@ format:
   - Email: [Charlotte.Wachter@colostate.edu](mailto:Charlotte.Wachter@colostate.edu)
   - Office Hours: TBD
 
+**Table of Contents**
+
+* toc
+{:toc}
 ## Course Description
 
 The world generates 2.5 quintillion bytes of data each day. One of the key modern business challenges is transforming that data into actionable insights that improve decision making (i.e., data-driven decision making). Transforming data into information is not magic. It requires understanding the decision problem, organizing and processing data, analyzing data, and finally presenting information. This course will introduce you to this process of transforming data into actionable insights and build a core set of competencies with modern software. 
@@ -52,10 +59,21 @@ This course will contribute to several DARE Learning Outcomes:
 
 ## Course Materials and Software
 
-All [course materials](../course-materials) are freely available on the course website. There is no single textbook that you need to purchase. Copyright restricted materials will be posted on the [Canvas site](https://colostate.instructure.com/courses/218386). 
+All [course materials](../course-materials) are freely available on the course website. There is no single textbook that you need to purchase. However, I will assign readings out of the following book:
 
-The course will require the use of [R (statistical computing software)](https://www.r-project.org/) and its companion [RStudio (integrated development environment)](https://posit.co/download/rstudio-desktop/). You can download R from the Comprehensive R Archive Network (CRAN) here: <https://cran.r-project.org/mirrors.html>. After installing R, you can download and install RStudio from here: <https://posit.co/download/rstudio-desktop/>. Detailed instructions for installing R and RStudio are here : <https://rstudio-education.github.io/hopr/starting.html>.
-. R is an open source platform free to anyone. You will need to use these tools outside of class, so we recommend installing them on your own computer. Otherwise, it will be your responsibility to use the computer labs outside of class to complete assignments.
+- Knaflic, Cole. [Storytelling With Data: A Data Visualization Guide for Business Professionals](https://colostate.primo.exlibrisgroup.com/permalink/01COLSU_INST/via34g/alma991033629559603361), Wiley, 2015. *You can access an online version of this book through the CSU Library*
+
+
+I will post copyright-restricted materials on the [Canvas site](https://colostate.instructure.com/courses/218386). 
+
+The course will require the use of [R (statistical computing software)](https://www.r-project.org/) and its companion [RStudio (integrated development environment)](https://posit.co/download/rstudio-desktop/), as well as [Visual Studio Code (VS Code)](https://code.visualstudio.com/).
+
+- You can download R from the Comprehensive R Archive Network (CRAN) here: <https://cran.r-project.org/mirrors.html>. After installing R, you can download and install RStudio from here: <https://posit.co/download/rstudio-desktop/>. Detailed instructions for installing R and RStudio are here : <https://rstudio-education.github.io/hopr/starting.html>.
+
+- You can download VS Code here: <https://code.visualstudio.com/download>. Detailed instructions for installing VS Code are here: <https://code.visualstudio.com/docs/setup/setup-overview>.
+ 
+ 
+You will need to use these tools outside of class, so we recommend installing them on your own computer. Otherwise, it will be your responsibility to use the computer labs outside of class to complete assignments.
 
 We will also use Github throughout the semester. Please sign up for a github education account to get free access to these tools: <https://github.com/education/students>. A bonus of using github is that you will have access to GitHub Copilot, an AI coding assistant that can help you write code faster and with less effort.
 
@@ -67,9 +85,9 @@ We will use iClicker software to take attendance at lecture and assess understan
 
 The course is designed to introduce you to essential data analysis skills as well as effective communication of data insights. The first half of the course will focus on building foundational skills in data acquisition, cleaning, manipulation, and visualization using R. The second half of the course will emphasize applying these skills to real-world problems through projects and presentations.
 
-### Assignments
+### Lab Assignments
 
-The first part of the course will consist of problem sets that will help you build your skills in R and data analysis. 
+The first part of the course will consist of lab assignments designed to build your skills in R and data analysis. 
 
 ### Exams
 
@@ -77,13 +95,13 @@ There will be a midterm and final exam to assess your understanding of the cours
 
 ### Projects
 
-The second part of the course will involve a modeling project where you will apply the skills learned in class to a real-world problem. You will work in teams to complete the project, which will culminate in a written report and presentation.
+The second part of the course will involve a data analsysis project where you will apply the skills learned in class to a real-world problem. You will work in teams to complete the project, which will culminate in a written report and presentation.
 
 Many careers require teamwork in some form. In this course, you will work in teams to complete your assignments and present your work. Team projects will train students to collaborate with peers as they likely will do in the workplace. Group work can also lead to freeriding so, students will evaluate themselves and each other after each project. The evaluation will provide the students the opportunity to explain their contribution and those of their peers. The instructors will be available to resolve disputes within a team. However, the most productive arrangement for this class (and in your future workplace) is to communicate expectations with your colleagues and do your part of the project.
 
 ### Student Websites 
 
-Students will create a website that will serve as a repository for their project and assignments. If this is your first time creating a website, we recommend [google sites](https://sites.google.com) - a free and easy to use website editing and hosting tool. It will also serve as a record of their work in a presentable format that can be shared within or outside of CSU. *There are many other tools for building and hosting websites. Please come talk to us if you have another option in mind or would like learn a more advanced option.*
+Students will create a website that will serve as a repository for their project. If this is your first time creating a website, I recommend [google sites](https://sites.google.com) - a free and easy to use website editing and hosting tool. It will also serve as a record of their work in a presentable format that can be shared within or outside of CSU. *There are many other tools for building and hosting websites. Please come talk to me if you have another option in mind or would like learn a more advanced option.*
 
 ### Attendance and Participation 
 
@@ -91,72 +109,76 @@ There will be iClicker questions incorporated into most lecture materials. These
 
 
 
-
-## Course Expectations and Policies
-
-We will communicate with you through your CSU email and through Canvas. Email is the best way to reach us. When many students have the same kind of question, we may reply to the entire class or post documents on the class website.
-
-During class, please limit use of phones and tablets to class-relevant activity. Be respectful of each other and your instructors/TA. Much of the course content will require the use of computers. Please use laptops and lab computers appropriately (do not watch media in class).
-
-
 ## Assignments and Grading
 
 | Component                | Percentage |
 |--------------------------|------------:|
-| Problem sets (∼4)       | 20%        |
-| Midterm Exam            | 20%        |
-| Final Exam              | 30%        |
-| Modeling project        | 25%       |
-| Participation           | 5%         |
+| Lab Assignments         | 30%        |
+| Midterm Exam            | 30%        |
+| Data Analysis Project    | 30%       |
+| Participation           | 10%         |
 
-I will use the standard CSU grading scale including + and - where the thresholds are defined at 2 and 8 of each 10-point range.
-
-### Homework
-
-There will be about 4 problem sets covering the material and tools covered in class. The problem sets will constitute the majority of the work during the first part of the course. 
-
-### Exams
-
-There will be a midterm and final in-class exam. The exams will be written and not require you to run code on a computer. The final exam will be cumulative. 
-
-### Modeling Project
-
-As part of this course, you will complete an applied modeling project that allows you to integrate the optimization techniques learned in class with your research interests. The project has three main components:
-
-- **Model Identification and Replication**: Select a peer-reviewed journal article or working paper that includes a mathematical programming model (linear, nonlinear, or dynamic). You will analyze the structure of the model, including its objective function, constraints, and underlying economic rationale. Then, replicate the model using R, using your own code and data where appropriate.
-
-- **Model Extension**: Propose and implement a meaningful extension to the original model. This could involve relaxing an assumption, adding a constraint, changing the objective function, introducing stochastic elements, or embedding the model in a dynamic framework. The goal is to demonstrate your ability to not only understand existing models but also contribute original insights.
-
-- **Written Report and Presentation**: Submit a short technical report (approximately 5–8 pages) describing the original model, your replication results, your extension, and the economic interpretation of your findings. The report should include code snippets and relevant figures or tables. You will also give a brief presentation of your project at the end of the semester.
-
-- **Deliverables**:
-
-    - Project Proposal: Submit a one-page proposal identifying your chosen article, model type, and intended extension.
-
-    - Final Report and Code: The code must be reproducible.
-
-    - Presentation: During the final two weeks of the course
+Letter grades will be assigned based on the conventional CSU grading scale (93% or more = A, 90% - 92% = A-, 88% - 89% = B+, 83% - 87% = B, 80% - 82% = B-, 78% - 79% = C+, 73% - 77% = C, 70% - 72% = C-, 60% - 69% = D, less than 60% = F)
 
 
 
-## Tentative Schedule of Topics
+## Course Expectations and Policies
 
-1. **Modeling Basics**
-   - Problem setup and components
-   - Introduction to R
+I will communicate with you through your CSU email and through Canvas. Email is the best way to reach me. When many students have the same kind of question, I may reply to the entire class or post documents on the class website.
 
-2. **Linear Programming**
-   - Solution methods and interpretation
-   - Duality and input-output models
+During class, please limit use of phones and tablets to class-relevant activity. Be respectful of each other and your instructors/TA. Much of the course content will require the use of computers. Please use laptops and lab computers appropriately (do not watch media in class).
 
-3. **Nonlinear Programming**
-   - Positive Mathematical Programming (PMP)
-   - Computable General Equilibrium (CGE)
-   - Risk and stochasticity
 
-4. **Dynamic Optimization**
-   - Dynamic programming
-   - Optimal control
+## AI/LLM Tools (drafted with the assistance of ChatGPT)
+
+This course encourages the responsible use of modern analytical tools, including artificial intelligence (AI) and large language models (LLMs) such as ChatGPT, GitHub Copilot, and similar systems. These tools are increasingly used in professional data analysis, programming, and decision-making contexts. Learning how to use them critically, transparently, and ethically is an explicit objective of this course.
+
+At the same time, students are expected to demonstrate their own understanding and reasoning. Using AI tools without disclosure, or presenting AI-generated work as your own original work, is not permitted.
+
+### Permitted Use
+
+**Students may use AI/LLM tools to support their learning, including but not limited to**:
+
+- Clarifying concepts (e.g., econometrics, optimization, or data methods)
+- Debugging or refactoring code
+- Generating example code snippets or pseudocode
+- Exploring alternative modeling approaches
+- Improving clarity, organization, or grammar in written explanations
+- Brainstorming research questions or project ideas
+
+Use of these tools is allowed only if it is fully and transparently documented (see Documentation Requirements below).
+
+### Prohibited Use
+
+**The following uses are not allowed**:
+
+- Submitting AI-generated text, code, analysis, or results without disclosure
+- Representing AI-generated work as your own independent work
+- Using AI tools to complete assignments in ways that bypass the learning objectives (e.g., generating a full solution when the assignment is designed to assess your ability to construct it)
+- Using AI tools during exams or assessments where they are explicitly disallowed
+- Fabricating citations, data sources, or empirical results generated by AI
+
+### Documentation Requirements
+
+Whenever you use an AI/LLM tool for an assignment, you must include an AI Usage Disclosure. This disclosure should be brief but specific and included at the end of your submission (or in comments for code).
+
+At a minimum, your disclosure must state:
+
+- Which tool(s) you used (e.g., ChatGPT, GitHub Copilot)
+- What tasks the tool assisted with (e.g., debugging, drafting, explanation)
+- How you modified or evaluated the AI output
+- What parts of the work are entirely your own
+
+Example Disclosure (Written Assignment)
+
+AI Usage Disclosure: I used ChatGPT to help clarify the interpretation of regression coefficients and to suggest alternative ways to explain the results in plain language. I revised the explanations substantially and verified all interpretations against course notes and my own analysis. All data processing, model estimation, and conclusions are my own.
+
+Example Disclosure (Coding Assignment)
+~~~
+# AI Usage Disclosure:
+# I used GitHub Copilot to suggest syntax for a for-loop and to debug an error
+# related to missing values. I reviewed, modified, and tested all code.
+~~~
 
 
 ## Principles of Community
@@ -192,19 +214,6 @@ Examples of academic misconduct include (but are not limited to):
 
 5.	Facilitation of any act of Academic Misconduct – Facilitation of any act of academic misconduct includes knowingly assisting another to commit an act of misconduct.
 
-## AI Tools Policy
-
-AI tools (e.g., ChatGPT) are powerful tools, and learning to use them is valuable. However, they can undermine efforts to learn economic concepts in this course. Please make every effort to understand the material. 
-
-Be aware of the limits of ChatGPT:
-
-- If you provide minimum effort prompts, you will get low-quality results. You will need to refine your prompts in order to get good outcomes. This will take work.
-
-- Don’t trust anything it says. If it gives you a number or fact, assume it is wrong unless you either know the answer or can check in with another source. You will be responsible for any errors or omissions provided by the tool. It works best for topics you understand.
-
-- AI is a tool, but one that you need to acknowledge using. Please include a paragraph at the end of any assignment that uses AI explaining what you used the AI for and what prompts you used to get the results. Failure to do so is in violation of the academic honesty policies.
-
-- Be thoughtful about when this tool is useful. Don’t use it if it isn’t appropriate for the case or circumstance.
 
 
 ## Accommodations
