@@ -1,0 +1,173 @@
+---
+title: "Class Introduction and Overview"
+format: 
+  revealjs:
+    theme: [night, ../custom.scss]
+---
+
+
+
+##
+
+{{< video https://youtu.be/vQbUZZVv4Rg width="100%" height="90%" >}}
+
+
+:::{.notes}
+The A's win the American league west with one of the lowest payrolls in baseball.  
+Sabermetrics is use of in game data to drive team management decisions (sign these players because they will produce numbers for good value)
+:::
+
+## The Oakland A's
+
+The A's go on to *win* the American League West with one of the lowest payrolls in baseball.
+
+How? *Data*! 
+
+The team uses in-game data to drive team management decisions: 
+
+  - sign players because they have high stats (e.g., on base percentage) for a good value
+  
+  - tell players to look for certain pitches because they tend to hit those pitches better
+  
+##
+:::{.main-point}
+**Data-driven decision making** is a process in which decisions are based on data and analysis rather than on intuition or personal experience.
+:::
+
+## 
+
+:::{.main-point}
+The objective of this course is to introduce this process of transforming data into actionable insights.
+:::
+
+
+
+## Which store should we expand?{.scrollable}
+
+| Metric                         | Store A          | Store B          |
+|--------------------------------|------------------|------------------|
+| Avg. Monthly Revenue           | $420,000         | $395,000         |
+| Avg. Monthly Foot Traffic      | 18,000 visits    | 14,500 visits    |
+| Avg. Transaction Value         | $23.30           | $27.20           |
+| Monthly Rent                   | $38,000          | $24,000          |
+| Local Median Household Income  | $52,000          | $68,000          |
+| Year-over-Year Revenue Growth  | 4%               | 9%               |
+
+:::{.notes}
+Give the students a moment to read the data and think. Now that we have AI tools, we can ask them to help us analyze the data and make a recommendation. 
+:::
+
+## Prompt
+
+```text {code-copy=true}
+You are a business data analyst advising a regional retail company.
+
+The company is deciding whether to expand Store A or Store B next quarter. 
+You are given the following summary data from the last 12 months:
+
+Store A:
+- Average monthly revenue: $420,000
+- Average monthly foot traffic: 18,000 visits
+- Average transaction value: $23.30
+- Rent: $38,000 per month
+- Local median household income: $52,000
+- Year-over-year revenue growth: 4%
+
+Store B:
+- Average monthly revenue: $395,000
+- Average monthly foot traffic: 14,500 visits
+- Average transaction value: $27.20
+- Rent: $24,000 per month
+- Local median household income: $68,000
+- Year-over-year revenue growth: 9%
+
+Tasks:
+1. Compare the performance of Store A and Store B.
+2. Identify which store is the better candidate for expansion.
+3. Clearly state your recommendation.
+4. Explain your reasoning in plain language suitable for senior management.
+5. Note any assumptions you are making.
+
+Provide a concise but professional recommendation.
+```
+
+## Should the company actually do this?
+
+What else might you want to know before making a recommendation?
+
+:::{.notes}
+Write student answers on board.
+e.g., Uncertainty, Risk, Sensitivity to assumptions, 
+
+What would change the recommendation?
+What if you found out a competitor is planning to open near Store B?
+The issue is that there is more to being an analyst than just crunching numbers. You need to exercise judgement and think critically about the context of the problem. 
+:::
+
+## Data + Analyst = Insight
+
+Data can reveal patterns and insights that *can* improve decision making
+
+**But, it is not magic.** 
+
+You must understand the context, the data, and the methods you are using...
+
+## 
+:::{.main-point}
+... and effectively communicate your findings to others.
+:::
+
+## 1 What does the figure tell you?
+
+![](https://external-preview.redd.it/t5BACgA8dFWnbMHtqyw1eRQeaCGhH5C57FKKhZUmY28.jpg?auto=webp&s=554531d5c59c51f9dc4c6126497e37c87ba3e843)
+
+## 2 What does the figure tell you?
+
+![](https://i.redd.it/yi5a3ygqq7001.jpg)
+
+:::{.notes}
+Charles Minard (1781–1870) was a French civil engineer and a pioneer in the field of information graphics.
+Shows the size of the army marching to moscow, the temperature during the retreat, and the location on a map.
+:::
+
+## 3 What does the figure tell you?
+
+<iframe 
+  src="https://www.nytimes.com/interactive/2015/07/08/us/census-race-map.html"
+  width="100%"
+  height="600"
+  style="border: none;">
+</iframe>
+
+
+
+## Storytelling with Data
+
+
+
+:::: {.columns}
+
+::: {.column width="60%"}
+The art of communicating data insights effectively through visualizations and narratives.
+
+Even the best model has no impact if decision-makers don’t understand or trust it.
+:::
+
+::: {.column width="40%"}
+![](https://images.squarespace-cdn.com/content/v1/55b6a6dce4b089e11621d3ed/1540999322708-KM9P9TAF825ATJPAVWV1/cole_cover.jpg)
+:::
+
+::::
+
+
+
+## Syllabus
+
+<https://jbayham.github.io/arec-330/syllabus/>
+
+
+## Engage
+
+I will try to make the course interesting and relevant to you
+
+Please come to class prepared to engage with the material and participate in discussions and activities

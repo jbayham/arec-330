@@ -61,7 +61,7 @@ This course will contribute to several DARE Learning Outcomes:
 
 All [course materials](../course-materials) are freely available on the course website. There is no single textbook that you need to purchase. However, I will assign readings out of the following book:
 
-- Knaflic, Cole. [Storytelling With Data: A Data Visualization Guide for Business Professionals](https://colostate.primo.exlibrisgroup.com/permalink/01COLSU_INST/via34g/alma991033629559603361), Wiley, 2015. *You can access an online version of this book through the CSU Library*
+- Knaflic, Cole. [Storytelling With Data: A Data Visualization Guide for Business Professionals](https://colostate.primo.exlibrisgroup.com/permalink/01COLSU_INST/51l05n/cdi_askewsholts_vlebooks_9781119002062), Wiley, 2015. *You can access an online version of this book through the CSU Library*
 
 
 I will post copyright-restricted materials on the [Canvas site](https://colostate.instructure.com/courses/218386). 
@@ -73,7 +73,7 @@ The course will require the use of [R (statistical computing software)](https://
 - You can download VS Code here: <https://code.visualstudio.com/download>. Detailed instructions for installing VS Code are here: <https://code.visualstudio.com/docs/setup/setup-overview>.
  
  
-You will need to use these tools outside of class, so we recommend installing them on your own computer. Otherwise, it will be your responsibility to use the computer labs outside of class to complete assignments.
+You will need to use these tools outside of class, so I recommend installing them on your own computer. Otherwise, it will be your responsibility to use the computer labs outside of class to complete assignments.
 
 We will also use Github throughout the semester. Please sign up for a github education account to get free access to these tools: <https://github.com/education/students>. A bonus of using github is that you will have access to GitHub Copilot, an AI coding assistant that can help you write code faster and with less effort.
 
@@ -129,7 +129,9 @@ I will communicate with you through your CSU email and through Canvas. Email is 
 During class, please limit use of phones and tablets to class-relevant activity. Be respectful of each other and your instructors/TA. Much of the course content will require the use of computers. Please use laptops and lab computers appropriately (do not watch media in class).
 
 
-## AI/LLM Tools (drafted with the assistance of ChatGPT)
+## AI/LLM Tools 
+
+(drafted with the assistance of ChatGPT)
 
 This course encourages the responsible use of modern analytical tools, including artificial intelligence (AI) and large language models (LLMs) such as ChatGPT, GitHub Copilot, and similar systems. These tools are increasingly used in professional data analysis, programming, and decision-making contexts. Learning how to use them critically, transparently, and ethically is an explicit objective of this course.
 

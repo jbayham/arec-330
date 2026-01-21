@@ -1,7 +1,8 @@
 - title: "Course Introduction"
   filename: "slides" 
   dirname: modules/intro
-  desc: ""
+  desc: "Introduction to the course and setting up software."
+  slides: "slides.html"
   # readings:
   #   - title: "McCarl & Spreen Ch. 1"
   #     url: "course-materials/"

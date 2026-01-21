@@ -42,6 +42,10 @@ The bottom right icons link to the Github directory for the lecture (<i class="f
 <a href="https://github.com/{{ site.githubdir}}/blob/master/{{ modules.dirname }}/{{ modules.filename}}.pdf"><i class="fas fa-file-pdf"></i></a>
 </strong> 
 -->
+{% if modules.slides %}
+  <br><strong><a href="{{ site.url }}{{ site.baseurl }}/{{ modules.dirname }}/{{ modules.slides }}">🖥 Slides</a></strong>
+{% endif %}
+
 {% if modules.readings %}
   <br><strong>📖 Readings:</strong>
   <ul>
