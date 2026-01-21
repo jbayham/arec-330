@@ -50,7 +50,7 @@ po/*~
 rsconnect/
 
 .DS_Store
-
+~$*
 
 # Jekyll build output
 _site/
