@@ -34,6 +34,11 @@ The team uses in-game data to drive team management decisions:
 **Data-driven decision making** is a process in which decisions are based on data and analysis rather than on intuition or personal experience.
 :::
 
+##
+:::{.main-point}
+Intuition and experience are important, but data can contain hidden patterns and insights.
+:::
+
 ## 
 
 :::{.main-point}
@@ -91,7 +96,7 @@ Tasks:
 Provide a concise but professional recommendation.
 ```
 
-## Should the company actually do this?
+## Should the company actually follow this recommendation?
 
 What else might you want to know before making a recommendation?
 
@@ -103,6 +108,16 @@ What would change the recommendation?
 What if you found out a competitor is planning to open near Store B?
 The issue is that there is more to being an analyst than just crunching numbers. You need to exercise judgement and think critically about the context of the problem. 
 :::
+
+## AI and Large Language Models
+
+AI tools like ChatGPT can help you analyze data and generate insights quickly.
+
+We will learn how to use them effectively in this course.
+
+- What questions to ask?
+- How to provide guardrails.
+- Skeptical evaluation of results.
 
 ## Data + Analyst = Insight
 
@@ -166,8 +181,41 @@ Even the best model has no impact if decision-makers don’t understand or trust
 <https://jbayham.github.io/arec-330/syllabus/>
 
 
+## College is probably still worth it
+
+<https://doi.org/10.1093/qje/qjaf055>
+
+<https://doi.org/10.1093/qje/qjaf048>
+
 ## Engage
 
 I will try to make the course interesting and relevant to you
 
 Please come to class prepared to engage with the material and participate in discussions and activities
+
+## Question 1 {.iclicker}
+
+:::{.question}
+Will you engage with the class?
+:::
+
+:::{.choices}
+A. Yes
+
+B. No
+
+C. Maybe
+:::
+
+## Due Friday
+
+  - Read syllabus
+  - Try to install/configure software on the computer you will bring to class:
+    - R and Rstudio
+    - Visual Studio Code
+    - PowerBI (desktop application windows only)
+  - Sign up for Github education 
+  
+
+  
+  

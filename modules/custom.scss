@@ -30,3 +30,157 @@
   justify-content: center;
   text-align: left;
 }
+
+
+/* custom.scss — styles for Quarto revealjs (works with night theme too)
+   Usage on a slide:
+   ## Question 1 {.iclicker}
+   or wrap a block:
+   ::: {.iclicker-block} ... :::
+*/
+
+.reveal {
+  // ---- Theme-ish variables (tweak as you like) ----
+  --iclicker-bg: rgba(255, 255, 255, 0.06);
+  --iclicker-border: rgba(255, 255, 255, 0.22);
+  --iclicker-accent: #C8C372; // warm yellow
+  --iclicker-accent-2: #1E4D2B; // green
+  --iclicker-text: rgba(255, 255, 255, 0.95);
+  --iclicker-muted: rgba(255, 255, 255, 0.70);
+  --iclicker-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+
+  // ---- Slide-level styling: apply when slide section has class .iclicker ----
+  section.iclicker {
+    /* A subtle distinct background wash */
+    /* background: radial-gradient(
+        circle at 20% 20%,
+        rgba(255, 209, 102, 0.14),
+        transparent 55%
+      ),
+      radial-gradient(
+        circle at 85% 70%,
+        rgba(6, 214, 160, 0.10),
+        transparent 55%
+      );
+      */
+
+    /* Optional: slightly tighten layout so prompt feels "card-like" */
+    .slide-content,
+    > div,
+    > .quarto-slide-content {
+      /* Quarto uses .quarto-slide-content on reveal slides */
+      position: relative;
+    }
+
+    /* Corner badge */
+    &::before {
+      content: "iClicker";
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      font-size: 0.65em;
+      letter-spacing: 0.08em;
+      //text-transform: uppercase;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--iclicker-border);
+      background: rgba(0, 0, 0, 0.25);
+      color: var(--iclicker-text);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Make the slide title feel like the prompt header */
+    h2 {
+      position: relative;
+      padding-bottom: 0.25em;
+      margin-bottom: 0.6em;
+
+      &::after {
+        content: "";
+        display: block;
+        height: 4px;
+        width: 396px;
+        margin-top: 0.35em;
+        border-radius: 999px;
+        background: linear-gradient(
+          90deg,
+          var(--iclicker-accent),
+          var(--iclicker-accent-2)
+        );
+        opacity: 0.9;
+      }
+    }
+
+    /* A card container you can use for the question text */
+    .question,
+    .iclicker-question,
+    blockquote,
+    .callout {
+      background: var(--iclicker-bg);
+      border: 1px solid var(--iclicker-border);
+      border-left: 6px solid var(--iclicker-accent);
+      border-radius: 18px;
+      padding: 18px 22px;
+      color: var(--iclicker-text);
+      box-shadow: var(--iclicker-shadow);
+    }
+
+    /* Make option lists look like click choices */
+    ol,
+    ul {
+      margin-top: 0.8em;
+
+      li {
+        margin: 0.4em 0;
+        padding: 0.25em 0.2em;
+        color: var(--iclicker-text);
+      }
+    }
+
+    /* If you put choices in a block with class .choices */
+    .choices {
+      background: rgba(0, 0, 0, 0.18);
+      border: 1px solid var(--iclicker-border);
+      border-radius: 18px;
+      padding: 14px 18px;
+      margin-top: 0.9em;
+
+      li {
+        color: var(--iclicker-text);
+      }
+    }
+
+    /* Small helper text (e.g., "Vote now", "30 seconds") */
+    .meta,
+    .iclicker-meta {
+      margin-top: 0.6em;
+      font-size: 0.8em;
+      color: var(--iclicker-muted);
+    }
+
+    /* Tighten code blocks if you use them on question slides */
+    pre code {
+      font-size: 0.8em;
+      line-height: 1.25;
+    }
+  }
+
+  // ---- Block-level styling (use inside any slide) ----
+  .iclicker-block {
+    background: var(--iclicker-bg);
+    border: 1px solid var(--iclicker-border);
+    border-left: 6px solid var(--iclicker-accent);
+    border-radius: 18px;
+    padding: 18px 22px;
+    box-shadow: var(--iclicker-shadow);
+
+    .iclicker-label {
+      font-size: 0.65em;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--iclicker-muted);
+      margin-bottom: 0.6em;
+      display: inline-block;
+    }
+  }
+}

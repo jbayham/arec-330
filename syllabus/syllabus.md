@@ -105,8 +105,9 @@ Students will create a website that will serve as a repository for their project
 
 ### Attendance and Participation 
 
-There will be iClicker questions incorporated into most lecture materials. These questions are intended to test understanding of lecture materials and provide the instructors with real-time feedback on comprehension. Responses will account for a small portion of the overall course grade.
+There will be iClicker questions incorporated into most lecture materials. These questions are intended to assess understanding of lecture materials and provide the instructors with real-time feedback on comprehension. Responses will account for a small portion of the overall course grade.
 
+I will assign readings throughout the course. These readings may be case studies, book chapters, or articles. You are expected to complete the readings before class and be prepared to discuss them in class. I may randomly call on you to discuss the readings during class. Your participation will contribute to your overall course grade.
 
 
 ## Assignments and Grading
