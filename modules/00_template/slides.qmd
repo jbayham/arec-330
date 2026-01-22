@@ -1,0 +1,123 @@
+---
+title: "Class Introduction and Overview"
+format: 
+  revealjs:
+    theme: [night, ../custom.scss]
+---
+
+
+<!-- Insert video 
+##
+
+{{< video https://youtu.be/vQbUZZVv4Rg width="100%" height="90%" >}}
+
+-->
+
+## Recap
+
+
+## Agenda
+
+
+  
+<!-- to make a point with text at center
+
+##
+:::{.main-point}
+**Data-driven decision making** is a process in which decisions are based on data and analysis rather than on intuition or personal experience.
+:::
+
+-->
+
+
+<!-- to make a slide scrollable 
+## Which store should we expand?{.scrollable}
+
+| Metric                         | Store A          | Store B          |
+|--------------------------------|------------------|------------------|
+| Avg. Monthly Revenue           | $420,000         | $395,000         |
+| Avg. Monthly Foot Traffic      | 18,000 visits    | 14,500 visits    |
+| Avg. Transaction Value         | $23.30           | $27.20           |
+| Monthly Rent                   | $38,000          | $24,000          |
+| Local Median Household Income  | $52,000          | $68,000          |
+| Year-over-Year Revenue Growth  | 4%               | 9%               |
+
+-->
+
+<!-- include code block for prompt
+## Prompt
+
+```text {code-copy=true}
+You are a business data analyst advising a regional retail company.
+
+The company is deciding whether to expand Store A or Store B next quarter. 
+You are given the following summary data from the last 12 months:
+
+```
+-->
+
+<!-- iframe
+## 3 What does the figure tell you?
+
+<iframe 
+  src="https://www.nytimes.com/interactive/2015/07/08/us/census-race-map.html"
+  width="100%"
+  height="600"
+  style="border: none;">
+</iframe>
+
+-->
+
+<!-- slide with multiple columns
+
+## Storytelling with Data
+
+
+
+:::: {.columns}
+
+::: {.column width="60%"}
+The art of communicating data insights effectively through visualizations and narratives.
+
+Even the best model has no impact if decision-makers don’t understand or trust it.
+:::
+
+::: {.column width="40%"}
+![](https://images.squarespace-cdn.com/content/v1/55b6a6dce4b089e11621d3ed/1540999322708-KM9P9TAF825ATJPAVWV1/cole_cover.jpg)
+:::
+
+::::
+
+-->
+
+
+<!-- iclicker question
+
+## Question 1 {.iclicker}
+
+:::{.question}
+Will you engage with the class?
+:::
+
+:::{.choices}
+A. Yes
+
+B. No
+
+C. Maybe
+:::
+
+-->
+
+## Reminders and Due Dates
+
+  - Read syllabus
+  - Try to install/configure software on the computer you will bring to class:
+    - R and Rstudio
+    - Visual Studio Code
+    - PowerBI (desktop application windows only)
+  - Sign up for Github education 
+  
+
+  
+  

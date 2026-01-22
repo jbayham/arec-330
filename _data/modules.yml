@@ -1,6 +1,5 @@
 - title: "Course Introduction"
-  filename: "slides" 
-  dirname: modules/intro
+  dirname: modules/01_intro
   desc: "Introduction to the course and setting up software."
   slides: "slides.html"
   # readings:
