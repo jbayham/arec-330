@@ -17,10 +17,10 @@ This syllabus is a living document. I will update it as needed throughout the se
 - **Instructor:** Jude Bayham  
   - Office: Nutrien 203  
   - Email: [jbayham@colostate.edu](mailto:jbayham@colostate.edu)  
-  - Office Hours: Monday and Wednesday 1–2, or by appointment ([book here](https://outlook.office.com/bookwithme/user/8f601447c7934b3fb7dc895f4140ffe4@colostate.edu?anonymous&ismsaljsauthenabled&ep=plink))  
+  - Office Hours: Wednesday 2–3PM, or by appointment ([book here](https://outlook.office.com/bookwithme/user/8f601447c7934b3fb7dc895f4140ffe4@colostate.edu?anonymous&ismsaljsauthenabled&ep=plink))  
 - **Teaching Assistant:** Charlotte Wachter  
   - Email: [Charlotte.Wachter@colostate.edu](mailto:Charlotte.Wachter@colostate.edu)
-  - Office Hours: TBD
+  - Office Hours: Monday 3-4PM in Nutrien 165
 
 **Table of Contents**
 
