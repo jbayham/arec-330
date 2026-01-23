@@ -1,6 +1,10 @@
 project:
   type: default
 
+course:
+  canvas_url: "https://colostate.instructure.com/courses/218386"
+  site_url: "https://jbayham.github.io/arec-330/"
+  
 # format:
   # pdf:
   #   toc: false

@@ -1,0 +1,85 @@
+/* Top banner */
+.course-links {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  /* subtle separation from content */
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+
+  /* works fine with most themes */
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(6px);
+}
+
+.course-links__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.55rem 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.course-links__left {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.course-links__brand {
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.course-links__sep {
+  opacity: 0.6;
+}
+
+.course-links__page {
+  opacity: 0.8;
+}
+
+.course-links__right {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.course-links__btn {
+  text-decoration: none;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid rgba(0,0,0,0.20);
+  border-radius: 999px;
+  font-size: 0.95rem;
+}
+
+/* Make sure your actual content doesn't hide under the sticky bar when jumping to headings */
+html {
+  scroll-padding-top: 4rem;
+}
+
+/* Footer */
+.course-footer {
+  margin-top: 3rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid rgba(0,0,0,0.12);
+  opacity: 0.9;
+}
+
+.course-footer__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.course-footer__sep {
+  opacity: 0.6;
+}

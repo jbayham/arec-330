@@ -1,0 +1,9 @@
+title: "lab"
+contributes:
+  formats: 
+    lab-html:
+      theme: zephyr
+      toc: true
+      css: css/course-links.css
+      include-before-body: includes/course-links.html
+      include-after-body: includes/course-footer.html

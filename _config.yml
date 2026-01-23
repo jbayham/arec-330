@@ -8,6 +8,7 @@ baseurl: "/arec-330" # the subpath of your site, e.g. /blog/
 url: "https://jbayham.github.io" # the base hostname & protocol for your site
 syllabus: "/syllabus"
 githubdir: "jbayham/arec-330"
+canvas: "https://colostate.instructure.com/courses/218386"
 
 # Author/user information
 email: jbayham@colostate.edu

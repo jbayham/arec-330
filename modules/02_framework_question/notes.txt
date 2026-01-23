@@ -1,0 +1,12 @@
+
+Notes for lecture
+
+- step back a little further - we need to understand the problem and/or the goal to better understand the decision that needs to be made, then we can define the question
+- There are some linkedin courses that provide some OK context: https://www.linkedin.com/learning/search?keywords=data%20driven%20decision%20making&promptType=LEARNER_TYPED&u=41911228
+  - Duarte video
+    - Three levels of D3M: 
+      - Discrete Decisions: Quick, low-stakes choices requiring minimal data, such as a single data point to confirm a hunch.
+      - Operational Decisions: Involve monitoring data over time, typically using dashboards to track performance and make real-time adjustments.
+      - Strategic Decisions: High-stakes, long-term decisions requiring comprehensive and contextual data, often involving external data sources to assess risks and opportunities.
+
+- I found a couple of readings too

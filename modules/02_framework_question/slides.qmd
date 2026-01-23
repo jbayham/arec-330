@@ -1,0 +1,134 @@
+---
+title: "Week 2: Analyst's Workflow and Asking the Right Questions"
+format: 
+  revealjs:
+    theme: [night, ../custom.scss]
+---
+
+
+
+## Recap
+
+
+## Agenda
+
+- The analyst’s workflow (the *whole* game)
+- Zoom in: what makes a *good* question
+- Asking the right question **given data constraints**
+- How this sets up data acquisition + EDA
+
+::: notes
+This is the first "real content" lecture. Set expectations: we will build a repeatable workflow.
+:::
+
+
+## Quick reset from Week 1
+
+Last week: **why** data analysis matters.
+
+Starting today: **how** it actually works.
+
+::: notes
+Mark the transition clearly. Helps students shift mindset from motivation to craft.
+:::
+
+
+## What students think analysis is
+
+:::{.main-point}
+**Data → Model → Output**
+:::
+
+::: notes
+
+:::
+
+---
+
+## What analysis actually is
+
+**Problem → Question → Data → Method → Result → Decision**
+
+> If you start with “model,” you’re already late.
+
+::: notes
+This is the course backbone. Keep coming back to it all semester.
+:::
+
+
+## The loop (not a line)
+
+:::{.main-point}
+```{mermaid}
+flowchart LR
+  D[Decision] --> Q[Question]
+  Q --> Da[Data]
+  Da --> M[Method]
+  M --> R[Result]
+  R --> D
+  R --> Q
+  Da --> Q
+```
+:::
+
+::: notes
+Emphasize iteration: results change questions; data constraints reshape questions.
+:::
+
+## Where projects usually fail
+
+- The decision is unclear
+
+- The question is vague or misaligned
+
+- The data don’t measure the concept
+
+- The unit of observation doesn’t match the claim
+
+::: notes
+Normalize this: professionals struggle here too. We'll practice fixing it.
+:::
+
+## Zoom in: What makes a “good” question?
+
+A good empirical question is:
+
+- Decision-relevant
+
+- Answerable (with data you have or can acquire)
+
+- Specific about:
+
+    - Who/what (unit)
+
+    - Where
+
+    - When
+
+    - Compared to what
+
+::: notes
+This slide sets the criteria; next slides operationalize with constraints.
+:::
+
+
+## A useful test
+
+If you can’t say how the answer would change a decision, the question isn’t finished.
+
+::: notes
+Call on an example decision: policy choice, business action, resource allocation.
+:::
+
+
+## Reminders and Due Dates
+
+
+
+
+
+
+
+
+  
+  

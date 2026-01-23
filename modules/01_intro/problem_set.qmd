@@ -1,0 +1,45 @@
+---
+title: "Problem Set 1: Introduction to R"
+format: 
+  html:
+    theme: zephyr
+    toc: true
+---
+
+## Part 1: R
+
+<!-- Link to website -->
+1. Create a variable called `myage` and assign it the value of your age.
+
+2. Create a vector called `grades` containing the following values: 88, 92, 75, 99, and 80.
+
+3. Using indexing, print the third element of the `grades` vector to the console.
+
+4. Use the function`mean()` to calculate the average grade. Assign the result to the object `avg`.
+
+5. Create a data frame called `student_info` containing the following columns: Name, Age, Major, Absent. The data should be as follows:
+
+```{r,echo=FALSE,results='asis'}
+knitr::kable(data.frame(
+   Name = c("John", "Emily", "Michael", "Jessica"),
+   Age = c(20, 22, 19, 21),
+   Major = c("AgBiz", "ENRE", "ENRE", "AgBiz"),
+   Absent = c(TRUE, TRUE, FALSE, FALSE)
+))
+
+```
+
+6. Install the package `tidyverse`.
+
+7. Write a brief explanation of what you did in steps 1-6 and how it relates to the tutorial we did in class.
+
+## Part 2: Getting Started with VS Code
+
+Ask AI (github copilot in VS Code) to complete part 1 steps 1-6. Write a brief reflection addressing the following questions:
+
+- How does the code that copilot wrote compare to your approach? 
+- If it answered the questions differently, ask copilot to explain why?
+
+## How to Submit
+
+You will submit two documents: the .log file for part 1 and a word doc or text file with your reflection. Refer to the lab instructions on generating a log file. Submit the two files on [Canvas](https://colostate.instructure.com/courses/218386).
