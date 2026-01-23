@@ -29,7 +29,7 @@ knitr::kable(data.frame(
 
 ```
 
-6. Install the package `tidyverse`.
+6. Install the package `tidyverse`. It installs many packages that we will use throughout the course. It may take some time. If things are happening in the console, it is working.
 
 7. Write a brief explanation of what you did in steps 1-6 and how it relates to the tutorial we did in class.
 

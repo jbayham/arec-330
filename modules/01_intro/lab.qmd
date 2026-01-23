@@ -237,4 +237,4 @@ Tone: friendly, concise, patient. Label sections exactly: Overview, Script, Line
 
 -----------
 
-Get started on the problem set here: <https://csu-arec-330.github.io/materials/unit_00/week_01/ps1.html>
+Get started on the problem set here: [Lab Assignment](assignment.html))
