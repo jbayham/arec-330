@@ -4,6 +4,12 @@ title: Modules
 permalink: /modules/
 ---
 
+<!--<style>  small vertical gap + subtle separator between module action lines 
+ul#archive li .module-line { display: block; margin: 0.05em 0 0.0em 0; padding: 0; } 
+ul#archive li .module-line a { font-weight: bold; color: #0077CC; text-decoration: inherit; } 
+ul#archive li .module-line a:hover { color: inherit; text-decoration: underline; }
+</style>-->
+
 <!-- <ul id="archive">
 
 
@@ -61,8 +67,8 @@ The bottom right icons link to the Github directory for the lecture (<i class="f
   <br><strong><a href="{{ site.url }}{{ site.baseurl }}/{{ modules.dirname }}/{{ modules.lab }}">💻 Lab</a></strong>
 {% endif %}
 
-{% if modules.ps %}
-  <br><strong><a href="{{ site.url }}{{ site.baseurl }}/{{ modules.dirname }}/{{ modules.ps }}">📝 Problem Set</a></strong>
+{% if modules.assignment %}
+  <br><strong><a href="{{ site.url }}{{ site.baseurl }}/{{ modules.dirname }}/{{ modules.assignment }}">📝 Lab Assignment</a></strong>
 {% endif %}
 
 

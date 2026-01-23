@@ -3,20 +3,21 @@ title: "Week 1 Lab: Introduction to R, VS Code, and Github Copilot"
 format:
   html:
     theme: zephyr
+    code-copy: true
     toc: true
     css: ../course-links.css
     include-before-body: ../course-links.html
     include-after-body: ../course-footer.html
 ---
 
-
+This lab is intended to get you started with R programming and using VS Code with GitHub Copilot. If you have experience with R, this will be a review and you can skip ahead to the [lab assignment](assignment.html). You can also help your neighbor out if they are new to R. If you have not used VS Code, tune in near the end of the lab to get set up with GitHub Copilot.
 
 
 ## Introduction to R
 
 Welcome to the world of R programming! R is a powerful and widely used programming language in the field of data analysis and statistical computing. It is known for its vast collection of libraries and packages that allow users to easily perform complex data manipulation and analysis tasks.
 
-Before we get started, you will need to install R on your computer. You can download the latest version of R for free from the official website <https://cran.r-project.org/>. Once the installation is complete, you will also need to install RStudio, a popular integrated development environment (IDE) for R. You can download RStudio from the official website <https://rstudio.com/>. Alternatively, you will have access to a version of RStudio on a CSU server that you can access via web browser here: <http://darecompute-01.aggie.colostate.edu:8787/>.  I will provide you with log in credentials in class.
+Before we get started, you will need to install R on your computer. You can download the latest version of R for free from the official website <https://cran.r-project.org/>. Once the installation is complete, you will also need to install RStudio, a popular integrated development environment (IDE) for R. You can download RStudio from the official website <https://rstudio.com/>. 
 
 RStudio provides a user-friendly interface for working with R and offers a variety of features to make working with R easier and more efficient.  Open up RStudio and you should see something that looks like this:
 
@@ -54,7 +55,7 @@ Here, we have created a variable called `x` and assigned it the value of 5.  Any
 print(x)
 ```
 
->Stop and open a new R script.  Because R is a command-line application, we can write a script (i.e., text file) with a sequence of commands.  There are many benefits to scripting.  First, you can save a record of the commands if you need to reproduce the analysis.  Second, you can share it with others so they can reproduce it. Third, you can easily change a part of your script to see what happens.**
+>Stop and open a new R script.  Because R is a command-line application, we can write a script (i.e., text file) with a sequence of commands.  There are many benefits to scripting.  First, you can save a record of the commands if you need to reproduce the analysis.  Second, you can share it with others so they can reproduce it. Third, you can easily change a part of your script to see what happens.
 
 You can also perform basic arithmetic operations in R using the standard operators (`+, -, *, /`):
 ```{r}
@@ -155,7 +156,7 @@ Here, we have installed and loaded the "dplyr" package, which provides a wide ra
 
 ### Running scripts and saving output
 
-We have been building a script (a text file with a series of commands in R - like a recipe). Suppose that script analyzed some data and produced some outputs. You may want to have R run all of the commands in your script. The command to run a script in R is:  `source()`. There is also a button called source in the upper right corner of the source panel. You can call that command directly in the R console. Suppose you have an R script called `lab_01_example.R` in your current working directory. You can run it by typing the following in the console: `source("lab_01_example.R",echo=TRUE)`. The `echo` argument set to `TRUE` tells R to print the output of each command. 
+We have been building a script (a text file with a series of commands in R - like a recipe). Suppose that script analyzed some data and produced some outputs. You may want to have R run all of the commands in your script. The command to run a script in R is:  `source()`. There is also a button called source in the upper right corner of the source panel. You can call that command directly in the R console. Suppose you have an R script called `lab_01_example.R` in your current working directory. You can check your working directory with `getwd()` in the R console. You can run the R script by typing the following in the console: `source("lab_01_example.R",echo=TRUE)`. The `echo` argument set to `TRUE` tells R to print the output of each command. 
 
 Assignments in this class will require you to demonstrate that your code runs without errors. You can use `source()` along with another function called `sink()` to generate a log file that you can use to show evidence that your R code runs. To create a log file that demonstrates the script, `lab_01_example.R`, runs, open a new script and type the following three commands (lines) into the new script (or directly into the R console):
 ```{r}
@@ -165,7 +166,7 @@ source("lab_01_example.R",echo = TRUE)
 sink()
 ```
 
-The `sink()` command is strange - it opens an active connection to a blank text file called `lab_01_example.log`, then writes the output of any following commands (i.e., `source("lab_01_example.R",echo = TRUE)`) into that file. The last `sink()` command simply closes the connection, so you can keep using R without writing everything to your log file. 
+The `sink()` command is strange - it opens an active connection to a blank text file called `lab_01_example.log` in the current working directory, then writes the output of any following commands (i.e., `source("lab_01_example.R",echo = TRUE)`) into that file. The last `sink()` command simply closes the connection, so you can keep using R without writing everything to your log file. 
 
 ### Documentation
 
@@ -201,7 +202,37 @@ Let's find the script we wrote in RStudio and run the commands in VS Code.
    - Official VS Code setup guide: <https://code.visualstudio.com/docs/copilot/setup>
 
 
+## Prompt for additional practice
 
+Enter the following prompt into your favorite LLM:
+
+```
+You are an interactive R tutor for absolute beginners. I use RStudio. I want short, clear explanations, runnable base‑R code, and small exercises I can complete in 5–10 minutes each.
+
+Please:
+
+Start with a one‑paragraph Overview of the topic I asked for.
+
+Use only R’s built‑in datasets (examples: mtcars, iris, airquality, PlantGrowth, ChickWeight, Orange) — do NOT include examples that read external files or call read_*() functions.
+
+Use only base R (do NOT suggest or use packages like dplyr, ggplot2, or others).
+
+Do NOT include any plotting examples or plotting functions.
+
+Show a minimal, runnable R script (complete, copy‑paste ready) and explain each line with one short sentence.
+
+Use base‑R functions for data inspection (examples: head(), tail(), str(), summary(), nrow(), ncol(), names()).
+
+Show commands I should run in my R console in backticks (e.g., getwd(), source("my_script.R")).
+
+Give 3 tiny practice tasks (one‑line each) with succinct solutions shown separately.
+
+Add a short "Troubleshooting" bullet list with 5 common beginner errors and quick fixes (e.g., object not found, wrong indexing, factor vs character, NA handling, package-not-needed reminders).
+
+End with 2 suggested Next steps (what to learn next) and 2 helpful Links.
+
+Tone: friendly, concise, patient. Label sections exactly: Overview, Script, Line-by-line, Run, Exercises, Troubleshooting, Next steps, Links.
+```
 
 
 -----------
