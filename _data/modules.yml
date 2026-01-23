@@ -2,6 +2,9 @@
   dirname: modules/01_intro
   desc: "Introduction to the course and setting up software."
   slides: "slides.html"
+  lab: "lab.html"
+  ps: "problem_set.html"
+  
   # readings:
   #   - title: "McCarl & Spreen Ch. 1"
   #     url: "course-materials/"

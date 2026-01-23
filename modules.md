@@ -42,9 +42,6 @@ The bottom right icons link to the Github directory for the lecture (<i class="f
 <a href="https://github.com/{{ site.githubdir}}/blob/master/{{ modules.dirname }}/{{ modules.filename}}.pdf"><i class="fas fa-file-pdf"></i></a>
 </strong> 
 -->
-{% if modules.slides %}
-  <br><strong><a href="{{ site.url }}{{ site.baseurl }}/{{ modules.dirname }}/{{ modules.slides }}">🖥 Slides</a></strong>
-{% endif %}
 
 {% if modules.readings %}
   <br><strong>📖 Readings:</strong>
@@ -55,14 +52,21 @@ The bottom right icons link to the Github directory for the lecture (<i class="f
   </ul>
 {% endif %}
 
-{% if modules.ps %}
-  <strong>📝 Problem Set:</strong>
-  <ul>
-    {% for a in modules.ps %}
-      <li><a href="{{ site.url }}{{ site.baseurl }}/{{ modules.dirname }}/{{ a.url }}">{{ a.title }}</a></li>
-    {% endfor %}
-  </ul>
+
+{% if modules.slides %}
+  <br><strong><a href="{{ site.url }}{{ site.baseurl }}/{{ modules.dirname }}/{{ modules.slides }}">🖥 Slides</a></strong>
 {% endif %}
+
+{% if modules.lab %}
+  <br><strong><a href="{{ site.url }}{{ site.baseurl }}/{{ modules.dirname }}/{{ modules.lab }}">💻 Lab</a></strong>
+{% endif %}
+
+{% if modules.ps %}
+  <br><strong><a href="{{ site.url }}{{ site.baseurl }}/{{ modules.dirname }}/{{ modules.ps }}">📝 Problem Set</a></strong>
+{% endif %}
+
+
+
 
 {% if modules.materials %}
   <strong>Additional Materials:</strong>
