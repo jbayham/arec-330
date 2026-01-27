@@ -266,7 +266,7 @@ ul#archive {
 
 ul#archive li {
        border-top: #999 1px dotted;
-       border-bottom: #999 1px dotted;
+       /*border-bottom: #999 1px dotted;*/
        padding: .1em 0 .1em .5em;
 }
 
@@ -283,7 +283,7 @@ ul#archive li.alt {
 
 .archiveposturl {
        display: block;
-       margin-bottom: 0.5em;
+       margin-bottom: 1.5em;
        padding-bottom: 0.5em;
        color: #333;
 }
