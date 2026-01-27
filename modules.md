@@ -49,15 +49,6 @@ The bottom right icons link to the Github directory for the lecture (<i class="f
 </strong> 
 -->
 
-{% if modules.readings %}
-  <br><strong>📖 Readings:</strong>
-  <ul>
-    {% for r in modules.readings %}
-      <li><a href="{{ site.url }}{{ site.baseurl }}/{{ r.url }}">{{ r.title }}</a></li>
-    {% endfor %}
-  </ul>
-{% endif %}
-
 
 {% if modules.slides %}
   <br><strong><a href="{{ site.url }}{{ site.baseurl }}/{{ modules.dirname }}/{{ modules.slides }}">🖥 Slides</a></strong>
@@ -73,12 +64,29 @@ The bottom right icons link to the Github directory for the lecture (<i class="f
 
 
 
+{% if modules.readings %}
+  <br><strong>📖 Readings:</strong>
+  <ul>
+    {% for r in modules.readings %}
+      {% if r.rel_url %}
+      <li><a href="{{ site.url }}{{ site.baseurl }}/{{ modules.dirname }}/{{ r.rel_url }}">{{ r.title }}</a></li>
+      {% else %}
+      <li><a href="{{ r.url }}">{{ r.title }}</a></li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endif %}
+
 
 {% if modules.materials %}
-  <strong>Additional Materials:</strong>
+  <br> <strong>Additional Materials:</strong>
   <ul>
     {% for c in modules.materials %}
-      <li><a href="{{ site.url }}{{ site.baseurl }}/{{ modules.dirname }}/{{ c.url }}">{{ c.title }}</a></li>
+      {% if c.rel_url %}
+      <li><a href="{{ site.url }}{{ site.baseurl }}/{{ modules.dirname }}/{{ c.rel_url }}">{{ c.title }}</a></li>
+      {% else %}
+      <li><a href="{{ c.url }}">{{ c.title }}</a></li>
+      {% endif %}
     {% endfor %}
   </ul>
 {% endif %}

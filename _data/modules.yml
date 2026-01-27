@@ -1,10 +1,24 @@
-- title: "Course Introduction"
+- title: "Week 1: Course Introduction"
   dirname: modules/01_intro
   desc: "Introduction to the course and setting up software."
   slides: "slides.html"
   lab: "lab.html"
   assignment: "assignment.html"
+
   
+  
+  
+- title: "Week 2: Asking the Right Questions"
+  dirname: modules/02_framework_question
+  desc: "Lecture will focus on a framework for data-driven decision making and how to ask the right questions. Lab will focus on finding data to answer your questions."
+  slides: ""
+  readings:
+  - title: "Puntoni and De Langhe. Better Decisions with Data"
+    url: "https://knowledge.wharton.upenn.edu/article/better-decisions-with-data-asking-the-right-question/"
+  - title: "Heidari. Analytics starts by asking the right questions"
+    url: "https://www.cpaalberta.ca/-/media/Files/Services/Online-Resource-Centre/PDF-Asking-a-good-question-by-Sam-Heidari.pdf?la=en&hash=B62F68830E8F4F1FCD9A3BFC18A7B783FBF40DC6"
+  - title: "Raoufy. The Art of Asking the Right Questions"
+    url: "https://medium.com/@raoufysohaib/the-art-of-asking-the-right-questions-how-i-learned-to-start-every-data-analysis-the-right-way-89b25cf0eee0"
   # readings:
   #   - title: "McCarl & Spreen Ch. 1"
   #     url: "course-materials/"
