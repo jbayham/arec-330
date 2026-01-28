@@ -1,79 +1,209 @@
 ---
-title: "Week 2: Analyst's Workflow and Asking the Right Questions"
+title: "Week 2: Asking the Right Questions"
 format: 
   revealjs:
     theme: [night, ../custom.scss]
+    slide-number: true
 ---
 
 
 
 ## Recap
 
+- Lab assignment due Fri (upload log and written response)
 
-## Agenda
+- Install R/Rstudio, VS code, github education
 
-- The analyst’s workflow (the *whole* game)
-- Zoom in: what makes a *good* question
-- Asking the right question **given data constraints**
-- How this sets up data acquisition + EDA
+- What is D3M?
 
-::: notes
-This is the first "real content" lecture. Set expectations: we will build a repeatable workflow.
+## Customer Churn
+
+![](https://miro.medium.com/1*0TFMuTvMfnLyMa1fjjuFTg.jpeg)
+
+## Churn prediction
+
+<div style="font-size: 0.7em">
+
+| CustomerID | Churn | Tenure | Preferred Device | Satisfaction Score |
+|------------|-------|--------|------------------|-------------------|
+| 50001      | 1     | 4      | Mobile Phone         | 2                 |
+| 50002      | 1     |        | Phone                | 3                 |
+| 50003      | 0     |        | Phone                | 3                 |
+| 50004      | 1     | 0      | Phone                | 5                 |
+| 50005      | 0     | 0      | Phone                | 5                 |
+| 50006      | 1     | 0      | Computer             | 5                 |
+| 50007      | 0     |        | Phone                | 2                 |
+| 50008      | 1     |        | Phone                | 2                 |
+| 50009      | 0     | 13     | Phone                | 3                 |
+| 50010      | 1     |        | Phone                | 3                 |
+
+</div>
+
+
+:::{.notes}
+Companies often have detailed data on their customers and want to predict churn - how likely customers are to leave
 :::
 
+## ML model produces good prediction
 
-## Quick reset from Week 1
+::::{.columns}
 
-Last week: **why** data analysis matters.
-
-Starting today: **how** it actually works.
-
-::: notes
-Mark the transition clearly. Helps students shift mindset from motivation to craft.
+:::{.column}
+![](https://www.kaggleusercontent.com/kf/271853030/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..uy6sh-L-j5W03YC0v6GHKw.cwmD3v1p3r8P-mX6KYAKaVcbiD1rh0x4VCVJLAeg8e0tvjJ85vApb779zhFwxJ5UBmf1YAYE4jR-CpMnsTL9oMK_C6Vk5Theh-tGgv-vn7lh3yNC9b2RCrPanjKSs0s18N_sw7o9J1ccgEoDtSKM0WxWs-yESorcoyzyaWJ_I-Owa3DtAstzaBKkuXhnLS894LJjfITnlre3vnNa41Bn6g0Tu7MegHYP8AVyPq1xfMyYOLTd5Bn8RTlKq-Ji_3RlWPnL-Bn5kHPLlHe61QjcIpLJwEXwpJRnPQspjUmpmOb-00rCaTw4-dViAd_z96v3OiCHsQuVOBhwTGGKItEY24dHiplOuQttCgHK4I4Wb6Q8oUcm1PgJTGMFKUJYCefLi4XczRg1FG-JlnXPnlArnrGyAXaBkAkjdFfQvqqfPosFd6ZtIKLBI2j9b_Hg6q9YIHG2XbsLtG-kFn5a8D6NLfyQrxJXuMLdzTnZ6awEvgDlfhTGrlj0DPPZl9bkoAD3_5BVYW5VD0da99s1VKQ9MB7xZDhnxDOwvXvZED2LXIPIMW-IK1in_-iemCPWN9QpEbOQLaVSatBdwVLGcQNVs_xjweTG13vaP7269hOQgvcnFzaLzjDaTHFVcImqG2NUj-RRDNknMn3EafAE6jwJqg.2Yula7lN69tGWk6RXZHJlg/__results___files/__results___26_0.png)
 :::
 
+:::{.column}
+Accuracy = 0.98
 
-## What students think analysis is
+Precision = .96
+
+Recall = 0.98
+
+:::
+
+::::
+
+:::{.notes}
+Accuracy: The fraction of all predictions the model gets right. (tp + tn) / (tp + tn + fp + fn) =  (446 + 1494)/(446 + 1494 + 16 + 7)
+Precision: Among customers the model predicts will churn, how many actually do? tp / (tp + fp) = 446/(16 + 446)
+Recall: Among customers who actually churn, how many did the model catch? tp / (tp + fn) = 446/(446 + 7)
+:::
+
+## This looks like success
+
+- High accuracy
+- High precision
+- High recall
+- Clean evaluation
+
+By most technical standards:
+
+> **This is a very good model.**
+
+
+##  {.iclicker}
+
+:::{.question}
+What question does this model actually answer?
+:::
+:::{.choices}
+A. Why customers churn  
+B. Which customers will churn  
+C. How to prevent churn  
+D. Whether churn is costly
+:::
+
+:::{.notes}
+B which customers will churn
+:::
+
+## Now what?
+
+You can predict which customers will stay and which will leave.
+
+How do you make a data-driven decision?
+
+
+## Taking a step back...
+
+We need to make sure our analysis is answering a question
+
+The question is formulated around the decision
+
+The decision should solve a problem
+
+
+## What is the problem?
+:::{.incremental}
+- Customer churn is expensive 
+
+- We want to reduce churn by retaining more customers
+
+- Question: Why are customers leaving?
+:::
+
+:::{.notes}
+attracting new customers is 5x more expensive than retaining existing customers
+:::
+
+## Exploring the data...
+:::{.incremental}
+- We find that customers leave when satisfaction falls
+
+- We then find that satisfaction falls when customers don't feel valued
+
+- Do any of our existing programs increase satisfaction? loyalty discounts, mailers, early access?
+:::
+
+## Decision-oriented question
 
 :::{.main-point}
-**Data → Model → Output**
+Which program (loyalty discounts, mailers, early access) increases satisfaction, thereby reducing churn?
 :::
 
-::: notes
-
-:::
-
----
-
-## What analysis actually is
-
-**Problem → Question → Data → Method → Result → Decision**
-
-> If you start with “model,” you’re already late.
-
-::: notes
-This is the course backbone. Keep coming back to it all semester.
-:::
+## Pair up and discuss
 
 
-## The loop (not a line)
+- What business decisions are you familiar with? 
 
+- Were the decisions related to a particular problem?
+
+5 minutes to discuss then be ready to share out
+
+# A Framework
+
+
+## Framework for Analysis
 :::{.main-point}
 ```{mermaid}
+%%{init: {"themeVariables": {"fontSize": "24px"}}}%%
 flowchart LR
-  D[Decision] --> Q[Question]
+  P[Problem] --> Q[Question]
   Q --> Da[Data]
-  Da --> M[Method]
+  Da --> M[Model]
   M --> R[Result]
-  R --> D
-  R --> Q
+  R --> D[Decision]
+```
+:::
+
+:::{.notes}
+Move from understanding the problem to formulating a clear question. Then finding data and appropriate model. This part requires advanced stats and understanding of measures of fit. Then when comfortable with the model, run and get results and make decision.
+:::
+
+## Reality is more complicated
+:::{.main-point}
+```{mermaid}
+%%{init: {"themeVariables": {"fontSize": "24px"}}}%%
+flowchart LR
+  P[Problem] --> Q[Question]
+  Q --> Da[Data]
+  Da --> M[Model]
+  M --> R[Result]
+  R --> D[Decision]
   Da --> Q
 ```
 :::
 
-::: notes
-Emphasize iteration: results change questions; data constraints reshape questions.
+
+## Reality is very complicated
+:::{.main-point}
+```{mermaid}
+%%{init: {"themeVariables": {"fontSize": "24px"}}}%%
+flowchart LR
+  P[Problem] --> Q[Question]
+  Q --> Da[Data]
+  Da --> M[Model]
+  M --> R[Result]
+  R --> D[Decision]
+  M --> Da
+  R --> Q
+  R --> M
+  Da --> Q
+```
 :::
+
+
+
 
 ## Where projects usually fail
 
@@ -89,7 +219,7 @@ Emphasize iteration: results change questions; data constraints reshape question
 Normalize this: professionals struggle here too. We'll practice fixing it.
 :::
 
-## Zoom in: What makes a “good” question?
+## What makes a “good” question?
 
 A good empirical question is:
 
@@ -119,6 +249,87 @@ If you can’t say how the answer would change a decision, the question isn’t 
 ::: notes
 Call on an example decision: policy choice, business action, resource allocation.
 :::
+
+
+##  {.iclicker}
+
+A company asks: “What would happen to customer churn **if we offered a retention discount**?”
+
+:::{.question}
+What type of analytics question is this? (Heidari)
+:::
+:::{.choices}
+A. Descriptive  
+B. Exploratory  
+C. Predictive  
+D. Causal (counterfactual)  
+E. Mechanistic
+:::
+
+:::{.notes}
+D counterfactual
+This question compares:
+
+the world with the intervention
+
+the world without the intervention
+
+That makes it counterfactual, not just predictive.
+
+Answering it usually requires:
+
+experiments, quasi-experiments, or strong assumptions
+:::
+
+
+
+## Types of Questions (Heidari) {.scrollable}
+
+- **Descriptive**  
+  What is happening in the data? (summarize levels, averages, frequencies)
+
+- **Exploratory**  
+  Are there patterns, trends, or relationships worth investigating?
+
+- **Inferential**  
+  What can we conclude about a population based on a sample?
+
+- **Predictive**  
+  Given what we observe, what is likely to happen next?
+
+- **Causal (Counterfactual)**  
+  What would change if we intervene, compared to if we do nothing?
+
+- **Mechanistic**  
+  Through what process or structure does an outcome occur?
+
+##  {.iclicker}
+
+:::{.question}
+Which question below is **predictive**, not causal?
+:::
+:::{.choices}
+A. Will churn decrease if we offer a discount?  
+B. Which customers are most likely to churn next month?  
+C. Did the discount reduce churn relative to no discount?  
+D. Which customers changed behavior because of the discount?
+:::
+
+:::{.notes}
+D counterfactual
+This question compares:
+
+the world with the intervention
+
+the world without the intervention
+
+That makes it counterfactual, not just predictive.
+
+Answering it usually requires:
+
+experiments, quasi-experiments, or strong assumptions
+:::
+
 
 
 ## Reminders and Due Dates
