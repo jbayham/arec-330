@@ -336,15 +336,29 @@
 <section id="recap" class="slide level2">
 <h2>Recap</h2>
 <ul>
-<li><p>Lab assignment due Fri (upload log and written response)</p></li>
+<li><p><a href="../01_intro/assignment.html">Lab assignment</a> due Fri (upload log and written response)</p></li>
 <li><p>Install R/Rstudio, VS code, github education</p></li>
 <li><p>What is D3M?</p></li>
+<li><p>What is an integrated development environment?</p></li>
 </ul>
 </section>
 <section id="customer-churn" class="slide level2">
 <h2>Customer Churn</h2>
 
-<img data-src="https://miro.medium.com/1*0TFMuTvMfnLyMa1fjjuFTg.jpeg" class="r-stretch"></section>
+<img data-src="https://miro.medium.com/1*0TFMuTvMfnLyMa1fjjuFTg.jpeg" class="r-stretch"><aside class="notes">
+<p>Churn is the fraction of customers that don’t return/continue buying. Companies often analyze churn rates.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="churn-prediction" class="slide level2">
 <h2>Churn prediction</h2>
 <div style="font-size: 0.7em">
@@ -457,7 +471,7 @@
 <h2>ML model produces good prediction</h2>
 <div class="columns">
 <div class="column">
-<p><img data-src="https://www.kaggleusercontent.com/kf/271853030/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..uy6sh-L-j5W03YC0v6GHKw.cwmD3v1p3r8P-mX6KYAKaVcbiD1rh0x4VCVJLAeg8e0tvjJ85vApb779zhFwxJ5UBmf1YAYE4jR-CpMnsTL9oMK_C6Vk5Theh-tGgv-vn7lh3yNC9b2RCrPanjKSs0s18N_sw7o9J1ccgEoDtSKM0WxWs-yESorcoyzyaWJ_I-Owa3DtAstzaBKkuXhnLS894LJjfITnlre3vnNa41Bn6g0Tu7MegHYP8AVyPq1xfMyYOLTd5Bn8RTlKq-Ji_3RlWPnL-Bn5kHPLlHe61QjcIpLJwEXwpJRnPQspjUmpmOb-00rCaTw4-dViAd_z96v3OiCHsQuVOBhwTGGKItEY24dHiplOuQttCgHK4I4Wb6Q8oUcm1PgJTGMFKUJYCefLi4XczRg1FG-JlnXPnlArnrGyAXaBkAkjdFfQvqqfPosFd6ZtIKLBI2j9b_Hg6q9YIHG2XbsLtG-kFn5a8D6NLfyQrxJXuMLdzTnZ6awEvgDlfhTGrlj0DPPZl9bkoAD3_5BVYW5VD0da99s1VKQ9MB7xZDhnxDOwvXvZED2LXIPIMW-IK1in_-iemCPWN9QpEbOQLaVSatBdwVLGcQNVs_xjweTG13vaP7269hOQgvcnFzaLzjDaTHFVcImqG2NUj-RRDNknMn3EafAE6jwJqg.2Yula7lN69tGWk6RXZHJlg/__results___files/__results___26_0.png"></p>
+<p><img data-src="includes/confusion_matrix.png"></p>
 </div><div class="column">
 <p>Accuracy = 0.98</p>
 <p>Precision = .96</p>
@@ -527,13 +541,13 @@ D. Whether churn is costly</p>
 <p>The question is formulated around the decision</p>
 <p>The decision should solve a problem</p>
 </section>
-<section id="what-is-the-problem" class="slide level2">
-<h2>What is the problem?</h2>
+<section id="why-should-we-care-about-churn" class="slide level2">
+<h2>Why should we care about churn?</h2>
 <div>
 <ul>
-<li class="fragment"><p>Customer churn is expensive</p></li>
-<li class="fragment"><p>We want to reduce churn by retaining more customers</p></li>
-<li class="fragment"><p>Question: Why are customers leaving?</p></li>
+<li class="fragment"><p><strong>Problem</strong>: Customer churn is expensive</p></li>
+<li class="fragment"><p><strong>Goal</strong>: We want to reduce churn by retaining more customers</p></li>
+<li class="fragment"><p><strong>Question</strong>: Why are customers leaving?</p></li>
 </ul>
 </div>
 <aside class="notes">
@@ -555,7 +569,7 @@ D. Whether churn is costly</p>
 <div>
 <ul>
 <li class="fragment"><p>We find that customers leave when satisfaction falls</p></li>
-<li class="fragment"><p>We then find that satisfaction falls when customers don’t feel valued</p></li>
+<li class="fragment"><p>We then find that satisfaction falls when customers don’t feel valued (measured by survey and focus groups)</p></li>
 <li class="fragment"><p>Do any of our existing programs increase satisfaction? loyalty discounts, mailers, early access?</p></li>
 </ul>
 </div>
@@ -571,16 +585,17 @@ D. Whether churn is costly</p>
 <ul>
 <li><p>What business decisions are you familiar with?</p></li>
 <li><p>Were the decisions related to a particular problem?</p></li>
+<li><p>Dissect the business decision into: <br> <em>problem, goals, and decision-oriented questions</em></p></li>
 </ul>
 <p>5 minutes to discuss then be ready to share out</p>
 </section>
 <section>
 <section id="a-framework" class="title-slide slide level1 center">
 <h1>A Framework</h1>
-
+<p>for data-driven decision making</p>
 </section>
-<section id="framework-for-analysis" class="slide level2">
-<h2>Framework for Analysis</h2>
+<section id="start-by-understanding-the-problem" class="slide level2">
+<h2>Start by understanding the problem</h2>
 <div class="main-point">
 <div class="cell" data-reveal="true">
 <div class="cell-output-display">
@@ -588,11 +603,12 @@ D. Whether churn is costly</p>
 <div>
 <pre class="mermaid mermaid-js">%%{init: {"themeVariables": {"fontSize": "24px"}}}%%
 flowchart LR
-  P[Problem] --&gt; Q[Question]
-  Q --&gt; Da[Data]
-  Da --&gt; M[Model]
-  M --&gt; R[Result]
-  R --&gt; D[Decision]
+  G[Goals] ==&gt; P[Problem]
+  P ==&gt; Q[Question]
+  Q ==&gt; Da[Data]
+  Da ==&gt; M[Model]
+  M ==&gt; R[Result]
+  R ==&gt; D[Decision]
 </pre>
 </div>
 </div>
@@ -600,7 +616,11 @@ flowchart LR
 </div>
 </div>
 <aside class="notes">
-<p>Move from understanding the problem to formulating a clear question. Then finding data and appropriate model. This part requires advanced stats and understanding of measures of fit. Then when comfortable with the model, run and get results and make decision.</p>
+<ul>
+<li>Move from understanding the problemto formulating a clear question.</li>
+<li>Then finding data and appropriate model. This part requires advanced stats and understanding of measures of fit.</li>
+<li>Then when comfortable with the model, run and get results and make decision.</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -622,18 +642,35 @@ flowchart LR
 <div>
 <pre class="mermaid mermaid-js">%%{init: {"themeVariables": {"fontSize": "24px"}}}%%
 flowchart LR
-  P[Problem] --&gt; Q[Question]
-  Q --&gt; Da[Data]
-  Da --&gt; M[Model]
-  M --&gt; R[Result]
-  R --&gt; D[Decision]
-  Da --&gt; Q
+  G[Goals] ==&gt; P[Problem]
+  P ==&gt; Q[Question]
+  Q ==&gt; Da[Data]
+  Da ==&gt; M[Model]
+  M ==&gt; R[Result]
+  R ==&gt; D[Decision]
+  Da ==&gt; Q
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
+<aside class="notes">
+<ul>
+<li>Data limitations may constrain the types of questions you can ask</li>
+<li>Exploring the data may also lead you to revise your questions</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="reality-is-very-complicated" class="slide level2">
 <h2>Reality is very complicated</h2>
@@ -644,24 +681,41 @@ flowchart LR
 <div>
 <pre class="mermaid mermaid-js">%%{init: {"themeVariables": {"fontSize": "24px"}}}%%
 flowchart LR
-  P[Problem] --&gt; Q[Question]
-  Q --&gt; Da[Data]
-  Da --&gt; M[Model]
-  M --&gt; R[Result]
-  R --&gt; D[Decision]
-  M --&gt; Da
-  R --&gt; Q
-  R --&gt; M
-  Da --&gt; Q
+  G[Goals] ==&gt; P[Problem]
+  P ==&gt; Q[Question]
+  Q ==&gt; Da[Data]
+  Da ==&gt; M[Model]
+  M ==&gt; R[Result]
+  R ==&gt; D[Decision]
+  M ==&gt; Da
+  R ==&gt; Q
+  R ==&gt; M
+  Da ==&gt; Q
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
+<aside class="notes">
+<ul>
+<li>Modeling constrains can affect data collection, which again may lead to question revision</li>
+<li>Results can lead you to revise your model or even question</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="where-projects-usually-fail" class="slide level2">
-<h2>Where projects usually fail</h2>
+<section id="where-dataresearch-projects-usually-fail" class="slide level2">
+<h2>Where data/research projects usually fail</h2>
 <ul>
 <li><p>The decision is unclear</p></li>
 <li><p>The question is vague or misaligned</p></li>
@@ -691,9 +745,9 @@ flowchart LR
 <li><p>Specific about:</p>
 <ul>
 <li><p>Who/what (unit)</p></li>
-<li><p>Where</p></li>
-<li><p>When</p></li>
-<li><p>Compared to what</p></li>
+<li><p>Where (one branch or whole enterprise)</p></li>
+<li><p>When (timeline)</p></li>
+<li><p>Compared to what (do nothing, )</p></li>
 </ul></li>
 </ul>
 <aside class="notes">
@@ -710,26 +764,9 @@ flowchart LR
           display:block!important;
       }</style></aside>
 </section>
-<section id="a-useful-test" class="slide level2">
-<h2>A useful test</h2>
-<p>If you can’t say how the answer would change a decision, the question isn’t finished.</p>
-<aside class="notes">
-<p>Call on an example decision: policy choice, business action, resource allocation.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
 <section id="section-1" class="slide level2 iclicker">
 <h2></h2>
-<p>A company asks: “What would happen to customer churn <strong>if we offered a retention discount</strong>?”</p>
+<p>A company asks: “What would happen to customer churn next year if we offered a retention discount at one location and not others?”</p>
 <div class="question">
 <p>What type of analytics question is this? (Heidari)</p>
 </div>
@@ -778,22 +815,19 @@ Through what process or structure does an outcome occur?</p></li>
 </section>
 <section id="section-2" class="slide level2 iclicker">
 <h2></h2>
+<p>What percentage of customers churned last month?</p>
 <div class="question">
-<p>Which question below is <strong>predictive</strong>, not causal?</p>
+<p>What type of analytics question is this? (Heidari)</p>
 </div>
 <div class="choices">
-<p>A. Will churn decrease if we offer a discount?<br>
-B. Which customers are most likely to churn next month?<br>
-C. Did the discount reduce churn relative to no discount?<br>
-D. Which customers changed behavior because of the discount?</p>
+<p>A. Descriptive<br>
+B. Exploratory<br>
+C. Predictive<br>
+D. Causal (counterfactual)<br>
+E. Mechanistic</p>
 </div>
 <aside class="notes">
-<p>D counterfactual This question compares:</p>
-<p>the world with the intervention</p>
-<p>the world without the intervention</p>
-<p>That makes it counterfactual, not just predictive.</p>
-<p>Answering it usually requires:</p>
-<p>experiments, quasi-experiments, or strong assumptions</p>
+<p>Correct answer: A. Descriptive. It summarizes what already happened.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -806,8 +840,88 @@ D. Which customers changed behavior because of the discount?</p>
           display:block!important;
       }</style></aside>
 </section>
+<section id="section-3" class="slide level2 iclicker">
+<h2></h2>
+<p>Through what process does customer dissatisfaction lead to churn?</p>
+<div class="question">
+<p>What type of analytics question is this? (Heidari)</p>
+</div>
+<div class="choices">
+<p>A. Descriptive<br>
+B. Exploratory<br>
+C. Predictive<br>
+D. Causal (counterfactual)<br>
+E. Mechanistic</p>
+</div>
+<aside class="notes">
+<p>E. Mechanistic. Trying to understand why something is happening</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="section-4" class="slide level2 iclicker">
+<h2></h2>
+<p>Is customer churn higher among users with low satisfaction scores?</p>
+<div class="question">
+<p>What type of analytics question is this? (Heidari)</p>
+</div>
+<div class="choices">
+<p>A. Descriptive<br>
+B. Exploratory<br>
+C. Predictive<br>
+D. Causal (counterfactual)<br>
+E. Mechanistic</p>
+</div>
+<aside class="notes">
+<p>B. Exploratory. It looks for patterns or associations without claiming causality.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="key-takeaways" class="slide level2">
+<h2>Key Takeaways</h2>
+<ul>
+<li>Strong models do <strong>not</strong> guarantee good decisions<br>
+</li>
+<li>Data analysis should start with the <strong>problem and decision</strong>, not the data<br>
+</li>
+<li>Different decisions require <strong>different types of questions</strong><br>
+</li>
+<li>Good questions are:
+<ul>
+<li>decision-relevant<br>
+</li>
+<li>answerable with data<br>
+</li>
+<li>clear about who, where, when, and compared to what</li>
+</ul></li>
+</ul>
+</section>
 <section id="reminders-and-due-dates" class="slide level2">
 <h2>Reminders and Due Dates</h2>
+<ul>
+<li><p>Lab assignment due Friday</p></li>
+<li><p>Lab on friday will focus on finding and importing data</p>
+<ul>
+<li>Start in excel then move to R</li>
+</ul></li>
+</ul>
 <div class="footer footer-default">
 
 </div>

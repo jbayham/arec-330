@@ -10,15 +10,21 @@ format:
 
 ## Recap
 
-- Lab assignment due Fri (upload log and written response)
+- [Lab assignment](../01_intro/assignment.html) due Fri (upload log and written response)
 
 - Install R/Rstudio, VS code, github education
 
 - What is D3M?
 
+- What is an integrated development environment?
+
 ## Customer Churn
 
 ![](https://miro.medium.com/1*0TFMuTvMfnLyMa1fjjuFTg.jpeg)
+
+:::{.notes}
+Churn is the fraction of customers that don't return/continue buying. Companies often analyze churn rates.
+:::
 
 ## Churn prediction
 
@@ -49,7 +55,7 @@ Companies often have detailed data on their customers and want to predict churn 
 ::::{.columns}
 
 :::{.column}
-![](https://www.kaggleusercontent.com/kf/271853030/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..uy6sh-L-j5W03YC0v6GHKw.cwmD3v1p3r8P-mX6KYAKaVcbiD1rh0x4VCVJLAeg8e0tvjJ85vApb779zhFwxJ5UBmf1YAYE4jR-CpMnsTL9oMK_C6Vk5Theh-tGgv-vn7lh3yNC9b2RCrPanjKSs0s18N_sw7o9J1ccgEoDtSKM0WxWs-yESorcoyzyaWJ_I-Owa3DtAstzaBKkuXhnLS894LJjfITnlre3vnNa41Bn6g0Tu7MegHYP8AVyPq1xfMyYOLTd5Bn8RTlKq-Ji_3RlWPnL-Bn5kHPLlHe61QjcIpLJwEXwpJRnPQspjUmpmOb-00rCaTw4-dViAd_z96v3OiCHsQuVOBhwTGGKItEY24dHiplOuQttCgHK4I4Wb6Q8oUcm1PgJTGMFKUJYCefLi4XczRg1FG-JlnXPnlArnrGyAXaBkAkjdFfQvqqfPosFd6ZtIKLBI2j9b_Hg6q9YIHG2XbsLtG-kFn5a8D6NLfyQrxJXuMLdzTnZ6awEvgDlfhTGrlj0DPPZl9bkoAD3_5BVYW5VD0da99s1VKQ9MB7xZDhnxDOwvXvZED2LXIPIMW-IK1in_-iemCPWN9QpEbOQLaVSatBdwVLGcQNVs_xjweTG13vaP7269hOQgvcnFzaLzjDaTHFVcImqG2NUj-RRDNknMn3EafAE6jwJqg.2Yula7lN69tGWk6RXZHJlg/__results___files/__results___26_0.png)
+![](includes/confusion_matrix.png)
 :::
 
 :::{.column}
@@ -113,13 +119,13 @@ The question is formulated around the decision
 The decision should solve a problem
 
 
-## What is the problem?
+## Why should we care about churn?
 :::{.incremental}
-- Customer churn is expensive 
+- **Problem**: Customer churn is expensive 
 
-- We want to reduce churn by retaining more customers
+- **Goal**: We want to reduce churn by retaining more customers
 
-- Question: Why are customers leaving?
+- **Question**: Why are customers leaving?
 :::
 
 :::{.notes}
@@ -130,7 +136,7 @@ attracting new customers is 5x more expensive than retaining existing customers
 :::{.incremental}
 - We find that customers leave when satisfaction falls
 
-- We then find that satisfaction falls when customers don't feel valued
+- We then find that satisfaction falls when customers don't feel valued (measured by survey and focus groups)
 
 - Do any of our existing programs increase satisfaction? loyalty discounts, mailers, early access?
 :::
@@ -148,26 +154,35 @@ Which program (loyalty discounts, mailers, early access) increases satisfaction,
 
 - Were the decisions related to a particular problem?
 
+- Dissect the business decision into: <br> 
+  *problem, goals, and decision-oriented questions* 
+
 5 minutes to discuss then be ready to share out
+
 
 # A Framework
 
+for data-driven decision making
 
-## Framework for Analysis
+
+## Start by understanding the problem
 :::{.main-point}
 ```{mermaid}
 %%{init: {"themeVariables": {"fontSize": "24px"}}}%%
 flowchart LR
-  P[Problem] --> Q[Question]
-  Q --> Da[Data]
-  Da --> M[Model]
-  M --> R[Result]
-  R --> D[Decision]
+  G[Goals] ==> P[Problem]
+  P ==> Q[Question]
+  Q ==> Da[Data]
+  Da ==> M[Model]
+  M ==> R[Result]
+  R ==> D[Decision]
 ```
 :::
 
 :::{.notes}
-Move from understanding the problem to formulating a clear question. Then finding data and appropriate model. This part requires advanced stats and understanding of measures of fit. Then when comfortable with the model, run and get results and make decision.
+- Move from understanding the problemto formulating a clear question. 
+- Then finding data and appropriate model. This part requires advanced stats and understanding of measures of fit. 
+- Then when comfortable with the model, run and get results and make decision.
 :::
 
 ## Reality is more complicated
@@ -175,37 +190,46 @@ Move from understanding the problem to formulating a clear question. Then findin
 ```{mermaid}
 %%{init: {"themeVariables": {"fontSize": "24px"}}}%%
 flowchart LR
-  P[Problem] --> Q[Question]
-  Q --> Da[Data]
-  Da --> M[Model]
-  M --> R[Result]
-  R --> D[Decision]
-  Da --> Q
+  G[Goals] ==> P[Problem]
+  P ==> Q[Question]
+  Q ==> Da[Data]
+  Da ==> M[Model]
+  M ==> R[Result]
+  R ==> D[Decision]
+  Da ==> Q
 ```
 :::
 
+:::{.notes}
+- Data limitations may constrain the types of questions you can ask
+- Exploring the data may also lead you to revise your questions
+:::
 
 ## Reality is very complicated
 :::{.main-point}
 ```{mermaid}
 %%{init: {"themeVariables": {"fontSize": "24px"}}}%%
 flowchart LR
-  P[Problem] --> Q[Question]
-  Q --> Da[Data]
-  Da --> M[Model]
-  M --> R[Result]
-  R --> D[Decision]
-  M --> Da
-  R --> Q
-  R --> M
-  Da --> Q
+  G[Goals] ==> P[Problem]
+  P ==> Q[Question]
+  Q ==> Da[Data]
+  Da ==> M[Model]
+  M ==> R[Result]
+  R ==> D[Decision]
+  M ==> Da
+  R ==> Q
+  R ==> M
+  Da ==> Q
 ```
 :::
 
+:::{.notes}
+- Modeling constrains can affect data collection, which again may lead to question revision
+- Results can lead you to revise your model or even question
+:::
 
 
-
-## Where projects usually fail
+## Where data/research projects usually fail
 
 - The decision is unclear
 
@@ -231,29 +255,20 @@ A good empirical question is:
 
     - Who/what (unit)
 
-    - Where
+    - Where (one branch or whole enterprise)
 
-    - When
+    - When (timeline)
 
-    - Compared to what
+    - Compared to what (do nothing, )
 
 ::: notes
 This slide sets the criteria; next slides operationalize with constraints.
 :::
 
 
-## A useful test
-
-If you can’t say how the answer would change a decision, the question isn’t finished.
-
-::: notes
-Call on an example decision: policy choice, business action, resource allocation.
-:::
-
-
 ##  {.iclicker}
 
-A company asks: “What would happen to customer churn **if we offered a retention discount**?”
+A company asks: “What would happen to customer churn next year if we offered a retention discount at one location and not others?”
 
 :::{.question}
 What type of analytics question is this? (Heidari)
@@ -305,35 +320,80 @@ experiments, quasi-experiments, or strong assumptions
 
 ##  {.iclicker}
 
+What percentage of customers churned last month?
+
 :::{.question}
-Which question below is **predictive**, not causal?
+What type of analytics question is this? (Heidari)
 :::
 :::{.choices}
-A. Will churn decrease if we offer a discount?  
-B. Which customers are most likely to churn next month?  
-C. Did the discount reduce churn relative to no discount?  
-D. Which customers changed behavior because of the discount?
+A. Descriptive  
+B. Exploratory  
+C. Predictive  
+D. Causal (counterfactual)  
+E. Mechanistic
 :::
 
 :::{.notes}
-D counterfactual
-This question compares:
-
-the world with the intervention
-
-the world without the intervention
-
-That makes it counterfactual, not just predictive.
-
-Answering it usually requires:
-
-experiments, quasi-experiments, or strong assumptions
+Correct answer: A. Descriptive. It summarizes what already happened.
 :::
 
+
+##  {.iclicker}
+
+Through what process does customer dissatisfaction lead to churn?
+
+:::{.question}
+What type of analytics question is this? (Heidari)
+:::
+:::{.choices}
+A. Descriptive  
+B. Exploratory  
+C. Predictive  
+D. Causal (counterfactual)  
+E. Mechanistic
+:::
+
+:::{.notes}
+E. Mechanistic. Trying to understand why something is happening
+:::
+
+
+##  {.iclicker}
+
+Is customer churn higher among users with low satisfaction scores?
+
+:::{.question}
+What type of analytics question is this? (Heidari)
+:::
+:::{.choices}
+A. Descriptive  
+B. Exploratory  
+C. Predictive  
+D. Causal (counterfactual)  
+E. Mechanistic
+:::
+
+:::{.notes}
+B. Exploratory. It looks for patterns or associations without claiming causality.
+:::
+
+## Key Takeaways
+
+- Strong models do **not** guarantee good decisions  
+- Data analysis should start with the **problem and decision**, not the data  
+- Different decisions require **different types of questions**  
+- Good questions are:
+  - decision-relevant  
+  - answerable with data  
+  - clear about who, where, when, and compared to what  
 
 
 ## Reminders and Due Dates
 
+- Lab assignment due Friday
+
+- Lab on friday will focus on finding and importing data
+  - Start in excel then move to R
 
 
 
