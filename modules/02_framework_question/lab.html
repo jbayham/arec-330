@@ -81,10 +81,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#scenario" id="toc-scenario" class="nav-link active" data-scroll-target="#scenario">Scenario</a></li>
-  <li><a href="#formulating-the-question" id="toc-formulating-the-question" class="nav-link" data-scroll-target="#formulating-the-question">Formulating the Question</a></li>
+  <li><a href="#part-1-formulating-the-question" id="toc-part-1-formulating-the-question" class="nav-link" data-scroll-target="#part-1-formulating-the-question">Part 1: Formulating the Question</a></li>
   <li><a href="#usda-nass-quickstats" id="toc-usda-nass-quickstats" class="nav-link" data-scroll-target="#usda-nass-quickstats">USDA NASS Quickstats</a></li>
   <li><a href="#us-drought-monitor" id="toc-us-drought-monitor" class="nav-link" data-scroll-target="#us-drought-monitor">US Drought Monitor</a></li>
-  <li><a href="#reading-the-data-into-r" id="toc-reading-the-data-into-r" class="nav-link" data-scroll-target="#reading-the-data-into-r">Reading the data into R</a></li>
+  <li><a href="#reading-the-data-into-r" id="toc-reading-the-data-into-r" class="nav-link" data-scroll-target="#reading-the-data-into-r">Reading the data into R</a>
+  <ul class="collapse">
+  <li><a href="#reading-some-of-the-data" id="toc-reading-some-of-the-data" class="nav-link" data-scroll-target="#reading-some-of-the-data">Reading some of the data</a></li>
+  </ul></li>
   <li><a href="#sink-source-sink" id="toc-sink-source-sink" class="nav-link" data-scroll-target="#sink-source-sink">sink-source-sink</a></li>
   </ul>
 </nav>
@@ -122,6 +125,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
+<p><img src="includes/lab2_header.png" class="img-fluid"></p>
 <p>The objective of this lab is to move from a policy-oriented problem to a question and data requirements. The lab assignment deliverable is to complete a microsoft form: <a href="https://forms.office.com/r/zvxBz2p4Qu" class="uri">https://forms.office.com/r/zvxBz2p4Qu</a>.</p>
 <p><strong>Preliminaries</strong>:</p>
 <ol type="1">
@@ -131,41 +135,64 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="scenario">Scenario</h2>
 <p>You are part of an analytical team advising policymakers at the U.S. Department of Agriculture. In recent years, several regions of the United States have experienced drought conditions that have raised concerns about impacts on crop production, particularly corn. Policymakers want to know whether drought has meaningfully reduced corn productivity and whether existing support programs are sufficient or if additional assistance may be needed.</p>
 </section>
-<section id="formulating-the-question" class="level2">
-<h2 class="anchored" data-anchor-id="formulating-the-question">Formulating the Question</h2>
-<p>Pair up discuss the scenario. Then proceed to the lab form and answer the questions: <a href="https://forms.office.com/r/zvxBz2p4Qu" class="uri">https://forms.office.com/r/zvxBz2p4Qu</a>.</p>
+<section id="part-1-formulating-the-question" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-formulating-the-question">Part 1: Formulating the Question</h2>
+<p>Pair up and discuss the scenario. Then proceed to the lab form and answer the questions: <a href="https://forms.office.com/r/zvxBz2p4Qu" class="uri">https://forms.office.com/r/zvxBz2p4Qu</a>. Please engage with the questions. I expect a paragraph or so.</p>
 </section>
 <section id="usda-nass-quickstats" class="level2">
 <h2 class="anchored" data-anchor-id="usda-nass-quickstats">USDA NASS Quickstats</h2>
 <p>The US Department of Agriculture (USDA) National Agricultural Statistics Service (NASS) maintains a database of many relevant ag statistics. Let’s go find some data on US Corn. Visit <a href="https://quickstats.nass.usda.gov/" class="uri">https://quickstats.nass.usda.gov/</a> to query the Quick Stats database.</p>
 <p>Click through the sequence of choices to narrow your data request.</p>
 <p><img src="includes/quick_stats.png" class="img-fluid" style="width:100%;height:auto;display:block;margin:0 auto;"></p>
+<div class="callout-attention">
 <p>Download the data to a known location. It will have the extension <code>.csv</code> which stands for comma-separated values. You can inspect the data in Excel. Then return to the lab form and answer the questions: <a href="https://forms.office.com/r/zvxBz2p4Qu" class="uri">https://forms.office.com/r/zvxBz2p4Qu</a>.</p>
+</div>
 </section>
 <section id="us-drought-monitor" class="level2">
 <h2 class="anchored" data-anchor-id="us-drought-monitor">US Drought Monitor</h2>
 <p>Now we need to find drought data. Visit the US Drought Monitor <a href="https://droughtmonitor.unl.edu/CurrentMap.aspx" class="uri">https://droughtmonitor.unl.edu/CurrentMap.aspx</a>. Navigate to the Data &gt; Data Download &gt; Comprehensive Statstics.</p>
 <p><img src="includes/drought.png" class="img-fluid" style="width:100%;height:auto;display:block;margin:0 auto;"></p>
+<div class="callout-attention">
 <p>Again, download the data in csv format to a known location. You can inspect the data in Excel. Then return to the lab form and answer the questions: <a href="https://forms.office.com/r/zvxBz2p4Qu" class="uri">https://forms.office.com/r/zvxBz2p4Qu</a>.</p>
+</div>
 </section>
 <section id="reading-the-data-into-r" class="level2">
 <h2 class="anchored" data-anchor-id="reading-the-data-into-r">Reading the data into R</h2>
-<p>By now you should have the data downloaded into your working directory for this lab (e.g., <code>lab_02</code>). To read data into R, we will use the function <code>read_csv()</code> from the library <code>readr</code> which is part of <code>tidyverse</code>. The corn data file may have a long filename. You can rename it to something like <code>corn_yield.csv</code>. After you read in the data, use <code>glimpse(corn_dat)</code> to have R print some information in the console.</p>
+<p>By now you should have the data downloaded into your working directory for this lab (e.g., <code>lab_02</code>). Open Rstudio and a new script. Save the script in your folder <code>lab_02</code> and name the script <code>lab_02.R</code>. Write a comment at the top of the script describing the goal of the script (this is for your future reference). Write comments for each command you write.</p>
+<p>To read data into R, we will use the function <code>read_csv()</code> from the library <code>readr</code>, which is part of <code>tidyverse</code>. First, use the function <code>library()</code> to load <code>tidyverse</code>. The corn data file may have a long filename. You can rename it to something like <code>corn_dat.csv</code>. After you read in the data, use <code>glimpse(corn_dat)</code> to have R print some information in the console. Look carefully at the data types. The <code>read_csv()</code> function tries to guess the data types based on the contents of the rows (e.g., if a column has letters, its probably a character).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co">#if you get an error make sure it is installed install.packages("readr")</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Read the corn data</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>corn_dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"corn_yield.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>corn_dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"corn_dat.csv"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Print a preview of the data to the console</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(corn_dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Do the same with the drought data. Read it in and use glimpse to print information to the console.</p>
+<div class="callout-attention">
+<p>Inspect the output of <code>glimpse()</code> and answer the question in the form: <a href="https://forms.office.com/r/zvxBz2p4Qu" class="uri">https://forms.office.com/r/zvxBz2p4Qu</a></p>
+<p>Do the same with the drought data. Read the data in using the function, <code>read_csv()</code>, and use <code>glimpse()</code> to print information to the console. Commands to read and inspect the drought data should be written in <code>lab_02.R</code>. Remember that the commands will be executed in order, so put them in a logical order (i.e., you cannot <code>glimpse()</code> data that you have not read yet).</p>
+</div>
+<section id="reading-some-of-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="reading-some-of-the-data">Reading some of the data</h3>
+<p>These datasets are relatively small. You may encounter large datasets that are difficult open in MS Excel. In these cases, we can read subsets of the rows to investigate the structure of the data. Use the function argument <code>n_max = 10</code> to read in 10 rows of data, then use glimpse to preview.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Read the corn data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>corn_dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"corn_dat.csv"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">n_max =</span> <span class="dv">10</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Print a preview of the data to the console</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(corn_dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 </section>
 <section id="sink-source-sink" class="level2">
 <h2 class="anchored" data-anchor-id="sink-source-sink">sink-source-sink</h2>
-<p>Generate a log file that shows your code ran.</p>
+<p>Generate a log file that shows your code ran. The first command, <code>sink(file="lab_02.log")</code> opens a connection to a log file you are creating. The second command, <code>source("lab_02.R",echo = TRUE)</code> executes all lines of your script lab_02.R and echo = TRUE makes sure to print everything to the console. The third command, <code>sink()</code> closes the connection to finalize writing the file. Remember you need to run all three lines from top to bottom. If you get an error running <code>source()</code>, then you must fix the error and run from the top. These commands will create files and run files in your current working directory. Use <code>getwd()</code> if you don’t know where that is.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="at">file=</span><span class="st">"lab_02.log"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"lab_02.R"</span>,<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="at">file=</span><span class="st">"lab_02.log"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"lab_02.R"</span>,<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 

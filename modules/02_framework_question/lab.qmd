@@ -10,6 +10,8 @@ format:
     include-after-body: ../course-footer.html
 ---
 
+![](includes/lab2_header.png)
+
 The objective of this lab is to move from a policy-oriented problem to a question and data requirements. The lab assignment deliverable is to complete a microsoft form: <https://forms.office.com/r/zvxBz2p4Qu>.
 
 **Preliminaries**:
@@ -21,9 +23,9 @@ The objective of this lab is to move from a policy-oriented problem to a questio
 
 You are part of an analytical team advising policymakers at the U.S. Department of Agriculture. In recent years, several regions of the United States have experienced drought conditions that have raised concerns about impacts on crop production, particularly corn. Policymakers want to know whether drought has meaningfully reduced corn productivity and whether existing support programs are sufficient or if additional assistance may be needed.
 
-## Formulating the Question
+## Part 1: Formulating the Question
 
-Pair up and discuss the scenario. Then proceed to the lab form and answer the questions: <https://forms.office.com/r/zvxBz2p4Qu>.
+Pair up and discuss the scenario. Then proceed to the lab form and answer the questions: <https://forms.office.com/r/zvxBz2p4Qu>. Please engage with the questions. I expect a paragraph or so.
 
 ## USDA NASS Quickstats
 
@@ -33,8 +35,9 @@ Click through the sequence of choices to narrow your data request.
 
 ![](includes/quick_stats.png){style="width:100%;height:auto;display:block;margin:0 auto;"}
 
+:::{.callout-attention}
 Download the data to a known location. It will have the extension `.csv` which stands for comma-separated values. You can inspect the data in Excel. Then return to the lab form and answer the questions: <https://forms.office.com/r/zvxBz2p4Qu>.
-
+:::
 
 ## US Drought Monitor
 
@@ -42,27 +45,55 @@ Now we need to find drought data. Visit the US Drought Monitor <https://droughtm
 
 ![](includes/drought.png){style="width:100%;height:auto;display:block;margin:0 auto;"}
 
+:::{.callout-attention}
 Again, download the data in csv format to a known location. You can inspect the data in Excel. Then return to the lab form and answer the questions: <https://forms.office.com/r/zvxBz2p4Qu>.
-
+:::
 
 ## Reading the data into R
 
-By now you should have the data downloaded into your working directory for this lab (e.g., `lab_02`). To read data into R, we will use the function `read_csv()` from the library `readr` which is part of `tidyverse`. The corn data file may have a long filename. You can rename it to something like `corn_yield.csv`. After you read in the data, use `glimpse(corn_dat)` to have R print some information in the console.
+By now you should have the data downloaded into your working directory for this lab (e.g., `lab_02`). Open Rstudio and a new script. Save the script in your folder `lab_02` and name the script `lab_02.R`. Write a comment at the top of the script describing the goal of the script (this is for your future reference). Write comments for each command you write. 
+
+To read data into R, we will use the function `read_csv()` from the library `readr`, which is part of `tidyverse`. First, use the function `library()` to load `tidyverse`. The corn data file may have a long filename. You can rename it to something like `corn_dat.csv`. After you read in the data, use `glimpse(corn_dat)` to have R print some information in the console. Look carefully at the data types. The `read_csv()` function tries to guess the data types based on the contents of the rows (e.g., if a column has letters, its probably a character).
 
 ```{r}
 #| eval: false
 library(tidyverse) #if you get an error make sure it is installed install.packages("readr")
 
 #Read the corn data
-corn_dat <- read_csv("corn_yield.csv")
+corn_dat <- read_csv("corn_dat.csv")
+
+#Print a preview of the data to the console
+glimpse(corn_dat)
 
 ```
 
-Do the same with the drought data. Read it in and use glimpse to print information to the console.
+:::{.callout-attention}
+Inspect the output of `glimpse()` and answer the question in the form: <https://forms.office.com/r/zvxBz2p4Qu>
+
+Do the same with the drought data. Read the data in using the function, `read_csv()`, and use `glimpse()` to print information to the console. Commands to read and inspect the drought data should be written in `lab_02.R`. Remember that the commands will be executed in order, so put them in a logical order (i.e., you cannot `glimpse()` data that you have not read yet).
+:::
+
+
+
+### Reading some of the data
+
+These datasets are relatively small. You may encounter large datasets that are difficult open in MS Excel. In these cases, we can read subsets of the rows to investigate the structure of the data. Use the function argument `n_max = 10` to read in 10 rows of data, then use glimpse to preview.
+
+```{r}
+#| eval: false
+
+#Read the corn data
+corn_dat <- read_csv("corn_dat.csv",
+                     n_max = 10)
+
+#Print a preview of the data to the console
+glimpse(corn_dat)
+
+```
 
 ## sink-source-sink
 
-Generate a log file that shows your code ran.
+Generate a log file that shows your code ran. The first command, `sink(file="lab_02.log")` opens a connection to a log file you are creating. The second command, `source("lab_02.R",echo = TRUE)` executes all lines of your script lab_02.R and echo = TRUE makes sure to print everything to the console. The third command, `sink()` closes the connection to finalize writing the file. Remember you need to run all three lines from top to bottom. If you get an error running `source()`, then you must fix the error and run from the top. These commands will create files and run files in your current working directory. Use `getwd()` if you don't know where that is.
 
 ```{r}
 #| eval: false

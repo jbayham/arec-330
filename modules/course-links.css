@@ -83,3 +83,18 @@ html {
 .course-footer__sep {
   opacity: 0.6;
 }
+
+/* Attention callout used in labs and slides
+   - slightly larger text and theme color
+   - use by adding {.callout-attention} to a block or blockquote
+*/
+.callout-attention {
+  color: #1E4D2B; 
+  font-size: 1.1em;
+  font-weight: 600;
+  line-height: 1.35;
+  background-color: #dee49d52; /* match code/pre background */
+  /*border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 3px;*/
+  padding: 0.5rem 0.75rem;
+}
