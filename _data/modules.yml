@@ -12,6 +12,7 @@
   dirname: modules/02_framework_question
   desc: "Lecture will focus on a framework for data-driven decision making and how to ask the right questions. Lab will focus on finding data to answer your questions."
   slides: "slides.html"
+  lab: "lab.html"
   readings:
   - title: "Puntoni and De Langhe. Better Decisions with Data"
     url: "https://knowledge.wharton.upenn.edu/article/better-decisions-with-data-asking-the-right-question/"
