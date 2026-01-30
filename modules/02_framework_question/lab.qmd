@@ -1,0 +1,73 @@
+---
+title: "Week 2 Lab: From Question to Data"
+format:
+  html:
+    theme: zephyr
+    code-copy: true
+    toc: true
+    css: ../course-links.css
+    include-before-body: ../course-links.html
+    include-after-body: ../course-footer.html
+---
+
+The objective of this lab is to move from a policy-oriented problem to a question and data requirements. The lab assignment deliverable is to complete a microsoft form: <https://forms.office.com/r/zvxBz2p4Qu>.
+
+**Preliminaries**:
+
+1. Create a directory called `lab_02` where you will save all files related to this lab. I don't care where you put the directory, but you should understand how to navigate there in windows explorer or mac finder.
+
+
+## Scenario
+
+You are part of an analytical team advising policymakers at the U.S. Department of Agriculture. In recent years, several regions of the United States have experienced drought conditions that have raised concerns about impacts on crop production, particularly corn. Policymakers want to know whether drought has meaningfully reduced corn productivity and whether existing support programs are sufficient or if additional assistance may be needed.
+
+## Formulating the Question
+
+Pair up and discuss the scenario. Then proceed to the lab form and answer the questions: <https://forms.office.com/r/zvxBz2p4Qu>.
+
+## USDA NASS Quickstats
+
+The US Department of Agriculture (USDA) National Agricultural Statistics Service (NASS) maintains a database of many relevant ag statistics. Let's go find some data on US Corn. Visit <https://quickstats.nass.usda.gov/> to query the Quick Stats database.
+
+Click through the sequence of choices to narrow your data request.
+
+![](includes/quick_stats.png){style="width:100%;height:auto;display:block;margin:0 auto;"}
+
+Download the data to a known location. It will have the extension `.csv` which stands for comma-separated values. You can inspect the data in Excel. Then return to the lab form and answer the questions: <https://forms.office.com/r/zvxBz2p4Qu>.
+
+
+## US Drought Monitor
+
+Now we need to find drought data. Visit the US Drought Monitor <https://droughtmonitor.unl.edu/CurrentMap.aspx>. Navigate to the Data > Data Download > Comprehensive Statstics. 
+
+![](includes/drought.png){style="width:100%;height:auto;display:block;margin:0 auto;"}
+
+Again, download the data in csv format to a known location. You can inspect the data in Excel. Then return to the lab form and answer the questions: <https://forms.office.com/r/zvxBz2p4Qu>.
+
+
+## Reading the data into R
+
+By now you should have the data downloaded into your working directory for this lab (e.g., `lab_02`). To read data into R, we will use the function `read_csv()` from the library `readr` which is part of `tidyverse`. The corn data file may have a long filename. You can rename it to something like `corn_yield.csv`. After you read in the data, use `glimpse(corn_dat)` to have R print some information in the console.
+
+```{r}
+#| eval: false
+library(tidyverse) #if you get an error make sure it is installed install.packages("readr")
+
+#Read the corn data
+corn_dat <- read_csv("corn_yield.csv")
+
+```
+
+Do the same with the drought data. Read it in and use glimpse to print information to the console.
+
+## sink-source-sink
+
+Generate a log file that shows your code ran.
+
+```{r}
+#| eval: false
+sink(file="lab_02.log")
+source("lab_02.R",echo = TRUE)
+sink()
+
+```
