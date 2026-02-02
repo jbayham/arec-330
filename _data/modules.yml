@@ -20,29 +20,13 @@
     url: "https://www.cpaalberta.ca/-/media/Files/Services/Online-Resource-Centre/PDF-Asking-a-good-question-by-Sam-Heidari.pdf?la=en&hash=B62F68830E8F4F1FCD9A3BFC18A7B783FBF40DC6"
   - title: "Raoufy. The Art of Asking the Right Questions"
     url: "https://medium.com/@raoufysohaib/the-art-of-asking-the-right-questions-how-i-learned-to-start-every-data-analysis-the-right-way-89b25cf0eee0"
-  # readings:
-  #   - title: "McCarl & Spreen Ch. 1"
-  #     url: "course-materials/"
-
-
-# - title: "Linear Programming"
-#   filename: "notes" 
-#   dirname: modules/linear_programming
-#   desc: "This unit introduces linear programming (LP) and covers the simplex method, sensitivity analysis, duality theory, and input-output analysis. Submit problem set on Canvas."
-#   readings:
-#     - title: "McCarl & Spreen Ch. 2–4"
-#       url: "course-materials/"
-#   ps:
-#     - title: "Problem Set 1"
-#       url: "problem_set.pdf"
-#   materials:
-#     - title: "LP Example"
-#       url: "lp_example.html"
-#     - title: "LP_land_alloc.xlsx"
-#       url: "LP_land_alloc.xlsx"
-#     - title: "R_lp_example.pdf"
-#       url: "R_lp_example.pdf"
-#     - title: "IO Example"
-#       url: "IO_example.html"
   
   
+- title: "Week 3: Data Processing"
+  dirname: modules/03_data_processing
+  desc: "Lecture will focus on the importance of data processing for overall analysis."
+  slides: "slides.html"
+  lab: "lab.html"
+  readings:
+  - title: "Data Processing Reader"
+    rel_url: "reading.html"
