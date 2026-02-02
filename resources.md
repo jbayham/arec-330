@@ -6,11 +6,6 @@ permalink: /resources/
 
 This page contains links to resources that may be helpful.
 
-**Table of Contents**
-
-*toc 
-{:toc}
-
 ## Online Resources
 
 There are many online resources to help you learn R programming and data analysis. Here are a select few that I have found helpful:
