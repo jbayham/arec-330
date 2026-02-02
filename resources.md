@@ -6,10 +6,6 @@ permalink: /resources/
 
 This page contains links to resources that may be helpful.
 
-**Table of Contents**
-
--   toc {:toc}
-
 ## Online Resources
 
 There are many online resources to help you learn R programming and data analysis. Here are a select few that I have found helpful:
@@ -35,6 +31,7 @@ This is a list of things to check when you run into a problem in R.
     -   Here is how you can copy a folder/file path in Windows and Mac:
         -   Windows: Navigate to the folder/file in File Explorer, right-click the folder/file, and select "Copy as path".
         -   Mac: Navigate to the folder/file in Finder, right-click (or Control-click) the folder/file, hold down the Option (⌥) key, right-click the folder/file, and select "Copy <folder/file> as Pathname".
+        -   NOTE: R only likes forward slashes (`/`) in file paths, even on Windows, so you may have to edit your copied file paths to successfully read files into R.
 
 -   If you're using a specific function from a package, are you referencing the right package/function?
 
