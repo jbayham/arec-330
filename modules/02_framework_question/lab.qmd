@@ -49,6 +49,14 @@ Now we need to find drought data. Visit the US Drought Monitor <https://droughtm
 Again, download the data in csv format to a known location. You can inspect the data in Excel. Then return to the lab form and answer the questions: <https://forms.office.com/r/zvxBz2p4Qu>.
 :::
 
+
+## Final Datasets
+
+Ultimately, modify your query and download:
+
+- Corn Yield 2000 - 2025 for all states
+- Drought 2000 - 2025 for all states
+
 ## Reading the data into R
 
 By now you should have the data downloaded into your working directory for this lab (e.g., `lab_02`). Open Rstudio and a new script. Save the script in your folder `lab_02` and name the script `lab_02.R`. Write a comment at the top of the script describing the goal of the script (this is for your future reference). Write comments for each command you write. 
