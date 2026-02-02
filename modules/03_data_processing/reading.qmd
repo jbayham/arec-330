@@ -15,7 +15,7 @@ This document covers key concepts of data processing, drawing on applied data sc
 
 ---
 
-## Why Data Processing Matters
+## Why Data Processing Matters 
 
 Before building models, creating visualizations, or running statistical tests, analysts must confront a more fundamental task: **making sure the data are suitable for the question being asked**. This step, often called *data processing*, *data cleaning*, or *data wrangling*, is where raw information is transformed into data suitable for analysis.
 
