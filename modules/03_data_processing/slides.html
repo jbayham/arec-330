@@ -10,7 +10,7 @@
 <link href="slides_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.450">
 
-  <title>Data Processing: Letting the Question Guide Your Choices</title>
+  <title>Data Processing  Part 1</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -324,7 +324,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Data Processing: Letting the Question Guide Your Choices</h1>
+  <h1 class="title">Data Processing <br>Part 1</h1>
 
 <div class="quarto-title-authors">
 </div>
@@ -395,7 +395,9 @@
 </section>
 <section id="the-journey-from-raw-data-to-insight" class="slide level2">
 <h2>The Journey from Raw Data to Insight</h2>
+<div class="main-point">
 <p>Raw Data → Data Processing → Structured Data → Analysis → Insight</p>
+</div>
 <aside class="notes">
 <p>The bridge between raw data and analysis is processing. Processing is not a single step — it’s a series of decisions.</p>
 <style type="text/css">
@@ -415,34 +417,6 @@
 <div class="main-point">
 <p><strong>Data processing is the set of decisions that transform raw data into a dataset that can credibly answer your question.</strong></p>
 </div>
-</section>
-<section id="roadmap" class="slide level2">
-<h2>Roadmap</h2>
-<ul>
-<li>Understand how the data were generated and what they measure</li>
-<li>Make explicit processing choices (variables, aggregation, missingness, outliers)</li>
-<li>Implement and document processing steps</li>
-</ul>
-<aside class="notes">
-<ol type="1">
-<li>Start by restating the research question so processing is aligned with it.</li>
-<li>Emphasize data provenance — collection method, coverage, and biases.</li>
-<li>Explain concrete processing decisions you’ll demonstrate (e.g., tidy, handle missing, aggregate).</li>
-<li>Note the importance of documenting every choice for reproducibility.</li>
-<li>Mention sensitivity checks: try alternate missingness/aggregation rules.</li>
-<li>Point to the lab where students will practice these steps.</li>
-</ol>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section>
 <section id="why-this-matters" class="slide level2">
 <h2>Why This Matters</h2>
@@ -467,6 +441,35 @@
           display:block!important;
       }</style></aside>
 </section>
+<section id="roadmap" class="slide level2">
+<h2>Roadmap</h2>
+<ul>
+<li>Understand your data</li>
+<li>Make data tidy</li>
+<li>Make explicit processing choices (variables, aggregation, missingness, outliers)</li>
+<li>Implement and document processing steps</li>
+</ul>
+<aside class="notes">
+<ol type="1">
+<li>Start by restating the research question so processing is aligned with it.</li>
+<li>Emphasize data provenance — collection method, coverage, and biases.</li>
+<li>Explain concrete processing decisions you’ll demonstrate (e.g., tidy, handle missing, aggregate).</li>
+<li>Note the importance of documenting every choice for reproducibility.</li>
+<li>Mention sensitivity checks: try alternate missingness/aggregation rules.</li>
+<li>Point to the lab where students will practice these steps.</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="processing-is-about-alignment" class="slide level2">
 <h2>Processing Is About Alignment</h2>
 <p>Your question determines:</p>
@@ -474,19 +477,19 @@
 <ul>
 <li class="fragment">What counts as an observation
 <ul>
-<li class="fragment">e.g., individual farms vs.&nbsp;counties</li>
+<li class="fragment">individual farms, counties, states</li>
 </ul></li>
-<li class="fragment">Which variables matter
+<li class="fragment">Which variables/measurements matter
 <ul>
-<li class="fragment">e.g., total yield vs.&nbsp;yield per acre</li>
+<li class="fragment">total yield, yield per acre, percent change</li>
 </ul></li>
-<li class="fragment">What level of aggregation is appropriate
+<li class="fragment">What level of temporal aggregation is appropriate
 <ul>
-<li class="fragment">e.g., daily vs.&nbsp;monthly vs.&nbsp;annual</li>
+<li class="fragment">daily, monthly, annual</li>
 </ul></li>
 <li class="fragment">How to handle missing or extreme values
 <ul>
-<li class="fragment">e.g., imputation, exclusion, or flagging</li>
+<li class="fragment">imputation, exclusion, flagging</li>
 </ul></li>
 </ul>
 </div>
@@ -519,6 +522,11 @@
 <div class="main-point">
 <p>This means data processing deserves the same care, documentation, and transparency as your analysis.</p>
 </div>
+</section>
+<section>
+<section id="tidy-data" class="title-slide slide level1 center">
+<h1>Tidy Data</h1>
+
 </section>
 <section id="section-6" class="slide level2 iclicker">
 <h2></h2>
@@ -684,6 +692,11 @@ D. Use a column to record the measurement type (e.g., crop)</p>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section></section>
+<section>
+<section id="missing-data" class="title-slide slide level1 center">
+<h1>Missing Data</h1>
+
 </section>
 <section id="section-7" class="slide level2 iclicker">
 <h2></h2>
@@ -710,34 +723,13 @@ D. Imputation performed by the analyst</p>
           display:block!important;
       }</style></aside>
 </section>
-<section id="missing-data" class="slide level2 scrollable">
-<h2>Missing data</h2>
-<p>C. Suppression for confidentiality or privacy<br>
-D. Imputation performed by the analyst<br>
-:::</p>
-<aside class="notes">
-<p>D</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
 <section id="missing-data-1" class="slide level2 scrollable">
 <h2>Missing data</h2>
-<p>Missing data are information — not just holes</p>
+<p>Missing data are information - not just holes</p>
 <ul>
-<li>Missingness are values absent from your dataset</li>
-<li>Missing at random vs.&nbsp;informative</li>
+<li>Why: Missing at random vs.&nbsp;informative</li>
 <li>Typical causes: nonresponse, measurement limits, deliberate suppression, data-entry errors</li>
 <li>Why it matters: changes sample composition, biases estimates</li>
-<li>Quick checklist: quantify missingness, explore patterns, decide interpretation (zero vs.&nbsp;nonresponse), choose handling (exclude, impute, flag), and document choice</li>
 </ul>
 <aside class="notes">
 <p>Start by showing that missingness can be informative. Briefly define MCAR/MAR/MNAR with one-line examples (MCAR: random sensor dropouts; MAR: lower-income respondents less likely to answer income; MNAR: people with very high debts decline to report debt). Emphasize workflow: (1) quantify &amp; visualize missingness, (2) ask why values are missing relative to your question, (3) choose and justify a handling strategy, (4) run sensitivity checks. Classroom prompt: ask students to spend 60s describing a plausible cause of missingness for the farm visits table and how they’d treat it.</p>
@@ -863,6 +855,21 @@ D. Imputation performed by the analyst<br>
 </ul>
 </div>
 </section>
+<section id="missing-data-checklist" class="slide level2">
+<h2>Missing Data Checklist</h2>
+<ul>
+<li>quantify missingness</li>
+<li>explore patterns</li>
+<li>decide interpretation (zero vs.&nbsp;nonresponse)</li>
+<li>choose handling (exclude, impute, flag)</li>
+<li>document choice</li>
+</ul>
+</section></section>
+<section>
+<section id="data-aggregation" class="title-slide slide level1 center">
+<h1>Data Aggregation</h1>
+
+</section>
 <section id="section-8" class="slide level2 iclicker">
 <h2></h2>
 <div class="question">
@@ -892,11 +899,10 @@ D. To convert categorical variables into numerical ones</p>
 <h2>Aggregation</h2>
 <div>
 <ul>
-<li class="fragment">What it is: combining observations (sum/mean/count/median) by time/place/group</li>
+<li class="fragment">Aggregation is combining observations (sum/mean/count/median) by time/place/group</li>
 <li class="fragment">Why do it: match data resolution to the question, reduce noise, reveal trends</li>
 <li class="fragment">Common choices: temporal (daily→monthly→annual), spatial (farm→county→state), unit-level (individual→household)</li>
 <li class="fragment">Pitfalls: losing meaningful variation, masking short-term effects</li>
-<li class="fragment">Quick checklist: pick level driven by the question; preserve raw data; document aggregation approach; run sensitivity checks</li>
 </ul>
 </div>
 <aside class="notes">
@@ -916,13 +922,40 @@ D. To convert categorical variables into numerical ones</p>
 <section id="example-aggregation" class="slide level2">
 <h2>Example: Aggregation</h2>
 <p>Daily sales data from a retail store:</p>
-<ul>
-<li>2024-01-01: $4,200</li>
-<li>2024-01-02: $3,800</li>
-<li>2024-01-03: $4,100</li>
-<li>2024-01-04: $3,900</li>
-<li>… (365 observations)</li>
-</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Date</th>
+<th style="text-align: right;">Sales</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2024-01-01</td>
+<td style="text-align: right;">$4,200</td>
+</tr>
+<tr class="even">
+<td>2024-01-02</td>
+<td style="text-align: right;">$3,800</td>
+</tr>
+<tr class="odd">
+<td>2024-01-03</td>
+<td style="text-align: right;">$4,100</td>
+</tr>
+<tr class="even">
+<td>2024-01-04</td>
+<td style="text-align: right;">$3,900</td>
+</tr>
+<tr class="odd">
+<td>…</td>
+<td style="text-align: right;">…</td>
+</tr>
+<tr class="even">
+<td>2024-12-31</td>
+<td style="text-align: right;">$5,300</td>
+</tr>
+</tbody>
+</table>
 <aside class="notes">
 <p>You have daily data for a full year. But your question is about seasonal trends. Do you analyze daily? Weekly? Monthly? The answer depends on your question.</p>
 <style type="text/css">
@@ -980,23 +1013,49 @@ D. To convert categorical variables into numerical ones</p>
           display:block!important;
       }</style></aside>
 </section>
+<section id="aggregation-checklist" class="slide level2">
+<h2>Aggregation Checklist</h2>
+<ul>
+<li>pick level driven by the question</li>
+<li>preserve raw data</li>
+<li>document aggregation approach</li>
+<li>run sensitivity checks</li>
+</ul>
+</section>
 <section id="pair-up-and-discuss-3-minutes-1" class="slide level2">
-<h2>Pair up and discuss: 3 minutes**</h2>
+<h2>Pair up and discuss: 3 minutes</h2>
 <p>Last week’s lab had you work with drought and yield data.</p>
 <ol type="1">
 <li>What aggregation level (time and space) would make sense for analyzing drought impacts on yield?</li>
-</ol>
-</section>
-<section id="key-principle-data-context-matters" class="slide level2">
-<h2>Key Principle: Data Context Matters</h2>
-<p>Before you process data, understand:</p>
-<ol type="1">
-<li><p><strong>How were they collected?</strong> What system, incentives, or constraints shaped what got measured?</p></li>
-<li><p><strong>What are they designed to measure?</strong> Were they created for your question or repurposed from another use?</p></li>
-<li><p><strong>What’s included and excluded?</strong> What populations, time periods, or locations are covered?</p></li>
+<li>Is that the data you have? If not, what processing would you need to do?</li>
 </ol>
 <aside class="notes">
-<p>Processing makes sense only when informed by understanding how data were generated.</p>
+<p>I want the students to discuss the data that we obtained. Most will probably say that the state level is good enough. Probe them on whether county is better. Even if they say state, the temporal data requires some aggregation.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="document-processing-choices" class="slide level2">
+<h2>Document Processing Choices</h2>
+<p>Record what you did, why, and where to find it</p>
+<div>
+<ul>
+<li class="fragment">What: filters, recodes, aggregations, imputations, and outlier rules</li>
+<li class="fragment">Why: how each choice links to the research question and assumptions</li>
+<li class="fragment">How: scripts, functions, parameters/variables</li>
+<li class="fragment">Where: processing scripts, README</li>
+</ul>
+</div>
+<aside class="notes">
+<p>Recommend a short processing log for reproducibility: (1) a script that implements steps, (2) a README summarizing key decisions and rationale, (3) a small table listing transformations (what/why/how), and (4) brief results from sensitivity checks showing how conclusions change under alternate rules.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1014,7 +1073,7 @@ D. To convert categorical variables into numerical ones</p>
 <p>Processing decisions should be:</p>
 <ol type="1">
 <li><p><strong>Guided by your question</strong> — not by what’s easiest or most traditional</p></li>
-<li><p><strong>Made explicitly</strong> — document assumptions and choices</p></li>
+<li><p><strong>Made explicit</strong> — document assumptions and choices</p></li>
 <li><p><strong>Justified</strong> — explain why this processing aligns with your question</p></li>
 <li><p><strong>Transparent</strong> — make it so others can evaluate your decisions</p></li>
 </ol>
@@ -1036,10 +1095,9 @@ D. To convert categorical variables into numerical ones</p>
 <h2>What’s Next?</h2>
 <p><strong>Lab Session:</strong> Hands-on practice</p>
 <ul>
-<li>Work with real messy data</li>
-<li>Make explicit processing choices</li>
-<li>Document your decisions</li>
-<li>Justify choices in writing</li>
+<li>Continue working with drought and yield data</li>
+<li>Apply processing principles: aggregation, missingness, tidying</li>
+<li>Document your processing choices</li>
 </ul>
 <aside class="notes">
 <p>The lab will give you concrete experience with these principles. You’ll see how processing choices play out in practice.</p>
@@ -1055,7 +1113,7 @@ D. To convert categorical variables into numerical ones</p>
           display:block!important;
       }</style></aside>
 </section>
-<section id="bonus-common-processing-mistakes" class="slide level2">
+<section id="bonus-common-processing-mistakes" class="slide level2 scrollable">
 <h2>Bonus: Common Processing Mistakes</h2>
 <p>(If time allows)</p>
 <aside class="notes">
@@ -1095,7 +1153,7 @@ D. To convert categorical variables into numerical ones</p>
 <div class="footer footer-default">
 
 </div>
-</section>
+</section></section>
     </div>
   </div>
 

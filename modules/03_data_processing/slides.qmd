@@ -1,5 +1,5 @@
 ---
-title: "Data Processing: Letting the Question Guide Your Choices"
+title: "Data Processing <br>Part 1"
 format: 
   revealjs:
     theme: [night, ../custom.scss]
@@ -44,9 +44,9 @@ Raw data are messy, incomplete, and often built for a purpose different from you
 
 ## The Journey from Raw Data to Insight
 
-
+:::{.main-point}
 Raw Data → Data Processing → Structured Data → Analysis → Insight
-
+:::
 
 :::{.notes}
 The bridge between raw data and analysis is processing. Processing is not a single step — it's a series of decisions.
@@ -58,22 +58,6 @@ The bridge between raw data and analysis is processing. Processing is not a sing
 
 :::{.main-point}
 **Data processing is the set of decisions that transform raw data into a dataset that can credibly answer your question.**
-:::
-
-## Roadmap
-
-
-- Understand how the data were generated and what they measure
-- Make explicit processing choices (variables, aggregation, missingness, outliers)
-- Implement and document processing steps
-
-:::{.notes}
-1. Start by restating the research question so processing is aligned with it.
-2. Emphasize data provenance — collection method, coverage, and biases.
-3. Explain concrete processing decisions you'll demonstrate (e.g., tidy, handle missing, aggregate).
-4. Note the importance of documenting every choice for reproducibility.
-5. Mention sensitivity checks: try alternate missingness/aggregation rules.
-6. Point to the lab where students will practice these steps.
 :::
 
 ## Why This Matters
@@ -90,19 +74,39 @@ The quality of your analysis is bounded by the quality of your data preparation.
 Aggregation example: Daily sales show a clear spike on day 47 (promotion). If you aggregate to monthly averages you miss the spike and conclude no short-term effect; if you keep daily data you see the promotion effect. The question determines the correct aggregation.
 :::
 
+
+
+## Roadmap
+
+
+- Understand your data
+- Make data tidy
+- Make explicit processing choices (variables, aggregation, missingness, outliers)
+- Implement and document processing steps
+
+:::{.notes}
+1. Start by restating the research question so processing is aligned with it.
+2. Emphasize data provenance — collection method, coverage, and biases.
+3. Explain concrete processing decisions you'll demonstrate (e.g., tidy, handle missing, aggregate).
+4. Note the importance of documenting every choice for reproducibility.
+5. Mention sensitivity checks: try alternate missingness/aggregation rules.
+6. Point to the lab where students will practice these steps.
+:::
+
+
 ## Processing Is About Alignment
 
 Your question determines:
 
 :::{.incremental}
 - What counts as an observation 
-    - e.g., individual farms vs. counties
-- Which variables matter 
-    - e.g., total yield vs. yield per acre
-- What level of aggregation is appropriate 
-    - e.g., daily vs. monthly vs. annual
+    - individual farms, counties, states
+- Which variables/measurements matter 
+    - total yield, yield per acre, percent change
+- What level of temporal aggregation is appropriate 
+    - daily, monthly, annual
 - How to handle missing or extreme values 
-    - e.g., imputation, exclusion, or flagging
+    - imputation, exclusion, flagging
 :::
 
 :::{.notes}
@@ -119,11 +123,15 @@ Processing is not about making data look neat. It's about aligning data with you
 
 3. **Choices have consequences.** Processing decisions can impact results without leaving obvious traces.
 :::
+
+
 ##
 
 :::{.main-point}
 This means data processing deserves the same care, documentation, and transparency as your analysis.
 :::
+
+# Tidy Data
 
 ##  {.iclicker}
 
@@ -198,6 +206,8 @@ Look at these two data structures. Discuss:
 Give students time to pair up and discuss. Walk around. This helps them internalize that there's not always one "right" structure—it depends on the question.
 :::
 
+# Missing Data
+
 ##  {.iclicker}
 
 :::{.question}
@@ -215,24 +225,15 @@ D. Imputation performed by the analyst
 D
 :::
 
-## Missing data{.scrollable}
-C. Suppression for confidentiality or privacy   
-D. Imputation performed by the analyst  
-:::
-
-:::{.notes}
-D
-:::
 
 ## Missing data{.scrollable}
 
-Missing data are information — not just holes
+Missing data are information - not just holes
 
-- Missingness are values absent from your dataset
-- Missing at random vs. informative
+- Why: Missing at random vs. informative
 - Typical causes: nonresponse, measurement limits, deliberate suppression, data-entry errors
 - Why it matters: changes sample composition, biases estimates
-- Quick checklist: quantify missingness, explore patterns, decide interpretation (zero vs. nonresponse), choose handling (exclude, impute, flag), and document choice
+
 
 :::{.notes}
 Start by showing that missingness can be informative. Briefly define MCAR/MAR/MNAR with one-line examples (MCAR: random sensor dropouts; MAR: lower-income respondents less likely to answer income; MNAR: people with very high debts decline to report debt). Emphasize workflow: (1) quantify & visualize missingness, (2) ask why values are missing relative to your question, (3) choose and justify a handling strategy, (4) run sensitivity checks. Classroom prompt: ask students to spend 60s describing a plausible cause of missingness for the farm visits table and how they'd treat it.
@@ -291,6 +292,15 @@ Same raw data. Different processing choice. Opposite conclusions. This is why pr
 - You might also run both scenarios and report how conclusions change.
 :::
 
+## Missing Data Checklist
+
+- quantify missingness
+- explore patterns
+- decide interpretation (zero vs. nonresponse)
+- choose handling (exclude, impute, flag)
+- document choice
+
+# Data Aggregation
 
 ##  {.iclicker}
 
@@ -312,11 +322,10 @@ B
 
 ## Aggregation{.scrollable}
 :::{.incremental}
-- What it is: combining observations (sum/mean/count/median) by time/place/group
+- Aggregation is combining observations (sum/mean/count/median) by time/place/group
 - Why do it: match data resolution to the question, reduce noise, reveal trends
 - Common choices: temporal (daily→monthly→annual), spatial (farm→county→state), unit-level (individual→household)
 - Pitfalls: losing meaningful variation, masking short-term effects
-- Quick checklist: pick level driven by the question; preserve raw data; document aggregation approach; run sensitivity checks
 :::
 
 :::{.notes}
@@ -327,11 +336,14 @@ Example: aggregate daily sales to monthly for seasonality, but keep daily to stu
 
 Daily sales data from a retail store:
 
-- 2024-01-01: $4,200
-- 2024-01-02: $3,800
-- 2024-01-03: $4,100
-- 2024-01-04: $3,900
-- ... (365 observations)
+| Date       | Sales   |
+|------------|--------:|
+| 2024-01-01 | $4,200  |
+| 2024-01-02 | $3,800  |
+| 2024-01-03 | $4,100  |
+| 2024-01-04 | $3,900  |
+| ...        | ...     |
+| 2024-12-31 | $5,300  |
 
 :::{.notes}
 You have daily data for a full year. But your question is about seasonal trends. Do you analyze daily? Weekly? Monthly? The answer depends on your question.
@@ -370,26 +382,39 @@ Clear short-term spike visible.
 Same raw data. Three different aggregation choices. All defensible if they align with the question being asked.
 :::
 
-## Pair up and discuss: 3 minutes**
+## Aggregation Checklist
+
+- pick level driven by the question
+- preserve raw data 
+- document aggregation approach 
+- run sensitivity checks
+
+## Pair up and discuss: 3 minutes
 
 Last week's lab had you work with drought and yield data.
 
 1. What aggregation level (time and space) would make sense for analyzing drought impacts on yield?
-
-
-## Key Principle: Data Context Matters
-
-Before you process data, understand:
-
-1. **How were they collected?** What system, incentives, or constraints shaped what got measured?
-
-2. **What are they designed to measure?** Were they created for your question or repurposed from another use?
-
-3. **What's included and excluded?** What populations, time periods, or locations are covered?
+2. Is that the data you have? If not, what processing would you need to do?
 
 :::{.notes}
-Processing makes sense only when informed by understanding how data were generated.
+I want the students to discuss the data that we obtained. Most will probably say that the state level is good enough. Probe them on whether county is better. Even if they say state, the temporal data requires some aggregation.
 :::
+
+## Document Processing Choices
+
+Record what you did, why, and where to find it
+
+:::{.incremental}   
+- What: filters, recodes, aggregations, imputations, and outlier rules
+- Why: how each choice links to the research question and assumptions
+- How: scripts, functions, parameters/variables
+- Where: processing scripts, README
+:::
+
+:::{.notes}
+Recommend a short processing log for reproducibility: (1) a script that implements steps, (2) a README summarizing key decisions and rationale, (3) a small table listing transformations (what/why/how), and (4) brief results from sensitivity checks showing how conclusions change under alternate rules.
+:::
+
 
 
 ## The Takeaway
@@ -398,7 +423,7 @@ Processing decisions should be:
 
 1. **Guided by your question** — not by what's easiest or most traditional
 
-2. **Made explicitly** — document assumptions and choices
+2. **Made explicit** — document assumptions and choices
 
 3. **Justified** — explain why this processing aligns with your question
 
@@ -414,10 +439,9 @@ These four practices turn data processing from a black box into a defensible, co
 
 **Lab Session:** Hands-on practice
 
-- Work with real messy data
-- Make explicit processing choices
-- Document your decisions
-- Justify choices in writing
+- Continue working with drought and yield data
+- Apply processing principles: aggregation, missingness, tidying
+- Document your processing choices
 
 :::{.notes}
 The lab will give you concrete experience with these principles. You'll see how processing choices play out in practice.
@@ -425,7 +449,7 @@ The lab will give you concrete experience with these principles. You'll see how 
 
 
 
-## Bonus: Common Processing Mistakes
+## Bonus: Common Processing Mistakes{.scrollable}
 
 (If time allows)
 
