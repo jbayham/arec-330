@@ -1,0 +1,455 @@
+---
+title: "Data Processing: Letting the Question Guide Your Choices"
+format: 
+  revealjs:
+    theme: [night, ../custom.scss]
+    touch: true
+---
+
+## 
+
+:::{.main-point}
+You've asked a question.
+:::
+
+:::{.notes}
+E.g., we want to understand whether drought affects corn yield
+:::
+
+## 
+
+:::{.main-point}
+You've found data.
+:::
+
+:::{.notes}
+We found drought data from US Drought Monitor and yield data from USDA NASS Quickstats.
+:::
+
+## 
+
+:::{.main-point}
+But the data don't come *ready to analyze*.
+:::
+
+:::{.notes}
+The drought data are weekly, the yield data are annual. 
+:::
+
+## 
+
+:::{.main-point}
+Raw data are messy, incomplete, and often built for a purpose different from your question.
+:::
+
+## The Journey from Raw Data to Insight
+
+
+Raw Data → Data Processing → Structured Data → Analysis → Insight
+
+
+:::{.notes}
+The bridge between raw data and analysis is processing. Processing is not a single step — it's a series of decisions.
+:::
+
+
+
+##
+
+:::{.main-point}
+**Data processing is the set of decisions that transform raw data into a dataset that can credibly answer your question.**
+:::
+
+## Roadmap
+
+
+- Understand how the data were generated and what they measure
+- Make explicit processing choices (variables, aggregation, missingness, outliers)
+- Implement and document processing steps
+
+:::{.notes}
+1. Start by restating the research question so processing is aligned with it.
+2. Emphasize data provenance — collection method, coverage, and biases.
+3. Explain concrete processing decisions you'll demonstrate (e.g., tidy, handle missing, aggregate).
+4. Note the importance of documenting every choice for reproducibility.
+5. Mention sensitivity checks: try alternate missingness/aggregation rules.
+6. Point to the lab where students will practice these steps.
+:::
+
+## Why This Matters
+
+**"Garbage In, Garbage Out"**
+
+- Poor data preparation undermines analysis
+- No statistical method can compensate for fundamental problems in the data
+- Processing choices directly influence what conclusions are possible
+
+:::{.notes}
+The quality of your analysis is bounded by the quality of your data preparation.
+
+Aggregation example: Daily sales show a clear spike on day 47 (promotion). If you aggregate to monthly averages you miss the spike and conclude no short-term effect; if you keep daily data you see the promotion effect. The question determines the correct aggregation.
+:::
+
+## Processing Is About Alignment
+
+Your question determines:
+
+:::{.incremental}
+- What counts as an observation 
+    - e.g., individual farms vs. counties
+- Which variables matter 
+    - e.g., total yield vs. yield per acre
+- What level of aggregation is appropriate 
+    - e.g., daily vs. monthly vs. annual
+- How to handle missing or extreme values 
+    - e.g., imputation, exclusion, or flagging
+:::
+
+:::{.notes}
+Processing is not about making data look neat. It's about aligning data with your research question.
+
+:::
+
+## What Makes Processing Tricky?
+:::{.incremental}
+
+1. **Data reflect how they were collected.** They encode assumptions about what matters, who to measure, and what to record.
+
+2. **Processing involves judgment.** Two analysts with the same raw data can make different (reasonable) processing choices.
+
+3. **Choices have consequences.** Processing decisions can impact results without leaving obvious traces.
+:::
+##
+
+:::{.main-point}
+This means data processing deserves the same care, documentation, and transparency as your analysis.
+:::
+
+##  {.iclicker}
+
+:::{.question}
+Which one of these does ***NOT*** make data tidy?
+:::
+
+:::{.choices}
+A. Put each variable in its own column  
+B. Put each observation in its own row  
+C. Store measurements for different observational units (e.g., individuals and households) together in the same table   
+D. Use a column to record the measurement type (e.g., crop) 
+:::
+
+:::{.notes}
+B which customers will churn
+:::
+
+
+
+## What Is Tidy Data?
+
+Tidy data: structure that facilitates analysis
+
+
+- Each variable forms a column
+- Each observation forms a row
+- Each type of observational unit forms a table
+
+:::{.notes}
+Tidy data is a convention that makes data manipulation, modeling, and visualization easier and less error-prone. Give the simple rule: columns = variables, rows = observations. Show the before/after: wide table with crop columns → long tidy table with a `crop` column and a `yield` column. Emphasize that tidy = same information, easier analysis.
+:::
+
+## Example: Untidy Data
+
+:::{.notes}
+Let me show you a concrete example of why data structure matters.
+:::
+
+A dataset reports crop yields by county and year:
+
+| county   | year | corn | wheat | soy |
+|----------|-----:|-----:|------:|----:|
+| County A | 2020 | 120 | 80   | 45  |
+| County B | 2020 | 95  | 70   | 50  |
+
+**Problem:** Crop type is hidden in column names, not stored as data.
+
+
+## The Tidy Version
+
+| county   | year | crop  | yield |
+|----------|-----:|-------|------:|
+| County A | 2020 | corn  | 120   |
+| County A | 2020 | wheat | 80    |
+| County A | 2020 | soy   | 45    |
+| County B | 2020 | corn  | 95    |
+| County B | 2020 | wheat | 70    |
+| County B | 2020 | soy   | 50    |
+
+**Same information. Different structure. Much easier to analyze.**
+
+
+## **Pair up and discuss: 3 minutes**
+
+Look at these two data structures. Discuss:
+
+1. What analytical questions would be easier or harder with each structure?
+2. When might the untidy structure actually be useful?
+
+:::{.notes}
+Give students time to pair up and discuss. Walk around. This helps them internalize that there's not always one "right" structure—it depends on the question.
+:::
+
+##  {.iclicker}
+
+:::{.question}
+According to the reader, which of the following is ***not*** a common cause of missing data:
+:::
+
+:::{.choices}
+A. Nonresponse or incomplete reporting  
+B. Measurement failure or data corruption   
+C. Suppression for confidentiality or privacy   
+D. Imputation performed by the analyst  
+:::
+
+:::{.notes}
+D
+:::
+
+## Missing data{.scrollable}
+C. Suppression for confidentiality or privacy   
+D. Imputation performed by the analyst  
+:::
+
+:::{.notes}
+D
+:::
+
+## Missing data{.scrollable}
+
+Missing data are information — not just holes
+
+- Missingness are values absent from your dataset
+- Missing at random vs. informative
+- Typical causes: nonresponse, measurement limits, deliberate suppression, data-entry errors
+- Why it matters: changes sample composition, biases estimates
+- Quick checklist: quantify missingness, explore patterns, decide interpretation (zero vs. nonresponse), choose handling (exclude, impute, flag), and document choice
+
+:::{.notes}
+Start by showing that missingness can be informative. Briefly define MCAR/MAR/MNAR with one-line examples (MCAR: random sensor dropouts; MAR: lower-income respondents less likely to answer income; MNAR: people with very high debts decline to report debt). Emphasize workflow: (1) quantify & visualize missingness, (2) ask why values are missing relative to your question, (3) choose and justify a handling strategy, (4) run sensitivity checks. Classroom prompt: ask students to spend 60s describing a plausible cause of missingness for the farm visits table and how they'd treat it.
+:::
+
+## Example: Ag Extension Visits
+
+A dataset of farm visits to agricultural extension services:
+
+| farm_id | district    | visits | reason    |
+|---------|-------------|--------|-----------|
+| 1001    | North       | 3      | crop_pest |
+| 1002    | North       | 2      | soil      |
+| 1003    | North       | —      | —         |
+| 1004    | South       | 4      | soil      |
+| 1005    | South       | —      | —         |
+
+:::{.notes}
+Farms 1003 and 1005 have missing values. But what do those missing values mean?
+:::
+
+## What Does "Missing" Mean?
+
+The farm might:
+
+- Have not used the service (zero visits)
+- Have failed to report (incomplete data)
+- Have been deliberately excluded (data suppression)
+- Have been newly registered (not yet in system)
+
+**Processing choice:** How you interpret missingness will shape your analysis.
+
+## Scenario A: "Missing" = Did Not Use Service
+
+If you treat missing as zero visits:
+
+- District North: Average 1.7 visits per farm
+- District South: Average 1.3 visits per farm
+- **Conclusion:** North uses extension more
+
+## Scenario B: "Missing" = Incomplete Data
+
+If you exclude those rows:
+
+- District North: Average 2.5 visits per farm
+- District South: Average 4.0 visits per farm
+- **Conclusion:** South uses extension more
+
+:::{.notes}
+Same raw data. Different processing choice. Opposite conclusions. This is why processing decisions matter.
+:::
+
+## What Would You Do?
+:::{.incremental}
+- Regardless of your choice, document it clearly.
+- You might also run both scenarios and report how conclusions change.
+:::
+
+
+##  {.iclicker}
+
+:::{.question}
+According to the reader, which of the following is a common reason for aggregating data?
+:::
+
+:::{.choices}
+A. To increase data resolution (e.g., turn annual data into daily)  
+B. To match the resolution among datasets   
+C. To eliminate outliers from the dataset  
+D. To convert categorical variables into numerical ones 
+:::
+
+:::{.notes}
+B
+:::
+
+
+## Aggregation{.scrollable}
+:::{.incremental}
+- What it is: combining observations (sum/mean/count/median) by time/place/group
+- Why do it: match data resolution to the question, reduce noise, reveal trends
+- Common choices: temporal (daily→monthly→annual), spatial (farm→county→state), unit-level (individual→household)
+- Pitfalls: losing meaningful variation, masking short-term effects
+- Quick checklist: pick level driven by the question; preserve raw data; document aggregation approach; run sensitivity checks
+:::
+
+:::{.notes}
+Example: aggregate daily sales to monthly for seasonality, but keep daily to study a promotion spike. Emphasize storing raw data, recording aggregation method (sum vs mean), and showing sensitivity to alternate aggregation levels when reporting results.
+:::
+
+## Example: Aggregation
+
+Daily sales data from a retail store:
+
+- 2024-01-01: $4,200
+- 2024-01-02: $3,800
+- 2024-01-03: $4,100
+- 2024-01-04: $3,900
+- ... (365 observations)
+
+:::{.notes}
+You have daily data for a full year. But your question is about seasonal trends. Do you analyze daily? Weekly? Monthly? The answer depends on your question.
+:::
+
+## Question 1: Do sales change with the season?
+
+**Process:** Aggregate to monthly averages
+
+- January average: $3,950
+- February average: $4,100
+- ...
+- December average: $5,200
+
+Clear seasonal pattern emerges.
+
+## Question 2: Do sales respond to a flash promotion on day 47?
+
+**Process:** Keep daily data (don't aggregate)
+
+- Day 46: $3,850
+- Day 47: $5,100 ← promotion
+- Day 48: $4,700
+- Day 49: $4,200
+
+Clear short-term spike visible.
+
+## Question 3: Do sales reliably exceed $4,000?
+
+**Process:** Different aggregation entirely
+
+- Days exceeding $4,000: 251/365
+- Proportion: 69%
+
+:::{.notes}
+Same raw data. Three different aggregation choices. All defensible if they align with the question being asked.
+:::
+
+## Pair up and discuss: 3 minutes**
+
+Last week's lab had you work with drought and yield data.
+
+1. What aggregation level (time and space) would make sense for analyzing drought impacts on yield?
+
+
+## Key Principle: Data Context Matters
+
+Before you process data, understand:
+
+1. **How were they collected?** What system, incentives, or constraints shaped what got measured?
+
+2. **What are they designed to measure?** Were they created for your question or repurposed from another use?
+
+3. **What's included and excluded?** What populations, time periods, or locations are covered?
+
+:::{.notes}
+Processing makes sense only when informed by understanding how data were generated.
+:::
+
+
+## The Takeaway
+
+Processing decisions should be:
+
+1. **Guided by your question** — not by what's easiest or most traditional
+
+2. **Made explicitly** — document assumptions and choices
+
+3. **Justified** — explain why this processing aligns with your question
+
+4. **Transparent** — make it so others can evaluate your decisions
+
+:::{.notes}
+These four practices turn data processing from a black box into a defensible, communicable part of your analysis.
+:::
+
+
+
+## What's Next?
+
+**Lab Session:** Hands-on practice
+
+- Work with real messy data
+- Make explicit processing choices
+- Document your decisions
+- Justify choices in writing
+
+:::{.notes}
+The lab will give you concrete experience with these principles. You'll see how processing choices play out in practice.
+:::
+
+
+
+## Bonus: Common Processing Mistakes
+
+(If time allows)
+
+:::{.notes}
+Use these as discussion prompts if you finish early or want to revisit key concepts.
+:::
+
+**Mistake 1:** Treating all missing values the same
+
+- Some represent absence, others represent incomplete reporting
+- Handle them differently based on what they mean
+
+**Mistake 2:** Removing outliers without understanding them
+
+- Extreme values may be exactly what you need to study
+- Investigate before you delete
+
+**Mistake 3:** Aggregating without thinking about what's lost
+
+- Averaging hides variation
+- Make sure you're not erasing meaningful differences
+
+**Mistake 4:** Not documenting why you made processing choices
+
+- Your future self will forget
+- Collaborators need to understand
+- Reviewers need to evaluate credibility
