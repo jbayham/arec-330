@@ -30,3 +30,10 @@
   readings:
   - title: "Data Processing Reader"
     rel_url: "reading.html"
+  materials: 
+  - title: "corn_yield_missing.csv"
+    rel_url: "includes/corn_yield_missing.csv"
+  - title: "corn_wide.csv"
+    rel_url: "includes/corn_wide.csv"
+  - title: "dm_state_2000-2025.csv"
+    rel_url: "includes/dm_state_2000-2025.csv"

@@ -1,0 +1,329 @@
+---
+title: "Week 3 Lab: Data Processing (Part 1)"
+format:
+  html:
+    theme: zephyr
+    code-copy: true
+    toc: true
+    css: ../course-links.css
+    include-before-body: ../course-links.html
+    include-after-body: ../course-footer.html
+---
+
+<!-- ![](includes/lab3_header.png) -->
+
+This lab gives you hands-on practice with the **data processing decisions** from lecture using engineered versions of the corn yield and drought datasets you collected last week. In each section, you will work with modified data that introduces realistic challenges: missing values, untidy structure, and temporal aggregation decisions.
+
+## Learning Objectives
+
+By the end of the lab, you will be able to:
+
+- Quantify and visualize missing data patterns
+- Distinguish between types of missingness and apply appropriate handling strategies
+- Reshape untidy data into tidy form using `pivot_longer()` and `pivot_wider()`
+- Aggregate time-series data to match your research question
+- Document your data processing choices
+
+## Preliminaries
+
+1. Create a folder called `lab_03` and navigate there in RStudio.
+2. Create a new R script called `lab_03.R` in your `lab_03` folder.
+3. Write a brief comment at the top describing the purpose of the script and your name.
+4. Load required libraries at the top:
+
+```{r}
+#| eval: false
+library(tidyverse)
+library(naniar)  # for missing data visualization
+#install.packages("naniar")  # run this line if you need to install naniar
+```
+
+### Lab Notebook
+
+Open up a word processing document (e.g., Google Doc, Word, or plain text) to serve as your lab notebook. Use this to respond to questions, document decisions, and reflect on the process. You should also comment your R script thoroughly to explain your code and rationale for each step.
+
+
+----
+
+# Section 1: Handling Missing Data
+
+## Context
+
+Real datasets often contain missing values (NA). But "missing" can mean different things:
+
+- **MAR** (Missing at Random): Missingness is unrelated to any variables
+- **MNAR** (Missing at Random): Missingness depends on observed or unobserved data (e.g., low-yield years less likely to be reported)
+
+Your processing choice—deletion, imputation, or flagging—depends on understanding *why* data are missing.
+
+## Data
+
+The file `corn_yield_missing.csv` contains engineered missingness:
+- **Random MCAR:** ~5% of yield values randomly set to NA
+- **Informative MAR:** Systematic missing values for certain states and years (mimicking reporting thresholds)
+
+The function `read_csv()` can read data from a local file path or a URL. You can download the file from the course repository and save it in your `lab_03` folder, or read it directly from the url.
+
+## Task
+
+**Optional (Excel): Quantify missingness in Excel**
+
+If you want to do a quick check in MS Excel before working in R, use the steps below. In the dataset, the yield variable is `Value` (and there are two engineered versions, `Value_mar` and `Value_mnar`).
+
+1. Open the CSV in Excel.
+2. Turn on **Filters** (Data → Filter).
+3. In the `Value` column filter drop‑down, check **(Blanks)** to see missing rows.
+4. Count how many rows are blank in `Value`:
+  - In a blank cell, enter `=COUNTBLANK([Value])` if your data are in an Excel Table, or `=COUNTBLANK(B2:B1078)` with the correct column range.
+5. Count total rows (excluding the header):
+  - Use `=COUNTA([Value]) + COUNTBLANK([Value])` (Table) or `=COUNTA(B2:B1078)+COUNTBLANK(B2:B1078)`.
+6. Compute the percent missing:
+  - `=COUNTBLANK([Value]) / (COUNTA([Value]) + COUNTBLANK([Value]))`.
+
+You can repeat the same steps for `Value_mar` and `Value_mnar` to compare the three missingness patterns.
+
+----
+
+Load the data and create a summary of missingness:
+
+```{r}
+#| eval: false
+# Read the data with missing values
+corn_missing <- read_csv("https://jbayham.github.io/arec-330/modules/03_data_processing/includes/corn_yield_missing.csv")
+
+# Inspect the structure
+glimpse(corn_missing)
+
+```
+
+Let's begin by reaquinting ourselves with the data. The corn yield data contains many columns that we won't need, so lets subset the columns to focus on what we do need. Let's use the `select()` function to keep only the columns that are relevant for our analysis. We will keep the following columns:
+- `state_alpha`: State abbreviation (e.g., "IA" for Iowa)
+- `commodity_desc`: Description of the commodity (e.g., "CORN")
+- `year`: Year of the observation
+- `Value`: The original yield value (with engineered missingness)
+- `Value_mar`: The version of yield with MAR missingness
+- `Value_mnar`: The version of yield with MNAR missingness
+
+```{r}
+#| eval: false
+corn_missing_sub <- select(corn_missing, state_alpha, commodity_desc, year, Value, Value_mar, Value_mnar)
+
+```
+
+
+Now we can focus on the columns that are relevant for our analysis. The `Value` columns is complete. Let's quantify the missingness in the columns `Value_mar` and `Value_mnar` to understand the extent of missing data we are dealing with. We can use the `is.na()` function to identify missing values and then summarize the total count and proportion of missingness.
+
+
+```{r}
+#| eval: false
+
+#Apply the is.na() function to the Value_mar column to identify missing values
+is.na(corn_missing_sub$Value_mar)
+
+# That generates a logical vector where TRUE indicates a missing value and FALSE indicates a non-missing value. To quantify the total number of missing values, we can use the `sum()` function, which will count the number of TRUE values in the logical vector. To calculate the proportion of missing values, we can take the sum of missing values and divide it by the total number of observations (rows) in the dataset..
+
+# Quantify total missingness
+sum(is.na(corn_missing_sub$Value_mar))
+sum(is.na(corn_missing_sub$Value_mar))/nrow(corn_missing_sub)  # proportion missing
+#or 
+mean(is.na(corn_missing_sub$Value_mar))  # proportion missing
+```
+
+> Do the same for the column `Value_mnar` on your own
+
+:::{.callout-attention}
+Question 1: Which column has more missing values, `Value_mar` or `Value_mnar`? What does this suggest about the nature of the missingness in each column? Answer in your notebook.
+:::
+
+Now we want to quantify missingness by state and year to see if there are patterns. We can use the `group_by()` and `summarize()` functions to calculate the number of missing values for each state and year combination. The function `summarize()` will allow us to create a new summary dataset that contains the count of missing values for each group. The function `group_by()` will group the data by the specified columns (in this case, `state_alpha` and `year`) so that the summary statistics are calculated for each unique combination of state and year.
+
+```{r}
+#| eval: false
+
+# Group by state, then summarize missingness
+corn_missing_sub_grp <- group_by(corn_missing_sub, state_alpha)
+
+corn_missing_summary <- summarize(corn_missing_sub_grp,
+                                  n_missing_mar = sum(is.na(Value_mar)),
+                                  n_missing_mnar = sum(is.na(Value_mnar)),
+                                  total_obs = n(),
+                                  prop_missing_mar = n_missing_mar / total_obs,
+                                  prop_missing_mnar = n_missing_mnar / total_obs)
+
+```
+
+> Do the same for grouping by year on your own.
+
+:::{.callout-attention}
+Question 2: Are there certain states or years that have higher proportions of missing data? What might be some reasons for this pattern? Answer in your notebook.
+:::
+
+Finally, we want to understand the consequences of missing data for our analysis. Let's calculate the mean yield for each of the variables (`Value`, `Value_mar`, and `Value_mnar`). This will help us understand how much bias might be introduced by missing data. We will use `summarize()` again to calculate the mean yield for each column, while ignoring the missing values using the argument `na.rm = TRUE`. 
+
+```{r}
+#| eval: false
+
+# Calculate mean yield for each column
+yield_summary <- summarize(corn_missing_sub,
+                          mean_value = mean(Value, na.rm = TRUE),
+                          mean_value_mar = mean(Value_mar, na.rm = TRUE),
+                          mean_value_mnar = mean(Value_mnar, na.rm = TRUE))
+```
+
+
+:::{.callout-attention}
+Question 3: How do the mean yields compare across the three columns? What does this suggest about the potential bias introduced by missing data? Answer in your notebook.
+:::
+
+
+
+
+---
+
+# Section 2: Reshaping Untidy Data
+
+## Context
+
+"Tidy data" follows three rules:
+
+1. Each variable is a column
+2. Each observation is a row
+3. Each type of observational unit is a separate table
+
+Real data rarely arrive in tidy form. The `pivot_longer()` and `pivot_wider()` functions let you reshape data flexibly.
+
+## Data
+
+The yield data are already in a tidy format, but let's pretend they are not. 
+
+## Tasks
+
+### Task 2.1: Load and Inspect Untidy Data
+
+```{r}
+#| eval: false
+corn_wide <- read_csv("https://jbayham.github.io/arec-330/modules/03_data_processing/includes/corn_wide.csv")
+
+glimpse(corn_wide)
+
+# Look at the first few rows to understand the structure
+head(corn_wide)
+```
+
+:::{.callout-attention}
+Question 4: What makes this data "untidy"? Describe how the structure differs from the tidy format. Answer in your notebook.
+:::
+
+This untidy structure makes it difficult to analyze yield severity across states and time. Suppose we wanted to calculate the average yield for each state across all years. In the tidy format, we could simply group by state and summarize. But in this wide format, we would have to manually select and average across multiple columns for each state, which is cumbersome and error-prone. 
+
+### Task 2.2: Reshape to Tidy Format
+
+The tidyverse provides a usefule function for reshaping data called, `pivot_longer()`. This function takes multiple columns that represent different categories (e.g., years) and pivots them into a longer format where there is a single column for the category (e.g., "year") and a single column for the values (e.g., "yield"). The arguments to `pivot_longer()` specify which columns to pivot, the name of the new category column, and the name of the new value column.
+
+```{r}
+#| eval: false
+corn_tidy <- pivot_longer(corn_wide,
+                         cols = starts_with("year_"),  # columns for each year
+                         names_to = "year",  # new column for year
+                         names_prefix = "year_",  # remove "year_" prefix from year values
+                         values_to = "yield")  # new column for yield
+
+
+# Inspect the result
+glimpse(corn_tidy)
+head(corn_tidy, 10)
+```
+
+:::{.callout-attention}
+Question 5: How has the structure of the data changed after pivoting? How many rows do you have now? What are the new variables created, and how do they relate to the original columns? What is the data type of the year variable? Is that desirable? Answer in your notebook.
+:::
+
+
+
+---
+
+# Section 3: Temporal Aggregation
+
+## Context
+
+Your corn yield data are annual (one value per state per year), but your drought data are weekly (52+ values per state per year). Before merging, you must aggregate drought data to match.
+
+But *how* you aggregate depends on your question:
+
+- Simple annual average: best for year-over-year comparisons
+- Growing season window: focuses on when drought matters biologically
+- Critical period: captures timing of drought stress relative to crop development
+- Cumulative measures: emphasizes total exposure
+
+We will calculate a single simple drought metric for each state-year for now. In future labs, we will explore more complex temporal features and how they affect the drought-yield relationship.
+
+## Data
+
+We will will now transition to the drought dataset, which contains weekly observations of drought severity for each state from 2000 to 2025. 
+
+```{r}
+#| eval: false
+
+drought_dat <- read_csv("https://jbayham.github.io/arec-330/modules/03_data_processing/includes/dm_state_2000-2025.csv")
+
+glimpse(drought_dat)
+```
+
+## Tasks
+
+### Task 3.1: Calculate the Drought Severity Composite Index (DSCI)
+
+The Drought Severity Composite Index (DSCI) is a weighted average of the area in each drought category, where higher severity levels contribute more to the index.[^dsci] The formula is:
+$$DSCI = \frac{0 \times \text{Area}_{None} + 1 \times \text{Area}_{D0} + 2 \times \text{Area}_{D1} + 3 \times \text{Area}_{D2} + 4 \times \text{Area}_{D3} + 5 \times \text{Area}_{D4}}{\text{Total Area}}$$
+
+[^dsci]: <https://droughtmonitor.unl.edu/About/AbouttheData/DSCI.aspx>
+
+In R, we will use the `mutate()` function to create a new variable `dsci` that calculates the DSCI for each state-week observation. We will also calculate the `total_area` for each state-week to use in the denominator of the DSCI formula.
+```{r}
+#| eval: false
+
+# Calculate DSCI as a weighted sum of severity levels
+drought_weekly <- drought_dat %>%
+  mutate(
+    total_area = None + D0 + D1 + D2 + D3 + D4,
+    dsci = (0 * None + 1 * D0 + 2 * D1 + 3 * D2 + 4 * D3 + 5 * D4)/total_area
+  )
+```
+
+
+
+### Task 3.2: Strategy A – Simple Annual Average
+
+Now we need to aggregate the weekly drought data to an annual level. The simplest approach is to calculate the average DSCI for each state-year. This gives us a single drought severity value for each state and year, which we can then merge with the corn yield data. We will use the `group_by()` and `summarize()` functions to perform this aggregation. We will group the data by `StateAbbreviation` and `year`, then calculate the mean DSCI for each group.
+
+First, we need to extract the year from the `ValidStart` date column. We can use the `year()` function from the `lubridate` package to do this. Then we will group by state and year, and calculate the mean DSCI.
+
+We also want to introduce the pipe operator (`%>%`) to chain our operations together in a clear and readable way. The pipe allows us to take the output of one function and pass it directly into the next function without needing to create intermediate objects.
+
+```{r}
+#| eval: false
+drought_annual <- drought_weekly %>%
+  mutate(year = year(ValidStart)) %>%
+  group_by(StateAbbreviation, year) %>%
+  summarize(
+    mean_dsci = mean(dsci, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+head(drought_annual)
+```
+
+
+----
+
+# Deliverables
+
+Submit the following on Canvas::
+
+1. Organize your code and make sure it runs without errors. Then generate a log file called `lab_03.log` using the sink-source-sink pattern from previous labs. The log file should include all the code you wrote for this lab, along with comments explaining each step. 
+
+2. Notebook responses: Compile your answers to the questions in a single document (e.g., Google Doc, Word, or plain text). Make sure to clearly label each question and provide thoughtful, detailed responses based on your analysis.
+
+
+
+

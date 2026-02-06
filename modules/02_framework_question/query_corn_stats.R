@@ -86,7 +86,7 @@ yield_params <- list(
   source_desc = "SURVEY",
   agg_level_desc = "STATE",
   reference_period_desc = "YEAR",
-  statisticcat_desc = c("YIELD","AREA HARVESTED","AREA PLANTED","PRODUCTION"),
+  statisticcat_desc = c("YIELD"),
   #state_alpha = "CO",
   util_practice_desc = "GRAIN"
   # Additional optional parameters:
@@ -105,7 +105,7 @@ corn_yield <- nassqs(yield_params)
 corn_yield_sub <- corn_yield %>%
   select(commodity_desc, year, state_alpha, state_name, Value, unit_desc, `CV (%)`)
 
-write_csv(corn_yield_sub,"modules/02_framework_question/includes/data/corn_yield.csv")
+write_csv(corn_yield,"usda_nass_corn_yield_2000-2025.csv")
 # ============================================================================
 # 4. QUERY CORN STATISTICS: AREA HARVESTED
 # ============================================================================

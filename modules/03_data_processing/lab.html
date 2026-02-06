@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Week 3 Lab: Data Processing (Part 1)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="lab_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lab_files/libs/quarto-html/quarto.js"></script>
+<script src="lab_files/libs/quarto-html/popper.min.js"></script>
+<script src="lab_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="lab_files/libs/quarto-html/anchor.min.js"></script>
+<link href="lab_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lab_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="lab_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="lab_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="lab_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../course-links.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#preliminaries" id="toc-preliminaries" class="nav-link" data-scroll-target="#preliminaries">Preliminaries</a>
+  <ul class="collapse">
+  <li><a href="#lab-notebook" id="toc-lab-notebook" class="nav-link" data-scroll-target="#lab-notebook">Lab Notebook</a></li>
+  </ul></li>
+  <li><a href="#section-1-handling-missing-data" id="toc-section-1-handling-missing-data" class="nav-link" data-scroll-target="#section-1-handling-missing-data">Section 1: Handling Missing Data</a>
+  <ul class="collapse">
+  <li><a href="#context" id="toc-context" class="nav-link" data-scroll-target="#context">Context</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#task" id="toc-task" class="nav-link" data-scroll-target="#task">Task</a></li>
+  </ul></li>
+  <li><a href="#section-2-reshaping-untidy-data" id="toc-section-2-reshaping-untidy-data" class="nav-link" data-scroll-target="#section-2-reshaping-untidy-data">Section 2: Reshaping Untidy Data</a>
+  <ul class="collapse">
+  <li><a href="#context-1" id="toc-context-1" class="nav-link" data-scroll-target="#context-1">Context</a></li>
+  <li><a href="#data-1" id="toc-data-1" class="nav-link" data-scroll-target="#data-1">Data</a></li>
+  <li><a href="#tasks" id="toc-tasks" class="nav-link" data-scroll-target="#tasks">Tasks</a>
+  <ul class="collapse">
+  <li><a href="#task-2.1-load-and-inspect-untidy-data" id="toc-task-2.1-load-and-inspect-untidy-data" class="nav-link" data-scroll-target="#task-2.1-load-and-inspect-untidy-data">Task 2.1: Load and Inspect Untidy Data</a></li>
+  <li><a href="#task-2.2-reshape-to-tidy-format" id="toc-task-2.2-reshape-to-tidy-format" class="nav-link" data-scroll-target="#task-2.2-reshape-to-tidy-format">Task 2.2: Reshape to Tidy Format</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#section-3-temporal-aggregation" id="toc-section-3-temporal-aggregation" class="nav-link" data-scroll-target="#section-3-temporal-aggregation">Section 3: Temporal Aggregation</a>
+  <ul class="collapse">
+  <li><a href="#context-2" id="toc-context-2" class="nav-link" data-scroll-target="#context-2">Context</a></li>
+  <li><a href="#data-2" id="toc-data-2" class="nav-link" data-scroll-target="#data-2">Data</a></li>
+  <li><a href="#tasks-1" id="toc-tasks-1" class="nav-link" data-scroll-target="#tasks-1">Tasks</a>
+  <ul class="collapse">
+  <li><a href="#task-3.1-calculate-the-drought-severity-composite-index-dsci" id="toc-task-3.1-calculate-the-drought-severity-composite-index-dsci" class="nav-link" data-scroll-target="#task-3.1-calculate-the-drought-severity-composite-index-dsci">Task 3.1: Calculate the Drought Severity Composite Index (DSCI)</a></li>
+  <li><a href="#task-3.2-strategy-a-simple-annual-average" id="toc-task-3.2-strategy-a-simple-annual-average" class="nav-link" data-scroll-target="#task-3.2-strategy-a-simple-annual-average">Task 3.2: Strategy A – Simple Annual Average</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#deliverables" id="toc-deliverables" class="nav-link" data-scroll-target="#deliverables">Deliverables</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+<nav class="course-links" aria-label="Course links">
+  <div class="course-links__inner">
+    <div class="course-links__left">
+      <a class="course-links__brand" href="https://jbayham.github.io/arec-330/">AREC 330</a>
+      <span class="course-links__sep">|</span>
+      <span class="course-links__page">Lab</span>
+    </div>
+
+    <div class="course-links__right">
+      <a class="course-links__btn" href="https://jbayham.github.io/arec-330/">Course site</a>
+      <a class="course-links__btn" href="https://colostate.instructure.com/courses/218386">Canvas</a>
+    </div>
+  </div>
+</nav>
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Week 3 Lab: Data Processing (Part 1)</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<!-- ![](includes/lab3_header.png) -->
+<p>This lab gives you hands-on practice with the <strong>data processing decisions</strong> from lecture using engineered versions of the corn yield and drought datasets you collected last week. In each section, you will work with modified data that introduces realistic challenges: missing values, untidy structure, and temporal aggregation decisions.</p>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<p>By the end of the lab, you will be able to:</p>
+<ul>
+<li>Quantify and visualize missing data patterns</li>
+<li>Distinguish between types of missingness and apply appropriate handling strategies</li>
+<li>Reshape untidy data into tidy form using <code>pivot_longer()</code> and <code>pivot_wider()</code></li>
+<li>Aggregate time-series data to match your research question</li>
+<li>Document your data processing choices</li>
+</ul>
+</section>
+<section id="preliminaries" class="level2">
+<h2 class="anchored" data-anchor-id="preliminaries">Preliminaries</h2>
+<ol type="1">
+<li>Create a folder called <code>lab_03</code> and navigate there in RStudio.</li>
+<li>Create a new R script called <code>lab_03.R</code> in your <code>lab_03</code> folder.</li>
+<li>Write a brief comment at the top describing the purpose of the script and your name.</li>
+<li>Load required libraries at the top:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naniar)  <span class="co"># for missing data visualization</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("naniar")  # run this line if you need to install naniar</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="lab-notebook" class="level3">
+<h3 class="anchored" data-anchor-id="lab-notebook">Lab Notebook</h3>
+<p>Open up a word processing document (e.g., Google Doc, Word, or plain text) to serve as your lab notebook. Use this to respond to questions, document decisions, and reflect on the process. You should also comment your R script thoroughly to explain your code and rationale for each step.</p>
+<hr>
+</section>
+</section>
+<section id="section-1-handling-missing-data" class="level1">
+<h1>Section 1: Handling Missing Data</h1>
+<section id="context" class="level2">
+<h2 class="anchored" data-anchor-id="context">Context</h2>
+<p>Real datasets often contain missing values (NA). But “missing” can mean different things:</p>
+<ul>
+<li><strong>MAR</strong> (Missing at Random): Missingness is unrelated to any variables</li>
+<li><strong>MNAR</strong> (Missing at Random): Missingness depends on observed or unobserved data (e.g., low-yield years less likely to be reported)</li>
+</ul>
+<p>Your processing choice—deletion, imputation, or flagging—depends on understanding <em>why</em> data are missing.</p>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>The file <code>corn_yield_missing.csv</code> contains engineered missingness: - <strong>Random MCAR:</strong> ~5% of yield values randomly set to NA - <strong>Informative MAR:</strong> Systematic missing values for certain states and years (mimicking reporting thresholds)</p>
+<p>The function <code>read_csv()</code> can read data from a local file path or a URL. You can download the file from the course repository and save it in your <code>lab_03</code> folder, or read it directly from the url.</p>
+</section>
+<section id="task" class="level2">
+<h2 class="anchored" data-anchor-id="task">Task</h2>
+<p><strong>Optional (Excel): Quantify missingness in Excel</strong></p>
+<p>If you want to do a quick check in MS Excel before working in R, use the steps below. In the dataset, the yield variable is <code>Value</code> (and there are two engineered versions, <code>Value_mar</code> and <code>Value_mnar</code>).</p>
+<ol type="1">
+<li>Open the CSV in Excel.</li>
+<li>Turn on <strong>Filters</strong> (Data → Filter).</li>
+<li>In the <code>Value</code> column filter drop‑down, check <strong>(Blanks)</strong> to see missing rows.</li>
+<li>Count how many rows are blank in <code>Value</code>:</li>
+</ol>
+<ul>
+<li>In a blank cell, enter <code>=COUNTBLANK([Value])</code> if your data are in an Excel Table, or <code>=COUNTBLANK(B2:B1078)</code> with the correct column range.</li>
+</ul>
+<ol start="5" type="1">
+<li>Count total rows (excluding the header):</li>
+</ol>
+<ul>
+<li>Use <code>=COUNTA([Value]) + COUNTBLANK([Value])</code> (Table) or <code>=COUNTA(B2:B1078)+COUNTBLANK(B2:B1078)</code>.</li>
+</ul>
+<ol start="6" type="1">
+<li>Compute the percent missing:</li>
+</ol>
+<ul>
+<li><code>=COUNTBLANK([Value]) / (COUNTA([Value]) + COUNTBLANK([Value]))</code>.</li>
+</ul>
+<p>You can repeat the same steps for <code>Value_mar</code> and <code>Value_mnar</code> to compare the three missingness patterns.</p>
+<hr>
+<p>Load the data and create a summary of missingness:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the data with missing values</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>corn_missing <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://jbayham.github.io/arec-330/modules/03_data_processing/includes/corn_yield_missing.csv"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the structure</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(corn_missing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s begin by reaquinting ourselves with the data. The corn yield data contains many columns that we won’t need, so lets subset the columns to focus on what we do need. Let’s use the <code>select()</code> function to keep only the columns that are relevant for our analysis. We will keep the following columns: - <code>state_alpha</code>: State abbreviation (e.g., “IA” for Iowa) - <code>commodity_desc</code>: Description of the commodity (e.g., “CORN”) - <code>year</code>: Year of the observation - <code>Value</code>: The original yield value (with engineered missingness) - <code>Value_mar</code>: The version of yield with MAR missingness - <code>Value_mnar</code>: The version of yield with MNAR missingness</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>corn_missing_sub <span class="ot">&lt;-</span> <span class="fu">select</span>(corn_missing, state_alpha, commodity_desc, year, Value, Value_mar, Value_mnar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we can focus on the columns that are relevant for our analysis. The <code>Value</code> columns is complete. Let’s quantify the missingness in the columns <code>Value_mar</code> and <code>Value_mnar</code> to understand the extent of missing data we are dealing with. We can use the <code>is.na()</code> function to identify missing values and then summarize the total count and proportion of missingness.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Apply the is.na() function to the Value_mar column to identify missing values</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(corn_missing_sub<span class="sc">$</span>Value_mar)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># That generates a logical vector where TRUE indicates a missing value and FALSE indicates a non-missing value. To quantify the total number of missing values, we can use the `sum()` function, which will count the number of TRUE values in the logical vector. To calculate the proportion of missing values, we can take the sum of missing values and divide it by the total number of observations (rows) in the dataset..</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Quantify total missingness</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(corn_missing_sub<span class="sc">$</span>Value_mar))</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(corn_missing_sub<span class="sc">$</span>Value_mar))<span class="sc">/</span><span class="fu">nrow</span>(corn_missing_sub)  <span class="co"># proportion missing</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#or </span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">is.na</span>(corn_missing_sub<span class="sc">$</span>Value_mar))  <span class="co"># proportion missing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Do the same for the column <code>Value_mnar</code> on your own</p>
+</blockquote>
+<div class="callout-attention">
+<p>Question 1: Which column has more missing values, <code>Value_mar</code> or <code>Value_mnar</code>? What does this suggest about the nature of the missingness in each column? Answer in your notebook.</p>
+</div>
+<p>Now we want to quantify missingness by state and year to see if there are patterns. We can use the <code>group_by()</code> and <code>summarize()</code> functions to calculate the number of missing values for each state and year combination. The function <code>summarize()</code> will allow us to create a new summary dataset that contains the count of missing values for each group. The function <code>group_by()</code> will group the data by the specified columns (in this case, <code>state_alpha</code> and <code>year</code>) so that the summary statistics are calculated for each unique combination of state and year.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by state, then summarize missingness</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>corn_missing_sub_grp <span class="ot">&lt;-</span> <span class="fu">group_by</span>(corn_missing_sub, state_alpha)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>corn_missing_summary <span class="ot">&lt;-</span> <span class="fu">summarize</span>(corn_missing_sub_grp,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">n_missing_mar =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(Value_mar)),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">n_missing_mnar =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(Value_mnar)),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">total_obs =</span> <span class="fu">n</span>(),</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">prop_missing_mar =</span> n_missing_mar <span class="sc">/</span> total_obs,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">prop_missing_mnar =</span> n_missing_mnar <span class="sc">/</span> total_obs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Do the same for grouping by year on your own.</p>
+</blockquote>
+<div class="callout-attention">
+<p>Question 2: Are there certain states or years that have higher proportions of missing data? What might be some reasons for this pattern? Answer in your notebook.</p>
+</div>
+<p>Finally, we want to understand the consequences of missing data for our analysis. Let’s calculate the mean yield for each of the variables (<code>Value</code>, <code>Value_mar</code>, and <code>Value_mnar</code>). This will help us understand how much bias might be introduced by missing data. We will use <code>summarize()</code> again to calculate the mean yield for each column, while ignoring the missing values using the argument <code>na.rm = TRUE</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate mean yield for each column</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>yield_summary <span class="ot">&lt;-</span> <span class="fu">summarize</span>(corn_missing_sub,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">mean_value =</span> <span class="fu">mean</span>(Value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">mean_value_mar =</span> <span class="fu">mean</span>(Value_mar, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">mean_value_mnar =</span> <span class="fu">mean</span>(Value_mnar, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-attention">
+<p>Question 3: How do the mean yields compare across the three columns? What does this suggest about the potential bias introduced by missing data? Answer in your notebook.</p>
+</div>
+<hr>
+</section>
+</section>
+<section id="section-2-reshaping-untidy-data" class="level1">
+<h1>Section 2: Reshaping Untidy Data</h1>
+<section id="context-1" class="level2">
+<h2 class="anchored" data-anchor-id="context-1">Context</h2>
+<p>“Tidy data” follows three rules:</p>
+<ol type="1">
+<li>Each variable is a column</li>
+<li>Each observation is a row</li>
+<li>Each type of observational unit is a separate table</li>
+</ol>
+<p>Real data rarely arrive in tidy form. The <code>pivot_longer()</code> and <code>pivot_wider()</code> functions let you reshape data flexibly.</p>
+</section>
+<section id="data-1" class="level2">
+<h2 class="anchored" data-anchor-id="data-1">Data</h2>
+<p>The yield data are already in a tidy format, but let’s pretend they are not.</p>
+</section>
+<section id="tasks" class="level2">
+<h2 class="anchored" data-anchor-id="tasks">Tasks</h2>
+<section id="task-2.1-load-and-inspect-untidy-data" class="level3">
+<h3 class="anchored" data-anchor-id="task-2.1-load-and-inspect-untidy-data">Task 2.1: Load and Inspect Untidy Data</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>corn_wide <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://jbayham.github.io/arec-330/modules/03_data_processing/includes/corn_wide.csv"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(corn_wide)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the first few rows to understand the structure</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(corn_wide)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-attention">
+<p>Question 4: What makes this data “untidy”? Describe how the structure differs from the tidy format. Answer in your notebook.</p>
+</div>
+<p>This untidy structure makes it difficult to analyze yield severity across states and time. Suppose we wanted to calculate the average yield for each state across all years. In the tidy format, we could simply group by state and summarize. But in this wide format, we would have to manually select and average across multiple columns for each state, which is cumbersome and error-prone.</p>
+</section>
+<section id="task-2.2-reshape-to-tidy-format" class="level3">
+<h3 class="anchored" data-anchor-id="task-2.2-reshape-to-tidy-format">Task 2.2: Reshape to Tidy Format</h3>
+<p>The tidyverse provides a usefule function for reshaping data called, <code>pivot_longer()</code>. This function takes multiple columns that represent different categories (e.g., years) and pivots them into a longer format where there is a single column for the category (e.g., “year”) and a single column for the values (e.g., “yield”). The arguments to <code>pivot_longer()</code> specify which columns to pivot, the name of the new category column, and the name of the new value column.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>corn_tidy <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(corn_wide,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"year_"</span>),  <span class="co"># columns for each year</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">names_to =</span> <span class="st">"year"</span>,  <span class="co"># new column for year</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">names_prefix =</span> <span class="st">"year_"</span>,  <span class="co"># remove "year_" prefix from year values</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">values_to =</span> <span class="st">"yield"</span>)  <span class="co"># new column for yield</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the result</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(corn_tidy)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(corn_tidy, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-attention">
+<p>Question 5: How has the structure of the data changed after pivoting? How many rows do you have now? What are the new variables created, and how do they relate to the original columns? What is the data type of the year variable? Is that desirable? Answer in your notebook.</p>
+</div>
+<hr>
+</section>
+</section>
+</section>
+<section id="section-3-temporal-aggregation" class="level1">
+<h1>Section 3: Temporal Aggregation</h1>
+<section id="context-2" class="level2">
+<h2 class="anchored" data-anchor-id="context-2">Context</h2>
+<p>Your corn yield data are annual (one value per state per year), but your drought data are weekly (52+ values per state per year). Before merging, you must aggregate drought data to match.</p>
+<p>But <em>how</em> you aggregate depends on your question:</p>
+<ul>
+<li>Simple annual average: best for year-over-year comparisons</li>
+<li>Growing season window: focuses on when drought matters biologically</li>
+<li>Critical period: captures timing of drought stress relative to crop development</li>
+<li>Cumulative measures: emphasizes total exposure</li>
+</ul>
+<p>We will calculate a single simple drought metric for each state-year for now. In future labs, we will explore more complex temporal features and how they affect the drought-yield relationship.</p>
+</section>
+<section id="data-2" class="level2">
+<h2 class="anchored" data-anchor-id="data-2">Data</h2>
+<p>We will will now transition to the drought dataset, which contains weekly observations of drought severity for each state from 2000 to 2025.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>drought_dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://jbayham.github.io/arec-330/modules/03_data_processing/includes/dm_state_2000-2025.csv"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(drought_dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="tasks-1" class="level2">
+<h2 class="anchored" data-anchor-id="tasks-1">Tasks</h2>
+<section id="task-3.1-calculate-the-drought-severity-composite-index-dsci" class="level3">
+<h3 class="anchored" data-anchor-id="task-3.1-calculate-the-drought-severity-composite-index-dsci">Task 3.1: Calculate the Drought Severity Composite Index (DSCI)</h3>
+<p>The Drought Severity Composite Index (DSCI) is a weighted average of the area in each drought category, where higher severity levels contribute more to the index.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The formula is: <span class="math display">\[DSCI = \frac{0 \times \text{Area}_{None} + 1 \times \text{Area}_{D0} + 2 \times \text{Area}_{D1} + 3 \times \text{Area}_{D2} + 4 \times \text{Area}_{D3} + 5 \times \text{Area}_{D4}}{\text{Total Area}}\]</span></p>
+<p>In R, we will use the <code>mutate()</code> function to create a new variable <code>dsci</code> that calculates the DSCI for each state-week observation. We will also calculate the <code>total_area</code> for each state-week to use in the denominator of the DSCI formula.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate DSCI as a weighted sum of severity levels</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>drought_weekly <span class="ot">&lt;-</span> drought_dat <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_area =</span> None <span class="sc">+</span> D0 <span class="sc">+</span> D1 <span class="sc">+</span> D2 <span class="sc">+</span> D3 <span class="sc">+</span> D4,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">dsci =</span> (<span class="dv">0</span> <span class="sc">*</span> None <span class="sc">+</span> <span class="dv">1</span> <span class="sc">*</span> D0 <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> D1 <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> D2 <span class="sc">+</span> <span class="dv">4</span> <span class="sc">*</span> D3 <span class="sc">+</span> <span class="dv">5</span> <span class="sc">*</span> D4)<span class="sc">/</span>total_area</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="task-3.2-strategy-a-simple-annual-average" class="level3">
+<h3 class="anchored" data-anchor-id="task-3.2-strategy-a-simple-annual-average">Task 3.2: Strategy A – Simple Annual Average</h3>
+<p>Now we need to aggregate the weekly drought data to an annual level. The simplest approach is to calculate the average DSCI for each state-year. This gives us a single drought severity value for each state and year, which we can then merge with the corn yield data. We will use the <code>group_by()</code> and <code>summarize()</code> functions to perform this aggregation. We will group the data by <code>StateAbbreviation</code> and <code>year</code>, then calculate the mean DSCI for each group.</p>
+<p>First, we need to extract the year from the <code>ValidStart</code> date column. We can use the <code>year()</code> function from the <code>lubridate</code> package to do this. Then we will group by state and year, and calculate the mean DSCI.</p>
+<p>We also want to introduce the pipe operator (<code>%&gt;%</code>) to chain our operations together in a clear and readable way. The pipe allows us to take the output of one function and pass it directly into the next function without needing to create intermediate objects.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>drought_annual <span class="ot">&lt;-</span> drought_weekly <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(ValidStart)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(StateAbbreviation, year) <span class="sc">%&gt;%</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_dsci =</span> <span class="fu">mean</span>(dsci, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(drought_annual)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+</section>
+</section>
+<section id="deliverables" class="level1">
+<h1>Deliverables</h1>
+<p>Submit the following on Canvas::</p>
+<ol type="1">
+<li><p>Organize your code and make sure it runs without errors. Then generate a log file called <code>lab_03.log</code> using the sink-source-sink pattern from previous labs. The log file should include all the code you wrote for this lab, along with comments explaining each step.</p></li>
+<li><p>Notebook responses: Compile your answers to the questions in a single document (e.g., Google Doc, Word, or plain text). Make sure to clearly label each question and provide thoughtful, detailed responses based on your analysis.</p></li>
+</ol>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p><a href="https://droughtmonitor.unl.edu/About/AbouttheData/DSCI.aspx" class="uri">https://droughtmonitor.unl.edu/About/AbouttheData/DSCI.aspx</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
+<!-- /main column -->
+<footer class="course-footer">
+  <div class="course-footer__inner">
+    <a href="https://jbayham.github.io/arec-330/">← Back to course site</a>
+    <span class="course-footer__sep">·</span>
+    <a href="https://colostate.instructure.com/courses/218386" target="_blank" rel="noopener">Open Canvas</a>
+  </div>
+</footer>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
