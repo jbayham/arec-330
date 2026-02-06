@@ -10,7 +10,7 @@ format:
     include-after-body: ../course-footer.html
 ---
 
-<!-- ![](includes/lab3_header.png) -->
+![](includes/lab_header.png)
 
 This lab gives you hands-on practice with the **data processing decisions** from lecture using engineered versions of the corn yield and drought datasets you collected last week. In each section, you will work with modified data that introduces realistic challenges: missing values, untidy structure, and temporal aggregation decisions.
 
@@ -23,6 +23,7 @@ By the end of the lab, you will be able to:
 - Reshape untidy data into tidy form using `pivot_longer()` and `pivot_wider()`
 - Aggregate time-series data to match your research question
 - Document your data processing choices
+- Learn the basics of the [`dplyr`](https://dplyr.tidyverse.org/) and [`tidyr`](https://tidyr.tidyverse.org/) packages for data manipulation
 
 ## Preliminaries
 
@@ -34,8 +35,6 @@ By the end of the lab, you will be able to:
 ```{r}
 #| eval: false
 library(tidyverse)
-library(naniar)  # for missing data visualization
-#install.packages("naniar")  # run this line if you need to install naniar
 ```
 
 ### Lab Notebook
@@ -45,20 +44,21 @@ Open up a word processing document (e.g., Google Doc, Word, or plain text) to se
 
 ----
 
-# Section 1: Handling Missing Data
+# Section 1: Missing Data
 
 ## Context
 
-Real datasets often contain missing values (NA). But "missing" can mean different things:
+Real datasets often contain missing values (R represents missing data as `NA`). But "missing" can mean different things:
 
 - **MAR** (Missing at Random): Missingness is unrelated to any variables
 - **MNAR** (Missing at Random): Missingness depends on observed or unobserved data (e.g., low-yield years less likely to be reported)
 
-Your processing choice—deletion, imputation, or flagging—depends on understanding *why* data are missing.
+Your processing choice—deletion, imputation, or flagging—depends on understanding *why* data are missing. How to deal with missing data is a whole area of study. We will investigate the consequences of missing data, but not implement any solutions because it requires analysis we have not yet covered. There are many resources online. 
 
 ## Data
 
 The file `corn_yield_missing.csv` contains engineered missingness:
+
 - **Random MCAR:** ~5% of yield values randomly set to NA
 - **Informative MAR:** Systematic missing values for certain states and years (mimicking reporting thresholds)
 
@@ -72,19 +72,21 @@ If you want to do a quick check in MS Excel before working in R, use the steps b
 
 1. Open the CSV in Excel.
 2. Turn on **Filters** (Data → Filter).
-3. In the `Value` column filter drop‑down, check **(Blanks)** to see missing rows.
-4. Count how many rows are blank in `Value`:
-  - In a blank cell, enter `=COUNTBLANK([Value])` if your data are in an Excel Table, or `=COUNTBLANK(B2:B1078)` with the correct column range.
+3. In the `Value` column filter drop‑down, check **NA** to see missing rows.
+4. Count how many rows are NA in `Value`:
+  - In a blank cell, enter `=COUNTIF([Value], "NA")`.
 5. Count total rows (excluding the header):
-  - Use `=COUNTA([Value]) + COUNTBLANK([Value])` (Table) or `=COUNTA(B2:B1078)+COUNTBLANK(B2:B1078)`.
+  - Use `=COUNTA([Value])`.
 6. Compute the percent missing:
-  - `=COUNTBLANK([Value]) / (COUNTA([Value]) + COUNTBLANK([Value]))`.
+  - `=COUNTIF([Value], "NA") / COUNTA([Value])`.
 
 You can repeat the same steps for `Value_mar` and `Value_mnar` to compare the three missingness patterns.
 
 ----
 
-Load the data and create a summary of missingness:
+**Quantify missingness in R**
+
+Load the data into R using `read_csv()`, then use `glimpse()` to inspect the structure and data types. 
 
 ```{r}
 #| eval: false
@@ -97,6 +99,7 @@ glimpse(corn_missing)
 ```
 
 Let's begin by reaquinting ourselves with the data. The corn yield data contains many columns that we won't need, so lets subset the columns to focus on what we do need. Let's use the `select()` function to keep only the columns that are relevant for our analysis. We will keep the following columns:
+
 - `state_alpha`: State abbreviation (e.g., "IA" for Iowa)
 - `commodity_desc`: Description of the commodity (e.g., "CORN")
 - `year`: Year of the observation
@@ -110,6 +113,7 @@ corn_missing_sub <- select(corn_missing, state_alpha, commodity_desc, year, Valu
 
 ```
 
+### Count Missing Values
 
 Now we can focus on the columns that are relevant for our analysis. The `Value` columns is complete. Let's quantify the missingness in the columns `Value_mar` and `Value_mnar` to understand the extent of missing data we are dealing with. We can use the `is.na()` function to identify missing values and then summarize the total count and proportion of missingness.
 
@@ -120,7 +124,12 @@ Now we can focus on the columns that are relevant for our analysis. The `Value` 
 #Apply the is.na() function to the Value_mar column to identify missing values
 is.na(corn_missing_sub$Value_mar)
 
-# That generates a logical vector where TRUE indicates a missing value and FALSE indicates a non-missing value. To quantify the total number of missing values, we can use the `sum()` function, which will count the number of TRUE values in the logical vector. To calculate the proportion of missing values, we can take the sum of missing values and divide it by the total number of observations (rows) in the dataset..
+```
+
+That generates a logical vector where TRUE indicates a missing value and FALSE indicates a non-missing value. To quantify the total number of missing values, we can use the `sum()` function, which will count the number of TRUE values in the logical vector. To calculate the proportion of missing values, we can take the sum of missing values and divide it by the total number of observations (rows) in the dataset..
+
+```{r}
+#| eval: false
 
 # Quantify total missingness
 sum(is.na(corn_missing_sub$Value_mar))
@@ -134,6 +143,8 @@ mean(is.na(corn_missing_sub$Value_mar))  # proportion missing
 :::{.callout-attention}
 Question 1: Which column has more missing values, `Value_mar` or `Value_mnar`? What does this suggest about the nature of the missingness in each column? Answer in your notebook.
 :::
+
+### Explore Missingness by State and Year
 
 Now we want to quantify missingness by state and year to see if there are patterns. We can use the `group_by()` and `summarize()` functions to calculate the number of missing values for each state and year combination. The function `summarize()` will allow us to create a new summary dataset that contains the count of missing values for each group. The function `group_by()` will group the data by the specified columns (in this case, `state_alpha` and `year`) so that the summary statistics are calculated for each unique combination of state and year.
 
@@ -157,6 +168,8 @@ corn_missing_summary <- summarize(corn_missing_sub_grp,
 :::{.callout-attention}
 Question 2: Are there certain states or years that have higher proportions of missing data? What might be some reasons for this pattern? Answer in your notebook.
 :::
+
+### Consequences of Missing Data
 
 Finally, we want to understand the consequences of missing data for our analysis. Let's calculate the mean yield for each of the variables (`Value`, `Value_mar`, and `Value_mnar`). This will help us understand how much bias might be introduced by missing data. We will use `summarize()` again to calculate the mean yield for each column, while ignoring the missing values using the argument `na.rm = TRUE`. 
 
@@ -194,7 +207,7 @@ Real data rarely arrive in tidy form. The `pivot_longer()` and `pivot_wider()` f
 
 ## Data
 
-The yield data are already in a tidy format, but let's pretend they are not. 
+The corn yield data are already in a tidy format, but let's pretend they are not. 
 
 ## Tasks
 
@@ -214,11 +227,14 @@ head(corn_wide)
 Question 4: What makes this data "untidy"? Describe how the structure differs from the tidy format. Answer in your notebook.
 :::
 
-This untidy structure makes it difficult to analyze yield severity across states and time. Suppose we wanted to calculate the average yield for each state across all years. In the tidy format, we could simply group by state and summarize. But in this wide format, we would have to manually select and average across multiple columns for each state, which is cumbersome and error-prone. 
+> In R, calculate the average corn yield for each state across all years using the original wide format. Make sure to include this in your script.
+
+<!-- This untidy structure makes it difficult to analyze yield severity across states and time. Suppose we wanted to calculate the average yield for each state across all years. In the tidy format, we could simply group by state and summarize. But in this wide format, we would have to manually select and average across multiple columns for each state, which is cumbersome and error-prone.  -->
+
 
 ### Task 2.2: Reshape to Tidy Format
 
-The tidyverse provides a usefule function for reshaping data called, `pivot_longer()`. This function takes multiple columns that represent different categories (e.g., years) and pivots them into a longer format where there is a single column for the category (e.g., "year") and a single column for the values (e.g., "yield"). The arguments to `pivot_longer()` specify which columns to pivot, the name of the new category column, and the name of the new value column.
+The tidyverse provides a useful function for reshaping data called, `pivot_longer()`. This function takes multiple columns that represent different categories (e.g., years) and pivots them into a longer format where there is a single column for the category (e.g., "year") and a single column for the values (e.g., "yield"). The arguments to `pivot_longer()` specify which columns to pivot, the name of the new category column, and the name of the new value column.
 
 ```{r}
 #| eval: false
@@ -238,6 +254,7 @@ head(corn_tidy, 10)
 Question 5: How has the structure of the data changed after pivoting? How many rows do you have now? What are the new variables created, and how do they relate to the original columns? What is the data type of the year variable? Is that desirable? Answer in your notebook.
 :::
 
+> Now calculate the average corn yield for each state across all years using the tidy format. Compare your results to the average yields you calculated in the previous task using the wide format. Are they the same? Which method was easier to use and why? Make sure to include this in your script.
 
 
 ---
@@ -273,12 +290,12 @@ glimpse(drought_dat)
 
 ### Task 3.1: Calculate the Drought Severity Composite Index (DSCI)
 
-The Drought Severity Composite Index (DSCI) is a weighted average of the area in each drought category, where higher severity levels contribute more to the index.[^dsci] The formula is:
+The drought dataset contains the area of each state in different drought categories (None, D0, D1, D2, D3, D4) for each week. To create a single drought severity metric, we will calculate the Drought Severity Composite Index (DSCI), which is a weighted average of the area in each drought category. The DSCI gives us a single value that represents the overall drought severity for each state-week observation.[^dsci] The formula is:
 $$DSCI = \frac{0 \times \text{Area}_{None} + 1 \times \text{Area}_{D0} + 2 \times \text{Area}_{D1} + 3 \times \text{Area}_{D2} + 4 \times \text{Area}_{D3} + 5 \times \text{Area}_{D4}}{\text{Total Area}}$$
 
 [^dsci]: <https://droughtmonitor.unl.edu/About/AbouttheData/DSCI.aspx>
 
-In R, we will use the `mutate()` function to create a new variable `dsci` that calculates the DSCI for each state-week observation. We will also calculate the `total_area` for each state-week to use in the denominator of the DSCI formula.
+In R, we will use the `mutate()` function (from `dplyr`) to create a new variable `dsci` that calculates the DSCI for each state-week observation. We will also calculate the `total_area` for each state-week to use in the denominator of the DSCI formula.
 ```{r}
 #| eval: false
 
@@ -290,9 +307,11 @@ drought_weekly <- drought_dat %>%
   )
 ```
 
+:::{.callout-attention}
+Question 6: Explain to a non-technical audience what the DSCI represents and how it is calculated. Why might this be a useful metric for summarizing drought severity? Answer in your notebook.
+:::
 
-
-### Task 3.2: Strategy A – Simple Annual Average
+### Task 3.2: Strategy A - Simple Annual Average
 
 Now we need to aggregate the weekly drought data to an annual level. The simplest approach is to calculate the average DSCI for each state-year. This gives us a single drought severity value for each state and year, which we can then merge with the corn yield data. We will use the `group_by()` and `summarize()` functions to perform this aggregation. We will group the data by `StateAbbreviation` and `year`, then calculate the mean DSCI for each group.
 
@@ -313,12 +332,15 @@ drought_annual <- drought_weekly %>%
 head(drought_annual)
 ```
 
+:::{.callout-attention}
+Question 7: What does the `mean_dsci` variable represent in the `drought_annual` dataset? How does this aggregation help us prepare the drought data for merging with the corn yield data? What are some potential limitations of using a simple annual average to summarize drought severity? Answer in your notebook.
+:::
 
 ----
 
 # Deliverables
 
-Submit the following on Canvas::
+Submit the following on Canvas:
 
 1. Organize your code and make sure it runs without errors. Then generate a log file called `lab_03.log` using the sink-source-sink pattern from previous labs. The log file should include all the code you wrote for this lab, along with comments explaining each step. 
 

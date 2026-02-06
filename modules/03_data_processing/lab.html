@@ -87,11 +87,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#lab-notebook" id="toc-lab-notebook" class="nav-link" data-scroll-target="#lab-notebook">Lab Notebook</a></li>
   </ul></li>
-  <li><a href="#section-1-handling-missing-data" id="toc-section-1-handling-missing-data" class="nav-link" data-scroll-target="#section-1-handling-missing-data">Section 1: Handling Missing Data</a>
+  <li><a href="#section-1-missing-data" id="toc-section-1-missing-data" class="nav-link" data-scroll-target="#section-1-missing-data">Section 1: Missing Data</a>
   <ul class="collapse">
   <li><a href="#context" id="toc-context" class="nav-link" data-scroll-target="#context">Context</a></li>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
-  <li><a href="#task" id="toc-task" class="nav-link" data-scroll-target="#task">Task</a></li>
+  <li><a href="#task" id="toc-task" class="nav-link" data-scroll-target="#task">Task</a>
+  <ul class="collapse">
+  <li><a href="#count-missing-values" id="toc-count-missing-values" class="nav-link" data-scroll-target="#count-missing-values">Count Missing Values</a></li>
+  <li><a href="#explore-missingness-by-state-and-year" id="toc-explore-missingness-by-state-and-year" class="nav-link" data-scroll-target="#explore-missingness-by-state-and-year">Explore Missingness by State and Year</a></li>
+  <li><a href="#consequences-of-missing-data" id="toc-consequences-of-missing-data" class="nav-link" data-scroll-target="#consequences-of-missing-data">Consequences of Missing Data</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#section-2-reshaping-untidy-data" id="toc-section-2-reshaping-untidy-data" class="nav-link" data-scroll-target="#section-2-reshaping-untidy-data">Section 2: Reshaping Untidy Data</a>
   <ul class="collapse">
@@ -110,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#tasks-1" id="toc-tasks-1" class="nav-link" data-scroll-target="#tasks-1">Tasks</a>
   <ul class="collapse">
   <li><a href="#task-3.1-calculate-the-drought-severity-composite-index-dsci" id="toc-task-3.1-calculate-the-drought-severity-composite-index-dsci" class="nav-link" data-scroll-target="#task-3.1-calculate-the-drought-severity-composite-index-dsci">Task 3.1: Calculate the Drought Severity Composite Index (DSCI)</a></li>
-  <li><a href="#task-3.2-strategy-a-simple-annual-average" id="toc-task-3.2-strategy-a-simple-annual-average" class="nav-link" data-scroll-target="#task-3.2-strategy-a-simple-annual-average">Task 3.2: Strategy A – Simple Annual Average</a></li>
+  <li><a href="#task-3.2-strategy-a---simple-annual-average" id="toc-task-3.2-strategy-a---simple-annual-average" class="nav-link" data-scroll-target="#task-3.2-strategy-a---simple-annual-average">Task 3.2: Strategy A - Simple Annual Average</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#deliverables" id="toc-deliverables" class="nav-link" data-scroll-target="#deliverables">Deliverables</a></li>
@@ -150,7 +155,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<!-- ![](includes/lab3_header.png) -->
+<p><img src="includes/lab_header.png" class="img-fluid"></p>
 <p>This lab gives you hands-on practice with the <strong>data processing decisions</strong> from lecture using engineered versions of the corn yield and drought datasets you collected last week. In each section, you will work with modified data that introduces realistic challenges: missing values, untidy structure, and temporal aggregation decisions.</p>
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
@@ -161,6 +166,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Reshape untidy data into tidy form using <code>pivot_longer()</code> and <code>pivot_wider()</code></li>
 <li>Aggregate time-series data to match your research question</li>
 <li>Document your data processing choices</li>
+<li>Learn the basics of the <a href="https://dplyr.tidyverse.org/"><code>dplyr</code></a> and <a href="https://tidyr.tidyverse.org/"><code>tidyr</code></a> packages for data manipulation</li>
 </ul>
 </section>
 <section id="preliminaries" class="level2">
@@ -172,9 +178,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Load required libraries at the top:</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naniar)  <span class="co"># for missing data visualization</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("naniar")  # run this line if you need to install naniar</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="lab-notebook" class="level3">
 <h3 class="anchored" data-anchor-id="lab-notebook">Lab Notebook</h3>
@@ -182,20 +186,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 </section>
 </section>
-<section id="section-1-handling-missing-data" class="level1">
-<h1>Section 1: Handling Missing Data</h1>
+<section id="section-1-missing-data" class="level1">
+<h1>Section 1: Missing Data</h1>
 <section id="context" class="level2">
 <h2 class="anchored" data-anchor-id="context">Context</h2>
-<p>Real datasets often contain missing values (NA). But “missing” can mean different things:</p>
+<p>Real datasets often contain missing values (R represents missing data as <code>NA</code>). But “missing” can mean different things:</p>
 <ul>
 <li><strong>MAR</strong> (Missing at Random): Missingness is unrelated to any variables</li>
 <li><strong>MNAR</strong> (Missing at Random): Missingness depends on observed or unobserved data (e.g., low-yield years less likely to be reported)</li>
 </ul>
-<p>Your processing choice—deletion, imputation, or flagging—depends on understanding <em>why</em> data are missing.</p>
+<p>Your processing choice—deletion, imputation, or flagging—depends on understanding <em>why</em> data are missing. How to deal with missing data is a whole area of study. We will investigate the consequences of missing data, but not implement any solutions because it requires analysis we have not yet covered. There are many resources online.</p>
 </section>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
-<p>The file <code>corn_yield_missing.csv</code> contains engineered missingness: - <strong>Random MCAR:</strong> ~5% of yield values randomly set to NA - <strong>Informative MAR:</strong> Systematic missing values for certain states and years (mimicking reporting thresholds)</p>
+<p>The file <code>corn_yield_missing.csv</code> contains engineered missingness:</p>
+<ul>
+<li><strong>Random MCAR:</strong> ~5% of yield values randomly set to NA</li>
+<li><strong>Informative MAR:</strong> Systematic missing values for certain states and years (mimicking reporting thresholds)</li>
+</ul>
 <p>The function <code>read_csv()</code> can read data from a local file path or a URL. You can download the file from the course repository and save it in your <code>lab_03</code> folder, or read it directly from the url.</p>
 </section>
 <section id="task" class="level2">
@@ -205,27 +213,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li>Open the CSV in Excel.</li>
 <li>Turn on <strong>Filters</strong> (Data → Filter).</li>
-<li>In the <code>Value</code> column filter drop‑down, check <strong>(Blanks)</strong> to see missing rows.</li>
-<li>Count how many rows are blank in <code>Value</code>:</li>
+<li>In the <code>Value</code> column filter drop‑down, check <strong>NA</strong> to see missing rows.</li>
+<li>Count how many rows are NA in <code>Value</code>:</li>
 </ol>
 <ul>
-<li>In a blank cell, enter <code>=COUNTBLANK([Value])</code> if your data are in an Excel Table, or <code>=COUNTBLANK(B2:B1078)</code> with the correct column range.</li>
+<li>In a blank cell, enter <code>=COUNTIF([Value], "NA")</code>.</li>
 </ul>
 <ol start="5" type="1">
 <li>Count total rows (excluding the header):</li>
 </ol>
 <ul>
-<li>Use <code>=COUNTA([Value]) + COUNTBLANK([Value])</code> (Table) or <code>=COUNTA(B2:B1078)+COUNTBLANK(B2:B1078)</code>.</li>
+<li>Use <code>=COUNTA([Value])</code>.</li>
 </ul>
 <ol start="6" type="1">
 <li>Compute the percent missing:</li>
 </ol>
 <ul>
-<li><code>=COUNTBLANK([Value]) / (COUNTA([Value]) + COUNTBLANK([Value]))</code>.</li>
+<li><code>=COUNTIF([Value], "NA") / COUNTA([Value])</code>.</li>
 </ul>
 <p>You can repeat the same steps for <code>Value_mar</code> and <code>Value_mnar</code> to compare the three missingness patterns.</p>
 <hr>
-<p>Load the data and create a summary of missingness:</p>
+<p><strong>Quantify missingness in R</strong></p>
+<p>Load the data into R using <code>read_csv()</code>, then use <code>glimpse()</code> to inspect the structure and data types.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the data with missing values</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>corn_missing <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://jbayham.github.io/arec-330/modules/03_data_processing/includes/corn_yield_missing.csv"</span>)</span>
@@ -233,22 +242,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the structure</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(corn_missing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Let’s begin by reaquinting ourselves with the data. The corn yield data contains many columns that we won’t need, so lets subset the columns to focus on what we do need. Let’s use the <code>select()</code> function to keep only the columns that are relevant for our analysis. We will keep the following columns: - <code>state_alpha</code>: State abbreviation (e.g., “IA” for Iowa) - <code>commodity_desc</code>: Description of the commodity (e.g., “CORN”) - <code>year</code>: Year of the observation - <code>Value</code>: The original yield value (with engineered missingness) - <code>Value_mar</code>: The version of yield with MAR missingness - <code>Value_mnar</code>: The version of yield with MNAR missingness</p>
+<p>Let’s begin by reaquinting ourselves with the data. The corn yield data contains many columns that we won’t need, so lets subset the columns to focus on what we do need. Let’s use the <code>select()</code> function to keep only the columns that are relevant for our analysis. We will keep the following columns:</p>
+<ul>
+<li><code>state_alpha</code>: State abbreviation (e.g., “IA” for Iowa)</li>
+<li><code>commodity_desc</code>: Description of the commodity (e.g., “CORN”)</li>
+<li><code>year</code>: Year of the observation</li>
+<li><code>Value</code>: The original yield value (with engineered missingness)</li>
+<li><code>Value_mar</code>: The version of yield with MAR missingness</li>
+<li><code>Value_mnar</code>: The version of yield with MNAR missingness</li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>corn_missing_sub <span class="ot">&lt;-</span> <span class="fu">select</span>(corn_missing, state_alpha, commodity_desc, year, Value, Value_mar, Value_mnar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<section id="count-missing-values" class="level3">
+<h3 class="anchored" data-anchor-id="count-missing-values">Count Missing Values</h3>
 <p>Now we can focus on the columns that are relevant for our analysis. The <code>Value</code> columns is complete. Let’s quantify the missingness in the columns <code>Value_mar</code> and <code>Value_mnar</code> to understand the extent of missing data we are dealing with. We can use the <code>is.na()</code> function to identify missing values and then summarize the total count and proportion of missingness.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Apply the is.na() function to the Value_mar column to identify missing values</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(corn_missing_sub<span class="sc">$</span>Value_mar)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># That generates a logical vector where TRUE indicates a missing value and FALSE indicates a non-missing value. To quantify the total number of missing values, we can use the `sum()` function, which will count the number of TRUE values in the logical vector. To calculate the proportion of missing values, we can take the sum of missing values and divide it by the total number of observations (rows) in the dataset..</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Quantify total missingness</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(corn_missing_sub<span class="sc">$</span>Value_mar))</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(corn_missing_sub<span class="sc">$</span>Value_mar))<span class="sc">/</span><span class="fu">nrow</span>(corn_missing_sub)  <span class="co"># proportion missing</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#or </span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">is.na</span>(corn_missing_sub<span class="sc">$</span>Value_mar))  <span class="co"># proportion missing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(corn_missing_sub<span class="sc">$</span>Value_mar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>That generates a logical vector where TRUE indicates a missing value and FALSE indicates a non-missing value. To quantify the total number of missing values, we can use the <code>sum()</code> function, which will count the number of TRUE values in the logical vector. To calculate the proportion of missing values, we can take the sum of missing values and divide it by the total number of observations (rows) in the dataset..</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Quantify total missingness</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(corn_missing_sub<span class="sc">$</span>Value_mar))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(corn_missing_sub<span class="sc">$</span>Value_mar))<span class="sc">/</span><span class="fu">nrow</span>(corn_missing_sub)  <span class="co"># proportion missing</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#or </span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">is.na</span>(corn_missing_sub<span class="sc">$</span>Value_mar))  <span class="co"># proportion missing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
 <p>Do the same for the column <code>Value_mnar</code> on your own</p>
@@ -256,17 +275,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="callout-attention">
 <p>Question 1: Which column has more missing values, <code>Value_mar</code> or <code>Value_mnar</code>? What does this suggest about the nature of the missingness in each column? Answer in your notebook.</p>
 </div>
+</section>
+<section id="explore-missingness-by-state-and-year" class="level3">
+<h3 class="anchored" data-anchor-id="explore-missingness-by-state-and-year">Explore Missingness by State and Year</h3>
 <p>Now we want to quantify missingness by state and year to see if there are patterns. We can use the <code>group_by()</code> and <code>summarize()</code> functions to calculate the number of missing values for each state and year combination. The function <code>summarize()</code> will allow us to create a new summary dataset that contains the count of missing values for each group. The function <code>group_by()</code> will group the data by the specified columns (in this case, <code>state_alpha</code> and <code>year</code>) so that the summary statistics are calculated for each unique combination of state and year.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by state, then summarize missingness</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>corn_missing_sub_grp <span class="ot">&lt;-</span> <span class="fu">group_by</span>(corn_missing_sub, state_alpha)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>corn_missing_summary <span class="ot">&lt;-</span> <span class="fu">summarize</span>(corn_missing_sub_grp,</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">n_missing_mar =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(Value_mar)),</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">n_missing_mnar =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(Value_mnar)),</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">total_obs =</span> <span class="fu">n</span>(),</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">prop_missing_mar =</span> n_missing_mar <span class="sc">/</span> total_obs,</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">prop_missing_mnar =</span> n_missing_mnar <span class="sc">/</span> total_obs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by state, then summarize missingness</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>corn_missing_sub_grp <span class="ot">&lt;-</span> <span class="fu">group_by</span>(corn_missing_sub, state_alpha)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>corn_missing_summary <span class="ot">&lt;-</span> <span class="fu">summarize</span>(corn_missing_sub_grp,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">n_missing_mar =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(Value_mar)),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">n_missing_mnar =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(Value_mnar)),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">total_obs =</span> <span class="fu">n</span>(),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">prop_missing_mar =</span> n_missing_mar <span class="sc">/</span> total_obs,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">prop_missing_mnar =</span> n_missing_mnar <span class="sc">/</span> total_obs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
 <p>Do the same for grouping by year on your own.</p>
@@ -274,18 +296,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="callout-attention">
 <p>Question 2: Are there certain states or years that have higher proportions of missing data? What might be some reasons for this pattern? Answer in your notebook.</p>
 </div>
+</section>
+<section id="consequences-of-missing-data" class="level3">
+<h3 class="anchored" data-anchor-id="consequences-of-missing-data">Consequences of Missing Data</h3>
 <p>Finally, we want to understand the consequences of missing data for our analysis. Let’s calculate the mean yield for each of the variables (<code>Value</code>, <code>Value_mar</code>, and <code>Value_mnar</code>). This will help us understand how much bias might be introduced by missing data. We will use <code>summarize()</code> again to calculate the mean yield for each column, while ignoring the missing values using the argument <code>na.rm = TRUE</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate mean yield for each column</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>yield_summary <span class="ot">&lt;-</span> <span class="fu">summarize</span>(corn_missing_sub,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">mean_value =</span> <span class="fu">mean</span>(Value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">mean_value_mar =</span> <span class="fu">mean</span>(Value_mar, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">mean_value_mnar =</span> <span class="fu">mean</span>(Value_mnar, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate mean yield for each column</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>yield_summary <span class="ot">&lt;-</span> <span class="fu">summarize</span>(corn_missing_sub,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">mean_value =</span> <span class="fu">mean</span>(Value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">mean_value_mar =</span> <span class="fu">mean</span>(Value_mar, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">mean_value_mnar =</span> <span class="fu">mean</span>(Value_mnar, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout-attention">
 <p>Question 3: How do the mean yields compare across the three columns? What does this suggest about the potential bias introduced by missing data? Answer in your notebook.</p>
 </div>
 <hr>
+</section>
 </section>
 </section>
 <section id="section-2-reshaping-untidy-data" class="level1">
@@ -302,43 +328,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="data-1" class="level2">
 <h2 class="anchored" data-anchor-id="data-1">Data</h2>
-<p>The yield data are already in a tidy format, but let’s pretend they are not.</p>
+<p>The corn yield data are already in a tidy format, but let’s pretend they are not.</p>
 </section>
 <section id="tasks" class="level2">
 <h2 class="anchored" data-anchor-id="tasks">Tasks</h2>
 <section id="task-2.1-load-and-inspect-untidy-data" class="level3">
 <h3 class="anchored" data-anchor-id="task-2.1-load-and-inspect-untidy-data">Task 2.1: Load and Inspect Untidy Data</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>corn_wide <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://jbayham.github.io/arec-330/modules/03_data_processing/includes/corn_wide.csv"</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(corn_wide)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the first few rows to understand the structure</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(corn_wide)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>corn_wide <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://jbayham.github.io/arec-330/modules/03_data_processing/includes/corn_wide.csv"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(corn_wide)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the first few rows to understand the structure</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(corn_wide)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout-attention">
 <p>Question 4: What makes this data “untidy”? Describe how the structure differs from the tidy format. Answer in your notebook.</p>
 </div>
-<p>This untidy structure makes it difficult to analyze yield severity across states and time. Suppose we wanted to calculate the average yield for each state across all years. In the tidy format, we could simply group by state and summarize. But in this wide format, we would have to manually select and average across multiple columns for each state, which is cumbersome and error-prone.</p>
+<blockquote class="blockquote">
+<p>In R, calculate the average corn yield for each state across all years using the original wide format. Make sure to include this in your script.</p>
+</blockquote>
+<!-- This untidy structure makes it difficult to analyze yield severity across states and time. Suppose we wanted to calculate the average yield for each state across all years. In the tidy format, we could simply group by state and summarize. But in this wide format, we would have to manually select and average across multiple columns for each state, which is cumbersome and error-prone.  -->
 </section>
 <section id="task-2.2-reshape-to-tidy-format" class="level3">
 <h3 class="anchored" data-anchor-id="task-2.2-reshape-to-tidy-format">Task 2.2: Reshape to Tidy Format</h3>
-<p>The tidyverse provides a usefule function for reshaping data called, <code>pivot_longer()</code>. This function takes multiple columns that represent different categories (e.g., years) and pivots them into a longer format where there is a single column for the category (e.g., “year”) and a single column for the values (e.g., “yield”). The arguments to <code>pivot_longer()</code> specify which columns to pivot, the name of the new category column, and the name of the new value column.</p>
+<p>The tidyverse provides a useful function for reshaping data called, <code>pivot_longer()</code>. This function takes multiple columns that represent different categories (e.g., years) and pivots them into a longer format where there is a single column for the category (e.g., “year”) and a single column for the values (e.g., “yield”). The arguments to <code>pivot_longer()</code> specify which columns to pivot, the name of the new category column, and the name of the new value column.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>corn_tidy <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(corn_wide,</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"year_"</span>),  <span class="co"># columns for each year</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">names_to =</span> <span class="st">"year"</span>,  <span class="co"># new column for year</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">names_prefix =</span> <span class="st">"year_"</span>,  <span class="co"># remove "year_" prefix from year values</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">values_to =</span> <span class="st">"yield"</span>)  <span class="co"># new column for yield</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the result</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(corn_tidy)</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(corn_tidy, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>corn_tidy <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(corn_wide,</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"year_"</span>),  <span class="co"># columns for each year</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">names_to =</span> <span class="st">"year"</span>,  <span class="co"># new column for year</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">names_prefix =</span> <span class="st">"year_"</span>,  <span class="co"># remove "year_" prefix from year values</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">values_to =</span> <span class="st">"yield"</span>)  <span class="co"># new column for yield</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the result</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(corn_tidy)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(corn_tidy, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout-attention">
 <p>Question 5: How has the structure of the data changed after pivoting? How many rows do you have now? What are the new variables created, and how do they relate to the original columns? What is the data type of the year variable? Is that desirable? Answer in your notebook.</p>
 </div>
+<blockquote class="blockquote">
+<p>Now calculate the average corn yield for each state across all years using the tidy format. Compare your results to the average yields you calculated in the previous task using the wide format. Are they the same? Which method was easier to use and why? Make sure to include this in your script.</p>
+</blockquote>
 <hr>
 </section>
 </section>
@@ -361,41 +393,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="data-2">Data</h2>
 <p>We will will now transition to the drought dataset, which contains weekly observations of drought severity for each state from 2000 to 2025.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>drought_dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://jbayham.github.io/arec-330/modules/03_data_processing/includes/dm_state_2000-2025.csv"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(drought_dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>drought_dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://jbayham.github.io/arec-330/modules/03_data_processing/includes/dm_state_2000-2025.csv"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(drought_dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="tasks-1" class="level2">
 <h2 class="anchored" data-anchor-id="tasks-1">Tasks</h2>
 <section id="task-3.1-calculate-the-drought-severity-composite-index-dsci" class="level3">
 <h3 class="anchored" data-anchor-id="task-3.1-calculate-the-drought-severity-composite-index-dsci">Task 3.1: Calculate the Drought Severity Composite Index (DSCI)</h3>
-<p>The Drought Severity Composite Index (DSCI) is a weighted average of the area in each drought category, where higher severity levels contribute more to the index.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The formula is: <span class="math display">\[DSCI = \frac{0 \times \text{Area}_{None} + 1 \times \text{Area}_{D0} + 2 \times \text{Area}_{D1} + 3 \times \text{Area}_{D2} + 4 \times \text{Area}_{D3} + 5 \times \text{Area}_{D4}}{\text{Total Area}}\]</span></p>
-<p>In R, we will use the <code>mutate()</code> function to create a new variable <code>dsci</code> that calculates the DSCI for each state-week observation. We will also calculate the <code>total_area</code> for each state-week to use in the denominator of the DSCI formula.</p>
+<p>The drought dataset contains the area of each state in different drought categories (None, D0, D1, D2, D3, D4) for each week. To create a single drought severity metric, we will calculate the Drought Severity Composite Index (DSCI), which is a weighted average of the area in each drought category. The DSCI gives us a single value that represents the overall drought severity for each state-week observation.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The formula is: <span class="math display">\[DSCI = \frac{0 \times \text{Area}_{None} + 1 \times \text{Area}_{D0} + 2 \times \text{Area}_{D1} + 3 \times \text{Area}_{D2} + 4 \times \text{Area}_{D3} + 5 \times \text{Area}_{D4}}{\text{Total Area}}\]</span></p>
+<p>In R, we will use the <code>mutate()</code> function (from <code>dplyr</code>) to create a new variable <code>dsci</code> that calculates the DSCI for each state-week observation. We will also calculate the <code>total_area</code> for each state-week to use in the denominator of the DSCI formula.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate DSCI as a weighted sum of severity levels</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>drought_weekly <span class="ot">&lt;-</span> drought_dat <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_area =</span> None <span class="sc">+</span> D0 <span class="sc">+</span> D1 <span class="sc">+</span> D2 <span class="sc">+</span> D3 <span class="sc">+</span> D4,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">dsci =</span> (<span class="dv">0</span> <span class="sc">*</span> None <span class="sc">+</span> <span class="dv">1</span> <span class="sc">*</span> D0 <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> D1 <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> D2 <span class="sc">+</span> <span class="dv">4</span> <span class="sc">*</span> D3 <span class="sc">+</span> <span class="dv">5</span> <span class="sc">*</span> D4)<span class="sc">/</span>total_area</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate DSCI as a weighted sum of severity levels</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>drought_weekly <span class="ot">&lt;-</span> drought_dat <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_area =</span> None <span class="sc">+</span> D0 <span class="sc">+</span> D1 <span class="sc">+</span> D2 <span class="sc">+</span> D3 <span class="sc">+</span> D4,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">dsci =</span> (<span class="dv">0</span> <span class="sc">*</span> None <span class="sc">+</span> <span class="dv">1</span> <span class="sc">*</span> D0 <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> D1 <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> D2 <span class="sc">+</span> <span class="dv">4</span> <span class="sc">*</span> D3 <span class="sc">+</span> <span class="dv">5</span> <span class="sc">*</span> D4)<span class="sc">/</span>total_area</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-attention">
+<p>Question 6: Explain to a non-technical audience what the DSCI represents and how it is calculated. Why might this be a useful metric for summarizing drought severity? Answer in your notebook.</p>
 </div>
 </section>
-<section id="task-3.2-strategy-a-simple-annual-average" class="level3">
-<h3 class="anchored" data-anchor-id="task-3.2-strategy-a-simple-annual-average">Task 3.2: Strategy A – Simple Annual Average</h3>
+<section id="task-3.2-strategy-a---simple-annual-average" class="level3">
+<h3 class="anchored" data-anchor-id="task-3.2-strategy-a---simple-annual-average">Task 3.2: Strategy A - Simple Annual Average</h3>
 <p>Now we need to aggregate the weekly drought data to an annual level. The simplest approach is to calculate the average DSCI for each state-year. This gives us a single drought severity value for each state and year, which we can then merge with the corn yield data. We will use the <code>group_by()</code> and <code>summarize()</code> functions to perform this aggregation. We will group the data by <code>StateAbbreviation</code> and <code>year</code>, then calculate the mean DSCI for each group.</p>
 <p>First, we need to extract the year from the <code>ValidStart</code> date column. We can use the <code>year()</code> function from the <code>lubridate</code> package to do this. Then we will group by state and year, and calculate the mean DSCI.</p>
 <p>We also want to introduce the pipe operator (<code>%&gt;%</code>) to chain our operations together in a clear and readable way. The pipe allows us to take the output of one function and pass it directly into the next function without needing to create intermediate objects.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>drought_annual <span class="ot">&lt;-</span> drought_weekly <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(ValidStart)) <span class="sc">%&gt;%</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(StateAbbreviation, year) <span class="sc">%&gt;%</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_dsci =</span> <span class="fu">mean</span>(dsci, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(drought_annual)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>drought_annual <span class="ot">&lt;-</span> drought_weekly <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(ValidStart)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(StateAbbreviation, year) <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_dsci =</span> <span class="fu">mean</span>(dsci, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(drought_annual)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-attention">
+<p>Question 7: What does the <code>mean_dsci</code> variable represent in the <code>drought_annual</code> dataset? How does this aggregation help us prepare the drought data for merging with the corn yield data? What are some potential limitations of using a simple annual average to summarize drought severity? Answer in your notebook.</p>
 </div>
 <hr>
 </section>
@@ -403,7 +441,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="deliverables" class="level1">
 <h1>Deliverables</h1>
-<p>Submit the following on Canvas::</p>
+<p>Submit the following on Canvas:</p>
 <ol type="1">
 <li><p>Organize your code and make sure it runs without errors. Then generate a log file called <code>lab_03.log</code> using the sink-source-sink pattern from previous labs. The log file should include all the code you wrote for this lab, along with comments explaining each step.</p></li>
 <li><p>Notebook responses: Compile your answers to the questions in a single document (e.g., Google Doc, Word, or plain text). Make sure to clearly label each question and provide thoughtful, detailed responses based on your analysis.</p></li>
