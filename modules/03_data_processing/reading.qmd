@@ -771,7 +771,7 @@ To ensure that merging is done correctly and transparently, analysts should:
 
 > **Key takeaway:** Merging datasets is a powerful way to enrich analysis, but it requires careful attention to how observations are matched and how variables are aligned. Thoughtful merging can enhance insights, while careless merging can lead to misleading results.
 
-
+You can find more information about joins in [R for Data Science: Joins](https://r4ds.hadley.nz/joins.html)
 
 ## Data Processing as a Reproducible Workflow
 

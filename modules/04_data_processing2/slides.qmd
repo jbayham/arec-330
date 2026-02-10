@@ -1,0 +1,226 @@
+---
+title: "Week 4: Joining and Merging Data"
+format:
+  revealjs:
+    slide-number: true
+    theme: [night, ../custom.scss]
+    touch: true
+---
+
+
+##  {.iclicker}
+
+:::{.question}
+Which statement best describes why missing data should not automatically be treated as zero?
+:::
+
+:::{.choices}
+A. Zeros are always outliers and should be removed. 
+B. Missingness can reflect nonresponse or suppression, not true zero values.    
+C. Missing values are always random and can be ignored.     
+D. Missing values only matter for time series data. 
+:::
+
+:::{.notes}
+B
+:::
+
+##  {.iclicker}
+
+:::{.question}
+Which of the following is an example of untidy data structure?
+:::
+
+:::{.choices}
+A. Each variable has its own column and each row is one observation.
+B. Monthly sales are stored in separate columns named jan, feb, mar, apr.
+C. A separate table is used for a different observational unit.
+D. A dataset includes a single column for month and a single column for value.
+:::
+
+:::{.notes}
+B
+:::
+
+##  {.iclicker}
+
+:::{.question}
+What is a common risk of aggregating data too early in a workflow?
+:::
+
+:::{.choices}
+A. It always increases measurement error.
+B. It can hide important variation within groups.
+C. It guarantees better causal identification.
+D. It eliminates the need for missing data checks.
+:::
+
+:::{.notes}
+B
+:::
+
+##  {.iclicker}
+
+:::{.question}
+You have county-year yield data, but weather data are monthly. What should you do before merging?
+:::
+
+:::{.choices}
+A. Drop the weather data because it is higher frequency.
+B. Aggregate weather to the county-year level to match the unit of observation.
+C. Duplicate yield rows to match each month.
+D. Convert yield to monthly values by dividing by 12.
+:::
+
+:::{.notes}
+B
+:::
+
+##  {.iclicker}
+
+:::{.question}
+Which handling of missing values preserves information about missingness itself?
+:::
+
+:::{.choices}
+A. Dropping all rows with any missing values.
+B. Replacing missing values with zero.
+C. Creating a missingness indicator or category.
+D. Replacing missing values with the mean.
+:::
+
+:::{.notes}
+C
+:::
+
+
+## Motivation: Why Joins Matter
+
+- Deep insights often come from combining datasets
+- Errors are hard to detect after models run
+- Joins can create bias by selection or duplication
+
+::: {.notes}
+Examples from research:
+- County-level yield + drought index
+- Wildfires and recreation outcomes 
+- Wildfires and water quality
+:::
+
+## Unit of Observation First
+
+- Let the analytic question define the unit of observation
+- All joins should preserve the target unit
+- Example target unit: county-year
+
+::: {.notes}
+Ask: "What is a row supposed to represent?" Tie to identification strategy.
+:::
+
+
+## Primary and Compound Keys
+
+- Keys define how tables relate to each other - a concept from relational databases
+- Primary key: unique ID for each row
+- Compound key: multiple columns define uniqueness
+
+::: {.notes}
+Use county-year as compound key: `county_fips` + `year`.
+:::
+
+##  {.iclicker}
+
+:::{.question}
+What variables make up the compound key in our corn yield and drought example in lab?
+:::
+
+:::{.choices}
+A. state and year  
+B. county and year  
+C. year only  
+D. state only 
+:::
+
+:::{.notes}
+A 
+:::
+
+## Join Types and Implications
+
+- `left_join()`: keep all rows in left table
+- `inner_join()`: keep only matched rows
+- `right_join()`/`full_join()`: mostly for debugging
+
+::: {.notes}
+Stress: join type is a policy decision about who stays in sample.
+:::
+
+## Joins
+![](includes/joins.png)
+
+## Example
+
+::::{.columns}
+
+:::{.column}
+| state   | year | yield |
+| ------- | ---: | ----: |
+| A       | 2020 |   120 |
+| B       | 2020 |    95 |
+| C       | 2020 |   105 |
+:::
+
+:::{.column}
+| state   | year | drought |
+| :------- | ---: | ------: |
+| A       | 2020 |     0.8 |
+| D       | 2020 |     0.6 |
+:::
+
+::::
+
+## Example: Inner Join
+| state   | year | yield | drought |
+| ------- | ---: | ----: | ------: |
+| A       | 2020 |   120 |     0.8 |
+
+Only state A appears because it's the only match.
+
+## Example: Left Join
+| state   | year | yield | drought |
+| ------- | ---: | ----: | ------: |
+| A       | 2020 |   120 |     0.8 |
+| B       | 2020 |    95 |     NA |
+| C       | 2020 |   105 |     NA |
+
+
+## Implicit Assumptions in Joins
+
+- Keys are correctly defined and formatted
+- Any observations dropped by inner join are ignorable
+
+
+## Diagnostics Before the Join
+
+- Confirm unit and key definitions
+- Check key uniqueness on both tables
+- Check overlap and missing keys
+- Predict expected row counts
+
+::: {.notes}
+Say: if any step fails, stop and investigate.
+:::
+
+
+## Common Failure Modes
+
+- Many-to-many joins inflate rows
+- Key mismatches (types, formatting, leading zeros)
+- Temporal mismatch or look-ahead bias
+- Unintended selection via inner join
+
+::: {.notes}
+Highlight FIPS as classic leading-zero issue.
+:::
+
+
