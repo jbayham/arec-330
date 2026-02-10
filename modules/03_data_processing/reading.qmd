@@ -670,6 +670,108 @@ There is no universally correct level of aggregation. Instead, analysts should c
 Aggregation and binning help align data with analytical and decision-making contexts, but they also remove detail. These choices should be made deliberately and with attention to what information is lost.
 
 
+## Merging and Joining Datasets
+
+In applied data analysis, it is common to combine information from multiple datasets to create a richer picture of the phenomenon being studied. This process, often referred to as *merging* or *joining*, is a powerful tool for data processing but also a common source of errors and misinterpretation. Merging datasets requires careful attention to how observations are matched and how variables are aligned across sources [@openstax_ds; @dime_handbook].
+
+### Why Merge Datasets?
+Merging allows analysts to: 
+
+* Enrich data with additional variables or dimensions
+* Combine information from different sources or time periods
+* Create new datasets that are better suited to specific questions
+
+For example, an analyst might merge agricultural yield data with weather data to study the impact of drought on production. Or they might merge survey data with administrative records to analyze the relationship between land ownership and productivity. In each case, merging enables a more comprehensive analysis than either dataset alone could support.
+
+### Common Challenges in Merging
+Merging datasets is not simply a technical task; it involves several challenges:
+
+* **Matching Observations**: Datasets may use different identifiers, time periods, or spatial units, making it difficult to align observations correctly.
+* **Variable Alignment**: Variables with the same name may have different meanings or units across datasets, leading to confusion or errors if not reconciled.
+* **Missing Data**: Merging can introduce missing values when observations do not have matches in both datasets, which requires decisions about how to handle these cases.
+
+For instance, if one dataset records yields at the county level and another records weather at the state level, merging them requires deciding how to aggregate or disaggregate data to create a common unit of analysis. Similarly, discrepencies in the units of time require decisions about how to aggregate. If identifiers are inconsistent (e.g., different spellings of county names), this can lead to mismatches that distort results.
+
+### Primary Keys 
+A critical aspect of merging is the choice of *primary keys*—the variables used to match observations across datasets. Common primary keys include geographic identifiers, time periods, or unique entity IDs. Choosing appropriate keys is essential for ensuring that the merged dataset accurately reflects the underlying phenomena.
+
+The primary key should align with the unit of analysis. For example, if the analysis focuses on county-level outcomes, then county and year might be appropriate keys. If the analysis focuses on individual farmers, then a unique farmer ID would be necessary. Mismatches in primary keys can lead to incorrect merges, which can produce misleading results or even cause the analysis to fail entirely.
+
+
+### Join Types and Their Implications
+Different types of joins (e.g., inner, left, right, full) determine how unmatched observations are handled. For example: 
+
+* An **inner join** includes only observations that have matches in ***both*** datasets, which can lead to data loss if many observations are unmatched.
+* A **left join** includes all observations from the left dataset and fills in missing values for unmatched observations from the right dataset, which can introduce missing data that must be handled in subsequent processing steps.
+* A **right join** does the opposite, including all observations from the right dataset and filling in missing values for unmatched observations from the left dataset.
+* A **full join** includes all observations from both datasets, which can create a large number of missing values if there are many unmatched observations.
+
+Below is a simple example with two tables to be merged. The primary keys are `county` and `year`.
+
+**Yield data (left table)**
+
+<div style="max-width: 520px; margin: 0 auto;">
+
+| county   | year | yield |
+|----------|-----:|------:|
+| County A | 2020 |   120 |
+| County B | 2020 |    95 |
+| County C | 2020 |   105 |
+
+</div>
+
+**Weather data (right table)**
+
+<div style="max-width: 520px; margin: 0 auto;">
+
+| county   | year | weather |
+|----------|-----:|-----:|
+| County A | 2020 |      30 |
+| County B | 2020 |      28 |
+| County D | 2020 |      27 |
+
+</div>
+
+**Inner join (keep only matching rows in both tables)**
+
+<div style="max-width: 520px; margin: 0 auto;">
+
+
+| county   | year | yield | weather |
+|----------|-----:|------:|--------:|
+| County A | 2020 |   120 |      30 |
+| County B | 2020 |    95 |      28 |
+
+
+</div>
+
+
+**Left join (keep all rows from the left table)**
+
+<div style="max-width: 520px; margin: 0 auto;">
+
+
+| county   | year | yield | weather |
+|----------|-----:|------:|--------:|
+| County A | 2020 |   120 |      30 |
+| County B | 2020 |    95 |      28 |
+| County C | 2020 |   105 |     NA  |
+
+</div>
+
+
+### Best Practices for Merging
+To ensure that merging is done correctly and transparently, analysts should:
+
+* Carefully examine the structure and content of each dataset before merging
+* Choose primary keys that align with the unit of analysis
+* Decide on the appropriate join type based on the analytical goals and the nature of the data
+* Document the merging process, including any assumptions made about how to handle unmatched observations or discrepancies in variable definitions
+* Test the merged dataset for consistency and plausibility before proceeding with analysis
+
+> **Key takeaway:** Merging datasets is a powerful way to enrich analysis, but it requires careful attention to how observations are matched and how variables are aligned. Thoughtful merging can enhance insights, while careless merging can lead to misleading results.
+
+
 
 ## Data Processing as a Reproducible Workflow
 

@@ -126,16 +126,24 @@ div.csl-indent {
   <li><a href="#binning-and-arbitrary-boundaries" id="toc-binning-and-arbitrary-boundaries" class="nav-link" data-scroll-target="#binning-and-arbitrary-boundaries"><span class="header-section-number">8.3</span> Binning and Arbitrary Boundaries</a></li>
   <li><a href="#aggregation-and-causal-interpretation" id="toc-aggregation-and-causal-interpretation" class="nav-link" data-scroll-target="#aggregation-and-causal-interpretation"><span class="header-section-number">8.4</span> Aggregation and Causal Interpretation</a></li>
   </ul></li>
-  <li><a href="#data-processing-as-a-reproducible-workflow" id="toc-data-processing-as-a-reproducible-workflow" class="nav-link" data-scroll-target="#data-processing-as-a-reproducible-workflow"><span class="header-section-number">9</span> Data Processing as a Reproducible Workflow</a>
+  <li><a href="#merging-and-joining-datasets" id="toc-merging-and-joining-datasets" class="nav-link" data-scroll-target="#merging-and-joining-datasets"><span class="header-section-number">9</span> Merging and Joining Datasets</a>
   <ul class="collapse">
-  <li><a href="#why-reproducibility-matters" id="toc-why-reproducibility-matters" class="nav-link" data-scroll-target="#why-reproducibility-matters"><span class="header-section-number">9.1</span> Why Reproducibility Matters</a></li>
-  <li><a href="#scripting-versus-manual-processing" id="toc-scripting-versus-manual-processing" class="nav-link" data-scroll-target="#scripting-versus-manual-processing"><span class="header-section-number">9.2</span> Scripting Versus Manual Processing</a></li>
-  <li><a href="#processing-with-the-future-in-mind" id="toc-processing-with-the-future-in-mind" class="nav-link" data-scroll-target="#processing-with-the-future-in-mind"><span class="header-section-number">9.3</span> Processing With the Future in Mind</a></li>
-  <li><a href="#documentation-as-part-of-the-workflow" id="toc-documentation-as-part-of-the-workflow" class="nav-link" data-scroll-target="#documentation-as-part-of-the-workflow"><span class="header-section-number">9.4</span> Documentation as Part of the Workflow</a></li>
-  <li><a href="#connecting-workflow-to-this-course" id="toc-connecting-workflow-to-this-course" class="nav-link" data-scroll-target="#connecting-workflow-to-this-course"><span class="header-section-number">9.5</span> Connecting Workflow to This Course</a></li>
+  <li><a href="#why-merge-datasets" id="toc-why-merge-datasets" class="nav-link" data-scroll-target="#why-merge-datasets"><span class="header-section-number">9.1</span> Why Merge Datasets?</a></li>
+  <li><a href="#common-challenges-in-merging" id="toc-common-challenges-in-merging" class="nav-link" data-scroll-target="#common-challenges-in-merging"><span class="header-section-number">9.2</span> Common Challenges in Merging</a></li>
+  <li><a href="#primary-keys" id="toc-primary-keys" class="nav-link" data-scroll-target="#primary-keys"><span class="header-section-number">9.3</span> Primary Keys</a></li>
+  <li><a href="#join-types-and-their-implications" id="toc-join-types-and-their-implications" class="nav-link" data-scroll-target="#join-types-and-their-implications"><span class="header-section-number">9.4</span> Join Types and Their Implications</a></li>
+  <li><a href="#best-practices-for-merging" id="toc-best-practices-for-merging" class="nav-link" data-scroll-target="#best-practices-for-merging"><span class="header-section-number">9.5</span> Best Practices for Merging</a></li>
   </ul></li>
-  <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding"><span class="header-section-number">10</span> Check Your Understanding</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">11</span> References</a></li>
+  <li><a href="#data-processing-as-a-reproducible-workflow" id="toc-data-processing-as-a-reproducible-workflow" class="nav-link" data-scroll-target="#data-processing-as-a-reproducible-workflow"><span class="header-section-number">10</span> Data Processing as a Reproducible Workflow</a>
+  <ul class="collapse">
+  <li><a href="#why-reproducibility-matters" id="toc-why-reproducibility-matters" class="nav-link" data-scroll-target="#why-reproducibility-matters"><span class="header-section-number">10.1</span> Why Reproducibility Matters</a></li>
+  <li><a href="#scripting-versus-manual-processing" id="toc-scripting-versus-manual-processing" class="nav-link" data-scroll-target="#scripting-versus-manual-processing"><span class="header-section-number">10.2</span> Scripting Versus Manual Processing</a></li>
+  <li><a href="#processing-with-the-future-in-mind" id="toc-processing-with-the-future-in-mind" class="nav-link" data-scroll-target="#processing-with-the-future-in-mind"><span class="header-section-number">10.3</span> Processing With the Future in Mind</a></li>
+  <li><a href="#documentation-as-part-of-the-workflow" id="toc-documentation-as-part-of-the-workflow" class="nav-link" data-scroll-target="#documentation-as-part-of-the-workflow"><span class="header-section-number">10.4</span> Documentation as Part of the Workflow</a></li>
+  <li><a href="#connecting-workflow-to-this-course" id="toc-connecting-workflow-to-this-course" class="nav-link" data-scroll-target="#connecting-workflow-to-this-course"><span class="header-section-number">10.5</span> Connecting Workflow to This Course</a></li>
+  </ul></li>
+  <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding"><span class="header-section-number">11</span> Check Your Understanding</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">12</span> References</a></li>
   </ul>
 </nav>
 </div>
@@ -734,12 +742,184 @@ div.csl-indent {
 </blockquote>
 </section>
 </section>
-<section id="data-processing-as-a-reproducible-workflow" class="level2" data-number="9">
-<h2 data-number="9" class="anchored" data-anchor-id="data-processing-as-a-reproducible-workflow"><span class="header-section-number">9</span> Data Processing as a Reproducible Workflow</h2>
+<section id="merging-and-joining-datasets" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="merging-and-joining-datasets"><span class="header-section-number">9</span> Merging and Joining Datasets</h2>
+<p>In applied data analysis, it is common to combine information from multiple datasets to create a richer picture of the phenomenon being studied. This process, often referred to as <em>merging</em> or <em>joining</em>, is a powerful tool for data processing but also a common source of errors and misinterpretation. Merging datasets requires careful attention to how observations are matched and how variables are aligned across sources <span class="citation" data-cites="openstax_ds dime_handbook">(<a href="#ref-openstax_ds" role="doc-biblioref">OpenStax 2021</a>; <a href="#ref-dime_handbook" role="doc-biblioref">World Bank DIME Analytics 2020</a>)</span>.</p>
+<section id="why-merge-datasets" class="level3" data-number="9.1">
+<h3 data-number="9.1" class="anchored" data-anchor-id="why-merge-datasets"><span class="header-section-number">9.1</span> Why Merge Datasets?</h3>
+<p>Merging allows analysts to:</p>
+<ul>
+<li>Enrich data with additional variables or dimensions</li>
+<li>Combine information from different sources or time periods</li>
+<li>Create new datasets that are better suited to specific questions</li>
+</ul>
+<p>For example, an analyst might merge agricultural yield data with weather data to study the impact of drought on production. Or they might merge survey data with administrative records to analyze the relationship between land ownership and productivity. In each case, merging enables a more comprehensive analysis than either dataset alone could support.</p>
+</section>
+<section id="common-challenges-in-merging" class="level3" data-number="9.2">
+<h3 data-number="9.2" class="anchored" data-anchor-id="common-challenges-in-merging"><span class="header-section-number">9.2</span> Common Challenges in Merging</h3>
+<p>Merging datasets is not simply a technical task; it involves several challenges:</p>
+<ul>
+<li><strong>Matching Observations</strong>: Datasets may use different identifiers, time periods, or spatial units, making it difficult to align observations correctly.</li>
+<li><strong>Variable Alignment</strong>: Variables with the same name may have different meanings or units across datasets, leading to confusion or errors if not reconciled.</li>
+<li><strong>Missing Data</strong>: Merging can introduce missing values when observations do not have matches in both datasets, which requires decisions about how to handle these cases.</li>
+</ul>
+<p>For instance, if one dataset records yields at the county level and another records weather at the state level, merging them requires deciding how to aggregate or disaggregate data to create a common unit of analysis. Similarly, discrepencies in the units of time require decisions about how to aggregate. If identifiers are inconsistent (e.g., different spellings of county names), this can lead to mismatches that distort results.</p>
+</section>
+<section id="primary-keys" class="level3" data-number="9.3">
+<h3 data-number="9.3" class="anchored" data-anchor-id="primary-keys"><span class="header-section-number">9.3</span> Primary Keys</h3>
+<p>A critical aspect of merging is the choice of <em>primary keys</em>—the variables used to match observations across datasets. Common primary keys include geographic identifiers, time periods, or unique entity IDs. Choosing appropriate keys is essential for ensuring that the merged dataset accurately reflects the underlying phenomena.</p>
+<p>The primary key should align with the unit of analysis. For example, if the analysis focuses on county-level outcomes, then county and year might be appropriate keys. If the analysis focuses on individual farmers, then a unique farmer ID would be necessary. Mismatches in primary keys can lead to incorrect merges, which can produce misleading results or even cause the analysis to fail entirely.</p>
+</section>
+<section id="join-types-and-their-implications" class="level3" data-number="9.4">
+<h3 data-number="9.4" class="anchored" data-anchor-id="join-types-and-their-implications"><span class="header-section-number">9.4</span> Join Types and Their Implications</h3>
+<p>Different types of joins (e.g., inner, left, right, full) determine how unmatched observations are handled. For example:</p>
+<ul>
+<li>An <strong>inner join</strong> includes only observations that have matches in <strong><em>both</em></strong> datasets, which can lead to data loss if many observations are unmatched.</li>
+<li>A <strong>left join</strong> includes all observations from the left dataset and fills in missing values for unmatched observations from the right dataset, which can introduce missing data that must be handled in subsequent processing steps.</li>
+<li>A <strong>right join</strong> does the opposite, including all observations from the right dataset and filling in missing values for unmatched observations from the left dataset.</li>
+<li>A <strong>full join</strong> includes all observations from both datasets, which can create a large number of missing values if there are many unmatched observations.</li>
+</ul>
+<p>Below is a simple example with two tables to be merged. The primary keys are <code>county</code> and <code>year</code>.</p>
+<p><strong>Yield data (left table)</strong></p>
+<div style="max-width: 520px; margin: 0 auto;">
+<table class="table">
+<thead>
+<tr class="header">
+<th>county</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">yield</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>County A</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">120</td>
+</tr>
+<tr class="even">
+<td>County B</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">95</td>
+</tr>
+<tr class="odd">
+<td>County C</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">105</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Weather data (right table)</strong></p>
+<div style="max-width: 520px; margin: 0 auto;">
+<table class="table">
+<thead>
+<tr class="header">
+<th>county</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">weather</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>County A</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">30</td>
+</tr>
+<tr class="even">
+<td>County B</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">28</td>
+</tr>
+<tr class="odd">
+<td>County D</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">27</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Inner join (keep only matching rows in both tables)</strong></p>
+<div style="max-width: 520px; margin: 0 auto;">
+<table class="table">
+<thead>
+<tr class="header">
+<th>county</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">yield</th>
+<th style="text-align: right;">weather</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>County A</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">30</td>
+</tr>
+<tr class="even">
+<td>County B</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">28</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Left join (keep all rows from the left table)</strong></p>
+<div style="max-width: 520px; margin: 0 auto;">
+<table class="table">
+<thead>
+<tr class="header">
+<th>county</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">yield</th>
+<th style="text-align: right;">weather</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>County A</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">30</td>
+</tr>
+<tr class="even">
+<td>County B</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">28</td>
+</tr>
+<tr class="odd">
+<td>County C</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">105</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="best-practices-for-merging" class="level3" data-number="9.5">
+<h3 data-number="9.5" class="anchored" data-anchor-id="best-practices-for-merging"><span class="header-section-number">9.5</span> Best Practices for Merging</h3>
+<p>To ensure that merging is done correctly and transparently, analysts should:</p>
+<ul>
+<li>Carefully examine the structure and content of each dataset before merging</li>
+<li>Choose primary keys that align with the unit of analysis</li>
+<li>Decide on the appropriate join type based on the analytical goals and the nature of the data</li>
+<li>Document the merging process, including any assumptions made about how to handle unmatched observations or discrepancies in variable definitions</li>
+<li>Test the merged dataset for consistency and plausibility before proceeding with analysis</li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>Key takeaway:</strong> Merging datasets is a powerful way to enrich analysis, but it requires careful attention to how observations are matched and how variables are aligned. Thoughtful merging can enhance insights, while careless merging can lead to misleading results.</p>
+</blockquote>
+</section>
+</section>
+<section id="data-processing-as-a-reproducible-workflow" class="level2" data-number="10">
+<h2 data-number="10" class="anchored" data-anchor-id="data-processing-as-a-reproducible-workflow"><span class="header-section-number">10</span> Data Processing as a Reproducible Workflow</h2>
 <p>Up to this point, data processing has been described as a series of decisions about structure, representation, and interpretation. An equally important aspect of data processing is <strong>how those decisions are implemented</strong>. In applied data analysis, processing is most valuable when it can be repeated, reviewed, and extended. This is the motivation for treating data processing as a reproducible workflow rather than a one-time task.</p>
 <p>Reproducibility is widely recognized as a core principle of credible data science and empirical research <span class="citation" data-cites="dime_handbook openstax_ds">(<a href="#ref-dime_handbook" role="doc-biblioref">World Bank DIME Analytics 2020</a>; <a href="#ref-openstax_ds" role="doc-biblioref">OpenStax 2021</a>)</span>.</p>
-<section id="why-reproducibility-matters" class="level3" data-number="9.1">
-<h3 data-number="9.1" class="anchored" data-anchor-id="why-reproducibility-matters"><span class="header-section-number">9.1</span> Why Reproducibility Matters</h3>
+<section id="why-reproducibility-matters" class="level3" data-number="10.1">
+<h3 data-number="10.1" class="anchored" data-anchor-id="why-reproducibility-matters"><span class="header-section-number">10.1</span> Why Reproducibility Matters</h3>
 <p>Many datasets are updated over time. New observations are added, reporting rules change, or additional regions become available. If data processing steps are not reproducible, analysts must repeat manual work each time the data change. This increases the risk of inconsistency and error.</p>
 <p>Reproducible workflows allow analysts to:</p>
 <ul>
@@ -750,8 +930,8 @@ div.csl-indent {
 </ul>
 <p>From a decision-making perspective, reproducibility supports accountability. When results are questioned, analysts can explain not only what the results are, but how they were produced <span class="citation" data-cites="dime_handbook">(<a href="#ref-dime_handbook" role="doc-biblioref">World Bank DIME Analytics 2020</a>)</span>.</p>
 </section>
-<section id="scripting-versus-manual-processing" class="level3" data-number="9.2">
-<h3 data-number="9.2" class="anchored" data-anchor-id="scripting-versus-manual-processing"><span class="header-section-number">9.2</span> Scripting Versus Manual Processing</h3>
+<section id="scripting-versus-manual-processing" class="level3" data-number="10.2">
+<h3 data-number="10.2" class="anchored" data-anchor-id="scripting-versus-manual-processing"><span class="header-section-number">10.2</span> Scripting Versus Manual Processing</h3>
 <p>A reproducible workflow typically relies on scripts rather than manual edits. Manual processing, such as editing spreadsheets by hand, can be quick for small tasks but is difficult to document and nearly impossible to reproduce exactly.</p>
 <p>Scripting data processing steps has several advantages:</p>
 <ul>
@@ -762,8 +942,8 @@ div.csl-indent {
 </ul>
 <p>Data science guides emphasize that scripting does not require complex code. Even simple, clearly written scripts can dramatically improve transparency and reliability <span class="citation" data-cites="datacamp_cleaning">(<a href="#ref-datacamp_cleaning" role="doc-biblioref">DataCamp 2023</a>)</span>.</p>
 </section>
-<section id="processing-with-the-future-in-mind" class="level3" data-number="9.3">
-<h3 data-number="9.3" class="anchored" data-anchor-id="processing-with-the-future-in-mind"><span class="header-section-number">9.3</span> Processing With the Future in Mind</h3>
+<section id="processing-with-the-future-in-mind" class="level3" data-number="10.3">
+<h3 data-number="10.3" class="anchored" data-anchor-id="processing-with-the-future-in-mind"><span class="header-section-number">10.3</span> Processing With the Future in Mind</h3>
 <p>Reproducible workflows encourage analysts to think beyond a single assignment or report. Processing decisions should be made with future use cases in mind, such as:</p>
 <ul>
 <li>Updating analyses as new data arrive</li>
@@ -773,8 +953,8 @@ div.csl-indent {
 </ul>
 <p>This perspective shifts data processing from a short-term task to a form of analytical infrastructure.</p>
 </section>
-<section id="documentation-as-part-of-the-workflow" class="level3" data-number="9.4">
-<h3 data-number="9.4" class="anchored" data-anchor-id="documentation-as-part-of-the-workflow"><span class="header-section-number">9.4</span> Documentation as Part of the Workflow</h3>
+<section id="documentation-as-part-of-the-workflow" class="level3" data-number="10.4">
+<h3 data-number="10.4" class="anchored" data-anchor-id="documentation-as-part-of-the-workflow"><span class="header-section-number">10.4</span> Documentation as Part of the Workflow</h3>
 <p>Reproducibility is not achieved through code alone. Documentation plays a critical role in explaining why processing decisions were made and how they affect interpretation.</p>
 <p>Good documentation includes:</p>
 <ul>
@@ -784,8 +964,8 @@ div.csl-indent {
 </ul>
 <p>The DIME Analytics Data Handbook emphasizes that well-documented processing steps are essential for credibility in applied and policy-oriented research, where results may influence high-stakes decisions <span class="citation" data-cites="dime_handbook">(<a href="#ref-dime_handbook" role="doc-biblioref">World Bank DIME Analytics 2020</a>)</span>.</p>
 </section>
-<section id="connecting-workflow-to-this-course" class="level3" data-number="9.5">
-<h3 data-number="9.5" class="anchored" data-anchor-id="connecting-workflow-to-this-course"><span class="header-section-number">9.5</span> Connecting Workflow to This Course</h3>
+<section id="connecting-workflow-to-this-course" class="level3" data-number="10.5">
+<h3 data-number="10.5" class="anchored" data-anchor-id="connecting-workflow-to-this-course"><span class="header-section-number">10.5</span> Connecting Workflow to This Course</h3>
 <p>In this course, data processing is treated as a deliberate, transparent workflow. The goal is not to eliminate judgment, but to make it visible. By scripting and documenting processing steps, analysts make their assumptions explicit and allow others to evaluate whether the data are appropriate for the question being asked.</p>
 <p>This approach prepares students for both academic research and applied work, where the ability to explain and defend data preparation choices is as important as producing results.</p>
 <blockquote class="blockquote">
@@ -793,8 +973,8 @@ div.csl-indent {
 </blockquote>
 </section>
 </section>
-<section id="check-your-understanding" class="level2" data-number="10">
-<h2 data-number="10" class="anchored" data-anchor-id="check-your-understanding"><span class="header-section-number">10</span> Check Your Understanding</h2>
+<section id="check-your-understanding" class="level2" data-number="11">
+<h2 data-number="11" class="anchored" data-anchor-id="check-your-understanding"><span class="header-section-number">11</span> Check Your Understanding</h2>
 <p>After completing the reading, answer the following questions. Your responses should be brief and reflect your understanding of the concepts, not technical details.</p>
 <p>Understanding the Role of Data Processing</p>
 <ol type="1">
@@ -822,8 +1002,8 @@ Note
 </div>
 </div>
 </section>
-<section id="references" class="level2" data-number="11">
-<h2 data-number="11" class="anchored" data-anchor-id="references"><span class="header-section-number">11</span> References</h2>
+<section id="references" class="level2" data-number="12">
+<h2 data-number="12" class="anchored" data-anchor-id="references"><span class="header-section-number">12</span> References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-datacamp_cleaning" class="csl-entry" role="listitem">
 DataCamp. 2023. <span>“Data Cleaning Tutorial: How to Clean Data for Analysis.”</span> 2023. <a href="https://www.datacamp.com/tutorial/tutorial-data-cleaning-tutorial">https://www.datacamp.com/tutorial/tutorial-data-cleaning-tutorial</a>.
