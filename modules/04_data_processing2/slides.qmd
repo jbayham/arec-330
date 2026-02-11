@@ -222,7 +222,7 @@ All yield with drought data for matches
 What would an full join create?
 
 
-## Example: Left Join
+## Example: Full Join
 | state   | year | yield | drought |
 | ------- | ---: | ----: | ------: |
 | A       | 2020 |   120 |     0.8 |
