@@ -22,7 +22,7 @@
     url: "https://medium.com/@raoufysohaib/the-art-of-asking-the-right-questions-how-i-learned-to-start-every-data-analysis-the-right-way-89b25cf0eee0"
   
   
-- title: "Week 3: Data Processing"
+- title: "Week 3: Data Processing Part 1"
   dirname: modules/03_data_processing
   desc: "Lecture will focus on the importance of data processing for overall analysis."
   slides: "slides.html"
@@ -37,3 +37,11 @@
     rel_url: "includes/corn_wide.csv"
   - title: "dm_state_2000-2025.csv"
     rel_url: "includes/dm_state_2000-2025.csv"
+    
+- title: "Week 4: Data Processing Part 2"
+  dirname: modules/04_data_processing2
+  desc: "Lecture will complete the unit on data processing with a focus on merging or joining."
+  slides: "slides.html"
+  readings:
+  - title: "Data Processing Reader (Merging Datasets)"
+    rel_url: "../03_data_processing/reading.html#merging-and-joining-datasets"
