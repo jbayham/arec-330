@@ -42,6 +42,10 @@
   dirname: modules/04_data_processing2
   desc: "Lecture will complete the unit on data processing with a focus on merging or joining."
   slides: "slides.html"
+  lab: "lab.html"
   readings:
   - title: "Data Processing Reader (Merging Datasets)"
     rel_url: "../03_data_processing/reading.html#merging-and-joining-datasets"
+  materials: 
+  - title: "BEA_farm_gdp_2000-2024.csv"
+    rel_url: "includes/BEA_farm_gdp_2000-2024.csv"
