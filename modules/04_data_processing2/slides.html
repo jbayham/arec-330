@@ -318,6 +318,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="slides_files/libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="slides_files/libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="slides_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-dark">
   <div class="reveal">
@@ -330,15 +333,43 @@
 </div>
 
 </section>
+<section id="big-picture-corn-yield-and-drought" class="slide level2">
+<h2>Big Picture: <br>Corn Yield and Drought</h2>
+<p><br></p>
+<div class="cell" data-reveal="true">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"themeVariables": {"fontSize": "24px"}}}%%
+flowchart LR
+  G[Goals] ==&gt; P[Problem]
+  P ==&gt; Q[Question]
+  Q ==&gt; Da[Data]
+  Da ==&gt; M[Model]
+  M ==&gt; R[Result]
+  R ==&gt; D[Decision]
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p><br></p>
+<ul>
+<li><p>What is the USDA’s goal?</p></li>
+<li><p>Problem?</p></li>
+<li><p>Question?</p></li>
+</ul>
+</section>
 <section id="section" class="slide level2 iclicker">
 <h2></h2>
 <div class="question">
-<p>Which statement best describes why missing data should not automatically be treated as zero?</p>
+<p>You have county-year yield data, but weather data are monthly. What should you do before merging?</p>
 </div>
 <div class="choices">
-<p>A. Zeros are always outliers and should be removed. B. Missingness can reflect nonresponse or suppression, not true zero values.<br>
-C. Missing values are always random and can be ignored.<br>
-D. Missing values only matter for time series data.</p>
+<p>A. Drop the weather data because it is higher frequency.<br>
+B. Aggregate weather to the county-year level to match the unit of observation.<br>
+C. Duplicate yield rows to match each month.<br>
+D. Convert yield to monthly values by dividing by 12.</p>
 </div>
 <aside class="notes">
 <p>B</p>
@@ -355,72 +386,6 @@ D. Missing values only matter for time series data.</p>
       }</style></aside>
 </section>
 <section id="section-1" class="slide level2 iclicker">
-<h2></h2>
-<div class="question">
-<p>Which of the following is an example of untidy data structure?</p>
-</div>
-<div class="choices">
-<p>A. Each variable has its own column and each row is one observation. B. Monthly sales are stored in separate columns named jan, feb, mar, apr. C. A separate table is used for a different observational unit. D. A dataset includes a single column for month and a single column for value.</p>
-</div>
-<aside class="notes">
-<p>B</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="section-2" class="slide level2 iclicker">
-<h2></h2>
-<div class="question">
-<p>What is a common risk of aggregating data too early in a workflow?</p>
-</div>
-<div class="choices">
-<p>A. It always increases measurement error. B. It can hide important variation within groups. C. It guarantees better causal identification. D. It eliminates the need for missing data checks.</p>
-</div>
-<aside class="notes">
-<p>B</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="section-3" class="slide level2 iclicker">
-<h2></h2>
-<div class="question">
-<p>You have county-year yield data, but weather data are monthly. What should you do before merging?</p>
-</div>
-<div class="choices">
-<p>A. Drop the weather data because it is higher frequency. B. Aggregate weather to the county-year level to match the unit of observation. C. Duplicate yield rows to match each month. D. Convert yield to monthly values by dividing by 12.</p>
-</div>
-<aside class="notes">
-<p>B</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="section-4" class="slide level2 iclicker">
 <h2></h2>
 <div class="question">
 <p>Which handling of missing values preserves information about missingness itself?</p>
@@ -463,15 +428,15 @@ D. Missing values only matter for time series data.</p>
           display:block!important;
       }</style></aside>
 </section>
-<section id="unit-of-observation-first" class="slide level2">
-<h2>Unit of Observation First</h2>
+<section id="unit-of-observation" class="slide level2">
+<h2>Unit of Observation</h2>
 <ul>
 <li>Let the analytic question define the unit of observation</li>
 <li>All joins should preserve the target unit</li>
 <li>Example target unit: county-year</li>
 </ul>
 <aside class="notes">
-<p>Ask: “What is a row supposed to represent?” Tie to identification strategy.</p>
+<p>Ask: “What is a row supposed to represent?”</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -491,21 +456,8 @@ D. Missing values only matter for time series data.</p>
 <li>Primary key: unique ID for each row</li>
 <li>Compound key: multiple columns define uniqueness</li>
 </ul>
-<aside class="notes">
-<p>Use county-year as compound key: <code>county_fips</code> + <code>year</code>.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section>
-<section id="section-5" class="slide level2 iclicker">
+<section id="section-2" class="slide level2 iclicker">
 <h2></h2>
 <div class="question">
 <p>What variables make up the compound key in our corn yield and drought example in lab?</p>
@@ -530,8 +482,11 @@ D. state only</p>
           display:block!important;
       }</style></aside>
 </section>
-<section id="join-types-and-implications" class="slide level2">
-<h2>Join Types and Implications</h2>
+<section id="joins" class="slide level2">
+<h2>Joins</h2>
+<div style="text-align:center">
+<p><img src="includes/joins.png" style="max-width:50%;height:auto;margin:0 auto;"></p>
+</div>
 <ul>
 <li><code>left_join()</code>: keep all rows in left table</li>
 <li><code>inner_join()</code>: keep only matched rows</li>
@@ -551,10 +506,6 @@ D. state only</p>
           display:block!important;
       }</style></aside>
 </section>
-<section id="joins" class="slide level2">
-<h2>Joins</h2>
-
-<img data-src="includes/joins.png" class="r-stretch"></section>
 <section id="example" class="slide level2">
 <h2>Example</h2>
 <div class="columns">
@@ -609,6 +560,7 @@ D. state only</p>
 </table>
 </div>
 </div>
+<p><br> What would an inner join create?</p>
 </section>
 <section id="example-inner-join" class="slide level2">
 <h2>Example: Inner Join</h2>
@@ -630,7 +582,64 @@ D. state only</p>
 </tr>
 </tbody>
 </table>
+<p><br></p>
 <p>Only state A appears because it’s the only match.</p>
+</section>
+<section id="example-1" class="slide level2">
+<h2>Example</h2>
+<div class="columns">
+<div class="column">
+<table>
+<thead>
+<tr class="header">
+<th>state</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">yield</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">120</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">95</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">105</td>
+</tr>
+</tbody>
+</table>
+</div><div class="column">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">state</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">drought</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">0.8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">D</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">0.6</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><br> What would an left join create?</p>
 </section>
 <section id="example-left-join" class="slide level2">
 <h2>Example: Left Join</h2>
@@ -664,12 +673,110 @@ D. state only</p>
 </tr>
 </tbody>
 </table>
+<p><br> All yield with drought data for matches</p>
+</section>
+<section id="example-2" class="slide level2">
+<h2>Example</h2>
+<div class="columns">
+<div class="column">
+<table>
+<thead>
+<tr class="header">
+<th>state</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">yield</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">120</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">95</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">105</td>
+</tr>
+</tbody>
+</table>
+</div><div class="column">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">state</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">drought</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">0.8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">D</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">0.6</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><br> What would an full join create?</p>
+</section>
+<section id="example-left-join-1" class="slide level2">
+<h2>Example: Left Join</h2>
+<table>
+<thead>
+<tr class="header">
+<th>state</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">yield</th>
+<th style="text-align: right;">drought</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">0.8</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">105</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td>D</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0.6</td>
+</tr>
+</tbody>
+</table>
+<p><br> All data from both with drought data for matches</p>
 </section>
 <section id="implicit-assumptions-in-joins" class="slide level2">
 <h2>Implicit Assumptions in Joins</h2>
 <ul>
 <li>Keys are correctly defined and formatted</li>
-<li>Any observations dropped by inner join are ignorable</li>
+<li>Any observations dropped by inner join are ignorable or acknowledged</li>
+<li>The measurements in each dataset are compatible</li>
 </ul>
 </section>
 <section id="diagnostics-before-the-join" class="slide level2">
@@ -694,8 +801,8 @@ D. state only</p>
           display:block!important;
       }</style></aside>
 </section>
-<section id="common-failure-modes" class="slide level2">
-<h2>Common Failure Modes</h2>
+<section id="common-issues" class="slide level2">
+<h2>Common Issues</h2>
 <ul>
 <li>Many-to-many joins inflate rows</li>
 <li>Key mismatches (types, formatting, leading zeros)</li>
@@ -715,6 +822,44 @@ D. state only</p>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section id="summary-joining-merging-data" class="slide level2 scrollable">
+<h2>Summary: Joining &amp; Merging Data</h2>
+<ul>
+<li><strong>Unit of observation:</strong> Define the row (e.g., county-year) and match datasets to it.</li>
+<li><strong>Keys:</strong> Use correct primary or compound keys; verify uniqueness and formatting.</li>
+<li><strong>Join type is policy:</strong> <code>left_join()</code> preserves your target sample; <code>inner_join()</code> restricts to matches; <code>full_join()</code> shows all records.</li>
+<li><strong>Diagnostics:</strong> Compare row counts, check overlaps, detect many-to-many inflations, and inspect duplicated rows.</li>
+<li><strong>Pre-merge step:</strong> Aggregate or transform higher-frequency data (e.g., monthly → county-year) before joining.</li>
+</ul>
+</section>
+<section id="project" class="slide level2">
+<h2><a href="../../project/">Project</a></h2>
+<ul>
+<li>Groups of 3</li>
+<li>Find a real world decision that could be informed by data</li>
+<li>Who is the decision maker?</li>
+<li>What is their goal/objective?</li>
+<li>What is the problem they face?</li>
+<li>What is the question they need answered?</li>
+</ul>
+<div class="cell" data-reveal="true">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"themeVariables": {"fontSize": "24px"}}}%%
+flowchart LR
+  G[Goals] ==&gt; P[Problem]
+  P ==&gt; Q[Question]
+  Q ==&gt; Da[Data]
+  Da ==&gt; M[Model]
+  M ==&gt; R[Result]
+  R ==&gt; D[Decision]
+</pre>
+</div>
+</div>
+</div>
+</div>
 <div class="footer footer-default">
 
 </div>
