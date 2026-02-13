@@ -46,6 +46,8 @@
   readings:
   - title: "Data Processing Reader (Merging Datasets)"
     rel_url: "../03_data_processing/reading.html#merging-and-joining-datasets"
+  - title: "Using AI Tools to Learn and Write Code"
+    rel_url: "../llm/llm_guide.html"
   materials: 
   - title: "BEA_farm_gdp_2000-2024.csv"
     rel_url: "includes/BEA_farm_gdp_2000-2024.csv"

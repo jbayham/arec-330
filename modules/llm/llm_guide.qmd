@@ -1,0 +1,384 @@
+---
+title: "Using AI Tools to Learn and Write Code: GitHub Copilot in VS Code"
+format:
+  html:
+    theme: zephyr
+    code-copy: true
+    toc: true
+    css: ../course-links.css
+    include-before-body: ../course-links.html
+    include-after-body: ../course-footer.html
+---
+
+## Introduction
+
+Throughout this course, we've talked about how **Large Language Models (LLMs)** like ChatGPT and GitHub Copilot can help you write code faster and understand how R works. In this guide, we'll explore what these tools actually do, how they work conceptually, and how to use them effectively as a learning resource.
+
+The key takeaway: **LLMs are powerful helpers, but they work best when you give them clear, specific instructions.** Writing good prompts requires you to understand what you're trying to accomplish—which deepens your own learning.
+
+---
+
+## What is a Large Language Model (LLM)?
+
+### The Basic Idea
+
+Imagine a tool that has read millions of documents, code repositories, and examples from the internet. It learned patterns from all that text: "When someone writes this, they usually mean that." An LLM is a machine learning model trained on these patterns to predict what words should come next in a sentence.
+
+**That's it.** That's the core idea. They don't truly "understand" in the way humans do—they're excellent at pattern matching.
+
+### How does this help with code?
+
+Code is text with very specific patterns. When you ask an LLM to "write a function that reads a CSV file," it can draw on patterns from thousands of real examples it has seen. It knows that:
+
+- CSV files are usually read with `read.csv()` in R (or similar functions in Python)
+- Functions have a specific structure: `function_name <- function(arguments) { ... }`
+- Comments help explain what the code does
+
+Because the model has seen so many examples of correct code, it can generate reasonable suggestions. **But it can also make mistakes**, which is why you always need to review and test what it produces. These mistakes commonly stem from confident, pattern-based guesses: the model may assume column names or data structures that don't exist, suggest functions or arguments that are slightly incorrect, or introduce subtle logic errors. Because it predicts likely text rather than verifying correctness, run quick sanity checks and simple tests on any suggested code.
+
+---
+
+## What is GitHub Copilot?
+
+### Copilot = LLM + IDE Integration
+
+GitHub Copilot is GitHub's implementation of an LLM specifically designed for code writing. It's integrated directly into code editors like VS Code, so as you type, Copilot suggests code completions in real time.
+
+**Key features:**
+
+- **Context-aware suggestions:** Copilot looks at your current file, function names, and comments to make relevant suggestions
+- **Real-time completion:** As you type, it shows suggestions that you can accept or ignore
+- **Works in many languages:** R, Python, JavaScript, SQL, and more
+- **Learns from your context:** It pays attention to your variable names, function definitions, and comments to tailor suggestions
+
+### Why use Copilot in this course?
+
+1. **Speed:** You spend less time typing boilerplate code
+2. **Learning:** Seeing multiple code examples helps you internalize patterns
+3. **Exploration:** You can ask Copilot to help you try approaches you haven't tried before
+4. **Confidence:** Having an AI partner can reduce the anxiety of "Am I doing this right?"
+
+---
+
+## The Most Important Concept: The Quality of Your Prompt Determines the Quality of the Output
+
+This is the key insight. **An LLM is only as good as the instruction you give it.**
+
+### Why Prompts Matter
+
+Consider these two prompts:
+
+**Vague prompt:**
+
+> "Write code to process data"
+
+**Clear prompt:**
+
+> "Write an R function that takes a CSV file path as input, reads the data, removes rows where the 'price' column is NA, and returns a data frame with only the columns 'product_name', 'price', and 'quantity'."
+
+The second prompt works better because it:
+
+- **States the goal explicitly** (what should the function do?)
+- **Specifies inputs and outputs** (what goes in, what comes out?)
+- **Mentions constraints** (remove NAs, keep specific columns)
+- **Is precise** (mentions column names, not vague categories)
+
+### Writing Clear Prompts Requires Understanding Your Problem
+
+Here's the lesson: **To write a good prompt, you must first know what you're trying to accomplish.** This is where the real learning happens.
+
+Instead of asking Copilot "How do I process data in R?", you must ask yourself:
+
+- What does my data look like?
+- What specific transformations do I need?
+- What should the output look like?
+- Are there edge cases[^ec] I need to handle?
+
+Answering these questions is the hard work. The LLM is just the helper that translates your clear thinking into code.
+
+[^ec]: Edge cases are situations that might not be common but could cause your code to break if not handled properly (e.g., missing values, unexpected data types, etc.).
+---
+
+## A Simple Example: Using GitHub Copilot in VS Code
+
+Let's walk through a real example of how to use Copilot effectively.
+
+### Setup (assuming Copilot is installed)
+
+If you haven't already:
+
+1. Install **VS Code** from <https://code.visualstudio.com/>
+2. Install the **GitHub Copilot** extension (search "GitHub Copilot" in the Extensions marketplace)
+3. Sign in with your GitHub account (free tier available for students)
+
+You can find more installation instructions here: <https://code.visualstudio.com/docs/copilot/setup>
+
+### Example: Reading and Exploring a Dataset
+
+Imagine your task: "I want to explore a built-in R dataset and compute grouped summary statistics using the tidyverse."
+
+**Step 1: Create a file and write a comment**
+
+Open a new file called `analysis.R` and write:
+
+```r
+# Load the built-in `mtcars` dataset and summarize mpg by number of cylinders using the tidyverse
+```
+
+**Step 2: Let Copilot suggest code**
+
+After typing that comment, Copilot will suggest code. You might see:
+
+```r
+library(tidyverse)
+data <- mtcars
+glimpse(data)
+```
+
+**Step 3: Refine or expand**
+
+If you want more specific output (mean and standard deviation of `mpg` by `cyl`), write a more detailed comment:
+
+```r
+# Calculate mean and standard deviation of mpg by number of cylinders
+# Save results to a tibble called `summary_by_cyl`
+```
+
+Now Copilot might suggest:
+
+```r
+summary_by_cyl <- mtcars %>%
+  as_tibble() %>%
+  group_by(cyl) %>%
+  summarize(
+    mean_mpg = mean(mpg, na.rm = TRUE),
+    sd_mpg = sd(mpg, na.rm = TRUE),
+    .groups = "drop"
+  )
+```
+
+**Step 4: Review and test**
+
+Always:
+
+- Read the code Copilot suggests
+- Check if it makes sense for the dataset you're using
+- Run the code interactively (e.g., in the R console or VS Code) and inspect `summary_by_cyl`
+- Refine comments and rerun if needed
+
+### Key Takeaway from the Example
+
+Notice that as your **comment became more specific**, Copilot's suggestion also became more specific and useful. Using a built-in dataset and tidyverse syntax keeps the example reproducible for everyone in the class while demonstrating how clear prompts lead to clearer code suggestions.
+
+## Agentic AI and Chat Features
+
+Beyond inline autocompletion, some chat-based AI assistants integrated into IDEs (for example, Copilot Chat in VS Code or other workspace-aware agents) can act more "agentically." That means they can access your project context, read files, create or modify files, and—with your permission—run commands in a terminal or REPL[^repl] to provide richer, end-to-end help.
+
+[^repl]: A REPL (Read-Eval-Print Loop) is an interactive programming environment that takes single user inputs (like code), evaluates them, and returns the result to the user. In R, this is typically the R console.
+
+What these agentic features enable:
+
+- **Workspace-aware recommendations:** The assistant can scan files in the repository to give suggestions tailored to your project's existing functions, styles, and tests.
+- **File creation and edits:** You can ask the assistant to add a new script, test file, or documentation page and it will produce the file content and write it to the project (when you accept the change).
+- **Run-and-report:** With permission, the assistant can run commands and return results, which helps it iterate on fixes or improvements.
+
+Practical cautions:
+
+- These agents operate with the permissions you grant—be careful with sensitive files or credentials in the workspace.
+- They may still make incorrect assumptions; always review created code and test outputs before merging.
+- For reproducibility and auditing, keep changes in version control and review diffs.
+
+Example (chat prompt + expected agent actions):
+
+User prompt:
+
+> "Open `analysis.R`, add code that computes the mean and standard deviation of `mpg` by `cyl` using the tidyverse (store the result in `summary_by_cyl` and print it). Then run the script and return the printed output."
+
+What an agentic assistant would do (high-level):
+
+1. Open `analysis.R` and inspect existing comments or code.
+2. Insert or replace the file content with a short tidyverse script that creates `summary_by_cyl` and prints it.
+3. Save `analysis.R` (showing a diff[^diff] for your approval if the assistant supports that).
+4. With your permission, run `Rscript analysis.R` (or `Rscript -e "source('analysis.R')"`) and return the printed tibble output. Note that this command is run in a terminal and not in R itself.
+
+[^diff]: A diff is a comparison of file versions that shows what lines were added, removed, or changed. This is crucial for reviewing AI-generated code before accepting it into your project.
+
+Sample `analysis.R` the assistant might create:
+
+```r
+library(tidyverse)
+
+summary_by_cyl <- mtcars %>%
+  as_tibble() %>%
+  group_by(cyl) %>%
+  summarize(
+    mean_mpg = mean(mpg, na.rm = TRUE),
+    sd_mpg = sd(mpg, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+print(summary_by_cyl)
+```
+
+What running the script would return (example):
+
+```
+# A tibble: 3 × 3
+    cyl mean_mpg sd_mpg
+  <dbl>    <dbl>  <dbl>
+1     4     26.7   4.51
+2     6     19.7   1.45
+3     8     15.1   2.56
+```
+
+The only difference from the inline autocompletion workflow is step 4: the agent actually executes the script (with your explicit permission) and returns the runtime output. This can be helpful for quick verification, but you should still inspect the file changes and test outputs before committing or merging them.
+
+### Asking for explanations
+
+You may not understand every line of the generated code, but you can ask the assistant to explain it or modify it until you do. This iterative process is where the real learning happens. 
+
+Switch to the chat interface and ask: "Can you explain what the `group_by()` and `summarize()` functions are doing in this code?"
+
+The assistant might respond:
+> "Sure! The `group_by(cyl)` function tells R to group the data by the `cyl` column, which represents the number of cylinders in the cars. This means that subsequent operations will be performed separately for each group of cars with the same number of cylinders. The `summarize()` function then calculates summary statistics for each group. In this case, it computes the mean and standard deviation of the `mpg` (miles per gallon) column for each group of cars defined by their cylinder count. The `.groups = "drop"` argument ensures that the resulting tibble is not grouped after summarization."
+
+---
+
+## Best Practices for Using LLMs and Copilot
+
+### 1. **Start with a Clear Goal**
+
+Before you write any code or prompt:
+
+- Write down what problem you're solving
+- Identify your inputs (what data do you have?)
+- Identify your desired output
+- Think through edge cases
+
+Then write a prompt (or comment in code) that reflects this clarity.
+
+### 2. **Use Comments as Prompts**
+
+In VS Code with Copilot, comments are your instructions. Write them like you're talking to a helpful colleague:
+
+**Good comments:**
+```r
+# Read the CSV file containing monthly sales, filter for Q1 2025,
+# calculate total revenue by product category
+```
+
+**Weak comments:**
+```r
+# process data
+```
+
+### 3. **Always Review and Test**
+
+The code Copilot generates might:
+
+- Be correct and save you time
+- Be partially correct but need tweaks
+- Be wrong (it happens!)
+
+Always:
+
+- Read the full code
+- Understand what each line does
+- Test it on sample data
+- Look for edge cases
+
+### 4. **Use Copilot for Learning, Not Replacement**
+
+If you use Copilot's code without reading it, you don't learn. Instead:
+
+- Read the suggested code
+- Ask yourself: "Why is it doing this step?"
+- If you really don't understand it, ask the LLM to explain the code if you're unsure
+- Modify the code so you understand what each part does
+- Iterate on the code by adding your own comments or changing variable names to make it clearer to you
+
+This deepens your understanding of R.
+
+### 5. **Ask Clarifying Questions**
+
+If Copilot's suggestion doesn't look right, refine your prompt:
+
+Instead of accepting unclear code, restart with more detail:
+
+```r
+# I have a data frame called 'crop_data' with columns:
+# - year (integer)
+# - crop (character, e.g., "corn", "soy")
+# - yield (numeric, measured in bushels/acre)
+# 
+# Write code to calculate the average yield for each crop
+# across all years
+```
+
+This level of detail gets better results.
+
+### 6. **Start Simple, Build Up**
+
+Don't ask Copilot to do a full analysis in one prompt. Break it into steps:
+
+1. "Load the data"
+2. "Check for missing values"
+3. "Calculate mean yield by crop"
+4. "Create a visualization"
+
+This makes it easier to review each piece and catch errors.
+
+---
+
+## Limitations and When LLMs Fall Short
+
+It's important to know what these tools *can't* do well:
+
+### **They can't read your mind**
+
+LLMs work best with explicit, detailed instructions. If you're vague, you get vague results.
+
+### **They can't automatically validate your logic**
+
+An LLM might generate syntactically correct R code that answers the wrong question. For example, if you ask it to calculate "average price" but your actual goal is "median price for products over $100," you need to specify that.
+
+### **They can make up details**
+
+Sometimes LLMs "hallucinate." They might reference a column name that doesn't exist in your data, or suggest using a function that doesn't work the way they described. This is why testing is crucial.
+
+### **They work best on common patterns**
+
+If you're doing something unusual or applying specialized methods, the LLM may struggle. In those cases, specific documentation or textbooks are better resources.
+
+---
+
+## Summary
+
+**Large Language Models like GitHub Copilot are powerful tools for:**
+
+- Writing code faster when you know what you want
+- Exploring alternative approaches
+- Learning by seeing multiple examples
+- Reducing friction in the coding process
+
+**But they work best when you:**
+
+- Know your problem clearly and can articulate it
+- Write specific, detailed prompts (or comments)
+- Always review, understand, and test the code
+- Treat them as learning partners, not answer machines
+
+**The real skill you're developing is not "how to use Copilot." It's "how to think about problems clearly enough to explain them to someone (or something) else."** That skill transfers everywhere—whether you're working with an AI tool, collaborating with colleagues, or solving problems on your own.
+
+---
+
+## Next Steps
+
+In the lab assignment, you'll practice using Copilot with a real dataset. As you work, notice:
+
+- How much clarity you need in your prompts to get good results
+- What aspects of the code are easy for Copilot to suggest
+- Where you find yourself needing to revise or correct the suggestions
+- How explaining the problem helps you understand it better
+
+These observations will help you become a more effective user of AI tools—and a better programmer overall.

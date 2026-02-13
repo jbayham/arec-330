@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Using AI Tools to Learn and Write Code: GitHub Copilot in VS Code</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="llm_guide_files/libs/clipboard/clipboard.min.js"></script>
+<script src="llm_guide_files/libs/quarto-html/quarto.js"></script>
+<script src="llm_guide_files/libs/quarto-html/popper.min.js"></script>
+<script src="llm_guide_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="llm_guide_files/libs/quarto-html/anchor.min.js"></script>
+<link href="llm_guide_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="llm_guide_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="llm_guide_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="llm_guide_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="llm_guide_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+<link rel="stylesheet" href="../course-links.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#what-is-a-large-language-model-llm" id="toc-what-is-a-large-language-model-llm" class="nav-link" data-scroll-target="#what-is-a-large-language-model-llm">What is a Large Language Model (LLM)?</a>
+  <ul class="collapse">
+  <li><a href="#the-basic-idea" id="toc-the-basic-idea" class="nav-link" data-scroll-target="#the-basic-idea">The Basic Idea</a></li>
+  <li><a href="#how-does-this-help-with-code" id="toc-how-does-this-help-with-code" class="nav-link" data-scroll-target="#how-does-this-help-with-code">How does this help with code?</a></li>
+  </ul></li>
+  <li><a href="#what-is-github-copilot" id="toc-what-is-github-copilot" class="nav-link" data-scroll-target="#what-is-github-copilot">What is GitHub Copilot?</a>
+  <ul class="collapse">
+  <li><a href="#copilot-llm-ide-integration" id="toc-copilot-llm-ide-integration" class="nav-link" data-scroll-target="#copilot-llm-ide-integration">Copilot = LLM + IDE Integration</a></li>
+  <li><a href="#why-use-copilot-in-this-course" id="toc-why-use-copilot-in-this-course" class="nav-link" data-scroll-target="#why-use-copilot-in-this-course">Why use Copilot in this course?</a></li>
+  </ul></li>
+  <li><a href="#the-most-important-concept-the-quality-of-your-prompt-determines-the-quality-of-the-output" id="toc-the-most-important-concept-the-quality-of-your-prompt-determines-the-quality-of-the-output" class="nav-link" data-scroll-target="#the-most-important-concept-the-quality-of-your-prompt-determines-the-quality-of-the-output">The Most Important Concept: The Quality of Your Prompt Determines the Quality of the Output</a>
+  <ul class="collapse">
+  <li><a href="#why-prompts-matter" id="toc-why-prompts-matter" class="nav-link" data-scroll-target="#why-prompts-matter">Why Prompts Matter</a></li>
+  <li><a href="#writing-clear-prompts-requires-understanding-your-problem" id="toc-writing-clear-prompts-requires-understanding-your-problem" class="nav-link" data-scroll-target="#writing-clear-prompts-requires-understanding-your-problem">Writing Clear Prompts Requires Understanding Your Problem</a></li>
+  </ul></li>
+  <li><a href="#a-simple-example-using-github-copilot-in-vs-code" id="toc-a-simple-example-using-github-copilot-in-vs-code" class="nav-link" data-scroll-target="#a-simple-example-using-github-copilot-in-vs-code">A Simple Example: Using GitHub Copilot in VS Code</a>
+  <ul class="collapse">
+  <li><a href="#setup-assuming-copilot-is-installed" id="toc-setup-assuming-copilot-is-installed" class="nav-link" data-scroll-target="#setup-assuming-copilot-is-installed">Setup (assuming Copilot is installed)</a></li>
+  <li><a href="#example-reading-and-exploring-a-dataset" id="toc-example-reading-and-exploring-a-dataset" class="nav-link" data-scroll-target="#example-reading-and-exploring-a-dataset">Example: Reading and Exploring a Dataset</a></li>
+  <li><a href="#key-takeaway-from-the-example" id="toc-key-takeaway-from-the-example" class="nav-link" data-scroll-target="#key-takeaway-from-the-example">Key Takeaway from the Example</a></li>
+  </ul></li>
+  <li><a href="#agentic-ai-and-chat-features" id="toc-agentic-ai-and-chat-features" class="nav-link" data-scroll-target="#agentic-ai-and-chat-features">Agentic AI and Chat Features</a>
+  <ul class="collapse">
+  <li><a href="#asking-for-explanations" id="toc-asking-for-explanations" class="nav-link" data-scroll-target="#asking-for-explanations">Asking for explanations</a></li>
+  </ul></li>
+  <li><a href="#best-practices-for-using-llms-and-copilot" id="toc-best-practices-for-using-llms-and-copilot" class="nav-link" data-scroll-target="#best-practices-for-using-llms-and-copilot">Best Practices for Using LLMs and Copilot</a>
+  <ul class="collapse">
+  <li><a href="#start-with-a-clear-goal" id="toc-start-with-a-clear-goal" class="nav-link" data-scroll-target="#start-with-a-clear-goal">1. <strong>Start with a Clear Goal</strong></a></li>
+  <li><a href="#use-comments-as-prompts" id="toc-use-comments-as-prompts" class="nav-link" data-scroll-target="#use-comments-as-prompts">2. <strong>Use Comments as Prompts</strong></a></li>
+  <li><a href="#always-review-and-test" id="toc-always-review-and-test" class="nav-link" data-scroll-target="#always-review-and-test">3. <strong>Always Review and Test</strong></a></li>
+  <li><a href="#use-copilot-for-learning-not-replacement" id="toc-use-copilot-for-learning-not-replacement" class="nav-link" data-scroll-target="#use-copilot-for-learning-not-replacement">4. <strong>Use Copilot for Learning, Not Replacement</strong></a></li>
+  <li><a href="#ask-clarifying-questions" id="toc-ask-clarifying-questions" class="nav-link" data-scroll-target="#ask-clarifying-questions">5. <strong>Ask Clarifying Questions</strong></a></li>
+  <li><a href="#start-simple-build-up" id="toc-start-simple-build-up" class="nav-link" data-scroll-target="#start-simple-build-up">6. <strong>Start Simple, Build Up</strong></a></li>
+  </ul></li>
+  <li><a href="#limitations-and-when-llms-fall-short" id="toc-limitations-and-when-llms-fall-short" class="nav-link" data-scroll-target="#limitations-and-when-llms-fall-short">Limitations and When LLMs Fall Short</a>
+  <ul class="collapse">
+  <li><a href="#they-cant-read-your-mind" id="toc-they-cant-read-your-mind" class="nav-link" data-scroll-target="#they-cant-read-your-mind"><strong>They can’t read your mind</strong></a></li>
+  <li><a href="#they-cant-automatically-validate-your-logic" id="toc-they-cant-automatically-validate-your-logic" class="nav-link" data-scroll-target="#they-cant-automatically-validate-your-logic"><strong>They can’t automatically validate your logic</strong></a></li>
+  <li><a href="#they-can-make-up-details" id="toc-they-can-make-up-details" class="nav-link" data-scroll-target="#they-can-make-up-details"><strong>They can make up details</strong></a></li>
+  <li><a href="#they-work-best-on-common-patterns" id="toc-they-work-best-on-common-patterns" class="nav-link" data-scroll-target="#they-work-best-on-common-patterns"><strong>They work best on common patterns</strong></a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+<nav class="course-links" aria-label="Course links">
+  <div class="course-links__inner">
+    <div class="course-links__left">
+      <a class="course-links__brand" href="https://jbayham.github.io/arec-330/">AREC 330</a>
+      <span class="course-links__sep">|</span>
+      <span class="course-links__page">Lab</span>
+    </div>
+
+    <div class="course-links__right">
+      <a class="course-links__btn" href="https://jbayham.github.io/arec-330/">Course site</a>
+      <a class="course-links__btn" href="https://colostate.instructure.com/courses/218386">Canvas</a>
+    </div>
+  </div>
+</nav>
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Using AI Tools to Learn and Write Code: GitHub Copilot in VS Code</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Throughout this course, we’ve talked about how <strong>Large Language Models (LLMs)</strong> like ChatGPT and GitHub Copilot can help you write code faster and understand how R works. In this guide, we’ll explore what these tools actually do, how they work conceptually, and how to use them effectively as a learning resource.</p>
+<p>The key takeaway: <strong>LLMs are powerful helpers, but they work best when you give them clear, specific instructions.</strong> Writing good prompts requires you to understand what you’re trying to accomplish—which deepens your own learning.</p>
+<hr>
+</section>
+<section id="what-is-a-large-language-model-llm" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-large-language-model-llm">What is a Large Language Model (LLM)?</h2>
+<section id="the-basic-idea" class="level3">
+<h3 class="anchored" data-anchor-id="the-basic-idea">The Basic Idea</h3>
+<p>Imagine a tool that has read millions of documents, code repositories, and examples from the internet. It learned patterns from all that text: “When someone writes this, they usually mean that.” An LLM is a machine learning model trained on these patterns to predict what words should come next in a sentence.</p>
+<p><strong>That’s it.</strong> That’s the core idea. They don’t truly “understand” in the way humans do—they’re excellent at pattern matching.</p>
+</section>
+<section id="how-does-this-help-with-code" class="level3">
+<h3 class="anchored" data-anchor-id="how-does-this-help-with-code">How does this help with code?</h3>
+<p>Code is text with very specific patterns. When you ask an LLM to “write a function that reads a CSV file,” it can draw on patterns from thousands of real examples it has seen. It knows that:</p>
+<ul>
+<li>CSV files are usually read with <code>read.csv()</code> in R (or similar functions in Python)</li>
+<li>Functions have a specific structure: <code>function_name &lt;- function(arguments) { ... }</code></li>
+<li>Comments help explain what the code does</li>
+</ul>
+<p>Because the model has seen so many examples of correct code, it can generate reasonable suggestions. <strong>But it can also make mistakes</strong>, which is why you always need to review and test what it produces. These mistakes commonly stem from confident, pattern-based guesses: the model may assume column names or data structures that don’t exist, suggest functions or arguments that are slightly incorrect, or introduce subtle logic errors. Because it predicts likely text rather than verifying correctness, run quick sanity checks and simple tests on any suggested code.</p>
+<hr>
+</section>
+</section>
+<section id="what-is-github-copilot" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-github-copilot">What is GitHub Copilot?</h2>
+<section id="copilot-llm-ide-integration" class="level3">
+<h3 class="anchored" data-anchor-id="copilot-llm-ide-integration">Copilot = LLM + IDE Integration</h3>
+<p>GitHub Copilot is GitHub’s implementation of an LLM specifically designed for code writing. It’s integrated directly into code editors like VS Code, so as you type, Copilot suggests code completions in real time.</p>
+<p><strong>Key features:</strong></p>
+<ul>
+<li><strong>Context-aware suggestions:</strong> Copilot looks at your current file, function names, and comments to make relevant suggestions</li>
+<li><strong>Real-time completion:</strong> As you type, it shows suggestions that you can accept or ignore</li>
+<li><strong>Works in many languages:</strong> R, Python, JavaScript, SQL, and more</li>
+<li><strong>Learns from your context:</strong> It pays attention to your variable names, function definitions, and comments to tailor suggestions</li>
+</ul>
+</section>
+<section id="why-use-copilot-in-this-course" class="level3">
+<h3 class="anchored" data-anchor-id="why-use-copilot-in-this-course">Why use Copilot in this course?</h3>
+<ol type="1">
+<li><strong>Speed:</strong> You spend less time typing boilerplate code</li>
+<li><strong>Learning:</strong> Seeing multiple code examples helps you internalize patterns</li>
+<li><strong>Exploration:</strong> You can ask Copilot to help you try approaches you haven’t tried before</li>
+<li><strong>Confidence:</strong> Having an AI partner can reduce the anxiety of “Am I doing this right?”</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="the-most-important-concept-the-quality-of-your-prompt-determines-the-quality-of-the-output" class="level2">
+<h2 class="anchored" data-anchor-id="the-most-important-concept-the-quality-of-your-prompt-determines-the-quality-of-the-output">The Most Important Concept: The Quality of Your Prompt Determines the Quality of the Output</h2>
+<p>This is the key insight. <strong>An LLM is only as good as the instruction you give it.</strong></p>
+<section id="why-prompts-matter" class="level3">
+<h3 class="anchored" data-anchor-id="why-prompts-matter">Why Prompts Matter</h3>
+<p>Consider these two prompts:</p>
+<p><strong>Vague prompt:</strong></p>
+<blockquote class="blockquote">
+<p>“Write code to process data”</p>
+</blockquote>
+<p><strong>Clear prompt:</strong></p>
+<blockquote class="blockquote">
+<p>“Write an R function that takes a CSV file path as input, reads the data, removes rows where the ‘price’ column is NA, and returns a data frame with only the columns ‘product_name’, ‘price’, and ‘quantity’.”</p>
+</blockquote>
+<p>The second prompt works better because it:</p>
+<ul>
+<li><strong>States the goal explicitly</strong> (what should the function do?)</li>
+<li><strong>Specifies inputs and outputs</strong> (what goes in, what comes out?)</li>
+<li><strong>Mentions constraints</strong> (remove NAs, keep specific columns)</li>
+<li><strong>Is precise</strong> (mentions column names, not vague categories)</li>
+</ul>
+</section>
+<section id="writing-clear-prompts-requires-understanding-your-problem" class="level3">
+<h3 class="anchored" data-anchor-id="writing-clear-prompts-requires-understanding-your-problem">Writing Clear Prompts Requires Understanding Your Problem</h3>
+<p>Here’s the lesson: <strong>To write a good prompt, you must first know what you’re trying to accomplish.</strong> This is where the real learning happens.</p>
+<p>Instead of asking Copilot “How do I process data in R?”, you must ask yourself:</p>
+<ul>
+<li>What does my data look like?</li>
+<li>What specific transformations do I need?</li>
+<li>What should the output look like?</li>
+<li>Are there edge cases<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> I need to handle?</li>
+</ul>
+<p>Answering these questions is the hard work. The LLM is just the helper that translates your clear thinking into code.</p>
+<hr>
+</section>
+</section>
+<section id="a-simple-example-using-github-copilot-in-vs-code" class="level2">
+<h2 class="anchored" data-anchor-id="a-simple-example-using-github-copilot-in-vs-code">A Simple Example: Using GitHub Copilot in VS Code</h2>
+<p>Let’s walk through a real example of how to use Copilot effectively.</p>
+<section id="setup-assuming-copilot-is-installed" class="level3">
+<h3 class="anchored" data-anchor-id="setup-assuming-copilot-is-installed">Setup (assuming Copilot is installed)</h3>
+<p>If you haven’t already:</p>
+<ol type="1">
+<li>Install <strong>VS Code</strong> from <a href="https://code.visualstudio.com/" class="uri">https://code.visualstudio.com/</a></li>
+<li>Install the <strong>GitHub Copilot</strong> extension (search “GitHub Copilot” in the Extensions marketplace)</li>
+<li>Sign in with your GitHub account (free tier available for students)</li>
+</ol>
+<p>You can find more installation instructions here: <a href="https://code.visualstudio.com/docs/copilot/setup" class="uri">https://code.visualstudio.com/docs/copilot/setup</a></p>
+</section>
+<section id="example-reading-and-exploring-a-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="example-reading-and-exploring-a-dataset">Example: Reading and Exploring a Dataset</h3>
+<p>Imagine your task: “I want to explore a built-in R dataset and compute grouped summary statistics using the tidyverse.”</p>
+<p><strong>Step 1: Create a file and write a comment</strong></p>
+<p>Open a new file called <code>analysis.R</code> and write:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the built-in `mtcars` dataset and summarize mpg by number of cylinders using the tidyverse</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Step 2: Let Copilot suggest code</strong></p>
+<p>After typing that comment, Copilot will suggest code. You might see:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> mtcars</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Step 3: Refine or expand</strong></p>
+<p>If you want more specific output (mean and standard deviation of <code>mpg</code> by <code>cyl</code>), write a more detailed comment:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate mean and standard deviation of mpg by number of cylinders</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Save results to a tibble called `summary_by_cyl`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now Copilot might suggest:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>summary_by_cyl <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cyl) <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_mpg =</span> <span class="fu">mean</span>(mpg, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_mpg =</span> <span class="fu">sd</span>(mpg, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Step 4: Review and test</strong></p>
+<p>Always:</p>
+<ul>
+<li>Read the code Copilot suggests</li>
+<li>Check if it makes sense for the dataset you’re using</li>
+<li>Run the code interactively (e.g., in the R console or VS Code) and inspect <code>summary_by_cyl</code></li>
+<li>Refine comments and rerun if needed</li>
+</ul>
+</section>
+<section id="key-takeaway-from-the-example" class="level3">
+<h3 class="anchored" data-anchor-id="key-takeaway-from-the-example">Key Takeaway from the Example</h3>
+<p>Notice that as your <strong>comment became more specific</strong>, Copilot’s suggestion also became more specific and useful. Using a built-in dataset and tidyverse syntax keeps the example reproducible for everyone in the class while demonstrating how clear prompts lead to clearer code suggestions.</p>
+</section>
+</section>
+<section id="agentic-ai-and-chat-features" class="level2">
+<h2 class="anchored" data-anchor-id="agentic-ai-and-chat-features">Agentic AI and Chat Features</h2>
+<p>Beyond inline autocompletion, some chat-based AI assistants integrated into IDEs (for example, Copilot Chat in VS Code or other workspace-aware agents) can act more “agentically.” That means they can access your project context, read files, create or modify files, and—with your permission—run commands in a terminal or REPL<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> to provide richer, end-to-end help.</p>
+<p>What these agentic features enable:</p>
+<ul>
+<li><strong>Workspace-aware recommendations:</strong> The assistant can scan files in the repository to give suggestions tailored to your project’s existing functions, styles, and tests.</li>
+<li><strong>File creation and edits:</strong> You can ask the assistant to add a new script, test file, or documentation page and it will produce the file content and write it to the project (when you accept the change).</li>
+<li><strong>Run-and-report:</strong> With permission, the assistant can run commands and return results, which helps it iterate on fixes or improvements.</li>
+</ul>
+<p>Practical cautions:</p>
+<ul>
+<li>These agents operate with the permissions you grant—be careful with sensitive files or credentials in the workspace.</li>
+<li>They may still make incorrect assumptions; always review created code and test outputs before merging.</li>
+<li>For reproducibility and auditing, keep changes in version control and review diffs.</li>
+</ul>
+<p>Example (chat prompt + expected agent actions):</p>
+<p>User prompt:</p>
+<blockquote class="blockquote">
+<p>“Open <code>analysis.R</code>, add code that computes the mean and standard deviation of <code>mpg</code> by <code>cyl</code> using the tidyverse (store the result in <code>summary_by_cyl</code> and print it). Then run the script and return the printed output.”</p>
+</blockquote>
+<p>What an agentic assistant would do (high-level):</p>
+<ol type="1">
+<li>Open <code>analysis.R</code> and inspect existing comments or code.</li>
+<li>Insert or replace the file content with a short tidyverse script that creates <code>summary_by_cyl</code> and prints it.</li>
+<li>Save <code>analysis.R</code> (showing a diff<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> for your approval if the assistant supports that).</li>
+<li>With your permission, run <code>Rscript analysis.R</code> (or <code>Rscript -e "source('analysis.R')"</code>) and return the printed tibble output. Note that this command is run in a terminal and not in R itself.</li>
+</ol>
+<p>Sample <code>analysis.R</code> the assistant might create:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>summary_by_cyl <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cyl) <span class="sc">%&gt;%</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_mpg =</span> <span class="fu">mean</span>(mpg, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_mpg =</span> <span class="fu">sd</span>(mpg, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(summary_by_cyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>What running the script would return (example):</p>
+<pre><code># A tibble: 3 × 3
+    cyl mean_mpg sd_mpg
+  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+1     4     26.7   4.51
+2     6     19.7   1.45
+3     8     15.1   2.56</code></pre>
+<p>The only difference from the inline autocompletion workflow is step 4: the agent actually executes the script (with your explicit permission) and returns the runtime output. This can be helpful for quick verification, but you should still inspect the file changes and test outputs before committing or merging them.</p>
+<section id="asking-for-explanations" class="level3">
+<h3 class="anchored" data-anchor-id="asking-for-explanations">Asking for explanations</h3>
+<p>You may not understand every line of the generated code, but you can ask the assistant to explain it or modify it until you do. This iterative process is where the real learning happens.</p>
+<p>Switch to the chat interface and ask: “Can you explain what the <code>group_by()</code> and <code>summarize()</code> functions are doing in this code?”</p>
+<p>The assistant might respond: &gt; “Sure! The <code>group_by(cyl)</code> function tells R to group the data by the <code>cyl</code> column, which represents the number of cylinders in the cars. This means that subsequent operations will be performed separately for each group of cars with the same number of cylinders. The <code>summarize()</code> function then calculates summary statistics for each group. In this case, it computes the mean and standard deviation of the <code>mpg</code> (miles per gallon) column for each group of cars defined by their cylinder count. The <code>.groups = "drop"</code> argument ensures that the resulting tibble is not grouped after summarization.”</p>
+<hr>
+</section>
+</section>
+<section id="best-practices-for-using-llms-and-copilot" class="level2">
+<h2 class="anchored" data-anchor-id="best-practices-for-using-llms-and-copilot">Best Practices for Using LLMs and Copilot</h2>
+<section id="start-with-a-clear-goal" class="level3">
+<h3 class="anchored" data-anchor-id="start-with-a-clear-goal">1. <strong>Start with a Clear Goal</strong></h3>
+<p>Before you write any code or prompt:</p>
+<ul>
+<li>Write down what problem you’re solving</li>
+<li>Identify your inputs (what data do you have?)</li>
+<li>Identify your desired output</li>
+<li>Think through edge cases</li>
+</ul>
+<p>Then write a prompt (or comment in code) that reflects this clarity.</p>
+</section>
+<section id="use-comments-as-prompts" class="level3">
+<h3 class="anchored" data-anchor-id="use-comments-as-prompts">2. <strong>Use Comments as Prompts</strong></h3>
+<p>In VS Code with Copilot, comments are your instructions. Write them like you’re talking to a helpful colleague:</p>
+<p><strong>Good comments:</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the CSV file containing monthly sales, filter for Q1 2025,</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate total revenue by product category</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Weak comments:</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># process data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="always-review-and-test" class="level3">
+<h3 class="anchored" data-anchor-id="always-review-and-test">3. <strong>Always Review and Test</strong></h3>
+<p>The code Copilot generates might:</p>
+<ul>
+<li>Be correct and save you time</li>
+<li>Be partially correct but need tweaks</li>
+<li>Be wrong (it happens!)</li>
+</ul>
+<p>Always:</p>
+<ul>
+<li>Read the full code</li>
+<li>Understand what each line does</li>
+<li>Test it on sample data</li>
+<li>Look for edge cases</li>
+</ul>
+</section>
+<section id="use-copilot-for-learning-not-replacement" class="level3">
+<h3 class="anchored" data-anchor-id="use-copilot-for-learning-not-replacement">4. <strong>Use Copilot for Learning, Not Replacement</strong></h3>
+<p>If you use Copilot’s code without reading it, you don’t learn. Instead:</p>
+<ul>
+<li>Read the suggested code</li>
+<li>Ask yourself: “Why is it doing this step?”</li>
+<li>If you really don’t understand it, ask the LLM to explain the code if you’re unsure</li>
+<li>Modify the code so you understand what each part does</li>
+<li>Iterate on the code by adding your own comments or changing variable names to make it clearer to you</li>
+</ul>
+<p>This deepens your understanding of R.</p>
+</section>
+<section id="ask-clarifying-questions" class="level3">
+<h3 class="anchored" data-anchor-id="ask-clarifying-questions">5. <strong>Ask Clarifying Questions</strong></h3>
+<p>If Copilot’s suggestion doesn’t look right, refine your prompt:</p>
+<p>Instead of accepting unclear code, restart with more detail:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I have a data frame called 'crop_data' with columns:</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># - year (integer)</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - crop (character, e.g., "corn", "soy")</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - yield (numeric, measured in bushels/acre)</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Write code to calculate the average yield for each crop</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># across all years</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This level of detail gets better results.</p>
+</section>
+<section id="start-simple-build-up" class="level3">
+<h3 class="anchored" data-anchor-id="start-simple-build-up">6. <strong>Start Simple, Build Up</strong></h3>
+<p>Don’t ask Copilot to do a full analysis in one prompt. Break it into steps:</p>
+<ol type="1">
+<li>“Load the data”</li>
+<li>“Check for missing values”</li>
+<li>“Calculate mean yield by crop”</li>
+<li>“Create a visualization”</li>
+</ol>
+<p>This makes it easier to review each piece and catch errors.</p>
+<hr>
+</section>
+</section>
+<section id="limitations-and-when-llms-fall-short" class="level2">
+<h2 class="anchored" data-anchor-id="limitations-and-when-llms-fall-short">Limitations and When LLMs Fall Short</h2>
+<p>It’s important to know what these tools <em>can’t</em> do well:</p>
+<section id="they-cant-read-your-mind" class="level3">
+<h3 class="anchored" data-anchor-id="they-cant-read-your-mind"><strong>They can’t read your mind</strong></h3>
+<p>LLMs work best with explicit, detailed instructions. If you’re vague, you get vague results.</p>
+</section>
+<section id="they-cant-automatically-validate-your-logic" class="level3">
+<h3 class="anchored" data-anchor-id="they-cant-automatically-validate-your-logic"><strong>They can’t automatically validate your logic</strong></h3>
+<p>An LLM might generate syntactically correct R code that answers the wrong question. For example, if you ask it to calculate “average price” but your actual goal is “median price for products over $100,” you need to specify that.</p>
+</section>
+<section id="they-can-make-up-details" class="level3">
+<h3 class="anchored" data-anchor-id="they-can-make-up-details"><strong>They can make up details</strong></h3>
+<p>Sometimes LLMs “hallucinate.” They might reference a column name that doesn’t exist in your data, or suggest using a function that doesn’t work the way they described. This is why testing is crucial.</p>
+</section>
+<section id="they-work-best-on-common-patterns" class="level3">
+<h3 class="anchored" data-anchor-id="they-work-best-on-common-patterns"><strong>They work best on common patterns</strong></h3>
+<p>If you’re doing something unusual or applying specialized methods, the LLM may struggle. In those cases, specific documentation or textbooks are better resources.</p>
+<hr>
+</section>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p><strong>Large Language Models like GitHub Copilot are powerful tools for:</strong></p>
+<ul>
+<li>Writing code faster when you know what you want</li>
+<li>Exploring alternative approaches</li>
+<li>Learning by seeing multiple examples</li>
+<li>Reducing friction in the coding process</li>
+</ul>
+<p><strong>But they work best when you:</strong></p>
+<ul>
+<li>Know your problem clearly and can articulate it</li>
+<li>Write specific, detailed prompts (or comments)</li>
+<li>Always review, understand, and test the code</li>
+<li>Treat them as learning partners, not answer machines</li>
+</ul>
+<p><strong>The real skill you’re developing is not “how to use Copilot.” It’s “how to think about problems clearly enough to explain them to someone (or something) else.”</strong> That skill transfers everywhere—whether you’re working with an AI tool, collaborating with colleagues, or solving problems on your own.</p>
+<hr>
+</section>
+<section id="next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="next-steps">Next Steps</h2>
+<p>In the lab assignment, you’ll practice using Copilot with a real dataset. As you work, notice:</p>
+<ul>
+<li>How much clarity you need in your prompts to get good results</li>
+<li>What aspects of the code are easy for Copilot to suggest</li>
+<li>Where you find yourself needing to revise or correct the suggestions</li>
+<li>How explaining the problem helps you understand it better</li>
+</ul>
+<p>These observations will help you become a more effective user of AI tools—and a better programmer overall.</p>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Edge cases are situations that might not be common but could cause your code to break if not handled properly (e.g., missing values, unexpected data types, etc.).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>A REPL (Read-Eval-Print Loop) is an interactive programming environment that takes single user inputs (like code), evaluates them, and returns the result to the user. In R, this is typically the R console.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>A diff is a comparison of file versions that shows what lines were added, removed, or changed. This is crucial for reviewing AI-generated code before accepting it into your project.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
+<!-- /main column -->
+<footer class="course-footer">
+  <div class="course-footer__inner">
+    <a href="https://jbayham.github.io/arec-330/">← Back to course site</a>
+    <span class="course-footer__sep">·</span>
+    <a href="https://colostate.instructure.com/courses/218386" target="_blank" rel="noopener">Open Canvas</a>
+  </div>
+</footer>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
