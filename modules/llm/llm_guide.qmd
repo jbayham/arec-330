@@ -14,7 +14,7 @@ format:
 
 Throughout this course, we've talked about how **Large Language Models (LLMs)** like ChatGPT and GitHub Copilot can help you write code faster and understand how R works. In this guide, we'll explore what these tools actually do, how they work conceptually, and how to use them effectively as a learning resource.
 
-The key takeaway: **LLMs are powerful helpers, but they work best when you give them clear, specific instructions.** Writing good prompts requires you to understand what you're trying to accomplish—which deepens your own learning.
+The key takeaway: **LLMs are powerful helpers, but they work best when you give them clear, specific instructions.** Writing good prompts requires you to understand what you're trying to accomplish.
 
 ---
 
@@ -24,7 +24,7 @@ The key takeaway: **LLMs are powerful helpers, but they work best when you give 
 
 Imagine a tool that has read millions of documents, code repositories, and examples from the internet. It learned patterns from all that text: "When someone writes this, they usually mean that." An LLM is a machine learning model trained on these patterns to predict what words should come next in a sentence.
 
-**That's it.** That's the core idea. They don't truly "understand" in the way humans do—they're excellent at pattern matching.
+**That's it.** That's the core idea. They don't truly "understand" in the way humans do - they're excellent at pattern matching.
 
 ### How does this help with code?
 
