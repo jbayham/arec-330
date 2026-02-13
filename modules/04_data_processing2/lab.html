@@ -190,12 +190,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="context" class="level2">
 <h2 class="anchored" data-anchor-id="context">Context</h2>
 <p>Last week, you worked with corn yield and drought data, learning to handle missing values, reshape untidy data, and aggregate time-series observations. This week, we’re adding a third dataset: <strong><a href="includes/BEA_farm_gdp.csv">Farm GDP</a> from the Bureau of Economic Analysis (BEA)</strong>.</p>
-<p>The BEA data measures the economic value of agricultural production by state and year. Merging this with yield and drought data will let you explore questions like: <em>How does drought affect not just crop yields, but also farm economic output?</em></p>
+<p>The BEA data measures the economic value of agricultural production by state and year. Merging farm GDP with yield and drought data will let you explore questions like: <em>How does drought affect not just crop yields, but also farm economic output?</em></p>
 <p>But first, we need to prepare the BEA data for merging. Real datasets rarely arrive in analysis-ready form, and the BEA data is no exception - it’s in “wide” format with years as columns.</p>
 </section>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
-<p>The file <code>[BEA_farm_gdp_2000-2024.csv](includes/BEA_farm_gdp_2000-2024.csv)</code> contains farm GDP (in millions of current dollars) for each state from 2000 to 2024. Download it or load it directly from the course repository.</p>
+<p>The file <a href="includes/BEA_farm_gdp_2000-2024.csv">BEA_farm_gdp_2000-2024.csv</a> contains farm GDP (in millions of current dollars) for each state from 2000 to 2024. Download it or load it directly from the course repository.</p>
 </section>
 <section id="task-1.1-load-and-inspect-the-bea-data" class="level2">
 <h2 class="anchored" data-anchor-id="task-1.1-load-and-inspect-the-bea-data">Task 1.1: Load and Inspect the BEA Data</h2>
@@ -235,7 +235,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Before we can merge all three datasets, we need to load and prepare the corn yield and drought data from last week. This is a quick recap to ensure everyone starts from the same place.</p>
 <section id="task-2.1-load-and-prepare-corn-yield-data" class="level2">
 <h2 class="anchored" data-anchor-id="task-2.1-load-and-prepare-corn-yield-data">Task 2.1: Load and Prepare Corn Yield Data</h2>
-<p>Read in the corn yield data, which contains some missing values. Select only the relevant columns (<code>state_alpha</code>, <code>year</code>, and <code>Value</code>), and rename <code>Value</code> to <code>yield_bu_per_acre</code> for clarity. The <code>dplyr</code> function <code>rename()</code> allows you to change the name of a column. The syntax is <code>rename(new_name = old_name)</code>. Use this function to rename the <code>Value</code> column to <code>yield_bu_per_acre</code>. Store the cleaned dataset in a new object called <code>corn_clean</code>.</p>
+<p>Read in the corn yield data <a href="../03_data_processing/includes/corn_yield_2000-2025.csv">corn_yield_2000-2025.csv</a>. Select only the relevant columns (<code>state_alpha</code>, <code>year</code>, and <code>Value</code>), and rename <code>Value</code> to <code>yield_bu_per_acre</code> for clarity. The <code>dplyr</code> function <code>rename()</code> allows you to change the name of a column. The syntax is <code>rename(new_name = old_name)</code>. Use this function to rename the <code>Value</code> column to <code>yield_bu_per_acre</code>. Store the cleaned dataset in a new object called <code>corn_clean</code>.</p>
 </section>
 <section id="task-2.2-load-and-prepare-drought-data" class="level2">
 <h2 class="anchored" data-anchor-id="task-2.2-load-and-prepare-drought-data">Task 2.2: Load and Prepare Drought Data</h2>
@@ -298,7 +298,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Now we’re ready to combine our three datasets. We’ll merge step by step, validating each merge before proceeding to the next.</p>
 <section id="task-4.1-merge-corn-yield-and-drought-data" class="level2">
 <h2 class="anchored" data-anchor-id="task-4.1-merge-corn-yield-and-drought-data">Task 4.1: Merge Corn Yield and Drought Data</h2>
-<p>First, let’s merge corn yield with drought data. Notice that the state abbreviation variable has different names in each dataset: <code>state_alpha</code> in corn data and <code>StateAbbreviation</code> in drought data. The <code>by</code> argument in join functions allows you to specify how to match variables with different names. The syntax is <code>by = c("left_var" = "right_var")</code>. Use this syntax to specify the correct matching variables for the merge.</p>
+<p>First, let’s merge corn yield with drought data. Notice that the state abbreviation variable has different names in each dataset: <code>state_alpha</code> in corn data and <code>StateAbbreviation</code> in drought data. The <code>by</code> argument in join functions allows you to specify how to match variables with different names. The syntax is <code>by = c("left_var" = "right_var")</code>. Use this syntax to specify the correct matching variables for the merge. If the left and right datasets have columns with the same name that you want to match on, you can simply use <code>by = "variable_name"</code> without needing to specify the left and right variable names separately.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First merge: corn yield + drought</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Use inner_join to keep only states/years present in both datasets</span></span>
@@ -370,7 +370,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="task-4.5-create-a-complete-cases-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="task-4.5-create-a-complete-cases-dataset">Task 4.5: Create a Complete Cases Dataset</h2>
-<p>For some analyses, you might want a dataset with no missing values. Let’s create a “complete cases” version.</p>
+<p>For some analyses, you might want a dataset with no missing values. Let’s create a “complete cases” version. We will use the <code>filter()</code> function to keep only rows where <code>yield_bu_per_acre</code>, <code>mean_dsci</code>, and <code>farm_gdp</code> are not missing. The syntax is <code>filter(!is.na(variable_name))</code>. Use this syntax to filter out rows with missing values in the key variables. The <code>!</code> operator negates the condition, so <code>!is.na(variable_name)</code> keeps rows where the variable is not missing. Store this complete cases dataset in an object called <code>final_data_complete</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove rows with any missing values</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>final_data_complete <span class="ot">&lt;-</span> final_data <span class="sc">%&gt;%</span></span>
@@ -402,9 +402,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Deliverables</h1>
 <p>Submit the following on Canvas:</p>
 <ol type="1">
-<li><p><strong>R Script (<code>lab_04.R</code>) and log file (<code>lab_04.log</code>):</strong> Organize your code and make sure it runs without errors. Generate a log file called <code>lab_04.log</code> using the sink-source-sink pattern from previous labs. The log file should include all the code you wrote for this lab, along with comments explaining each step.</p></li>
+<li><p><strong>log file (<code>lab_04.log</code>):</strong> Organize your code and make sure it runs without errors. Generate a log file called <code>lab_04.log</code> using the sink-source-sink pattern from previous labs. The log file should include all the code you wrote for this lab, along with comments explaining each step.</p></li>
 <li><p><strong>Lab Notebook:</strong> Compile your answers to all 8 questions in a single document (e.g., Google Doc, Word, or PDF). Make sure to clearly label each question and provide thoughtful, detailed responses based on your analysis.</p></li>
-<li><p><strong>Final Dataset (Optional):</strong> If requested by your instructor, submit the <code>corn_drought_gdp_complete.csv</code> file you created in Task 4.6.</p></li>
 </ol>
 </section>
 

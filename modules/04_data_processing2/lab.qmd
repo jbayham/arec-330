@@ -50,13 +50,13 @@ Open up a word processing document (e.g., Google Doc, Word, or plain text) to se
 
 Last week, you worked with corn yield and drought data, learning to handle missing values, reshape untidy data, and aggregate time-series observations. This week, we're adding a third dataset: **[Farm GDP](includes/BEA_farm_gdp.csv) from the Bureau of Economic Analysis (BEA)**. 
 
-The BEA data measures the economic value of agricultural production by state and year. Merging this with yield and drought data will let you explore questions like: *How does drought affect not just crop yields, but also farm economic output?*
+The BEA data measures the economic value of agricultural production by state and year. Merging farm GDP with yield and drought data will let you explore questions like: *How does drought affect not just crop yields, but also farm economic output?*
 
 But first, we need to prepare the BEA data for merging. Real datasets rarely arrive in analysis-ready form, and the BEA data is no exception - it's in "wide" format with years as columns.
 
 ## Data
 
-The file `[BEA_farm_gdp_2000-2024.csv](includes/BEA_farm_gdp_2000-2024.csv)` contains farm GDP (in millions of current dollars) for each state from 2000 to 2024. Download it or load it directly from the course repository.
+The file [BEA_farm_gdp_2000-2024.csv](includes/BEA_farm_gdp_2000-2024.csv) contains farm GDP (in millions of current dollars) for each state from 2000 to 2024. Download it or load it directly from the course repository.
 
 ## Task 1.1: Load and Inspect the BEA Data
 
@@ -102,7 +102,7 @@ Before we can merge all three datasets, we need to load and prepare the corn yie
 
 ## Task 2.1: Load and Prepare Corn Yield Data
 
-Read in the corn yield data, which contains some missing values. Select only the relevant columns (`state_alpha`, `year`, and `Value`), and rename `Value` to `yield_bu_per_acre` for clarity. The `dplyr` function `rename()` allows you to change the name of a column. The syntax is `rename(new_name = old_name)`. Use this function to rename the `Value` column to `yield_bu_per_acre`. Store the cleaned dataset in a new object called `corn_clean`.
+Read in the corn yield data [corn_yield_2000-2025.csv](../03_data_processing/includes/corn_yield_2000-2025.csv). Select only the relevant columns (`state_alpha`, `year`, and `Value`), and rename `Value` to `yield_bu_per_acre` for clarity. The `dplyr` function `rename()` allows you to change the name of a column. The syntax is `rename(new_name = old_name)`. Use this function to rename the `Value` column to `yield_bu_per_acre`. Store the cleaned dataset in a new object called `corn_clean`.
 
 
 ## Task 2.2: Load and Prepare Drought Data
@@ -153,7 +153,7 @@ Now we're ready to combine our three datasets. We'll merge step by step, validat
 
 ## Task 4.1: Merge Corn Yield and Drought Data
 
-First, let's merge corn yield with drought data. Notice that the state abbreviation variable has different names in each dataset: `state_alpha` in corn data and `StateAbbreviation` in drought data. The `by` argument in join functions allows you to specify how to match variables with different names. The syntax is `by = c("left_var" = "right_var")`. Use this syntax to specify the correct matching variables for the merge.
+First, let's merge corn yield with drought data. Notice that the state abbreviation variable has different names in each dataset: `state_alpha` in corn data and `StateAbbreviation` in drought data. The `by` argument in join functions allows you to specify how to match variables with different names. The syntax is `by = c("left_var" = "right_var")`. Use this syntax to specify the correct matching variables for the merge. If the left and right datasets have columns with the same name that you want to match on, you can simply use `by = "variable_name"` without needing to specify the left and right variable names separately. 
 
 ```{r}
 #| eval: false
@@ -239,7 +239,7 @@ Let's check for missing farm GDP values, which might indicate states in our corn
 
 ## Task 4.5: Create a Complete Cases Dataset
 
-For some analyses, you might want a dataset with no missing values. Let's create a "complete cases" version.
+For some analyses, you might want a dataset with no missing values. Let's create a "complete cases" version. We will use the `filter()` function to keep only rows where `yield_bu_per_acre`, `mean_dsci`, and `farm_gdp` are not missing. The syntax is `filter(!is.na(variable_name))`. Use this syntax to filter out rows with missing values in the key variables. The `!` operator negates the condition, so `!is.na(variable_name)` keeps rows where the variable is not missing. Store this complete cases dataset in an object called `final_data_complete`.
 
 ```{r}
 #| eval: false
@@ -278,8 +278,8 @@ Question 8: Explain how the question we posed initially guided out data processi
 
 Submit the following on Canvas:
 
-1. **R Script (`lab_04.R`) and log file (`lab_04.log`):** Organize your code and make sure it runs without errors. Generate a log file called `lab_04.log` using the sink-source-sink pattern from previous labs. The log file should include all the code you wrote for this lab, along with comments explaining each step. 
+1. **log file (`lab_04.log`):** Organize your code and make sure it runs without errors. Generate a log file called `lab_04.log` using the sink-source-sink pattern from previous labs. The log file should include all the code you wrote for this lab, along with comments explaining each step. 
 
 2. **Lab Notebook:** Compile your answers to all 8 questions in a single document (e.g., Google Doc, Word, or PDF). Make sure to clearly label each question and provide thoughtful, detailed responses based on your analysis.
 
-3. **Final Dataset (Optional):** If requested by your instructor, submit the `corn_drought_gdp_complete.csv` file you created in Task 4.6.
+

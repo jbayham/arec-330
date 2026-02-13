@@ -51,3 +51,7 @@
   materials: 
   - title: "BEA_farm_gdp_2000-2024.csv"
     rel_url: "includes/BEA_farm_gdp_2000-2024.csv"
+  - title: "corn_yield_2000-2025.csv"
+    rel_url: "../03_data_processing/includes/corn_yield_2000-2025.csv"
+  - title: "dm_state_2000-2025.csv"
+    rel_url: "../03_data_processing/includes/dm_state_2000-2025.csv"
