@@ -368,17 +368,11 @@ If you're doing something unusual or applying specialized methods, the LLM may s
 - Always review, understand, and test the code
 - Treat them as learning partners, not answer machines
 
-**The real skill you're developing is not "how to use Copilot." It's "how to think about problems clearly enough to explain them to someone (or something) else."** That skill transfers everywhere—whether you're working with an AI tool, collaborating with colleagues, or solving problems on your own.
+**The real skill you're developing is not "how to use Copilot." It's "how to think about problems clearly enough to explain them to someone (or something) else."** That skill transfers everywhere - whether you're working with an AI tool, collaborating with colleagues, or solving problems on your own.
 
 ---
 
-## Next Steps
+## Resources
 
-In the lab assignment, you'll practice using Copilot with a real dataset. As you work, notice:
-
-- How much clarity you need in your prompts to get good results
-- What aspects of the code are easy for Copilot to suggest
-- Where you find yourself needing to revise or correct the suggestions
-- How explaining the problem helps you understand it better
-
-These observations will help you become a more effective user of AI tools—and a better programmer overall.
+- GitHub Copilot documentation: <https://docs.github.com/copilot>. While this site contains technical documentation, it also has practical guides and examples that can help you understand how to use Copilot effectively. See the how-to guides and best practices sections for more insights.
+- VS Code Copilot Chat: <https://code.visualstudio.com/docs/copilot/chat>. This page explains how to use the chat features of Copilot, which allow for more interactive and agentic interactions. It includes examples of how to ask for explanations, code modifications, and even running code with your permission.

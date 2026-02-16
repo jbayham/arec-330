@@ -1,0 +1,71 @@
+---
+title: "Week 5: Exploratory Data Analysis"
+format:
+  revealjs:
+    slide-number: true
+    theme: [night, ../custom.scss]
+    touch: true
+---
+
+## Big Picture: <br>Corn Yield and Drought
+
+<br>
+```{mermaid}
+%%{init: {"themeVariables": {"fontSize": "24px"}}}%%
+flowchart LR
+  G[Goals] ==> P[Problem]
+  P ==> Q[Question]
+  Q ==> Da[Data]
+  Da == EDA ==> M[Model]
+  M ==> R[Result]
+  R ==> D[Decision]
+```
+
+<br>
+
+- What is the USDA's goal?
+
+- Problem?
+
+- Question?
+
+
+##  {.iclicker}
+
+:::{.question}
+Joining data
+:::
+
+:::{.choices}
+A. Drop the weather data because it is higher frequency.  
+B. Aggregate weather to the county-year level to match the unit of observation.   
+C. Duplicate yield rows to match each month.  
+D. Convert yield to monthly values by dividing by 12. 
+:::
+
+:::{.notes}
+
+:::
+
+## Exploratory Data Analysis
+
+EDA can serve multiple roles
+
+- You are given data and there is no clear question. EDA can help explore patterns.
+
+- You are given a question and you have data. EDA can help assess question feasibility and refine if needed.
+
+# Describing the data
+<!-- distributions -->
+
+## Introduction
+
+We have our question and we've prepped our data. Now we need to check our data against some basic intuition:
+- do the values look right given the units?
+
+
+# Variation over time
+
+# Relationship between variables
+
+# Hypothesis generation

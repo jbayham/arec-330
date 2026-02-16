@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>rubric</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="rubric_files/libs/clipboard/clipboard.min.js"></script>
+<script src="rubric_files/libs/quarto-html/quarto.js"></script>
+<script src="rubric_files/libs/quarto-html/popper.min.js"></script>
+<script src="rubric_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="rubric_files/libs/quarto-html/anchor.min.js"></script>
+<link href="rubric_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="rubric_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="rubric_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="rubric_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="rubric_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="lab-4-rubric-data-processing-part-2-merging-datasets" class="level1">
+<h1>Lab 4 Rubric: <em>Data Processing (Part 2) – Merging Datasets</em></h1>
+<p><strong>Total points:</strong> 100<br>
+<strong>Grading philosophy:</strong></p>
+<ul>
+<li>Emphasis on understanding merge strategies and data quality validation<br>
+</li>
+<li>Technical correctness matters, but reasoning about joins is paramount<br>
+</li>
+<li>Partial credit encouraged<br>
+</li>
+<li>Penalize vague responses that avoid discussing join types or merge consequences</li>
+</ul>
+<hr>
+<section id="section-a-data-preparation-reshaping-20-points" class="level2">
+<h2 class="anchored" data-anchor-id="section-a-data-preparation-reshaping-20-points">Section A: Data Preparation &amp; Reshaping (20 points)</h2>
+<section id="q1.-identifying-untidy-structure-in-bea-data-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="q1.-identifying-untidy-structure-in-bea-data-10-points">Q1. Identifying Untidy Structure in BEA Data (10 points)</h3>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Score</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">9–10</td>
+<td>Correctly identifies wide format AND articulates specific challenges for merging (different row structure, multiple year columns)</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6–8</td>
+<td>Notes untidy structure but explanation is incomplete or generic</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3–5</td>
+<td>Mentions years as columns but limited reasoning about merge challenges</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0–2</td>
+<td>Vague or missing</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key indicators:</strong></p>
+<ul>
+<li>Recognizes that years (2000–2024) are spread across columns instead of rows</li>
+<li>Counts or estimates the number of year columns</li>
+<li>Explains that this structure prevents direct matching with long-format datasets (corn, drought)</li>
+</ul>
+<hr>
+</section>
+<section id="q2.-data-type-conversion-importance-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="q2.-data-type-conversion-importance-10-points">Q2. Data Type Conversion Importance (10 points)</h3>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Score</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">9–10</td>
+<td>Clearly explains why numeric year is essential</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6–8</td>
+<td>Identifies importance of numeric conversion but examples are generic</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3–5</td>
+<td>Mentions data type but reasoning is incomplete</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0–2</td>
+<td>No meaningful response</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Look for evidence of:</strong></p>
+<ul>
+<li>Understanding that character year can’t match numeric year across datasets</li>
+<li>Awareness that character sorting alphabetically would produce wrong order</li>
+<li>Discussion of how this causes merge failures (no matches found)</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="section-b-understanding-data-integration-20-points" class="level2">
+<h2 class="anchored" data-anchor-id="section-b-understanding-data-integration-20-points">Section B: Understanding Data Integration (20 points)</h2>
+<section id="q3.-identifying-key-merge-variables-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="q3.-identifying-key-merge-variables-10-points">Q3. Identifying Key Merge Variables (10 points)</h3>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Score</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">9–10</td>
+<td>Correctly identifies common variables across all three datasets</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6–8</td>
+<td>Identifies most key variables but reasoning is incomplete</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3–5</td>
+<td>Lists some variables but confusion about which exist in which dataset</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0–2</td>
+<td>Incorrect or missing</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key indicators:</strong></p>
+<ul>
+<li>Recognizes <code>year</code> is common across all three datasets (and should be numeric)</li>
+<li>Notes that state abbreviation appears in all three but with different names (<code>state_alpha</code>, <code>StateAbbreviation</code>, <code>state_abr</code>)</li>
+<li>Understands that these are the <em>only</em> join keys available</li>
+</ul>
+<hr>
+</section>
+<section id="q4.-left-join-scenario-year-coverage-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="q4.-left-join-scenario-year-coverage-10-points">Q4. Left Join Scenario &amp; Year Coverage (10 points)</h3>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Score</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">9–10</td>
+<td>Correctly predicts outcome for both year ranges AND explains why (no match = NA)</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6–8</td>
+<td>Correct predictions but explanation is incomplete</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3–5</td>
+<td>Partial understanding of join behavior</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0–2</td>
+<td>Incorrect or confused</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Look for evidence of:</strong></p>
+<ul>
+<li>Recognition that years before 2000 in BEA would NOT appear (corn yield doesn’t go back that far)</li>
+<li>Understanding that years 2000–2024 would add BEA data to corn yield rows where available</li>
+<li>Clarity that unmatched rows from BEA (pre-2000) are discarded in left join</li>
+<li>Awareness that corn yield rows without BEA matches would have <code>NA</code> for farm_gdp</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="section-c-merging-data-quality-validation-30-points" class="level2">
+<h2 class="anchored" data-anchor-id="section-c-merging-data-quality-validation-30-points">Section C: Merging &amp; Data Quality Validation (30 points)</h2>
+<section id="q5.-merge-outcome-row-count-observation-loss-12-points" class="level3">
+<h3 class="anchored" data-anchor-id="q5.-merge-outcome-row-count-observation-loss-12-points">Q5. Merge Outcome: Row Count &amp; Observation Loss (12 points)</h3>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Score</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">11–12</td>
+<td>Correctly states merged row count AND explains whether/why observations were lost</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8–10</td>
+<td>Mostly correct with minor reasoning gaps</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5–7</td>
+<td>Identifies row count but explanation is incomplete</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0–4</td>
+<td>Missing calculations or incorrect</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key indicators:</strong></p>
+<ul>
+<li>Provides actual row counts for comparison</li>
+<li>Recognizes that <code>inner_join</code> keeps only state-years present in <em>both</em> datasets</li>
+<li>Explains that small states or non-agricultural regions may not have drought data</li>
+<li>Distinguishes between data not matching vs.&nbsp;data not existing</li>
+</ul>
+<hr>
+</section>
+<section id="q6.-implications-of-duplicate-state-year-combinations-11-points" class="level3">
+<h3 class="anchored" data-anchor-id="q6.-implications-of-duplicate-state-year-combinations-11-points">Q6. Implications of Duplicate State-Year Combinations (11 points)</h3>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Score</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">10–11</td>
+<td>Clearly defines duplicates AND articulates specific analytical consequences</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">7–9</td>
+<td>Identifies what duplicates mean but analytical impact is vague</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4–6</td>
+<td>Notes duplicates but reasoning is weak</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0–3</td>
+<td>Missing or incorrect</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Look for evidence of:</strong></p>
+<ul>
+<li>Recognition that duplicates violate the assumption of one observation per state-year</li>
+<li>Understanding that duplicates could arise from:
+<ul>
+<li>Multiple entries per year in source data (not collapsed before merge)</li>
+<li>Merge key misspecification (accidentally matching on subsets of keys)</li>
+</ul></li>
+<li>Discussion of analytical problems:
+<ul>
+<li>Biased estimates (weights states unequally)</li>
+<li>Inflated sample size</li>
+<li>Incorrect standard errors</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="q7.-join-type-selection-left-vs.-inner-join-7-points" class="level3">
+<h3 class="anchored" data-anchor-id="q7.-join-type-selection-left-vs.-inner-join-7-points">Q7. Join Type Selection: Left vs.&nbsp;Inner Join (7 points)</h3>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Score</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">6–7</td>
+<td>Clearly articulates why <code>left_join</code> was chosen AND explains inner_join consequences</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4–5</td>
+<td>Correct reasoning but some nuance is missing</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5–7</td>
+<td>Identifies difference but incomplete justification</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0–4</td>
+<td>Confused or missing</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Look for evidence of:</strong></p>
+<ul>
+<li>Recognition that <code>left_join</code> preserves all corn-drought observations (our primary dataset)</li>
+<li>Understanding that <code>inner_join</code> would remove state-years without BEA data (loss of information)</li>
+<li>Discussion of when <code>inner_join</code> would be appropriate (only if BEA is complete for all states/years)</li>
+<li>Awareness of trade-off: <code>left_join</code> introduces <code>NA</code> values but retains full corn-drought sample</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="section-d-analytical-thinking-synthesis-15-points" class="level2">
+<h2 class="anchored" data-anchor-id="section-d-analytical-thinking-synthesis-15-points">Section D: Analytical Thinking &amp; Synthesis (15 points)</h2>
+<section id="q8.-research-question-data-decisions-analysis-15-points" class="level3">
+<h3 class="anchored" data-anchor-id="q8.-research-question-data-decisions-analysis-15-points">Q8. Research Question → Data Decisions → Analysis (15 points)</h3>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Score</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">13–15</td>
+<td>Clearly traces how research question drove reshaping, merging choices AND proposes some form of analyses</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10–12</td>
+<td>Good flow from question to decisions; analyses may be a bit generic</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">6–9</td>
+<td>Addresses question but weak connection to merge decisions or analyses</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0–5</td>
+<td>Minimal engagement or off-topic</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Look for evidence of:</strong></p>
+<ul>
+<li>Explicit reference to the drought-yield-GDP research question</li>
+<li>Explanation of how this question motivated:
+<ul>
+<li>Reshaping BEA to long format (to match other datasets)</li>
+<li>Choosing left join (to preserve corn-yield observations)</li>
+<li>Aggregating drought to annual level (to align with annual yield and GDP)</li>
+</ul></li>
+<li>Proposed analyses (but do not be overly critical as the students have little experience at this point in the course):
+<ul>
+<li>Regression of yield on drought severity</li>
+<li>Correlation between drought impact and farm GDP sensitivity</li>
+<li>State-level heterogeneity in drought-yield relationship</li>
+</ul></li>
+<li>Recognition that merge strategy constrains which analyses are possible</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="section-e-code-quality-documentation-10-points" class="level2">
+<h2 class="anchored" data-anchor-id="section-e-code-quality-documentation-10-points">Section E: Code Quality &amp; Documentation (10 points)</h2>
+<section id="code-log-file" class="level3">
+<h3 class="anchored" data-anchor-id="code-log-file">Code &amp; Log File</h3>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Score</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">9–10</td>
+<td>All code runs without errors; logical workflow; thorough comments; complete and clean log file</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6–8</td>
+<td>Code runs mostly; adequate comments; minor formatting issues in log</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3–5</td>
+<td>Code has minor errors or incomplete comments; log present but messy</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0–2</td>
+<td>Code does not run or log file is missing/unusable</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Look for evidence of:</strong></p>
+<ul>
+<li>Correct use of <code>pivot_longer()</code>, <code>as.numeric()</code>, <code>rename()</code>, <code>select()</code></li>
+<li>Proper join syntax with <code>by = c("left_var" = "right_var")</code> where needed</li>
+<li>Data validation steps (dimension checks, missing value summaries)</li>
+<li>Clear comments explaining each major merge step and validation check</li>
+<li>Logical organization: prep → inspect → merge → validate</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="section-f-overall-notebook-quality-5-points" class="level2">
+<h2 class="anchored" data-anchor-id="section-f-overall-notebook-quality-5-points">Section F: Overall Notebook Quality (5 points)</h2>
+<section id="clarity-completeness-engagement" class="level3">
+<h3 class="anchored" data-anchor-id="clarity-completeness-engagement">Clarity, Completeness &amp; Engagement</h3>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Score</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td>All 8 questions answered thoughtfully; organized; shows critical thinking</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3–4</td>
+<td>Most questions answered; some responses are superficial or brief</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1–2</td>
+<td>Minimal effort; several unanswered or incomplete questions</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0</td>
+<td>Missing or severely incomplete notebook</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="instructor-ta-notes" class="level2">
+<h2 class="anchored" data-anchor-id="instructor-ta-notes">Instructor / TA Notes</h2>
+<ul>
+<li>This rubric emphasizes <strong>join strategy reasoning</strong> and <strong>merge validation</strong> over perfect coding<br>
+</li>
+<li>Many students struggle with the conceptual difference between left/inner/full joins—reward clear articulation<br>
+</li>
+<li>Highlight that merging is a design choice: which observations to keep, which to discard, which to allow as <code>NA</code><br>
+</li>
+<li>Encourage students to think about <em>why</em> the research question drives merge decisions (not just mechanics)<br>
+</li>
+<li>Data quality checks (duplicates, missing values) are critical; reward thorough validation<br>
+</li>
+<li>Watch for students who successfully execute merges but can’t explain why they chose a particular join type<br>
+</li>
+<li>In the reflection, look for evidence that students understand trade-offs (e.g., left join introduces <code>NA</code> but preserves information)</li>
+</ul>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
