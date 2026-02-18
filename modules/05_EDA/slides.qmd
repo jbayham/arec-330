@@ -305,7 +305,7 @@ $$
 
 ## Visualizing Correlation
 
-![](includes/correlation.png)
+![](includes/Correlation.png)
 
 ## Correlation ≠ Causation
 

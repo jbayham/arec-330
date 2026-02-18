@@ -107,7 +107,7 @@ Read in the corn yield data [corn_yield_2000-2025.csv](../03_data_processing/inc
 
 ## Task 2.2: Load and Prepare Drought Data
 
-Recall from last week that we calculated the Drought Severity Composite Index (DSCI) and aggregated weekly drought data to annual values. Either load the processed drought data from last week or repeat the steps to calculate DSCI and aggregate to annual level. The key variables to keep are `StateAbbreviation`, `year`, and `mean_dsci` (the average DSCI for each state-year). Call the resulting dataset `drought_annual`.
+Recall from last week that we calculated the Drought Severity Composite Index (DSCI) and aggregated weekly drought data to annual values. Either load the processed drought data from last week or repeat the steps to calculate DSCI and aggregate to annual level. The key variables to keep are `StateAbbreviation`, `year`, and `mean_dsci` (the average DSCI for each state-year). Call the resulting dataset `drought_annual`. Note that you will need to extract the year from `ValidStart` using the function `year()`. The syntax is `year(date_variable)`. Use this function to create a new variable `year` in your drought dataset that contains the year extracted from the `ValidStart` date.
 
 :::{.callout-attention}
 Question 3: Before proceeding to merging, identify the key variables in each dataset that we'll use to match rows across datasets. What variables do all three datasets have in common? Answer in your notebook.
@@ -267,7 +267,7 @@ write_csv(final_data_complete, "corn_drought_gdp_complete.csv")
 ```
 
 :::{.callout-attention}
-Question 8: Explain how the question we posed initially guided out data processing and merging decisions. Now that we have a merged dataset, what types of analyses could we conduct to explore the relationship between drought, corn yield, and farm GDP? Answer in your notebook.
+Question 8: Explain how the question we posed initially guided our data processing and merging decisions. Now that we have a merged dataset, what types of analyses could we conduct to explore the relationship between drought, corn yield, and farm GDP? Answer in your notebook.
 
 :::
 

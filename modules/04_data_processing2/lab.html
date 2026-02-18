@@ -239,7 +239,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="task-2.2-load-and-prepare-drought-data" class="level2">
 <h2 class="anchored" data-anchor-id="task-2.2-load-and-prepare-drought-data">Task 2.2: Load and Prepare Drought Data</h2>
-<p>Recall from last week that we calculated the Drought Severity Composite Index (DSCI) and aggregated weekly drought data to annual values. Either load the processed drought data from last week or repeat the steps to calculate DSCI and aggregate to annual level. The key variables to keep are <code>StateAbbreviation</code>, <code>year</code>, and <code>mean_dsci</code> (the average DSCI for each state-year). Call the resulting dataset <code>drought_annual</code>.</p>
+<p>Recall from last week that we calculated the Drought Severity Composite Index (DSCI) and aggregated weekly drought data to annual values. Either load the processed drought data from last week or repeat the steps to calculate DSCI and aggregate to annual level. The key variables to keep are <code>StateAbbreviation</code>, <code>year</code>, and <code>mean_dsci</code> (the average DSCI for each state-year). Call the resulting dataset <code>drought_annual</code>. Note that you will need to extract the year from <code>ValidStart</code> using the function <code>year()</code>. The syntax is <code>year(date_variable)</code>. Use this function to create a new variable <code>year</code> in your drought dataset that contains the year extracted from the <code>ValidStart</code> date.</p>
 <div class="callout-attention">
 <p>Question 3: Before proceeding to merging, identify the key variables in each dataset that we’ll use to match rows across datasets. What variables do all three datasets have in common? Answer in your notebook.</p>
 </div>
@@ -393,7 +393,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(final_data_complete, <span class="st">"corn_drought_gdp_complete.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout-attention">
-<p>Question 8: Explain how the question we posed initially guided out data processing and merging decisions. Now that we have a merged dataset, what types of analyses could we conduct to explore the relationship between drought, corn yield, and farm GDP? Answer in your notebook.</p>
+<p>Question 8: Explain how the question we posed initially guided our data processing and merging decisions. Now that we have a merged dataset, what types of analyses could we conduct to explore the relationship between drought, corn yield, and farm GDP? Answer in your notebook.</p>
 </div>
 <hr>
 </section>

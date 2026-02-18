@@ -17,6 +17,8 @@ There are many online resources to help you learn R programming and data analysi
 -   [How to write better prompts for GitHub Copilot](https://github.blog/developer-skills/github/how-to-write-better-prompts-for-github-copilot/): Tips for writing effective prompts to get better code suggestions from Copilot.
 -   [R as GIS for Economists](https://tmieno2.github.io/R-as-GIS-for-Economists-Quarto/): For those interested in spatial analysis with R. This is also be helpful when trying to create maps in R.
 -   [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/): For those interested in coding with Python.
+-   [dplyr Cheat Sheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf): A quick reference for the dplyr package, which is commonly used for data manipulation in R.
+-   [tidyverse Cheat Sheet](https://posit.co/resources/cheatsheets/): Cheat sheets to common tidyverse packages and tools.
 
 ## Quick Troubleshooting Tips in R
 
