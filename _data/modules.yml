@@ -55,3 +55,8 @@
     rel_url: "../03_data_processing/includes/corn_yield_2000-2025.csv"
   - title: "dm_state_2000-2025.csv"
     rel_url: "../03_data_processing/includes/dm_state_2000-2025.csv"
+    
+- title: "Week 5: Exploratory Data Analysis"
+  dirname: modules/05_EDA
+  desc: "This module will focus on what exploratory data analysis is, why it is imporant, and how to do it in R and Power BI."
+  slides: "slides.html"

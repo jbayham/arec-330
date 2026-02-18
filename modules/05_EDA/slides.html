@@ -333,34 +333,68 @@
 </div>
 
 </section>
-<section id="big-picture-corn-yield-and-drought" class="slide level2">
-<h2>Big Picture: <br>Corn Yield and Drought</h2>
-<p><br></p>
-<div class="cell" data-reveal="true">
-<div class="cell-output-display">
-<div>
-<div>
-<pre class="mermaid mermaid-js">%%{init: {"themeVariables": {"fontSize": "24px"}}}%%
-flowchart LR
-  G[Goals] ==&gt; P[Problem]
-  P ==&gt; Q[Question]
-  Q ==&gt; Da[Data]
-  Da == EDA ==&gt; M[Model]
-  M ==&gt; R[Result]
-  R ==&gt; D[Decision]
-</pre>
-</div>
-</div>
-</div>
-</div>
-<p><br></p>
-<ul>
-<li><p>What is the USDA’s goal?</p></li>
-<li><p>Problem?</p></li>
-<li><p>Question?</p></li>
-</ul>
+<section>
+<section id="check-in" class="title-slide slide level1 center">
+<h1>Check in</h1>
+
 </section>
 <section id="section" class="slide level2 iclicker">
+<h2></h2>
+<div class="question">
+<p>How much time do you spend outside of class on AREC 330 each week?</p>
+</div>
+<div class="choices">
+<p>A. 0-1 hours<br>
+B. 1-2 hours<br>
+C. 2-3 hours<br>
+D. 3+ hours</p>
+</div>
+</section>
+<section id="section-1" class="slide level2 iclicker">
+<h2></h2>
+<div class="question">
+<p>Overall, the class is going…</p>
+</div>
+<div class="choices">
+<p>A. Well<br>
+B. OK (neutral)<br>
+C. Not well</p>
+</div>
+</section>
+<section id="section-2" class="slide level2 iclicker">
+<h2></h2>
+<div class="question">
+<p>The material is…</p>
+</div>
+<div class="choices">
+<p>A. Relevant to me<br>
+B. Somewhat relevant (neutral)<br>
+C. Not relevant to me</p>
+</div>
+</section>
+<section id="section-3" class="slide level2 iclicker">
+<h2></h2>
+<div class="question">
+<p>The labs are…</p>
+</div>
+<div class="choices">
+<p>A. Easy and straightforward<br>
+B. Mixed (some easy, some hard)<br>
+C. Very difficult</p>
+</div>
+</section>
+<section id="section-4" class="slide level2 iclicker">
+<h2></h2>
+<div class="question">
+<p>How can I improve the class? (constructive feedback)</p>
+</div>
+</section></section>
+<section>
+<section id="quick-review-joins" class="title-slide slide level1 center">
+<h1>Quick Review: Joins</h1>
+
+</section>
+<section id="section-5" class="slide level2 iclicker">
 <h2></h2>
 <div class="question">
 <p>When is <code>left_join()</code> the preferred choice over <code>inner_join()</code>?</p>
@@ -385,9 +419,33 @@ D. When you need to remove duplicate keys before merging</p>
           display:block!important;
       }</style></aside>
 </section>
+<section id="big-picture-corn-yield-and-drought" class="slide level2">
+<h2>Big Picture: <br>Corn Yield and Drought</h2>
+<p><br></p>
+<div class="cell" data-reveal="true">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"themeVariables": {"fontSize": "24px"}}}%%
+flowchart LR
+  G[Goals] ==&gt; P[Problem]
+  P ==&gt; Q[Question]
+  Q ==&gt; Da[Data]
+  Da ==&gt; EDA[EDA]
+  EDA ==&gt; M[Model]
+  M ==&gt; R[Result]
+  R ==&gt; D[Decision]
+
+  style EDA fill:#FFD966,stroke:#333,stroke-width:3px,color:#000
+</pre>
+</div>
+</div>
+</div>
+</div>
+</section>
 <section id="before-you-model-you-must-understand" class="slide level2">
-<h2>Before You Model, You Must Understand</h2>
-<p>Models can mislead if you don’t understand the data.</p>
+<h2>Before You Model,<br> You Must Understand</h2>
+<p><br> Models can mislead if you don’t understand the data.</p>
 <p>EDA is a critical step to understand the data before modeling.</p>
 <div class="cell" data-reveal="true">
 <div class="cell-output-display">
@@ -445,8 +503,7 @@ RQ ==&gt; M[Model]
 <li>Is there a pattern?</li>
 <li>Is there a relationship?</li>
 <li>Are there clusters?</li>
-<li>Are there nonlinearities?</li>
-<li>Are there outliers driving results?</li>
+<li>Are there outliers driving some relationship?</li>
 </ul>
 </section>
 <section id="role-2-refine-the-question" class="slide level2">
@@ -460,7 +517,20 @@ RQ ==&gt; M[Model]
 <p><em>Example: Does drought reduce farm GDP?</em></p>
 <p>EDA reveals: GDP is highly skewed</p>
 <p>Now you refine: Should we log-transform?</p>
-</section>
+<aside class="notes">
+<p>What if we were interested in how drought affects individual farms instead of state-level GDP? Would our data be suitable for answering that question?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
 <section>
 <section id="describing-the-data" class="title-slide slide level1 center">
 <h1>Describing the data</h1>
@@ -494,7 +564,7 @@ RQ ==&gt; M[Model]
 <p>{1, 2, 2, 3, 4} <span class="math inline">\(\rightarrow\)</span> mode = 2</p>
 <p>{1, 1, 2, 3, 4} <span class="math inline">\(\rightarrow\)</span> mode = 1</p>
 </section>
-<section id="pair-up" class="slide level2">
+<section id="pair-up" class="slide level2 scrollable">
 <h2>Pair up</h2>
 <p><strong>You compute summary statistics for state-level farm GDP:</strong></p>
 <ul>
@@ -505,25 +575,35 @@ RQ ==&gt; M[Model]
 <p><strong>Discussion Prompt:</strong></p>
 <ul>
 <li>What does this tell you about the distribution?</li>
-<li>Is the mean representative?</li>
+<li>Is the mean representative of the average US state Farm GDP?</li>
 <li>Would you consider transforming the variable? Why?</li>
-<li>How might this affect a regression model?</li>
+<li>How might this affect an analysis of the relationship between drought and farm GDP?</li>
 </ul>
 </section>
 <section id="measures-of-dispersion" class="slide level2 scrollable">
 <h2>Measures of Dispersion</h2>
 <p>How spread out are the data?</p>
 <ol type="1">
-<li><p>Range: Difference between max and min <span class="math display">\[
+<li>Range: Difference between max and min <span class="math display">\[
 \text{Range} = x_{\text{max}} - x_{\text{min}}
-\]</span> <br></p></li>
-<li><p>Variance: Average squared deviation from mean. <span class="math display">\[
-s^2 = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2
-\]</span> <br></p></li>
-<li><p>Standard Deviation: Square root of variance, in same units as data. <span class="math display">\[
-s = \sqrt{s^2}
-\]</span></p></li>
+\]</span></li>
 </ol>
+<p>Example: For {1, 2, 3, 4, 5}, range = 5 - 1 = 4</p>
+<p><br></p>
+<ol start="2" type="1">
+<li>Variance: Average squared deviation from mean. <span class="math display">\[
+s^2 = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2
+\]</span></li>
+</ol>
+<p>Example: For {1, 2, 3, 4, 5}, variance = 2.5</p>
+<p>Why do we square the deviations?</p>
+<p><br></p>
+<ol start="3" type="1">
+<li>Standard Deviation: Square root of variance, in same units as data. <span class="math display">\[
+s = \sqrt{s^2}
+\]</span></li>
+</ol>
+<p>Example: For {1, 2, 3, 4, 5}, standard deviation = <span class="math inline">\(\sqrt{2.5} \approx 1.58\)</span></p>
 </section>
 <section id="percentiles" class="slide level2 scrollable">
 <h2>Percentiles</h2>
@@ -535,18 +615,31 @@ P_k = \text{value such that } k\% \text{ of data} \leq P_k
 \]</span></p>
 <ul>
 <li>Common percentiles: 25th (Q1), 50th (median), 75th (Q3)</li>
+<li>You may see interquartile range (IQR) = Q3 - Q1</li>
 </ul>
-<p>Example: If <span class="math inline">\(P_{25} = 10\)</span>, then 25% of data values are less than or equal to 10.</p>
+<p>Example: For {1, 2, 3, 4, 5},</p>
+<ul>
+<li>2 is the 30th percentile,</li>
+<li>3 is the 50th percentile (median),</li>
+<li>4 is the 70th percentile.</li>
+</ul>
+<p>Using the midpoint method for percentiles, <span class="math display">\[
+P = \frac{R-0.5}{n} * 100
+\]</span> where <span class="math inline">\(R\)</span> is the rank of the value in the sorted data and <span class="math inline">\(n\)</span> is the total number of observations.</p>
 </section>
 <section id="measures-of-relationship" class="slide level2 scrollable">
 <h2>Measures of Relationship</h2>
 <ol type="1">
-<li><p>Covariance: Measures how two variables vary together. <span class="math display">\[
+<li>Covariance: Measures how two variables vary together. <span class="math display">\[
 \text{Cov}(X, Y) = \frac{1}{n-1} \sum_{i=1}^{n} (X_i - \bar{X})(Y_i - \bar{Y})
-\]</span> <br></p></li>
-<li><p>Correlation: Standardized measure of linear relationship between two variables. <span class="math display">\[
+\]</span> <br></li>
+</ol>
+<p>What is <span class="math inline">\(\text{Cov}(X, X)\)</span>?</p>
+<p><br></p>
+<ol start="2" type="1">
+<li>Correlation: Standardized measure of linear relationship between two variables. <span class="math display">\[
 r = \frac{\text{Cov}(X, Y)}{s_X s_Y}
-\]</span> <em>recall: <span class="math inline">\(s_X\)</span> and <span class="math inline">\(s_Y\)</span> are the standard deviations</em></p></li>
+\]</span> <em>recall: <span class="math inline">\(s_X\)</span> and <span class="math inline">\(s_Y\)</span> are the standard deviations</em></li>
 </ol>
 <ul>
 <li><span class="math inline">\(r\)</span> ranges from -1 to 1, where:
@@ -565,7 +658,7 @@ r = \frac{\text{Cov}(X, Y)}{s_X s_Y}
 <h2>Correlation ≠ Causation</h2>
 
 <img data-src="includes/pirates.png" class="r-stretch"></section>
-<section id="section-1" class="slide level2">
+<section id="section-6" class="slide level2">
 <h2></h2>
 <div class="main-point">
 <p>EDA is not busy work. It produces deliverables.</p>

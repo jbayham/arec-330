@@ -31,6 +31,14 @@
   text-align: left;
 }
 
+/* Fix: top of radicals/climb symbols clipped in display math */
+.reveal .math.display,
+.reveal mjx-container[display="true"] {
+  overflow: visible;
+  padding-top: 0.25em;
+  padding-bottom: 0.05em;
+  line-height: 1.4;
+}
 
 /* custom.scss — styles for Quarto revealjs (works with night theme too)
    Usage on a slide:
