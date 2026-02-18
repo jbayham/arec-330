@@ -33,39 +33,250 @@ flowchart LR
 ##  {.iclicker}
 
 :::{.question}
-Joining data
+When is `left_join()` the preferred choice over `inner_join()`?
 :::
 
 :::{.choices}
-A. Drop the weather data because it is higher frequency.  
-B. Aggregate weather to the county-year level to match the unit of observation.   
-C. Duplicate yield rows to match each month.  
-D. Convert yield to monthly values by dividing by 12. 
+A. When you only want rows present in both datasets.    
+B. When you want to keep all observations from the primary dataset even if matches are missing in the second dataset.  
+C. When key variable types differ between datasets.   
+D. When you need to remove duplicate keys before merging
 :::
 
 :::{.notes}
-
+B
 :::
+
+## Before You Model, You Must Understand
+
+Models can mislead if you don't understand the data. 
+
+EDA is a critical step to understand the data before modeling.
+
+```{mermaid}
+%%{init: {"themeVariables": {"fontSize": "24px"}}}%%
+flowchart LR
+Q[Question] ==> Da[Understand Data]
+Da ==> EP[Explore Patterns]
+EP ==> RQ[Refine Question]
+RQ ==> M[Model]
+```
 
 ## Exploratory Data Analysis
 
-EDA can serve multiple roles
+Exploratory Data Analysis (EDA) is the process of:
+
+- Understanding the structure of the data
+- Summarizing distributions and relationships
+- Identifying anomalies and data quality issues
+- Generating hypotheses
+
+EDA is not about proving something.
+
+It is about learning what the data is capable of saying.
+
+## EDA Roles
+
+EDA can serve multiple purposes:
 
 - You are given data and there is no clear question. EDA can help explore patterns.
 
 - You are given a question and you have data. EDA can help assess question feasibility and refine if needed.
 
+:::{.notes}
+A useful analogy to think about EDA is to imagine receiving a sealed box filled with unknown components.  Before attempting to assemble anything, one must open the box, inspect each piece, and understand what can be made with the components. 
+:::
+
+## Role 1: Generate Hypotheses
+
+EDA helps us ask:
+
+- Is there a pattern?
+- Is there a relationship?
+- Are there clusters?
+- Are there nonlinearities?
+- Are there outliers driving results?
+
+## Role 2: Refine the Question
+
+EDA can help us refine our question by:
+
+- Assessing the feasibility of the question given the data
+- Identifying which variables are relevant to the question
+- Suggesting modifications to the question to better fit the data
+
+*Example: Does drought reduce farm GDP?*
+
+EDA reveals: GDP is highly skewed
+
+Now you refine: Should we log-transform?
+
+
 # Describing the data
 <!-- distributions -->
 
-## Introduction
+## Measures of Central Tendency{.scrollable}
 
-We have our question and we've prepped our data. Now we need to check our data against some basic intuition:
-- do the values look right given the units?
+1. Mean (average)
+
+$$
+\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i
+$$
+Example:
+
+{1, 2, 3, 4, 5} $\rightarrow$ $\bar{x} = 3$
+
+Sensitive to outliers
+
+{1, 2, 3, 4, 100} $\rightarrow$ $\bar{x} = 22$
+
+<br>
+2. Median (middle value)
+
+- middle value when data is sorted
+- less sensitive to outliers
+
+Example:
+
+{1, 2, 3, 4, 5} $\rightarrow$ median = 3
+
+{1, 2, 3, 4, 100} $\rightarrow$ median = 3
+
+<br>
+3. Mode (most frequent value)
+
+- value that appears most frequently
+- can be used for categorical data
+
+Example:
+
+{1, 2, 2, 3, 4} $\rightarrow$ mode = 2
+
+{1, 1, 2, 3, 4} $\rightarrow$ mode = 1
+
+## Pair up
+
+**You compute summary statistics for state-level farm GDP:**
+
+- Mean: $4.2 billion
+- Median: $1.3 billion
+- Max: $38 billion
+
+**Discussion Prompt:**
+
+- What does this tell you about the distribution?
+- Is the mean representative?
+- Would you consider transforming the variable? Why?
+- How might this affect a regression model?
+
+## Measures of Dispersion{.scrollable}
+
+How spread out are the data?
+
+1. Range: Difference between max and min
+$$
+\text{Range} = x_{\text{max}} - x_{\text{min}}
+$$
+<br>
+
+2. Variance: Average squared deviation from mean.
+$$
+s^2 = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2
+$$
+<br>
+
+3. Standard Deviation: Square root of variance, in same units as data.
+$$
+s = \sqrt{s^2}
+$$
+
+## Percentiles{.scrollable}
+- Percentiles: Value below which a given percentage of data falls.
+
+$$
+P_k = \text{value such that } k\% \text{ of data} \leq P_k
+$$
+
+- Common percentiles: 25th (Q1), 50th (median), 75th (Q3)
+
+Example: If $P_{25} = 10$, then 25% of data values are less than or equal to 10.
+
+## Measures of Relationship{.scrollable}
+1. Covariance: Measures how two variables vary together.
+$$
+\text{Cov}(X, Y) = \frac{1}{n-1} \sum_{i=1}^{n} (X_i - \bar{X})(Y_i - \bar{Y})
+$$
+<br>
+
+2. Correlation: Standardized measure of linear relationship between two variables.
+$$
+r = \frac{\text{Cov}(X, Y)}{s_X s_Y}
+$$
+*recall: $s_X$ and $s_Y$ are the standard deviations*
+
+- $r$ ranges from -1 to 1, where:
+  - $r = 1$: perfect positive linear relationship
+  - $r = -1$: perfect negative linear relationship
+  - $r = 0$: no linear relationship
+
+## Visualizing Correlation
+
+![](includes/correlation.png)
+
+## Correlation ≠ Causation
+
+![](includes/pirates.png)
 
 
-# Variation over time
+##
 
-# Relationship between variables
+:::{.main-point}
+EDA is not busy work. It produces deliverables.
+:::
 
-# Hypothesis generation
+## Develop a Data Dictionary{.scrollable}
+
+A data dictionary is a document that describes the structure, content, and meaning of a dataset. It typically includes:
+
+- Variable names and descriptions
+- Data types (e.g., numeric, categorical)
+- Units of measurement
+- Possible values and their meanings (for categorical variables)
+- Any data transformations applied
+- Missing value codes and handling
+- Source of the data
+
+Data dictionaries are useful for you but also for others who may use the data in the future. 
+
+They help ensure that everyone understands the data in the same way and can use it appropriately.
+
+## Data Quality Report{.scrollable}
+A data quality report is a document that assesses the quality of a dataset. It typically includes:
+
+- Summary statistics (e.g., mean, median, standard deviation)
+- Distribution of values (e.g., histograms, boxplots)
+- Missing data patterns (e.g., percentage of missing values, missingness by variable)
+- Outliers and anomalies (e.g., extreme values, inconsistent entries)
+- Data consistency checks (e.g., duplicate records, invalid values)
+- Data quality issues and recommendations for cleaning or handling them
+
+A data quality report helps identify potential issues with the data that could affect analysis and modeling. 
+
+It also provides a basis for making informed decisions about how to handle data quality problems.
+
+## Summary
+
+EDA has two core roles:
+
+- Generate hypotheses
+- Refine questions
+
+Summary statistics are tools for insight, not formulas to memorize.
+
+EDA produces outputs:
+
+- Data dictionary
+- Data quality report
+
+Good analysts document what they learn from data before modeling it.
+

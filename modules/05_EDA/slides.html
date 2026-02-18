@@ -363,16 +363,16 @@ flowchart LR
 <section id="section" class="slide level2 iclicker">
 <h2></h2>
 <div class="question">
-<p>Joining data</p>
+<p>When is <code>left_join()</code> the preferred choice over <code>inner_join()</code>?</p>
 </div>
 <div class="choices">
-<p>A. Drop the weather data because it is higher frequency.<br>
-B. Aggregate weather to the county-year level to match the unit of observation.<br>
-C. Duplicate yield rows to match each month.<br>
-D. Convert yield to monthly values by dividing by 12.</p>
+<p>A. When you only want rows present in both datasets.<br>
+B. When you want to keep all observations from the primary dataset even if matches are missing in the second dataset.<br>
+C. When key variable types differ between datasets.<br>
+D. When you need to remove duplicate keys before merging</p>
 </div>
 <aside class="notes">
-
+<p>B</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -384,10 +384,240 @@ D. Convert yield to monthly values by dividing by 12.</p>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section id="before-you-model-you-must-understand" class="slide level2">
+<h2>Before You Model, You Must Understand</h2>
+<p>Models can mislead if you don’t understand the data.</p>
+<p>EDA is a critical step to understand the data before modeling.</p>
+<div class="cell" data-reveal="true">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"themeVariables": {"fontSize": "24px"}}}%%
+flowchart LR
+Q[Question] ==&gt; Da[Understand Data]
+Da ==&gt; EP[Explore Patterns]
+EP ==&gt; RQ[Refine Question]
+RQ ==&gt; M[Model]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="exploratory-data-analysis" class="slide level2">
+<h2>Exploratory Data Analysis</h2>
+<p>Exploratory Data Analysis (EDA) is the process of:</p>
+<ul>
+<li>Understanding the structure of the data</li>
+<li>Summarizing distributions and relationships</li>
+<li>Identifying anomalies and data quality issues</li>
+<li>Generating hypotheses</li>
+</ul>
+<p>EDA is not about proving something.</p>
+<p>It is about learning what the data is capable of saying.</p>
+</section>
+<section id="eda-roles" class="slide level2">
+<h2>EDA Roles</h2>
+<p>EDA can serve multiple purposes:</p>
+<ul>
+<li><p>You are given data and there is no clear question. EDA can help explore patterns.</p></li>
+<li><p>You are given a question and you have data. EDA can help assess question feasibility and refine if needed.</p></li>
+</ul>
+<aside class="notes">
+<p>A useful analogy to think about EDA is to imagine receiving a sealed box filled with unknown components. Before attempting to assemble anything, one must open the box, inspect each piece, and understand what can be made with the components.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="role-1-generate-hypotheses" class="slide level2">
+<h2>Role 1: Generate Hypotheses</h2>
+<p>EDA helps us ask:</p>
+<ul>
+<li>Is there a pattern?</li>
+<li>Is there a relationship?</li>
+<li>Are there clusters?</li>
+<li>Are there nonlinearities?</li>
+<li>Are there outliers driving results?</li>
+</ul>
+</section>
+<section id="role-2-refine-the-question" class="slide level2">
+<h2>Role 2: Refine the Question</h2>
+<p>EDA can help us refine our question by:</p>
+<ul>
+<li>Assessing the feasibility of the question given the data</li>
+<li>Identifying which variables are relevant to the question</li>
+<li>Suggesting modifications to the question to better fit the data</li>
+</ul>
+<p><em>Example: Does drought reduce farm GDP?</em></p>
+<p>EDA reveals: GDP is highly skewed</p>
+<p>Now you refine: Should we log-transform?</p>
+</section>
+<section>
+<section id="describing-the-data" class="title-slide slide level1 center">
+<h1>Describing the data</h1>
+<!-- distributions -->
+</section>
+<section id="measures-of-central-tendency" class="slide level2 scrollable">
+<h2>Measures of Central Tendency</h2>
+<ol type="1">
+<li>Mean (average)</li>
+</ol>
+<p><span class="math display">\[
+\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i
+\]</span> Example:</p>
+<p>{1, 2, 3, 4, 5} <span class="math inline">\(\rightarrow\)</span> <span class="math inline">\(\bar{x} = 3\)</span></p>
+<p>Sensitive to outliers</p>
+<p>{1, 2, 3, 4, 100} <span class="math inline">\(\rightarrow\)</span> <span class="math inline">\(\bar{x} = 22\)</span></p>
+<p><br> 2. Median (middle value)</p>
+<ul>
+<li>middle value when data is sorted</li>
+<li>less sensitive to outliers</li>
+</ul>
+<p>Example:</p>
+<p>{1, 2, 3, 4, 5} <span class="math inline">\(\rightarrow\)</span> median = 3</p>
+<p>{1, 2, 3, 4, 100} <span class="math inline">\(\rightarrow\)</span> median = 3</p>
+<p><br> 3. Mode (most frequent value)</p>
+<ul>
+<li>value that appears most frequently</li>
+<li>can be used for categorical data</li>
+</ul>
+<p>Example:</p>
+<p>{1, 2, 2, 3, 4} <span class="math inline">\(\rightarrow\)</span> mode = 2</p>
+<p>{1, 1, 2, 3, 4} <span class="math inline">\(\rightarrow\)</span> mode = 1</p>
+</section>
+<section id="pair-up" class="slide level2">
+<h2>Pair up</h2>
+<p><strong>You compute summary statistics for state-level farm GDP:</strong></p>
+<ul>
+<li>Mean: $4.2 billion</li>
+<li>Median: $1.3 billion</li>
+<li>Max: $38 billion</li>
+</ul>
+<p><strong>Discussion Prompt:</strong></p>
+<ul>
+<li>What does this tell you about the distribution?</li>
+<li>Is the mean representative?</li>
+<li>Would you consider transforming the variable? Why?</li>
+<li>How might this affect a regression model?</li>
+</ul>
+</section>
+<section id="measures-of-dispersion" class="slide level2 scrollable">
+<h2>Measures of Dispersion</h2>
+<p>How spread out are the data?</p>
+<ol type="1">
+<li><p>Range: Difference between max and min <span class="math display">\[
+\text{Range} = x_{\text{max}} - x_{\text{min}}
+\]</span> <br></p></li>
+<li><p>Variance: Average squared deviation from mean. <span class="math display">\[
+s^2 = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2
+\]</span> <br></p></li>
+<li><p>Standard Deviation: Square root of variance, in same units as data. <span class="math display">\[
+s = \sqrt{s^2}
+\]</span></p></li>
+</ol>
+</section>
+<section id="percentiles" class="slide level2 scrollable">
+<h2>Percentiles</h2>
+<ul>
+<li>Percentiles: Value below which a given percentage of data falls.</li>
+</ul>
+<p><span class="math display">\[
+P_k = \text{value such that } k\% \text{ of data} \leq P_k
+\]</span></p>
+<ul>
+<li>Common percentiles: 25th (Q1), 50th (median), 75th (Q3)</li>
+</ul>
+<p>Example: If <span class="math inline">\(P_{25} = 10\)</span>, then 25% of data values are less than or equal to 10.</p>
+</section>
+<section id="measures-of-relationship" class="slide level2 scrollable">
+<h2>Measures of Relationship</h2>
+<ol type="1">
+<li><p>Covariance: Measures how two variables vary together. <span class="math display">\[
+\text{Cov}(X, Y) = \frac{1}{n-1} \sum_{i=1}^{n} (X_i - \bar{X})(Y_i - \bar{Y})
+\]</span> <br></p></li>
+<li><p>Correlation: Standardized measure of linear relationship between two variables. <span class="math display">\[
+r = \frac{\text{Cov}(X, Y)}{s_X s_Y}
+\]</span> <em>recall: <span class="math inline">\(s_X\)</span> and <span class="math inline">\(s_Y\)</span> are the standard deviations</em></p></li>
+</ol>
+<ul>
+<li><span class="math inline">\(r\)</span> ranges from -1 to 1, where:
+<ul>
+<li><span class="math inline">\(r = 1\)</span>: perfect positive linear relationship</li>
+<li><span class="math inline">\(r = -1\)</span>: perfect negative linear relationship</li>
+<li><span class="math inline">\(r = 0\)</span>: no linear relationship</li>
+</ul></li>
+</ul>
+</section>
+<section id="visualizing-correlation" class="slide level2">
+<h2>Visualizing Correlation</h2>
+
+<img data-src="includes/correlation.png" class="r-stretch"></section>
+<section id="correlation-causation" class="slide level2">
+<h2>Correlation ≠ Causation</h2>
+
+<img data-src="includes/pirates.png" class="r-stretch"></section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<div class="main-point">
+<p>EDA is not busy work. It produces deliverables.</p>
+</div>
+</section>
+<section id="develop-a-data-dictionary" class="slide level2 scrollable">
+<h2>Develop a Data Dictionary</h2>
+<p>A data dictionary is a document that describes the structure, content, and meaning of a dataset. It typically includes:</p>
+<ul>
+<li>Variable names and descriptions</li>
+<li>Data types (e.g., numeric, categorical)</li>
+<li>Units of measurement</li>
+<li>Possible values and their meanings (for categorical variables)</li>
+<li>Any data transformations applied</li>
+<li>Missing value codes and handling</li>
+<li>Source of the data</li>
+</ul>
+<p>Data dictionaries are useful for you but also for others who may use the data in the future.</p>
+<p>They help ensure that everyone understands the data in the same way and can use it appropriately.</p>
+</section>
+<section id="data-quality-report" class="slide level2 scrollable">
+<h2>Data Quality Report</h2>
+<p>A data quality report is a document that assesses the quality of a dataset. It typically includes:</p>
+<ul>
+<li>Summary statistics (e.g., mean, median, standard deviation)</li>
+<li>Distribution of values (e.g., histograms, boxplots)</li>
+<li>Missing data patterns (e.g., percentage of missing values, missingness by variable)</li>
+<li>Outliers and anomalies (e.g., extreme values, inconsistent entries)</li>
+<li>Data consistency checks (e.g., duplicate records, invalid values)</li>
+<li>Data quality issues and recommendations for cleaning or handling them</li>
+</ul>
+<p>A data quality report helps identify potential issues with the data that could affect analysis and modeling.</p>
+<p>It also provides a basis for making informed decisions about how to handle data quality problems.</p>
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<p>EDA has two core roles:</p>
+<ul>
+<li>Generate hypotheses</li>
+<li>Refine questions</li>
+</ul>
+<p>Summary statistics are tools for insight, not formulas to memorize.</p>
+<p>EDA produces outputs:</p>
+<ul>
+<li>Data dictionary</li>
+<li>Data quality report</li>
+</ul>
+<p>Good analysts document what they learn from data before modeling it.</p>
 <div class="footer footer-default">
 
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
