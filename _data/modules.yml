@@ -60,3 +60,9 @@
   dirname: modules/05_EDA
   desc: "This module will focus on what exploratory data analysis is, why it is imporant, and how to do it in R and Power BI."
   slides: "slides.html"
+  lab: "lab.html"
+  materials:
+  - title: "final_merged_data.csv"
+    rel_url: "includes/final_merged_data.csv"
+  - title: "drought_weekly.csv"
+    rel_url: "includes/drought_weekly.csv"
