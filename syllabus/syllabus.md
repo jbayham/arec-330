@@ -105,19 +105,19 @@ Students will create a website that will serve as a repository for their project
 
 ### Attendance and Participation 
 
-There will be iClicker questions incorporated into most lecture materials. These questions are intended to assess understanding of lecture materials and provide the instructors with real-time feedback on comprehension. Responses will account for a small portion of the overall course grade.
+There will be iClicker questions incorporated into most lecture materials. These questions are intended to assess understanding of lecture materials and provide the instructors with real-time feedback on comprehension. Questions focused on material covered in previous lectures and labs will be scored and count toward your participation score.
 
 I will assign readings throughout the course. These readings may be case studies, book chapters, or articles. You are expected to complete the readings before class and be prepared to discuss them in class. I may randomly call on you to discuss the readings during class. Your participation will contribute to your overall course grade.
 
 
 ## Assignments and Grading
 
-| Component                | Percentage |
-|--------------------------|------------:|
+| Component               | Percentage |
+|-------------------------|-----------:|
 | Lab Assignments         | 30%        |
 | Midterm Exam            | 30%        |
-| Data Analysis Project    | 30%       |
-| Participation           | 10%         |
+| Data Analysis Project   | 30%        |
+| Participation           | 10%        |
 
 Letter grades will be assigned based on the conventional CSU grading scale (93% or more = A, 90% - 92% = A-, 88% - 89% = B+, 83% - 87% = B, 80% - 82% = B-, 78% - 79% = C+, 73% - 77% = C, 70% - 72% = C-, 60% - 69% = D, less than 60% = F)
 
