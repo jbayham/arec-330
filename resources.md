@@ -46,3 +46,10 @@ This is a list of things to check when you run into a problem in R.
 -   When using other AI tools like ChatGPT or Gemini for troubleshooting, be specific about the error message and context. Provide the exact error message, a brief description of what you were trying to do, and any relevant code snippets. This will help the AI provide more accurate and helpful responses.
 -   If it recommends a fix with a specific package, check that the package/function being referenced is real (sometimes AI makes these things up, especially for more complicated coding challenges). You can look up the package documentation (using Google) to make sure it’s an actual package calling an actual function. Example: [dyplr package documentation](https://cran.r-project.org/web/packages/dplyr/dplyr.pdf)
 -   Be careful about the proposed solutions. Sometimes they are legitimate, sometimes they will send you down rabbit holes that are not helpful / make your code less elegant.
+
+
+## Video Tutorials
+
+Setting directory and generating .log file:
+
+<iframe src="https://colostate-my.sharepoint.com/personal/crw41_colostate_edu/_layouts/15/embed.aspx?UniqueId=44370a47-a4b3-4550-9e72-272ec5bcc71b&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" width="640" height="360" frameborder="0" scrolling="no" allowfullscreen title="lab_setup_and_log_file.mp4"></iframe>
