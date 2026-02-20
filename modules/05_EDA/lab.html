@@ -99,6 +99,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation">Correlation</a></li>
   <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics">Summary Statistics</a></li>
+  <li><a href="#codebook" id="toc-codebook" class="nav-link" data-scroll-target="#codebook">Codebook</a></li>
   </ul></li>
   <li><a href="#deliverables" id="toc-deliverables" class="nav-link" data-scroll-target="#deliverables">Deliverables</a></li>
   </ul>
@@ -245,7 +246,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The basic structure is:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> your_data, <span class="fu">aes</span>(<span class="at">x =</span> variable)) <span class="sc">+</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="histogram" class="level3">
 <h3 class="anchored" data-anchor-id="histogram">Histogram</h3>
@@ -270,13 +271,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="correlation" class="level2">
 <h2 class="anchored" data-anchor-id="correlation">Correlation</h2>
 <p>Correlation measures the strength and direction of a linear relationship between two numeric variables. The correlation coefficient (r) ranges from -1 to 1, where: - r = 1 indicates a perfect positive linear relationship - r = -1 indicates a perfect negative linear relationship - r = 0 indicates no linear relationship</p>
-<p>To calculate the correlation between corn yield and farm GDP, we can use the <code>cor()</code> function in R: <code>wpf#| eval: false cor(combined_dat$yield_bu_per_acre, combined_dat$farm_gdp, use = "complete.obs")</code></p>
+<p>To calculate the correlation between corn yield and farm GDP, we can use the <code>cor()</code> function in R: <code>umf#| eval: false cor(combined_dat$yield_bu_per_acre, combined_dat$farm_gdp, use = "complete.obs")</code></p>
 <div class="callout-attention">
 <p>Question 6: What does the correlation coefficient between corn yield and farm GDP tell you about their relationship? Is it positive, negative, or close to zero? What might this imply about how drought affects not just yields but also economic output? Answer in your notebook.</p>
 </div>
 </section>
 <section id="summary-statistics" class="level2">
 <h2 class="anchored" data-anchor-id="summary-statistics">Summary Statistics</h2>
+<p>Summary statistics provide a concise description of the main features of a dataset. Common summary statistics include: - Mean: The average value of a variable. - Median: The middle value when the data is sorted. - Standard Deviation: A measure of the spread of the data around the mean. - Minimum and Maximum: The smallest and largest values in the dataset.</p>
+<p>We can use the <code>summarise()</code> function from the <code>dplyr</code> package to calculate these summary statistics for corn yield. For example, to calculate the mean, median, and standard deviation of corn yield by state:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(combined_dat, </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean_yield =</span> <span class="fu">mean</span>(yield_bu_per_acre, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">median_yield =</span> <span class="fu">median</span>(yield_bu_per_acre, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd_yield =</span> <span class="fu">sd</span>(yield_bu_per_acre, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_yield =</span> <span class="fu">min</span>(yield_bu_per_acre, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_yield =</span> <span class="fu">max</span>(yield_bu_per_acre, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Because this is a common task, others have created packages to make it easier. The <code>skimr</code> package provides a convenient function called <code>skim()</code> that gives you a comprehensive summary of your data, including the mean, median, standard deviation, and more for each variable in your dataset:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr) <span class="co">#install.packages("skimr") if you don't have it already</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>sum_stats <span class="ot">&lt;-</span> <span class="fu">skim</span>(combined_dat)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sum_stats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-attention">
+<p>Question 7: Create a table in your notebook summarizing the mean, median, standard deviation, minimum, maximum, number of observations, and number of missing values for corn yield, drought severity, and farm GDP. Format the table neatly in your notebook. Replace the variable names with descriptive names that humans can easily understand. What do these summary statistics tell you about the central tendency and variability of these variables? Are there any surprising values or patterns in the summary statistics? Answer in your notebook.</p>
+</div>
+</section>
+<section id="codebook" class="level2">
+<h2 class="anchored" data-anchor-id="codebook">Codebook</h2>
+<p>A codebook is a document that describes the variables in a dataset, including their names, descriptions, data types, and source information. It serves as a reference for anyone who uses the dataset, helping them understand what each variable represents and how to interpret it.</p>
+<div class="callout-attention">
+<p>Question 8: Create a codebook for the <code>final_merged_data.csv</code> dataset. For each variable, provide the following information:</p>
+<ul>
+<li>Variable name</li>
+<li>Description (what does the variable represent?)</li>
+<li>Data type (e.g., numeric, categorical)</li>
+<li>Units of measurement (if applicable)</li>
+<li>Source of the data (where did this variable come from?)</li>
+</ul>
+<p>Format this codebook as a table in your notebook. This will be a useful reference for you and others who may use this dataset in the future.</p>
+</div>
 <hr>
 </section>
 </section>
@@ -284,7 +320,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Deliverables</h1>
 <p>Submit the following on Canvas:</p>
 <ol type="1">
-<li><p>Export your Power BI report as a PDF (lab_5_report.pdf) and upload it to Canvas. Make sure it contains four pages (Corn, Drought, Farm GDP, Scatterplot).</p></li>
+<li><p><strong>Power BI Report:</strong> Export your Power BI report as a PDF (lab_5_report.pdf) and upload it to Canvas. Make sure it contains four pages (Corn, Drought, Farm GDP, Scatterplot).</p></li>
 <li><p><strong>log file (<code>lab_05.log</code>):</strong> Organize your code and make sure it runs without errors. Generate a log file called <code>lab_05.log</code> using the sink-source-sink pattern from previous labs. The log file should include all the code you wrote for this lab, along with comments explaining each step.</p></li>
 <li><p><strong>Lab Notebook:</strong> Compile your answers to all 8 questions in a single document (e.g., Google Doc, Word, or PDF). Make sure to clearly label each question and provide thoughtful, detailed responses based on your analysis.</p></li>
 </ol>

@@ -152,7 +152,7 @@ The basic structure is:
 ```{r}
 #| eval: false
 ggplot(data = your_data, aes(x = variable)) +
-  geom_histogram() +
+  geom_histogram()
 ```
 
 ### Histogram
@@ -195,7 +195,51 @@ Question 6: What does the correlation coefficient between corn yield and farm GD
 
 ## Summary Statistics
 
+Summary statistics provide a concise description of the main features of a dataset. Common summary statistics include:
+- Mean: The average value of a variable.
+- Median: The middle value when the data is sorted.
+- Standard Deviation: A measure of the spread of the data around the mean.
+- Minimum and Maximum: The smallest and largest values in the dataset.
 
+We can use the `summarise()` function from the `dplyr` package to calculate these summary statistics for corn yield. For example, to calculate the mean, median, and standard deviation of corn yield by state:
+```{r}
+#| eval: false
+summarise(combined_dat, 
+  mean_yield = mean(yield_bu_per_acre, na.rm = TRUE), 
+  median_yield = median(yield_bu_per_acre, na.rm = TRUE), 
+  sd_yield = sd(yield_bu_per_acre, na.rm = TRUE),
+  min_yield = min(yield_bu_per_acre, na.rm = TRUE),
+  max_yield = max(yield_bu_per_acre, na.rm = TRUE)
+)
+```
+
+Because this is a common task, others have created packages to make it easier. The `skimr` package provides a convenient function called `skim()` that gives you a comprehensive summary of your data, including the mean, median, standard deviation, and more for each variable in your dataset:
+```{r}
+#| eval: false
+library(skimr) #install.packages("skimr") if you don't have it already
+sum_stats <- skim(combined_dat)
+print(sum_stats)
+```
+
+:::{.callout-attention}
+Question 7: Create a table in your notebook summarizing the mean, median, standard deviation, minimum, maximum, number of observations, and number of missing values for corn yield, drought severity, and farm GDP. Format the table neatly in your notebook. Replace the variable names with descriptive names that humans can easily understand. What do these summary statistics tell you about the central tendency and variability of these variables? Are there any surprising values or patterns in the summary statistics? Answer in your notebook.
+:::
+
+## Codebook
+
+A codebook is a document that describes the variables in a dataset, including their names, descriptions, data types, and source information. It serves as a reference for anyone who uses the dataset, helping them understand what each variable represents and how to interpret it.
+
+:::{.callout-attention}
+Question 8: Create a codebook for the `final_merged_data.csv` dataset. For each variable, provide the following information:
+
+- Variable name
+- Description (what does the variable represent?)
+- Data type (e.g., numeric, categorical)
+- Units of measurement (if applicable)
+- Source of the data (where did this variable come from?)
+
+Format this codebook as a table in your notebook. This will be a useful reference for you and others who may use this dataset in the future.
+:::
 
 ---
 
@@ -203,7 +247,7 @@ Question 6: What does the correlation coefficient between corn yield and farm GD
 
 Submit the following on Canvas:
 
-1. Export your Power BI report as a PDF (lab_5_report.pdf) and upload it to Canvas. Make sure it contains four pages (Corn, Drought, Farm GDP, Scatterplot).
+1. **Power BI Report:** Export your Power BI report as a PDF (lab_5_report.pdf) and upload it to Canvas. Make sure it contains four pages (Corn, Drought, Farm GDP, Scatterplot).
 
 1. **log file (`lab_05.log`):** Organize your code and make sure it runs without errors. Generate a log file called `lab_05.log` using the sink-source-sink pattern from previous labs. The log file should include all the code you wrote for this lab, along with comments explaining each step. 
 
