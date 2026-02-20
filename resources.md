@@ -20,6 +20,11 @@ There are many online resources to help you learn R programming and data analysi
 -   [dplyr Cheat Sheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf): A quick reference for the dplyr package, which is commonly used for data manipulation in R.
 -   [tidyverse Cheat Sheet](https://posit.co/resources/cheatsheets/): Cheat sheets to common tidyverse packages and tools.
 
+CSU offers access to LinkedIn Learning, which has many courses on R programming and data analysis. You can access LinkedIn Learning here: <https://provost.colostate.edu/linkedin-learning/>
+
+- [Intro to Power BI](https://www.linkedin.com/learning-login/share?account=41911228&forceAccount=false&redirect=https%3A%2F%2Fwww.linkedin.com%2Flearning%2Fpower-bi-essential-training-25882735%3Ftrk%3Dshare_ent_url%26shareId%3D6sr%252FE%252BEYRJCR1S%252BGe6TzuQ%253D%253D) 
+
+
 ## Quick Troubleshooting Tips in R
 
 This is a list of things to check when you run into a problem in R.
