@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>rubric</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="rubric_files/libs/clipboard/clipboard.min.js"></script>
+<script src="rubric_files/libs/quarto-html/quarto.js"></script>
+<script src="rubric_files/libs/quarto-html/popper.min.js"></script>
+<script src="rubric_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="rubric_files/libs/quarto-html/anchor.min.js"></script>
+<link href="rubric_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="rubric_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="rubric_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="rubric_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="rubric_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="lab-5-rubric-exploratory-data-analysis-eda" class="level1">
+<h1>Lab 5 Rubric: <em>Exploratory Data Analysis (EDA)</em></h1>
+<p><strong>Total points:</strong> 100<br>
+<strong>Grading philosophy:</strong></p>
+<ul>
+<li>Emphasis on interpretation, not just screenshot production</li>
+<li>Reward clear links between visuals/statistics and the research question</li>
+<li>Partial credit encouraged for reasonable analysis, even if imperfectly executed</li>
+<li>Penalize vague responses that only describe charts without interpreting patterns</li>
+</ul>
+<hr>
+<section id="section-a-power-bi-visual-analysis-40-points" class="level2">
+<h2 class="anchored" data-anchor-id="section-a-power-bi-visual-analysis-40-points">Section A: Power BI Visual Analysis (40 points)</h2>
+<section id="q1.-corn-yield-patterns-across-states-and-time-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="q1.-corn-yield-patterns-across-states-and-time-10-points">Q1. Corn Yield Patterns Across States and Time (10 points)</h3>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Score</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">9–10</td>
+<td>Identifies clear state and time patterns, names high/low-yield states, and provides plausible interpretation</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6–8</td>
+<td>Describes major patterns but interpretation is somewhat generic</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3–5</td>
+<td>Lists observations with limited interpretation</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0–2</td>
+<td>Vague, incorrect, or missing</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key indicators:</strong></p>
+<ul>
+<li>Distinguishes cross-state differences from over-time trends</li>
+<li>Notes whether yields generally rise, fall, or vary over time</li>
+<li>Mentions at least one notable state pattern (high, low, or unusual)</li>
+</ul>
+<hr>
+</section>
+<section id="q2.-drought-patterns-in-colorado-vs-other-states-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="q2.-drought-patterns-in-colorado-vs-other-states-10-points">Q2. Drought Patterns in Colorado vs Other States (10 points)</h3>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Score</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">9–10</td>
+<td>Correctly identifies high-severity months/years for Colorado and makes a meaningful comparison to other states</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6–8</td>
+<td>Identifies Colorado patterns but comparison is brief or superficial</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3–5</td>
+<td>Mentions severe periods but lacks clear comparison</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0–2</td>
+<td>Minimal, incorrect, or missing</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Look for evidence of:</strong></p>
+<ul>
+<li>Use of the state slicer and heatmap interpretation</li>
+<li>Specific references to timing (months/years) of severe drought</li>
+<li>Comparative language (e.g., more/less severe, different seasonality)</li>
+</ul>
+<hr>
+</section>
+<section id="q3.-farm-gdp-patterns-across-states-and-time-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="q3.-farm-gdp-patterns-across-states-and-time-10-points">Q3. Farm GDP Patterns Across States and Time (10 points)</h3>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Score</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">9–10</td>
+<td>Clearly identifies cross-state differences and temporal trends with sound interpretation</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6–8</td>
+<td>Captures key patterns but explanation lacks depth</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3–5</td>
+<td>Basic description with little analytical interpretation</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0–2</td>
+<td>Off-topic, vague, or missing</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key indicators:</strong></p>
+<ul>
+<li>Identifies high and low farm GDP states (or clusters)</li>
+<li>Describes trend direction over time (growth, decline, volatility)</li>
+<li>Recognizes that interactive filtering changes interpretation</li>
+</ul>
+<hr>
+</section>
+<section id="q4.-scatterplot-drought-severity-vs-corn-yield-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="q4.-scatterplot-drought-severity-vs-corn-yield-10-points">Q4. Scatterplot: Drought Severity vs Corn Yield (10 points)</h3>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Score</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">9–10</td>
+<td>Correctly interprets direction/strength of association, discusses trend line, and notes outliers/exceptions</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6–8</td>
+<td>Interprets relationship correctly but misses nuance (outliers or strength)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3–5</td>
+<td>Mentions relationship but interpretation is unclear or unsupported</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0–2</td>
+<td>Incorrect, vague, or missing</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Look for evidence of:</strong></p>
+<ul>
+<li>Whether relationship appears negative, positive, or weak</li>
+<li>Proper use of trend line as summary (not proof of causality)</li>
+<li>Identification of outliers or state-year exceptions</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="section-b-r-based-statistical-summaries-40-points" class="level2">
+<h2 class="anchored" data-anchor-id="section-b-r-based-statistical-summaries-40-points">Section B: R-Based Statistical Summaries (40 points)</h2>
+<section id="q5.-distribution-interpretation-histograms-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="q5.-distribution-interpretation-histograms-10-points">Q5. Distribution Interpretation (Histograms) (10 points)</h3>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Score</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">9–10</td>
+<td>Interprets all required histograms (<code>yield_bu_per_acre</code>, <code>mean_dsci</code>, <code>farm_gdp</code>) with discussion of shape, spread, and unusual values</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6–8</td>
+<td>Covers most variables and basic distribution properties</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3–5</td>
+<td>Minimal interpretation; mostly descriptive</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0–2</td>
+<td>Missing or incorrect</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key indicators:</strong></p>
+<ul>
+<li>Mentions skewness/symmetry where relevant</li>
+<li>Notes possible outliers or long tails</li>
+<li>Compares distributions across variables</li>
+</ul>
+<hr>
+</section>
+<section id="q6.-correlation-interpretation-yield-and-farm-gdp-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="q6.-correlation-interpretation-yield-and-farm-gdp-10-points">Q6. Correlation Interpretation (Yield and Farm GDP) (10 points)</h3>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Score</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">9–10</td>
+<td>Correctly interprets sign and magnitude of correlation and gives a careful implication for economic outcomes</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6–8</td>
+<td>Correct sign/magnitude interpretation with limited implications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3–5</td>
+<td>Computes value but interpretation is weak or partially incorrect</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0–2</td>
+<td>Missing or incorrect</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Look for evidence of:</strong></p>
+<ul>
+<li>Correct interpretation of positive/negative/near-zero correlation</li>
+<li>Distinguishes correlation from causation</li>
+<li>Thoughtful link to possible drought-yield-output dynamics</li>
+</ul>
+<hr>
+</section>
+<section id="q7.-summary-statistics-table-and-interpretation-12-points" class="level3">
+<h3 class="anchored" data-anchor-id="q7.-summary-statistics-table-and-interpretation-12-points">Q7. Summary Statistics Table and Interpretation (12 points)</h3>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Score</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">11–12</td>
+<td>Complete, neatly formatted table with all required statistics and a strong interpretation of central tendency/variability</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8–10</td>
+<td>Table mostly complete with reasonable interpretation</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5–7</td>
+<td>Partial table or limited interpretation</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0–4</td>
+<td>Missing major components</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Required table elements:</strong></p>
+<ul>
+<li>Variables: corn yield, drought severity, farm GDP</li>
+<li>Statistics: mean, median, standard deviation, minimum, maximum, number of observations, number of missing values</li>
+<li>Human-readable variable labels</li>
+</ul>
+<hr>
+</section>
+<section id="q8.-codebook-quality-and-completeness-8-points" class="level3">
+<h3 class="anchored" data-anchor-id="q8.-codebook-quality-and-completeness-8-points">Q8. Codebook Quality and Completeness (8 points)</h3>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Score</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">7–8</td>
+<td>Complete codebook for <code>final_merged_data.csv</code> with clear descriptions, data types, units, and source information</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5–6</td>
+<td>Mostly complete with minor omissions or vague descriptions</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3–4</td>
+<td>Partial codebook; several required fields missing</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0–2</td>
+<td>Minimal or missing</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Look for evidence of:</strong></p>
+<ul>
+<li>Variable-by-variable documentation</li>
+<li>Plain-language descriptions understandable to non-technical readers</li>
+<li>Appropriate unit and source attribution where applicable</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="section-c-code-reproducibility-and-deliverables-15-points" class="level2">
+<h2 class="anchored" data-anchor-id="section-c-code-reproducibility-and-deliverables-15-points">Section C: Code, Reproducibility, and Deliverables (15 points)</h2>
+<section id="r-script-log-file-power-bi-pdf" class="level3">
+<h3 class="anchored" data-anchor-id="r-script-log-file-power-bi-pdf">R Script + Log File + Power BI PDF</h3>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Score</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">13–15</td>
+<td><code>lab_05.log</code> runs cleanly with organized/commented code, and Power BI PDF contains all four required pages</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">9–12</td>
+<td>Minor issues in organization or completeness, but core deliverables are present</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5–8</td>
+<td>Deliverables incomplete or code quality weak</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0–4</td>
+<td>Major missing deliverables or nonfunctional workflow</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key indicators:</strong></p>
+<ul>
+<li>Clear script structure (load → visualize → summarize → interpret)</li>
+<li>Reproducible commands and readable comments</li>
+<li>Power BI export includes: Corn, Drought, Farm GDP, Scatterplot pages</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="section-d-overall-notebook-quality-5-points" class="level2">
+<h2 class="anchored" data-anchor-id="section-d-overall-notebook-quality-5-points">Section D: Overall Notebook Quality (5 points)</h2>
+<section id="clarity-completeness-and-critical-thinking" class="level3">
+<h3 class="anchored" data-anchor-id="clarity-completeness-and-critical-thinking">Clarity, Completeness, and Critical Thinking</h3>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Score</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td>All 8 questions answered thoughtfully with clear, evidence-based reasoning</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3–4</td>
+<td>Most questions answered; some responses are brief/superficial</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1–2</td>
+<td>Several incomplete answers or limited engagement</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0</td>
+<td>Missing or severely incomplete notebook</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="instructor-ta-notes" class="level2">
+<h2 class="anchored" data-anchor-id="instructor-ta-notes">Instructor / TA Notes</h2>
+<ul>
+<li>Prioritize interpretation quality over polished prose</li>
+<li>High scores require specific evidence from visuals/statistics, not generic statements</li>
+<li>Reward students who acknowledge uncertainty and limitations</li>
+<li>In Q4 and Q6, deduct points if students claim causal conclusions from correlation alone</li>
+<li>In Q7 and Q8, emphasize communication quality: can another analyst reuse their outputs?</li>
+</ul>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
