@@ -1,0 +1,422 @@
+---
+title: "Week 6 Lab: Forecasting National Park Visitation"
+format:
+  html:
+    theme: zephyr
+    code-copy: true
+    toc: true
+    css: ../course-links.css
+    include-before-body: ../course-links.html
+    include-after-body: ../course-footer.html
+references:
+  - id: hyndman2018fpp3
+    type: book
+    title: "Forecasting: Principles and Practice"
+    author:
+      - family: Hyndman
+        given: "Rob J."
+      - family: Athanasopoulos
+        given: "George"
+    issued:
+      date-parts: [[2018]]
+    edition: "3rd"
+    publisher: "OTexts"
+    URL: "https://otexts.com/fpp3/"
+---
+
+![](includes/lab_header.png)
+
+Forecasting is about using patterns in past data to form a *transparent*, *testable* prediction about the future. In this lab, you will forecast **monthly recreation visits** to a U.S. National Park.
+
+Each person will:
+
+1. **Decompose** the time series into trend, seasonal, and remainder components using **STL**.
+2. **Forecast** the seasonally adjusted series with a simple benchmark method.
+
+This workflow is called **forecasting with decomposition** and is emphasized in *Forecasting: Principles and Practice (3rd ed.)* (FPP3) [@hyndman2018fpp3].  
+- STL decomposition overview: https://otexts.com/fpp3/stl.html 
+- Forecasting with decomposition: https://otexts.com/fpp3/forecasting-decomposition.html 
+
+
+## Learning Objectives
+
+By the end of the lab, you will be able to:
+
+- Convert monthly data into a `tsibble` (tidy time series)
+- Use **STL decomposition** to separate a series into interpretable components
+- Explain what seasonal adjustment does (and why it can help forecasting)
+- Build a simple **decomposition-based forecast**
+- Evaluate forecast accuracy using a train/test split
+- Compare forecasts to a strong benchmark (**seasonal naive**)
+
+## Lab Notebook
+
+Open up a word processing document (e.g., Google Doc, Word, or plain text) to serve as your lab notebook. Use this to respond to questions, document decisions, and reflect on the process. You should also comment your R script thoroughly to explain your code and rationale for each step.
+
+---
+
+# Section 0: Setup
+
+## Download data 
+
+We will download data on monthly National Park visitation from the [Integrated Resource Management Applications (IRMA) Portal](https://irma.nps.gov/Stats/SSRSReports/National%20Reports/Query%20Builder%20for%20Public%20Use%20Statistics%20(1979%20-%20Last%20Calendar%20Year))
+
+<!-- Placeholder for video walkthrough of data download process. -->
+
+## Preliminaries
+
+1. Create a folder called `lab_06`.
+2. Create a new R script called `lab_06.R` in that folder.
+3. Write a brief comment at the top describing the purpose of the script and your name.
+4. Load required libraries at the top:
+
+```{r}
+#| eval: false
+# install.packages("fpp3")  # only if you don't have it
+library(fpp3)              # loads tsibble, feasts, fable, etc.
+library(tidyverse)
+````
+
+The `fpp3` package loads the toolchain used in the textbook FPP3. 
+
+## Load the Arches monthly visitation data
+
+
+```{r}
+#| eval: false
+arches_raw <- read_csv("arches.csv")
+
+glimpse(arches_raw)
+```
+
+The key outcome for this lab is `RecreationVisits`, monthly recreation visits (this is the standard visitation measure in NPS visitor use stats).
+
+:::{.callout-attention}
+**Question 1:** What is the unit of observation in `arches_raw`? (What does one row represent?)
+Answer in your notebook.
+:::
+
+---
+
+# Section 1: Make a time series object
+
+Time series forecasting requires a clear **time index**. 
+
+* **Index**: time variable (year-month)
+
+First, we need to convert the raw data into a `tsibble` (tidy time series format). A `tsibble` is a data frame with special attributes that allow it to be used with time series functions in the `fpp3` ecosystem. We will create a new variable for the time index using a function from the `tsibble` package called `yearmonth()`.
+
+```{r}
+#| eval: false
+
+arches <- arches_raw %>%
+  mutate(ymonth = yearmonth(month)) %>%
+  arrange(ymonth) %>% #ensure data is in chronological order
+  as_tsibble(index = ymonth) #convert to tsibble with ymonth as the index
+
+```
+
+## Plot the raw series
+
+We use the function `autoplot()` from the `feasts` package to quickly visualize the series. autoplot recognizes the time index and creates a time series plot. Technically, autoplot is a wrapper around `ggplot2` that creates a line plot of the specified variable against the time index, which means you can add layers and customize it like any ggplot.
+
+```{r}
+#| eval: false
+arches %>%
+  autoplot(visits)
+
+```
+
+:::{.callout-attention}
+**Question 2:** Describe the visitation series. Do you see:
+
+* long-run changes (trend / regime shifts)?
+* repeated within-year patterns (seasonality)?
+* unusual spikes (outliers)?
+
+Answer in your notebook.
+:::
+
+---
+
+# Section 2: Decomposition with STL
+
+Time series often have multiple patterns at once. Decomposition is a way to separate these patterns into components that are easier to understand and forecast. Decomposition helps you visualize and understand your data, but it can also be used as part of a forecasting workflow (more on that later).
+
+## The idea (intuition + math)
+
+A common way to represent a seasonal time series is an **additive decomposition**:
+
+$$
+y_t = T_t + S_t + R_t
+$$
+
+* $y_t$: observed DSCI at month $t$
+* $T_t$: trend-cycle (slow-moving component)
+* $S_t$: seasonal component (repeats each year)
+* $R_t$: remainder (what's left after removing trend + seasonality)
+
+STL ("Seasonal and Trend decomposition using Loess") estimates $T_t$ and $S_t$ using flexible smoothing, and then defines the remainder as:
+
+$$R_t = y_t - T_t - S_t$$
+
+STL is widely used because it is flexible and can be made robust to outliers. 
+
+## Fit STL decomposition
+
+```{r}
+#| eval: false
+fit_stl <- arches %>%
+  model(
+    STL(visits ~ trend(window = 13), robust = TRUE)
+  )
+
+```
+
+
+* `model(STL(...))` estimates the decomposition components.
+* `trend(window = 13)` controls how smooth the trend is (roughly: how many months the smoother uses).
+* `robust = TRUE` reduces the influence of outliers on the decomposition.
+
+## Visualize the components
+
+After fitting the model, we can extract the components and plot them to understand the patterns in the data.
+
+```{r}
+#| eval: false
+components(fit_stl) %>%
+  autoplot() 
+```
+
+:::{.callout-attention}
+**Question 3:** Use the decomposition plot to answer:
+
+1. Is the seasonal component large relative to the trend and remainder? What does this say about the importance of seasonality at Arches National Park?
+
+2. Which months are typically highest/lowest visitation?
+
+3. Does the trend show multi-year growth/decline regimes?
+
+4. Identify at least one major “shock” period (example: abrupt drops). What might explain it?
+
+Answer in your notebook.
+:::
+
+---
+
+# Section 3: Seasonally adjusted series
+
+A “seasonally adjusted” series removes the repeating seasonal pattern so we can focus on the underlying movement:
+
+$$
+\text{SA}_t = y_t - S_t = T_t + R_t
+$$
+
+This is useful because many forecasting methods work better when seasonality is removed first.
+
+## Extract and plot seasonally adjusted visits series
+
+```{r}
+#| eval: false
+cmp <- components(fit_stl)
+
+cmp %>%
+  as_tibble() %>% #convert to tibble for easier manipulation
+  select(month, visits, season_adjust) %>% #subset to original and seasonally adjusted series
+  pivot_longer(cols = c(visits, season_adjust), #reshape to long format for plotting
+               names_to = "series",
+               values_to = "value") %>%
+  ggplot(aes(x = month, y = value)) + #passing the long format data to ggplot
+  geom_line() +
+  facet_wrap(~series, ncol = 1, scales = "free_y")  #facet_wrap produces different panels for each series
+ 
+```
+
+:::{.callout-attention}
+**Question 4:** Compare the original and seasonally adjusted series. What changes? What stays the same?
+Answer in your notebook.
+:::
+
+---
+
+# Section 4: Forecasting with decomposition
+
+## The big idea (math)
+
+We will forecast $y_t$ by forecasting its parts:
+
+1. Decompose: $y_t = T_t + S_t + R_t$
+
+2. Forecast the seasonally adjusted series:
+   $$\widehat{\text{SA}}_{t+h}$$
+
+3. Forecast the seasonal component:
+   $$\widehat{S}_{t+h}$$
+
+4. Re-seasonalize to get the final forecast:
+   $$\hat{y}_{t+h} = \widehat{\text{SA}}_{t+h} + \widehat{S}_{t+h}$$
+
+This is the “forecasting with decomposition” workflow in @hyndman2018fpp3 Chapter 5.7.
+
+## Train/test split
+
+We have covered how we will do the forecasting. We will evaluate the forecast by comparing it to actual values that we withhold from the model. We will define a "training" dataset to estimate model parameters, then assess performance on the "test" set (the set that the model has not yet seen). This is called a **train/test split**.
+
+We will hold out the last 24 months to test forecasting performance.
+
+```{r}
+#| eval: false
+
+h <- 24
+last_month <- max(arches$month)
+
+train <- arches |>
+  filter(month <= (last_month - h))
+
+test <- arches |>
+  filter(month > (last_month - h))
+```
+
+## Fit a decomposition-based forecasting model (STL + Naive on SA)
+
+Here’s the key modeling step:
+
+* Decompose with STL
+* Forecast the seasonally adjusted series using a simple benchmark: **NAIVE**
+* Automatically reseasonalize the forecast
+
+```{r}
+#| eval: false
+
+#Estimate the decomposition-based forecasting model
+fit_dcmp <- train |>
+  model(
+    stlf = decomposition_model(
+      STL(visits ~ trend(window = 13), robust = TRUE),
+      NAIVE(season_adjust)
+    )
+  )
+
+#Use the model to forecast the next 24 months
+fc_dcmp <- fit_dcmp |>
+  forecast(h = h)
+
+#Plot the forecasts (with the test data visible)
+forecast_plot <- fc_dcmp |>
+  autoplot(arches)
+
+#Display the plot
+forecast_plot
+
+#save the plot as "forecast_plot.png" in the current working directory
+ggsave("forecast_plot.png", plot = forecast_plot, width = 5, height = 5, units = "in")
+
+```
+
+This matches the approach used in the text for decomposition-based forecasting examples. 
+
+---
+
+# Section 5: Forecast accuracy
+
+We care about **out-of-sample** accuracy: how close forecasts are to reality in the held-out test period.
+
+Common metrics:
+
+* **MAE**: mean absolute error - the average size of the errors (ignoring direction)
+* **RMSE**: root mean squared error - the square root of the average squared errors (penalizes large misses)
+* **MAPE**: mean absolute percentage error - the average size of errors relative to actual values (can be misleading when actuals are close to zero)
+
+```{r}
+#| eval: false
+accuracy(fc_dcmp, test) %>% #generates a data frame of accuracy metrics by comparing forecasts to test data
+  select(.model, MAE, RMSE, MAPE) #subsetting to just the metrics we care about
+```
+
+:::{.callout-attention}
+**Question 5:** Report MAE and RMSE. 
+
+- In plain language: how good were the forecasts over the last 24 months? 
+- When you look at the forecast plot, can you see any patterns in the forecast errors (too high, too low, systematic bias)? 
+
+Arches NP implemented a reservation system in 2020 that may have changed visitation patterns. 
+
+- Do you see any evidence of this in the forecast errors? 
+
+However, they just announced that the reservation system will be removed in 2026. 
+
+- How might you account for this in future forecasting?
+
+Answer in your notebook.
+:::
+
+---
+
+# Section 6: Compare to a simple benchmark
+
+A model should be judged against a benchmark. A natural benchmark for monthly data is **seasonal naive**:
+
+$$
+\hat{y}_{t+12} = y_t
+$$
+
+Meaning: “This month will look like the same month last year.” It may surprise you, but seasonal naive is often a hard forecast to beat.
+
+```{r}
+#| eval: false
+fit_bench <- train |>
+  model(
+    stlf = decomposition_model(
+      STL(visits ~ trend(window = 13), robust = TRUE),
+      ETS(season_adjust)
+    ),
+    snaive_bench = SNAIVE(visits ~ lag("year"))
+  )
+
+fc_bench <- fit_bench |>
+  forecast(h = h)
+
+accuracy(fc_bench, test) %>%
+  select(.model, MAE, RMSE, MAPE)
+```
+
+Adapt the plot code above to plot the decomposition-based forecast and the seasonal naive benchmark on the same graph with the test data if you want to visualize the comparison.
+
+:::{.callout-attention}
+**Question 6:** Which forecast performed better: the decomposition-based forecast or seasonal naive? 
+Answer in your notebook.
+:::
+
+---
+
+# Section 7: Replicate the process for another park
+
+Choose another park from the IRMA portal and repeat the process. You can use the same code as a template, but make sure to adjust it for the new data (e.g., variable names, date parsing).
+
+:::{.callout-attention}
+**Question 7:** 
+
+- Describe the new park's visitation series. How does it compare to Arches NP in terms of trend, seasonality, and shocks?
+- How did the forecasting process go for the new park? Did you encounter any new challenges? 
+- How did the forecast accuracy compare to Arches NP?
+
+Answer in your notebook.
+:::
+
+---
+
+# Deliverables
+
+Submit on Canvas:
+
+1. **log file (`lab_forecasting_dsci.log`)**
+   Use the sink-source-sink pattern. Your log should include code + comments explaining each step.
+
+2. **Lab notebook** with answers to Questions 1–6.
+
+3. **One figure** (exported image or screenshot) showing:
+
+   * your STL decomposition plot **or**
+   * your final forecast plot with the holdout period visible
+
+
