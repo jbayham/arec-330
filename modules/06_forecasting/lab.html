@@ -176,8 +176,11 @@ div.csl-indent {
 <li><strong>Decompose</strong> the time series into trend, seasonal, and remainder components using <strong>STL</strong>.</li>
 <li><strong>Forecast</strong> the seasonally adjusted series with a simple benchmark method.</li>
 </ol>
-<p>This workflow is called <strong>forecasting with decomposition</strong> and is emphasized in <em>Forecasting: Principles and Practice (3rd ed.)</em> (FPP3) <span class="citation" data-cites="hyndman2018fpp3">(<a href="#ref-hyndman2018fpp3" role="doc-biblioref">Hyndman and Athanasopoulos 2018</a>)</span>.<br>
-- STL decomposition overview: https://otexts.com/fpp3/stl.html - Forecasting with decomposition: https://otexts.com/fpp3/forecasting-decomposition.html</p>
+<p>This workflow is called <strong>forecasting with decomposition</strong> and is emphasized in <em>Forecasting: Principles and Practice (3rd ed.)</em> (FPP3) <span class="citation" data-cites="hyndman2018fpp3">(<a href="#ref-hyndman2018fpp3" role="doc-biblioref">Hyndman and Athanasopoulos 2018</a>)</span>.</p>
+<ul>
+<li>STL decomposition overview: https://otexts.com/fpp3/stl.html</li>
+<li>Forecasting with decomposition: https://otexts.com/fpp3/forecasting-decomposition.html</li>
+</ul>
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
 <p>By the end of the lab, you will be able to:</p>
@@ -200,7 +203,7 @@ div.csl-indent {
 <section id="download-data" class="level2">
 <h2 class="anchored" data-anchor-id="download-data">Download data</h2>
 <p>We will download data on monthly National Park visitation from the <a href="https://irma.nps.gov/Stats/SSRSReports/National%20Reports/Query%20Builder%20for%20Public%20Use%20Statistics%20(1979%20-%20Last%20Calendar%20Year)">Integrated Resource Management Applications (IRMA) Portal</a></p>
-<!-- Placeholder for video walkthrough of data download process. -->
+<p>Placeholder for video walkthrough of data download process.</p>
 </section>
 <section id="preliminaries" class="level2">
 <h2 class="anchored" data-anchor-id="preliminaries">Preliminaries</h2>
@@ -275,7 +278,7 @@ y_t = T_t + S_t + R_t
 <ul>
 <li><span class="math inline">\(y_t\)</span>: observed DSCI at month <span class="math inline">\(t\)</span></li>
 <li><span class="math inline">\(T_t\)</span>: trend-cycle (slow-moving component)</li>
-<li><span class="math inline">\(S_t\)</span>: seasonal component (repeats each year)</li>
+<li><span class="math inline">\(S_t\)</span>: seasonal component (is similar each year, but is allowed to change slowly over time)</li>
 <li><span class="math inline">\(R_t\)</span>: remainder (what’s left after removing trend + seasonality)</li>
 </ul>
 <p>STL (“Seasonal and Trend decomposition using Loess”) estimates <span class="math inline">\(T_t\)</span> and <span class="math inline">\(S_t\)</span> using flexible smoothing, and then defines the remainder as:</p>
@@ -362,14 +365,15 @@ y_t = T_t + S_t + R_t
 <p>We have covered how we will do the forecasting. We will evaluate the forecast by comparing it to actual values that we withhold from the model. We will define a “training” dataset to estimate model parameters, then assess performance on the “test” set (the set that the model has not yet seen). This is called a <strong>train/test split</strong>.</p>
 <p>We will hold out the last 24 months to test forecasting performance.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="dv">24</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>last_month <span class="ot">&lt;-</span> <span class="fu">max</span>(arches<span class="sc">$</span>month)</span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="dv">36</span> <span class="co">#forecast horizon (months to hold out)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>last_month <span class="ot">&lt;-</span> <span class="fu">max</span>(arches<span class="sc">$</span>month) <span class="co">#define the last month in the data</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> arches <span class="sc">|&gt;</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">&lt;=</span> (last_month <span class="sc">-</span> h))</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> arches <span class="sc">|&gt;</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">&gt;</span> (last_month <span class="sc">-</span> h))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Create training and test sets based on the last month and forecast horizon</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> arches <span class="sc">%&gt;%</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">&lt;=</span> (last_month <span class="sc">-</span> h))</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> arches <span class="sc">%&gt;%</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">&gt;</span> (last_month <span class="sc">-</span> h))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="fit-a-decomposition-based-forecasting-model-stl-naive-on-sa" class="level2">
@@ -382,21 +386,21 @@ y_t = T_t + S_t + R_t
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Estimate the decomposition-based forecasting model</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fit_dcmp <span class="ot">&lt;-</span> train <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fit_dcmp <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">stlf =</span> <span class="fu">decomposition_model</span>(</span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">STL</span>(visits <span class="sc">~</span> <span class="fu">trend</span>(<span class="at">window =</span> <span class="dv">13</span>), <span class="at">robust =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">NAIVE</span>(season_adjust)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ETS</span>(season_adjust)</span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Use the model to forecast the next 24 months</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>fc_dcmp <span class="ot">&lt;-</span> fit_dcmp <span class="sc">|&gt;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>fc_dcmp <span class="ot">&lt;-</span> fit_dcmp <span class="sc">%&gt;%</span></span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">forecast</span>(<span class="at">h =</span> h)</span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot the forecasts (with the test data visible)</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>forecast_plot <span class="ot">&lt;-</span> fc_dcmp <span class="sc">|&gt;</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>(arches)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>forecast_plot <span class="ot">&lt;-</span> fc_dcmp <span class="sc">%&gt;%</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>(test)</span>
 <span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">#Display the plot</span></span>
 <span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>forecast_plot</span>
@@ -404,7 +408,7 @@ y_t = T_t + S_t + R_t
 <span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co">#save the plot as "forecast_plot.png" in the current working directory</span></span>
 <span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"forecast_plot.png"</span>, <span class="at">plot =</span> forecast_plot, <span class="at">width =</span> <span class="dv">5</span>, <span class="at">height =</span> <span class="dv">5</span>, <span class="at">units =</span> <span class="st">"in"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This matches the approach used in the text for decomposition-based forecasting examples.</p>
+<p>This is similar to the approach used in <span class="citation" data-cites="hyndman2018fpp3">Hyndman and Athanasopoulos (<a href="#ref-hyndman2018fpp3" role="doc-biblioref">2018</a>)</span> for decomposition-based forecasting examples.</p>
 <hr>
 </section>
 </section>
@@ -424,7 +428,7 @@ y_t = T_t + S_t + R_t
 <div class="callout-attention">
 <p><strong>Question 5:</strong> Report MAE and RMSE.</p>
 <ul>
-<li>In plain language: how good were the forecasts over the last 24 months?</li>
+<li>In plain language: how good were the forecasts over the last 36 months?</li>
 <li>When you look at the forecast plot, can you see any patterns in the forecast errors (too high, too low, systematic bias)?</li>
 </ul>
 <p>Arches NP implemented a reservation system in 2020 that may have changed visitation patterns.</p>
@@ -446,6 +450,7 @@ y_t = T_t + S_t + R_t
 \hat{y}_{t+12} = y_t
 \]</span></p>
 <p>Meaning: “This month will look like the same month last year.” It may surprise you, but seasonal naive is often a hard forecast to beat.</p>
+<p>We can fit a seasonal naive model using the <code>SNAIVE()</code> function in the <code>fable</code> package. The syntax of <code>model()</code> allows us to fit multiple models at once, so we can estimate the decomposition-based forecast and the seasonal naive benchmark in one step.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fit_bench <span class="ot">&lt;-</span> train <span class="sc">|&gt;</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(</span>
