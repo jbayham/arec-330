@@ -270,8 +270,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="correlation" class="level2">
 <h2 class="anchored" data-anchor-id="correlation">Correlation</h2>
-<p>Correlation measures the strength and direction of a linear relationship between two numeric variables. The correlation coefficient (r) ranges from -1 to 1, where: - r = 1 indicates a perfect positive linear relationship - r = -1 indicates a perfect negative linear relationship - r = 0 indicates no linear relationship</p>
-<p>To calculate the correlation between corn yield and farm GDP, we can use the <code>cor()</code> function in R: <code>umf#| eval: false cor(combined_dat$yield_bu_per_acre, combined_dat$farm_gdp, use = "complete.obs")</code></p>
+<p>Correlation measures the strength and direction of a linear relationship between two numeric variables. The correlation coefficient (r) ranges from -1 to 1, where:</p>
+<ul>
+<li>r = 1 indicates a perfect positive linear relationship</li>
+<li>r = -1 indicates a perfect negative linear relationship</li>
+<li>r = 0 indicates no linear relationship</li>
+</ul>
+<p>To calculate the correlation between corn yield and farm GDP, we can use the <code>cor()</code> function in R:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(combined_dat<span class="sc">$</span>yield_bu_per_acre, combined_dat<span class="sc">$</span>farm_gdp, <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="callout-attention">
 <p>Question 6: What does the correlation coefficient between corn yield and farm GDP tell you about their relationship? Is it positive, negative, or close to zero? What might this imply about how drought affects not just yields but also economic output? Answer in your notebook.</p>
 </div>
@@ -281,19 +289,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Summary statistics provide a concise description of the main features of a dataset. Common summary statistics include: - Mean: The average value of a variable. - Median: The middle value when the data is sorted. - Standard Deviation: A measure of the spread of the data around the mean. - Minimum and Maximum: The smallest and largest values in the dataset.</p>
 <p>We can use the <code>summarise()</code> function from the <code>dplyr</code> package to calculate these summary statistics for corn yield. For example, to calculate the mean, median, and standard deviation of corn yield by state:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(combined_dat, </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean_yield =</span> <span class="fu">mean</span>(yield_bu_per_acre, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">median_yield =</span> <span class="fu">median</span>(yield_bu_per_acre, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd_yield =</span> <span class="fu">sd</span>(yield_bu_per_acre, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_yield =</span> <span class="fu">min</span>(yield_bu_per_acre, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_yield =</span> <span class="fu">max</span>(yield_bu_per_acre, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(combined_dat, </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean_yield =</span> <span class="fu">mean</span>(yield_bu_per_acre, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">median_yield =</span> <span class="fu">median</span>(yield_bu_per_acre, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd_yield =</span> <span class="fu">sd</span>(yield_bu_per_acre, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_yield =</span> <span class="fu">min</span>(yield_bu_per_acre, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_yield =</span> <span class="fu">max</span>(yield_bu_per_acre, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Because this is a common task, others have created packages to make it easier. The <code>skimr</code> package provides a convenient function called <code>skim()</code> that gives you a comprehensive summary of your data, including the mean, median, standard deviation, and more for each variable in your dataset:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr) <span class="co">#install.packages("skimr") if you don't have it already</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>sum_stats <span class="ot">&lt;-</span> <span class="fu">skim</span>(combined_dat)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sum_stats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr) <span class="co">#install.packages("skimr") if you don't have it already</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sum_stats <span class="ot">&lt;-</span> <span class="fu">skim</span>(combined_dat)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sum_stats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout-attention">
 <p>Question 7: Create a table in your notebook summarizing the mean, median, standard deviation, minimum, maximum, number of observations, and number of missing values for corn yield, drought severity, and farm GDP. Format the table neatly in your notebook. Replace the variable names with descriptive names that humans can easily understand. What do these summary statistics tell you about the central tendency and variability of these variables? Are there any surprising values or patterns in the summary statistics? Answer in your notebook.</p>

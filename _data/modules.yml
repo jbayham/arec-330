@@ -71,6 +71,6 @@
   dirname: modules/06_forecasting
   desc: "This module will focus on forecasting methods and how to do forecasting in R."
   readings:
-  - title: "Forecasting: Principles and Practice (Ch 1-3)"
+  - title: "Forecasting: Principles and Practice (Ch 1-3 & 5.7)"
     url: "https://otexts.com/fpp3/"
 

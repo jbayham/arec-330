@@ -179,12 +179,14 @@ ggplot(data = combined_dat, aes(y = state_alpha, x = farm_gdp)) +
 ## Correlation
 
 Correlation measures the strength and direction of a linear relationship between two numeric variables. The correlation coefficient (r) ranges from -1 to 1, where:
+
 - r = 1 indicates a perfect positive linear relationship
 - r = -1 indicates a perfect negative linear relationship
 - r = 0 indicates no linear relationship
 
 To calculate the correlation between corn yield and farm GDP, we can use the `cor()` function in R:
-```{r}#| eval: false
+```{r}
+#| eval: false
 cor(combined_dat$yield_bu_per_acre, combined_dat$farm_gdp, use = "complete.obs")
 ```
 
@@ -214,6 +216,7 @@ summarise(combined_dat,
 ```
 
 Because this is a common task, others have created packages to make it easier. The `skimr` package provides a convenient function called `skim()` that gives you a comprehensive summary of your data, including the mean, median, standard deviation, and more for each variable in your dataset:
+
 ```{r}
 #| eval: false
 library(skimr) #install.packages("skimr") if you don't have it already
