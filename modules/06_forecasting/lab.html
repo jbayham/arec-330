@@ -197,6 +197,8 @@ div.csl-indent {
 </section>
 <section id="section-0-setup" class="level1">
 <h1>Section 0: Setup</h1>
+<iframe src="https://colostate-my.sharepoint.com/personal/jbayham_colostate_edu/_layouts/15/embed.aspx?UniqueId=c560049b-3941-46ca-b914-96682ddaada8&amp;embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&amp;referrer=StreamWebApp&amp;referrerScenario=EmbedDialog.Create" width="640" height="360" frameborder="0" scrolling="no" allowfullscreen="">
+</iframe>
 <section id="download-data" class="level2">
 <h2 class="anchored" data-anchor-id="download-data">Download data</h2>
 <p>We will download data on monthly National Park visitation from the <a href="https://irma.nps.gov/Stats/SSRSReports/National%20Reports/Query%20Builder%20for%20Public%20Use%20Statistics%20(1979%20-%20Last%20Calendar%20Year)">Integrated Resource Management Applications (IRMA) Portal</a></p>
@@ -228,13 +230,13 @@ div.csl-indent {
 <div class="callout-attention">
 <p><strong>Question 1:</strong> What is the unit of observation in <code>arches_raw</code>? (What does one row represent?) Answer in your notebook.</p>
 </div>
-<iframe src="https://colostate-my.sharepoint.com/personal/jbayham_colostate_edu/_layouts/15/embed.aspx?UniqueId=c560049b-3941-46ca-b914-96682ddaada8&amp;embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&amp;referrer=StreamWebApp&amp;referrerScenario=EmbedDialog.Create" width="640" height="360" frameborder="0" scrolling="no" allowfullscreen="">
-</iframe>
 <hr>
 </section>
 </section>
 <section id="section-1-make-a-time-series-object" class="level1">
 <h1>Section 1: Make a time series object</h1>
+<iframe src="https://colostate-my.sharepoint.com/personal/jbayham_colostate_edu/_layouts/15/embed.aspx?UniqueId=ef26227e-0153-4eaa-b195-0ef1c333bc32&amp;embed=%7B%22hvm%22%3Atrue%2C%22ust%22%3Atrue%7D&amp;referrer=StreamWebApp&amp;referrerScenario=EmbedDialog.Create" width="640" height="360" frameborder="0" scrolling="no" allowfullscreen="" title="lab_06_section_01.mp4">
+</iframe>
 <p>Time series forecasting requires a clear <strong>time index</strong>.</p>
 <ul>
 <li><strong>Index</strong>: time variable (year-month)</li>
@@ -269,6 +271,8 @@ div.csl-indent {
 </section>
 <section id="section-2-decomposition-with-stl" class="level1">
 <h1>Section 2: Decomposition with STL</h1>
+<iframe src="https://colostate-my.sharepoint.com/personal/jbayham_colostate_edu/_layouts/15/embed.aspx?UniqueId=6ba6ec74-7dd6-43c6-ac69-c515e3ebfc04&amp;embed=%7B%22hvm%22%3Atrue%2C%22ust%22%3Atrue%7D&amp;referrer=StreamWebApp&amp;referrerScenario=EmbedDialog.Create" width="640" height="360" frameborder="0" scrolling="no" allowfullscreen="" title="lab_06_decomp.mp4">
+</iframe>
 <p>Time series often have multiple patterns at once. Decomposition is a way to separate these patterns into components that are easier to understand and forecast. Decomposition helps you visualize and understand your data, but it can also be used as part of a forecasting workflow (more on that later).</p>
 <section id="the-idea-intuition-math" class="level2">
 <h2 class="anchored" data-anchor-id="the-idea-intuition-math">The idea (intuition + math)</h2>
@@ -346,6 +350,8 @@ y_t = T_t + S_t + R_t
 </section>
 <section id="section-4-forecasting-with-decomposition" class="level1">
 <h1>Section 4: Forecasting with decomposition</h1>
+<iframe src="https://colostate-my.sharepoint.com/personal/jbayham_colostate_edu/_layouts/15/embed.aspx?UniqueId=86f8d013-0644-4a93-b0fc-f400a69befa2&amp;embed=%7B%22hvm%22%3Atrue%2C%22ust%22%3Atrue%7D&amp;referrer=StreamWebApp&amp;referrerScenario=EmbedDialog.Create" width="640" height="360" frameborder="0" scrolling="no" allowfullscreen="" title="lab_06_forecasting.mp4">
+</iframe>
 <section id="the-big-idea-math" class="level2">
 <h2 class="anchored" data-anchor-id="the-big-idea-math">The big idea (math)</h2>
 <p>We will forecast <span class="math inline">\(y_t\)</span> by forecasting its parts:</p>
@@ -360,7 +366,7 @@ y_t = T_t + S_t + R_t
 <section id="traintest-split" class="level2">
 <h2 class="anchored" data-anchor-id="traintest-split">Train/test split</h2>
 <p>We have covered how we will do the forecasting. We will evaluate the forecast by comparing it to actual values that we withhold from the model. We will define a “training” dataset to estimate model parameters, then assess performance on the “test” set (the set that the model has not yet seen). This is called a <strong>train/test split</strong>.</p>
-<p>We will hold out the last 24 months to test forecasting performance.</p>
+<p>We will hold out the last 36 months to test forecasting performance.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="dv">36</span> <span class="co">#forecast horizon (months to hold out)</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>last_month <span class="ot">&lt;-</span> <span class="fu">max</span>(arches<span class="sc">$</span>ymonth) <span class="co">#define the last month in the data</span></span>
@@ -378,7 +384,7 @@ y_t = T_t + S_t + R_t
 <p>Here’s the key modeling step:</p>
 <ul>
 <li>Decompose with STL</li>
-<li>Forecast the seasonally adjusted series using <strong>ETS</strong> (error-trend-seasonal) model, which is a flexible exponential smoothing method that can capture various types of trends and seasonality. ETS is a common choice for forecasting the seasonally adjusted series because it can adapt to different patterns in the data.</li>
+<li>Forecast the seasonally adjusted series using <strong>ETS</strong> (error-trend-seasonal) model, which is a flexible exponential smoothing method that can capture various types of trends and seasonality. ETS is a common choice for forecasting the seasonally adjusted series because it can adapt to different patterns in the data <span class="citation" data-cites="hyndman2018fpp3">(<a href="#ref-hyndman2018fpp3" role="doc-biblioref">Hyndman and Athanasopoulos 2018</a>)</span>.</li>
 <li>Automatically reseasonalize the forecast</li>
 </ul>
 <div class="cell">
@@ -391,7 +397,7 @@ y_t = T_t + S_t + R_t
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Use the model to forecast the next 24 months</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Use the model to forecast the next 36 months</span></span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>fc_dcmp <span class="ot">&lt;-</span> fit_dcmp <span class="sc">%&gt;%</span></span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">forecast</span>(<span class="at">h =</span> h)</span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
@@ -411,6 +417,8 @@ y_t = T_t + S_t + R_t
 </section>
 <section id="section-5-forecast-accuracy" class="level1">
 <h1>Section 5: Forecast accuracy</h1>
+<iframe src="https://colostate-my.sharepoint.com/personal/jbayham_colostate_edu/_layouts/15/embed.aspx?UniqueId=0b7e67db-393a-4b77-a8d0-7f00b10e5450&amp;embed=%7B%22hvm%22%3Atrue%2C%22ust%22%3Atrue%7D&amp;referrer=StreamWebApp&amp;referrerScenario=EmbedDialog.Create" width="640" height="360" frameborder="0" scrolling="no" allowfullscreen="" title="lab_06_accuracy.mp4">
+</iframe>
 <p>We care about <strong>out-of-sample</strong> accuracy: how close forecasts are to reality in the held-out test period.</p>
 <p>Common metrics:</p>
 <ul>

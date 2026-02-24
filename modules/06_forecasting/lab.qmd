@@ -58,6 +58,8 @@ Open up a word processing document (e.g., Google Doc, Word, or plain text) to se
 
 # Section 0: Setup
 
+<iframe src="https://colostate-my.sharepoint.com/personal/jbayham_colostate_edu/_layouts/15/embed.aspx?UniqueId=c560049b-3941-46ca-b914-96682ddaada8&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" width="640" height="360" frameborder="0" scrolling="no" allowfullscreen></iframe>
+
 ## Download data 
 
 We will download data on monthly National Park visitation from the [Integrated Resource Management Applications (IRMA) Portal](https://irma.nps.gov/Stats/SSRSReports/National%20Reports/Query%20Builder%20for%20Public%20Use%20Statistics%20(1979%20-%20Last%20Calendar%20Year))
@@ -98,11 +100,11 @@ Answer in your notebook.
 :::
 
 
-<iframe src="https://colostate-my.sharepoint.com/personal/jbayham_colostate_edu/_layouts/15/embed.aspx?UniqueId=c560049b-3941-46ca-b914-96682ddaada8&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" width="640" height="360" frameborder="0" scrolling="no" allowfullscreen></iframe>
-
 ---
 
 # Section 1: Make a time series object
+
+<iframe src="https://colostate-my.sharepoint.com/personal/jbayham_colostate_edu/_layouts/15/embed.aspx?UniqueId=ef26227e-0153-4eaa-b195-0ef1c333bc32&embed=%7B%22hvm%22%3Atrue%2C%22ust%22%3Atrue%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" width="640" height="360" frameborder="0" scrolling="no" allowfullscreen title="lab_06_section_01.mp4"></iframe>
 
 Time series forecasting requires a clear **time index**. 
 
@@ -146,6 +148,8 @@ Answer in your notebook.
 ---
 
 # Section 2: Decomposition with STL
+
+<iframe src="https://colostate-my.sharepoint.com/personal/jbayham_colostate_edu/_layouts/15/embed.aspx?UniqueId=6ba6ec74-7dd6-43c6-ac69-c515e3ebfc04&embed=%7B%22hvm%22%3Atrue%2C%22ust%22%3Atrue%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" width="640" height="360" frameborder="0" scrolling="no" allowfullscreen title="lab_06_decomp.mp4"></iframe>
 
 Time series often have multiple patterns at once. Decomposition is a way to separate these patterns into components that are easier to understand and forecast. Decomposition helps you visualize and understand your data, but it can also be used as part of a forecasting workflow (more on that later).
 
@@ -244,6 +248,8 @@ Answer in your notebook.
 
 # Section 4: Forecasting with decomposition
 
+<iframe src="https://colostate-my.sharepoint.com/personal/jbayham_colostate_edu/_layouts/15/embed.aspx?UniqueId=86f8d013-0644-4a93-b0fc-f400a69befa2&embed=%7B%22hvm%22%3Atrue%2C%22ust%22%3Atrue%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" width="640" height="360" frameborder="0" scrolling="no" allowfullscreen title="lab_06_forecasting.mp4"></iframe>
+
 ## The big idea (math)
 
 We will forecast $y_t$ by forecasting its parts:
@@ -265,7 +271,7 @@ This is the “forecasting with decomposition” workflow in @hyndman2018fpp3 Ch
 
 We have covered how we will do the forecasting. We will evaluate the forecast by comparing it to actual values that we withhold from the model. We will define a "training" dataset to estimate model parameters, then assess performance on the "test" set (the set that the model has not yet seen). This is called a **train/test split**.
 
-We will hold out the last 24 months to test forecasting performance.
+We will hold out the last 36 months to test forecasting performance.
 
 ```{r}
 #| eval: false
@@ -286,7 +292,7 @@ test <- arches %>%
 Here’s the key modeling step:
 
 * Decompose with STL
-* Forecast the seasonally adjusted series using **ETS** (error-trend-seasonal) model, which is a flexible exponential smoothing method that can capture various types of trends and seasonality. ETS is a common choice for forecasting the seasonally adjusted series because it can adapt to different patterns in the data.
+* Forecast the seasonally adjusted series using **ETS** (error-trend-seasonal) model, which is a flexible exponential smoothing method that can capture various types of trends and seasonality. ETS is a common choice for forecasting the seasonally adjusted series because it can adapt to different patterns in the data [@hyndman2018fpp3].
 * Automatically reseasonalize the forecast
 
 ```{r}
@@ -301,7 +307,7 @@ fit_dcmp <- train %>%
     )
   )
 
-#Use the model to forecast the next 24 months
+#Use the model to forecast the next 36 months
 fc_dcmp <- fit_dcmp %>%
   forecast(h = h)
 
@@ -322,6 +328,8 @@ This is similar to the approach used in @hyndman2018fpp3 for decomposition-based
 ---
 
 # Section 5: Forecast accuracy
+
+<iframe src="https://colostate-my.sharepoint.com/personal/jbayham_colostate_edu/_layouts/15/embed.aspx?UniqueId=0b7e67db-393a-4b77-a8d0-7f00b10e5450&embed=%7B%22hvm%22%3Atrue%2C%22ust%22%3Atrue%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" width="640" height="360" frameborder="0" scrolling="no" allowfullscreen title="lab_06_accuracy.mp4"></iframe>
 
 We care about **out-of-sample** accuracy: how close forecasts are to reality in the held-out test period.
 
