@@ -95,7 +95,7 @@ glimpse(arches_raw)
 The key outcome for this lab is `RecreationVisits`, monthly recreation visits (this is the standard visitation measure in NPS visitor use stats).
 
 :::{.callout-attention}
-**Question 1:** What is the unit of observation in `arches_raw`? (What does one row represent?)
+**Question 1 (7%):** What is the unit of observation in `arches_raw`? (What does one row represent?)
 Answer in your notebook.
 :::
 
@@ -136,7 +136,7 @@ arches %>%
 ```
 
 :::{.callout-attention}
-**Question 2:** Describe the visitation series. Do you see:
+**Question 2 (8%):** Describe the visitation series. Do you see:
 
 * long-run changes (trend / regime shifts)?
 * repeated within-year patterns (seasonality)?
@@ -199,7 +199,7 @@ components(fit_stl) %>%
 ```
 
 :::{.callout-attention}
-**Question 3:** Use the decomposition plot to answer:
+**Question 3 (15%):** Use the decomposition plot to answer:
 
 1. Is the seasonal component large relative to the trend and remainder? What does this say about the importance of seasonality at Arches National Park?
 
@@ -240,7 +240,7 @@ cmp %>%
 ```
 
 :::{.callout-attention}
-**Question 4:** Compare the original and seasonally adjusted series. What changes? What stays the same?
+**Question 4 (10%):** Compare the original and seasonally adjusted series. What changes? What stays the same?
 Answer in your notebook.
 :::
 
@@ -250,7 +250,7 @@ Answer in your notebook.
 
 <iframe src="https://colostate-my.sharepoint.com/personal/jbayham_colostate_edu/_layouts/15/embed.aspx?UniqueId=86f8d013-0644-4a93-b0fc-f400a69befa2&embed=%7B%22hvm%22%3Atrue%2C%22ust%22%3Atrue%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" width="640" height="360" frameborder="0" scrolling="no" allowfullscreen title="lab_06_forecasting.mp4"></iframe>
 
-## The big idea (math)
+## The forecasting workflow
 
 We will forecast $y_t$ by forecasting its parts:
 
@@ -287,7 +287,7 @@ test <- arches %>%
   filter(ymonth > (last_month - h))
 ```
 
-## Fit a decomposition-based forecasting model (STL + ETS on SA)
+## Fit a decomposition-based forecasting model 
 
 Here’s the key modeling step:
 
@@ -346,7 +346,7 @@ accuracy(fc_dcmp, test) %>% #generates a data frame of accuracy metrics by compa
 ```
 
 :::{.callout-attention}
-**Question 5:** Report MAE and RMSE. 
+**Question 5 (20%):** Report MAE and RMSE. 
 
 - In plain language: how good were the forecasts over the last 36 months? 
 - When you look at the forecast plot, can you see any patterns in the forecast errors (too high, too low, systematic bias)? 
@@ -397,7 +397,7 @@ accuracy(fc_bench, test) %>%
 Adapt the plot code above to plot the decomposition-based forecast and the seasonal naive benchmark on the same graph with the test data if you want to visualize the comparison.
 
 :::{.callout-attention}
-**Question 6:** Which forecast performed better: the decomposition-based forecast or seasonal naive? 
+**Question 6 (15%):** Which forecast performed better: the decomposition-based forecast or seasonal naive? 
 Answer in your notebook.
 :::
 
@@ -408,7 +408,7 @@ Answer in your notebook.
 Choose another park from the IRMA portal and repeat the process. You can use the same code as a template, but make sure to adjust it for the new data (e.g., variable names, date parsing).
 
 :::{.callout-attention}
-**Question 7:** 
+**Question 7 (15%):** 
 
 - Describe the new park's visitation series. How does it compare to Arches NP in terms of trend, seasonality, and shocks?
 - How did the forecasting process go for the new park? Did you encounter any new challenges? 
@@ -419,18 +419,16 @@ Answer in your notebook.
 
 ---
 
-# Deliverables
+# Deliverables (10%)
 
 Submit on Canvas:
 
 1. **log file (`lab_06.log`)**
-   Use the sink-source-sink pattern. Your log should include code + comments explaining each step.
+   Use the sink-source-sink pattern. Your log should include code, output and comments explaining each step.
 
-2. **Lab notebook** with answers to Questions 1–6.
+2. **Lab notebook** with answers to Questions 1–7.
 
-3. **One figure** (exported image or screenshot) showing:
+3. **One figure** (exported image) showing STL decomposition plot for your chosen park 
 
-   * your STL decomposition plot **or**
-   * your final forecast plot with the holdout period visible
 
 

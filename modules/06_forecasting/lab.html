@@ -122,14 +122,14 @@ div.csl-indent {
   </ul></li>
   <li><a href="#section-4-forecasting-with-decomposition" id="toc-section-4-forecasting-with-decomposition" class="nav-link" data-scroll-target="#section-4-forecasting-with-decomposition">Section 4: Forecasting with decomposition</a>
   <ul class="collapse">
-  <li><a href="#the-big-idea-math" id="toc-the-big-idea-math" class="nav-link" data-scroll-target="#the-big-idea-math">The big idea (math)</a></li>
+  <li><a href="#the-forecasting-workflow" id="toc-the-forecasting-workflow" class="nav-link" data-scroll-target="#the-forecasting-workflow">The forecasting workflow</a></li>
   <li><a href="#traintest-split" id="toc-traintest-split" class="nav-link" data-scroll-target="#traintest-split">Train/test split</a></li>
-  <li><a href="#fit-a-decomposition-based-forecasting-model-stl-ets-on-sa" id="toc-fit-a-decomposition-based-forecasting-model-stl-ets-on-sa" class="nav-link" data-scroll-target="#fit-a-decomposition-based-forecasting-model-stl-ets-on-sa">Fit a decomposition-based forecasting model (STL + ETS on SA)</a></li>
+  <li><a href="#fit-a-decomposition-based-forecasting-model" id="toc-fit-a-decomposition-based-forecasting-model" class="nav-link" data-scroll-target="#fit-a-decomposition-based-forecasting-model">Fit a decomposition-based forecasting model</a></li>
   </ul></li>
   <li><a href="#section-5-forecast-accuracy" id="toc-section-5-forecast-accuracy" class="nav-link" data-scroll-target="#section-5-forecast-accuracy">Section 5: Forecast accuracy</a></li>
   <li><a href="#section-6-compare-to-a-simple-benchmark" id="toc-section-6-compare-to-a-simple-benchmark" class="nav-link" data-scroll-target="#section-6-compare-to-a-simple-benchmark">Section 6: Compare to a simple benchmark</a></li>
   <li><a href="#section-7-replicate-the-process-for-another-park" id="toc-section-7-replicate-the-process-for-another-park" class="nav-link" data-scroll-target="#section-7-replicate-the-process-for-another-park">Section 7: Replicate the process for another park</a></li>
-  <li><a href="#deliverables" id="toc-deliverables" class="nav-link" data-scroll-target="#deliverables">Deliverables</a></li>
+  <li><a href="#deliverables-10" id="toc-deliverables-10" class="nav-link" data-scroll-target="#deliverables-10">Deliverables (10%)</a></li>
   </ul>
 </nav>
 </div>
@@ -228,7 +228,7 @@ div.csl-indent {
 </div>
 <p>The key outcome for this lab is <code>RecreationVisits</code>, monthly recreation visits (this is the standard visitation measure in NPS visitor use stats).</p>
 <div class="callout-attention">
-<p><strong>Question 1:</strong> What is the unit of observation in <code>arches_raw</code>? (What does one row represent?) Answer in your notebook.</p>
+<p><strong>Question 1 (7%):</strong> What is the unit of observation in <code>arches_raw</code>? (What does one row represent?) Answer in your notebook.</p>
 </div>
 <hr>
 </section>
@@ -258,7 +258,7 @@ div.csl-indent {
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>(visits)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout-attention">
-<p><strong>Question 2:</strong> Describe the visitation series. Do you see:</p>
+<p><strong>Question 2 (8%):</strong> Describe the visitation series. Do you see:</p>
 <ul>
 <li>long-run changes (trend / regime shifts)?</li>
 <li>repeated within-year patterns (seasonality)?</li>
@@ -312,7 +312,7 @@ y_t = T_t + S_t + R_t
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout-attention">
-<p><strong>Question 3:</strong> Use the decomposition plot to answer:</p>
+<p><strong>Question 3 (15%):</strong> Use the decomposition plot to answer:</p>
 <ol type="1">
 <li><p>Is the seasonal component large relative to the trend and remainder? What does this say about the importance of seasonality at Arches National Park?</p></li>
 <li><p>Which months are typically highest/lowest visitation?</p></li>
@@ -343,7 +343,7 @@ y_t = T_t + S_t + R_t
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>series, <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">scales =</span> <span class="st">"free_y"</span>)  <span class="co">#facet_wrap produces different panels for each series</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout-attention">
-<p><strong>Question 4:</strong> Compare the original and seasonally adjusted series. What changes? What stays the same? Answer in your notebook.</p>
+<p><strong>Question 4 (10%):</strong> Compare the original and seasonally adjusted series. What changes? What stays the same? Answer in your notebook.</p>
 </div>
 <hr>
 </section>
@@ -352,8 +352,8 @@ y_t = T_t + S_t + R_t
 <h1>Section 4: Forecasting with decomposition</h1>
 <iframe src="https://colostate-my.sharepoint.com/personal/jbayham_colostate_edu/_layouts/15/embed.aspx?UniqueId=86f8d013-0644-4a93-b0fc-f400a69befa2&amp;embed=%7B%22hvm%22%3Atrue%2C%22ust%22%3Atrue%7D&amp;referrer=StreamWebApp&amp;referrerScenario=EmbedDialog.Create" width="640" height="360" frameborder="0" scrolling="no" allowfullscreen="" title="lab_06_forecasting.mp4">
 </iframe>
-<section id="the-big-idea-math" class="level2">
-<h2 class="anchored" data-anchor-id="the-big-idea-math">The big idea (math)</h2>
+<section id="the-forecasting-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="the-forecasting-workflow">The forecasting workflow</h2>
 <p>We will forecast <span class="math inline">\(y_t\)</span> by forecasting its parts:</p>
 <ol type="1">
 <li><p>Decompose: <span class="math inline">\(y_t = T_t + S_t + R_t\)</span></p></li>
@@ -379,8 +379,8 @@ y_t = T_t + S_t + R_t
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ymonth <span class="sc">&gt;</span> (last_month <span class="sc">-</span> h))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="fit-a-decomposition-based-forecasting-model-stl-ets-on-sa" class="level2">
-<h2 class="anchored" data-anchor-id="fit-a-decomposition-based-forecasting-model-stl-ets-on-sa">Fit a decomposition-based forecasting model (STL + ETS on SA)</h2>
+<section id="fit-a-decomposition-based-forecasting-model" class="level2">
+<h2 class="anchored" data-anchor-id="fit-a-decomposition-based-forecasting-model">Fit a decomposition-based forecasting model</h2>
 <p>Here’s the key modeling step:</p>
 <ul>
 <li>Decompose with STL</li>
@@ -431,7 +431,7 @@ y_t = T_t + S_t + R_t
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(.model, MAE, RMSE, MAPE) <span class="co">#subsetting to just the metrics we care about</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout-attention">
-<p><strong>Question 5:</strong> Report MAE and RMSE.</p>
+<p><strong>Question 5 (20%):</strong> Report MAE and RMSE.</p>
 <ul>
 <li>In plain language: how good were the forecasts over the last 36 months?</li>
 <li>When you look at the forecast plot, can you see any patterns in the forecast errors (too high, too low, systematic bias)?</li>
@@ -474,7 +474,7 @@ y_t = T_t + S_t + R_t
 </div>
 <p>Adapt the plot code above to plot the decomposition-based forecast and the seasonal naive benchmark on the same graph with the test data if you want to visualize the comparison.</p>
 <div class="callout-attention">
-<p><strong>Question 6:</strong> Which forecast performed better: the decomposition-based forecast or seasonal naive? Answer in your notebook.</p>
+<p><strong>Question 6 (15%):</strong> Which forecast performed better: the decomposition-based forecast or seasonal naive? Answer in your notebook.</p>
 </div>
 <hr>
 </section>
@@ -482,7 +482,7 @@ y_t = T_t + S_t + R_t
 <h1>Section 7: Replicate the process for another park</h1>
 <p>Choose another park from the IRMA portal and repeat the process. You can use the same code as a template, but make sure to adjust it for the new data (e.g., variable names, date parsing).</p>
 <div class="callout-attention">
-<p><strong>Question 7:</strong></p>
+<p><strong>Question 7 (15%):</strong></p>
 <ul>
 <li>Describe the new park’s visitation series. How does it compare to Arches NP in terms of trend, seasonality, and shocks?</li>
 <li>How did the forecasting process go for the new park? Did you encounter any new challenges?</li>
@@ -492,17 +492,13 @@ y_t = T_t + S_t + R_t
 </div>
 <hr>
 </section>
-<section id="deliverables" class="level1">
-<h1>Deliverables</h1>
+<section id="deliverables-10" class="level1">
+<h1>Deliverables (10%)</h1>
 <p>Submit on Canvas:</p>
 <ol type="1">
-<li><p><strong>log file (<code>lab_06.log</code>)</strong> Use the sink-source-sink pattern. Your log should include code + comments explaining each step.</p></li>
-<li><p><strong>Lab notebook</strong> with answers to Questions 1–6.</p></li>
-<li><p><strong>One figure</strong> (exported image or screenshot) showing:</p>
-<ul>
-<li>your STL decomposition plot <strong>or</strong></li>
-<li>your final forecast plot with the holdout period visible</li>
-</ul></li>
+<li><p><strong>log file (<code>lab_06.log</code>)</strong> Use the sink-source-sink pattern. Your log should include code, output and comments explaining each step.</p></li>
+<li><p><strong>Lab notebook</strong> with answers to Questions 1–7.</p></li>
+<li><p><strong>One figure</strong> (exported image) showing STL decomposition plot for your chosen park</p></li>
 </ol>
 
 </section>
