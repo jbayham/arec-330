@@ -97,6 +97,9 @@ The key outcome for this lab is `RecreationVisits`, monthly recreation visits (t
 Answer in your notebook.
 :::
 
+
+<iframe src="https://colostate-my.sharepoint.com/personal/jbayham_colostate_edu/_layouts/15/embed.aspx?UniqueId=c560049b-3941-46ca-b914-96682ddaada8&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" width="640" height="360" frameborder="0" scrolling="no" allowfullscreen></iframe>
+
 ---
 
 # Section 1: Make a time series object
@@ -111,7 +114,9 @@ First, we need to convert the raw data into a `tsibble` (tidy time series format
 #| eval: false
 
 arches <- arches_raw %>%
-  mutate(ymonth = yearmonth(month)) %>%
+  mutate(ymonth = make_yearmonth(year=Year,month=Month),
+         visits = RecreationVisits) %>%
+  select(ymonth, visits) %>% #keep only the time index and the variable we care about
   arrange(ymonth) %>% #ensure data is in chronological order
   as_tsibble(index = ymonth) #convert to tsibble with ymonth as the index
 
@@ -152,7 +157,7 @@ $$
 y_t = T_t + S_t + R_t
 $$
 
-* $y_t$: observed DSCI at month $t$
+* $y_t$: observed visits at month $t$
 * $T_t$: trend-cycle (slow-moving component)
 * $S_t$: seasonal component (is similar each year, but is allowed to change slowly over time)
 * $R_t$: remainder (what's left after removing trend + seasonality)
@@ -203,9 +208,8 @@ components(fit_stl) %>%
 Answer in your notebook.
 :::
 
----
 
-# Section 3: Seasonally adjusted series
+## Seasonally adjusted series
 
 A “seasonally adjusted” series removes the repeating seasonal pattern so we can focus on the underlying movement:
 
@@ -215,19 +219,17 @@ $$
 
 This is useful because many forecasting methods work better when seasonality is removed first.
 
-## Extract and plot seasonally adjusted visits series
-
 ```{r}
 #| eval: false
 cmp <- components(fit_stl)
 
 cmp %>%
   as_tibble() %>% #convert to tibble for easier manipulation
-  select(month, visits, season_adjust) %>% #subset to original and seasonally adjusted series
+  select(ymonth, visits, season_adjust) %>% #subset to original and seasonally adjusted series
   pivot_longer(cols = c(visits, season_adjust), #reshape to long format for plotting
                names_to = "series",
                values_to = "value") %>%
-  ggplot(aes(x = month, y = value)) + #passing the long format data to ggplot
+  ggplot(aes(x = ymonth, y = value)) + #passing the long format data to ggplot
   geom_line() +
   facet_wrap(~series, ncol = 1, scales = "free_y")  #facet_wrap produces different panels for each series
  
@@ -269,22 +271,22 @@ We will hold out the last 24 months to test forecasting performance.
 #| eval: false
 
 h <- 36 #forecast horizon (months to hold out)
-last_month <- max(arches$month) #define the last month in the data
+last_month <- max(arches$ymonth) #define the last month in the data
 
 #Create training and test sets based on the last month and forecast horizon
 train <- arches %>%
-  filter(month <= (last_month - h))
+  filter(ymonth <= (last_month - h))
 
 test <- arches %>%
-  filter(month > (last_month - h))
+  filter(ymonth > (last_month - h))
 ```
 
-## Fit a decomposition-based forecasting model (STL + Naive on SA)
+## Fit a decomposition-based forecasting model (STL + ETS on SA)
 
 Here’s the key modeling step:
 
 * Decompose with STL
-* Forecast the seasonally adjusted series using a simple benchmark: **NAIVE**
+* Forecast the seasonally adjusted series using **ETS** (error-trend-seasonal) model, which is a flexible exponential smoothing method that can capture various types of trends and seasonality. ETS is a common choice for forecasting the seasonally adjusted series because it can adapt to different patterns in the data.
 * Automatically reseasonalize the forecast
 
 ```{r}
@@ -413,7 +415,7 @@ Answer in your notebook.
 
 Submit on Canvas:
 
-1. **log file (`lab_forecasting_dsci.log`)**
+1. **log file (`lab_06.log`)**
    Use the sink-source-sink pattern. Your log should include code + comments explaining each step.
 
 2. **Lab notebook** with answers to Questions 1–6.

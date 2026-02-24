@@ -118,16 +118,13 @@ div.csl-indent {
   <li><a href="#the-idea-intuition-math" id="toc-the-idea-intuition-math" class="nav-link" data-scroll-target="#the-idea-intuition-math">The idea (intuition + math)</a></li>
   <li><a href="#fit-stl-decomposition" id="toc-fit-stl-decomposition" class="nav-link" data-scroll-target="#fit-stl-decomposition">Fit STL decomposition</a></li>
   <li><a href="#visualize-the-components" id="toc-visualize-the-components" class="nav-link" data-scroll-target="#visualize-the-components">Visualize the components</a></li>
-  </ul></li>
-  <li><a href="#section-3-seasonally-adjusted-series" id="toc-section-3-seasonally-adjusted-series" class="nav-link" data-scroll-target="#section-3-seasonally-adjusted-series">Section 3: Seasonally adjusted series</a>
-  <ul class="collapse">
-  <li><a href="#extract-and-plot-seasonally-adjusted-visits-series" id="toc-extract-and-plot-seasonally-adjusted-visits-series" class="nav-link" data-scroll-target="#extract-and-plot-seasonally-adjusted-visits-series">Extract and plot seasonally adjusted visits series</a></li>
+  <li><a href="#seasonally-adjusted-series" id="toc-seasonally-adjusted-series" class="nav-link" data-scroll-target="#seasonally-adjusted-series">Seasonally adjusted series</a></li>
   </ul></li>
   <li><a href="#section-4-forecasting-with-decomposition" id="toc-section-4-forecasting-with-decomposition" class="nav-link" data-scroll-target="#section-4-forecasting-with-decomposition">Section 4: Forecasting with decomposition</a>
   <ul class="collapse">
   <li><a href="#the-big-idea-math" id="toc-the-big-idea-math" class="nav-link" data-scroll-target="#the-big-idea-math">The big idea (math)</a></li>
   <li><a href="#traintest-split" id="toc-traintest-split" class="nav-link" data-scroll-target="#traintest-split">Train/test split</a></li>
-  <li><a href="#fit-a-decomposition-based-forecasting-model-stl-naive-on-sa" id="toc-fit-a-decomposition-based-forecasting-model-stl-naive-on-sa" class="nav-link" data-scroll-target="#fit-a-decomposition-based-forecasting-model-stl-naive-on-sa">Fit a decomposition-based forecasting model (STL + Naive on SA)</a></li>
+  <li><a href="#fit-a-decomposition-based-forecasting-model-stl-ets-on-sa" id="toc-fit-a-decomposition-based-forecasting-model-stl-ets-on-sa" class="nav-link" data-scroll-target="#fit-a-decomposition-based-forecasting-model-stl-ets-on-sa">Fit a decomposition-based forecasting model (STL + ETS on SA)</a></li>
   </ul></li>
   <li><a href="#section-5-forecast-accuracy" id="toc-section-5-forecast-accuracy" class="nav-link" data-scroll-target="#section-5-forecast-accuracy">Section 5: Forecast accuracy</a></li>
   <li><a href="#section-6-compare-to-a-simple-benchmark" id="toc-section-6-compare-to-a-simple-benchmark" class="nav-link" data-scroll-target="#section-6-compare-to-a-simple-benchmark">Section 6: Compare to a simple benchmark</a></li>
@@ -231,6 +228,8 @@ div.csl-indent {
 <div class="callout-attention">
 <p><strong>Question 1:</strong> What is the unit of observation in <code>arches_raw</code>? (What does one row represent?) Answer in your notebook.</p>
 </div>
+<iframe src="https://colostate-my.sharepoint.com/personal/jbayham_colostate_edu/_layouts/15/embed.aspx?UniqueId=c560049b-3941-46ca-b914-96682ddaada8&amp;embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&amp;referrer=StreamWebApp&amp;referrerScenario=EmbedDialog.Create" width="640" height="360" frameborder="0" scrolling="no" allowfullscreen="">
+</iframe>
 <hr>
 </section>
 </section>
@@ -243,9 +242,11 @@ div.csl-indent {
 <p>First, we need to convert the raw data into a <code>tsibble</code> (tidy time series format). A <code>tsibble</code> is a data frame with special attributes that allow it to be used with time series functions in the <code>fpp3</code> ecosystem. We will create a new variable for the time index using a function from the <code>tsibble</code> package called <code>yearmonth()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>arches <span class="ot">&lt;-</span> arches_raw <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ymonth =</span> <span class="fu">yearmonth</span>(month)) <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(ymonth) <span class="sc">%&gt;%</span> <span class="co">#ensure data is in chronological order</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tsibble</span>(<span class="at">index =</span> ymonth) <span class="co">#convert to tsibble with ymonth as the index</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ymonth =</span> <span class="fu">make_yearmonth</span>(<span class="at">year=</span>Year,<span class="at">month=</span>Month),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">visits =</span> RecreationVisits) <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ymonth, visits) <span class="sc">%&gt;%</span> <span class="co">#keep only the time index and the variable we care about</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(ymonth) <span class="sc">%&gt;%</span> <span class="co">#ensure data is in chronological order</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tsibble</span>(<span class="at">index =</span> ymonth) <span class="co">#convert to tsibble with ymonth as the index</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="plot-the-raw-series" class="level2">
 <h2 class="anchored" data-anchor-id="plot-the-raw-series">Plot the raw series</h2>
@@ -276,7 +277,7 @@ div.csl-indent {
 y_t = T_t + S_t + R_t
 \]</span></p>
 <ul>
-<li><span class="math inline">\(y_t\)</span>: observed DSCI at month <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(y_t\)</span>: observed visits at month <span class="math inline">\(t\)</span></li>
 <li><span class="math inline">\(T_t\)</span>: trend-cycle (slow-moving component)</li>
 <li><span class="math inline">\(S_t\)</span>: seasonal component (is similar each year, but is allowed to change slowly over time)</li>
 <li><span class="math inline">\(R_t\)</span>: remainder (what’s left after removing trend + seasonality)</li>
@@ -316,28 +317,24 @@ y_t = T_t + S_t + R_t
 </ol>
 <p>Answer in your notebook.</p>
 </div>
-<hr>
 </section>
-</section>
-<section id="section-3-seasonally-adjusted-series" class="level1">
-<h1>Section 3: Seasonally adjusted series</h1>
+<section id="seasonally-adjusted-series" class="level2">
+<h2 class="anchored" data-anchor-id="seasonally-adjusted-series">Seasonally adjusted series</h2>
 <p>A “seasonally adjusted” series removes the repeating seasonal pattern so we can focus on the underlying movement:</p>
 <p><span class="math display">\[
 \text{SA}_t = y_t - S_t = T_t + R_t
 \]</span></p>
 <p>This is useful because many forecasting methods work better when seasonality is removed first.</p>
-<section id="extract-and-plot-seasonally-adjusted-visits-series" class="level2">
-<h2 class="anchored" data-anchor-id="extract-and-plot-seasonally-adjusted-visits-series">Extract and plot seasonally adjusted visits series</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cmp <span class="ot">&lt;-</span> <span class="fu">components</span>(fit_stl)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>cmp <span class="sc">%&gt;%</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> <span class="co">#convert to tibble for easier manipulation</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(month, visits, season_adjust) <span class="sc">%&gt;%</span> <span class="co">#subset to original and seasonally adjusted series</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ymonth, visits, season_adjust) <span class="sc">%&gt;%</span> <span class="co">#subset to original and seasonally adjusted series</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(visits, season_adjust), <span class="co">#reshape to long format for plotting</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"series"</span>,</span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> month, <span class="at">y =</span> value)) <span class="sc">+</span> <span class="co">#passing the long format data to ggplot</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> ymonth, <span class="at">y =</span> value)) <span class="sc">+</span> <span class="co">#passing the long format data to ggplot</span></span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>series, <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">scales =</span> <span class="st">"free_y"</span>)  <span class="co">#facet_wrap produces different panels for each series</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -366,22 +363,22 @@ y_t = T_t + S_t + R_t
 <p>We will hold out the last 24 months to test forecasting performance.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="dv">36</span> <span class="co">#forecast horizon (months to hold out)</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>last_month <span class="ot">&lt;-</span> <span class="fu">max</span>(arches<span class="sc">$</span>month) <span class="co">#define the last month in the data</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>last_month <span class="ot">&lt;-</span> <span class="fu">max</span>(arches<span class="sc">$</span>ymonth) <span class="co">#define the last month in the data</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Create training and test sets based on the last month and forecast horizon</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> arches <span class="sc">%&gt;%</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">&lt;=</span> (last_month <span class="sc">-</span> h))</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ymonth <span class="sc">&lt;=</span> (last_month <span class="sc">-</span> h))</span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> arches <span class="sc">%&gt;%</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">&gt;</span> (last_month <span class="sc">-</span> h))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ymonth <span class="sc">&gt;</span> (last_month <span class="sc">-</span> h))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="fit-a-decomposition-based-forecasting-model-stl-naive-on-sa" class="level2">
-<h2 class="anchored" data-anchor-id="fit-a-decomposition-based-forecasting-model-stl-naive-on-sa">Fit a decomposition-based forecasting model (STL + Naive on SA)</h2>
+<section id="fit-a-decomposition-based-forecasting-model-stl-ets-on-sa" class="level2">
+<h2 class="anchored" data-anchor-id="fit-a-decomposition-based-forecasting-model-stl-ets-on-sa">Fit a decomposition-based forecasting model (STL + ETS on SA)</h2>
 <p>Here’s the key modeling step:</p>
 <ul>
 <li>Decompose with STL</li>
-<li>Forecast the seasonally adjusted series using a simple benchmark: <strong>NAIVE</strong></li>
+<li>Forecast the seasonally adjusted series using <strong>ETS</strong> (error-trend-seasonal) model, which is a flexible exponential smoothing method that can capture various types of trends and seasonality. ETS is a common choice for forecasting the seasonally adjusted series because it can adapt to different patterns in the data.</li>
 <li>Automatically reseasonalize the forecast</li>
 </ul>
 <div class="cell">
@@ -491,7 +488,7 @@ y_t = T_t + S_t + R_t
 <h1>Deliverables</h1>
 <p>Submit on Canvas:</p>
 <ol type="1">
-<li><p><strong>log file (<code>lab_forecasting_dsci.log</code>)</strong> Use the sink-source-sink pattern. Your log should include code + comments explaining each step.</p></li>
+<li><p><strong>log file (<code>lab_06.log</code>)</strong> Use the sink-source-sink pattern. Your log should include code + comments explaining each step.</p></li>
 <li><p><strong>Lab notebook</strong> with answers to Questions 1–6.</p></li>
 <li><p><strong>One figure</strong> (exported image or screenshot) showing:</p>
 <ul>
