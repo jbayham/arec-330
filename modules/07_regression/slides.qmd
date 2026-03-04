@@ -1,0 +1,323 @@
+---
+title: "Week 7: Regression as a Tool for Answering Questions"
+format:
+  revealjs:
+    slide-number: true
+    theme: [night, ../custom.scss]
+    touch: true
+---
+
+## 
+
+<!-- clicker questions -->
+
+## Motivating Questions
+:::{.incremental}
+- Do fuel stations closer to highways charge higher prices?
+- Does advertising increase sales?
+- Do higher wages lead to higher productivity?
+:::
+
+
+## Running example: <br>Corn Yield and Drought
+
+What is the effect of drought on corn yields?
+
+<br>
+
+```{mermaid}
+%%{init: {"themeVariables": {"fontSize": "24px"}}}%%
+flowchart LR
+  G[Goals] ==> P[Problem]
+  P ==> Q[Question]
+  Q ==> Da[Data]
+  Da ==> M[Model]
+  M ==> R[Result]
+  R ==> D[Decision]
+
+  style M fill:#FFD966,stroke:#333,stroke-width:3px,color:#000
+```
+
+<br>
+
+We seek a method that tells us how much corn yields change when drought conditions change.
+
+## 
+:::{.main-point}
+Regression is a method for understanding relationships between quantitative variables
+:::
+
+## Example: Gas prices and highway proximity
+
+- Do fuel stations closer to highways charge higher prices?
+- Can you tell by looking at a map of gas stations and highways?
+- <https://www.gasbuddy.com/gasprices/wyoming/cheyenne>
+
+## How does regression work?
+
+- Regression estimates the relationship between a dependent variable and one or more independent variables.
+- It quantifies how much the dependent variable changes when the independent variable(s) change.
+- It does this by "fitting a line" through the data points that best captures the relationship.
+- What do we mean by "best" fit?
+
+## Regression demo
+
+- What is the equation of a line?
+- The data give us our x and y values. Coordinates.
+
+Go to R
+
+:::{.notes}
+- motivate the generation of the data
+- experiment with the class moving the line
+- show how the line changes with different slopes and intercepts (parameters)
+- the solution is the line that minimizes the sum of squared errors. why squared errors? why not absolute errors?
+
+:::
+
+## Regression math{.scrollable}
+
+- The regression line is defined by the equation: 
+$$
+y = \alpha + \beta x + \epsilon
+$$
+
+    - $\alpha$ is the intercept (the value of $y$ when $x=0$)
+    - $\beta$ is the slope (the change in $y$ for a one-unit change
+    in $x$)
+    - $\epsilon$ is the error term (the difference between the observed and predicted values)
+
+Rearranging gives us:
+$$
+y - \alpha - \beta x = \epsilon
+$$
+
+The regression line is the one that minimizes the sum of squared errors:
+$$
+\min_{\alpha, \beta} \sum_{i=1}^n (y_i - \alpha - \beta x_i)^2
+$$
+
+Differentiating with respect to $\alpha$ and $\beta$ and setting the derivatives to zero gives us the normal equations, which we can solve to find the estimates of $\alpha$ and $\beta$.
+
+$$
+\begin{cases}
+\sum_{i=1}^n (y_i - \alpha - \beta x_i) = 0 \\
+\sum_{i=1}^n x_i (y_i - \alpha - \beta x_i) = 0
+\end{cases}
+$$
+
+We have 2 equations with 2 unknowns. Solving these equations yields the least squares estimates:
+$$
+\hat{\beta} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n (x_i - \bar{x})^2}
+$$
+$$
+\hat{\alpha} = \bar{y} - \hat{\beta} \bar{x}
+$$
+
+$\beta$ is also the covariance of $x$ and $y$ divided by the variance of $x$:
+$$
+\hat{\beta} = \frac{\text{Cov}(x, y)}{\text{Var}(x)}
+$$  
+
+# Interpretting Regression Output
+
+##
+- The regression output provides estimates of the coefficients (intercept and slope) along with their standard errors, t-values, and p-values.
+
+## Example regression output:
+
+<br>
+
+| Variable | Estimate | Std. Error | t-stat | p-value |
+|----------|:--------:|:----------:|:------:|:-------:|
+| x        | -4.23    | 0.23       | -18.39 | <0.001  |
+| Intercept | 4.48     | 0.27       | 16.59  | <0.001  |
+
+
+## Interpreting Coefficient Estimates
+
+- The coefficient estimates tell us the **expected change** in the dependent variable for a one-unit change in the independent variable
+- In our example, the slope of -4.23 means that for every one-unit increase in x, y is expected to decrease by 4.23 units.
+- If x was miles from the highway, this would mean that for every additional mile from the highway, gas prices are expected to decrease by 4.23 cents.
+
+## Estimating Uncertainty: Standard Errors
+
+- The estimates are just that: estimates. They are subject to sampling variability.
+- What if we repeated the study with a different sample of gas stations? or a different period in time? Would we get the same estimates?
+- The standard error gives us a measure of how much the estimate would vary across different samples.
+
+## Hypothesis Testing{.scrollable}
+
+- We make assumptions about the error term $\epsilon$ (e.g., it is normally distributed with mean 0 and constant variance) that allow us to perform hypothesis tests on the coefficients.
+- The null hypothesis is typically that the coefficient is equal to zero (no effect).
+- The t-statistic is the estimate divided by its standard error, and the p-value tells us the probability of observing such an extreme t-statistic if the null hypothesis were true.
+- In our example, the t-statistic of -18.39 for the slope indicates that the coefficient is highly statistically significant (p < 0.001), suggesting a strong relationship between distance from the highway and gas prices.
+
+:::{.notes}
+Imagine testing whether a coin is fair.
+If you flip 10 times and get 6 heads:
+Not that surprising.
+If you flip 100 times and get 95 heads:
+Very surprising if coin is fair.
+The p-value quantifies “how surprising.”
+:::
+
+
+## 
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-width: 8
+#| fig-height: 4.2
+
+
+df <- 52
+t_obs <- -18.39
+alpha <- 0.05
+t_crit <- qt(1 - alpha/2, df)
+
+# Plot range chosen for teaching: shows critical values clearly
+x <- seq(-5, 5, length.out = 2000)
+y <- dt(x, df)
+
+plot(x, y, type = "l", xlab = "t", ylab = "Density",
+     main = sprintf("t distribution (df = %d): two-sided test at α = %.2f", df, alpha))
+
+# Shade rejection regions (tails beyond ±t_crit)
+x_left  <- x[x <= -t_crit]
+y_left  <- dt(x_left, df)
+polygon(c(x_left, rev(x_left)), c(y_left, rep(0, length(y_left))),
+        col = "gray80", border = NA)
+
+x_right <- x[x >=  t_crit]
+y_right <- dt(x_right, df)
+polygon(c(x_right, rev(x_right)), c(y_right, rep(0, length(y_right))),
+        col = "gray80", border = NA)
+
+# Draw critical value lines
+abline(v = c(-t_crit, t_crit), lty = 2)
+text(-t_crit, max(y)*0.95, sprintf("-t* = %.2f", t_crit), pos = 2)
+text( t_crit, max(y)*0.95, sprintf("t* = %.2f", t_crit), pos = 4)
+
+
+
+```
+
+$t=(\beta - 0)/\sigma_\beta$
+
+## 
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-width: 8
+#| fig-height: 4.2
+
+df <- 52
+t_obs <- -18.39
+alpha <- 0.05
+t_crit <- qt(1 - alpha/2, df)
+
+# Plot range chosen for teaching: shows critical values clearly
+x <- seq(-5, 5, length.out = 2000)
+y <- dt(x, df)
+
+plot(x, y, type = "l", xlab = "t", ylab = "Density",
+     main = sprintf("t distribution (df = %d): two-sided test at α = %.2f", df, alpha))
+
+# Shade rejection regions (tails beyond ±t_crit)
+x_left  <- x[x <= -t_crit]
+y_left  <- dt(x_left, df)
+polygon(c(x_left, rev(x_left)), c(y_left, rep(0, length(y_left))),
+        col = "gray80", border = NA)
+
+x_right <- x[x >=  t_crit]
+y_right <- dt(x_right, df)
+polygon(c(x_right, rev(x_right)), c(y_right, rep(0, length(y_right))),
+        col = "gray80", border = NA)
+
+# Draw critical value lines
+abline(v = c(-t_crit, t_crit), lty = 2)
+text(-t_crit, max(y)*0.95, sprintf("-t* = %.2f", t_crit), pos = 2)
+text( t_crit, max(y)*0.95, sprintf("t* = %.2f", t_crit), pos = 4)
+
+# Mark observed t.
+# It's off the plotted range; show an arrow indicating it's far beyond the left tail.
+if (t_obs < min(x)) {
+  arrows(x0 = -4.2, y0 = dt(-4.2, df)+.03, x1 = -4.95, y1 = dt(-4.95, df) +.03, length = 0.1)
+  text(-4.2, dt(-4.2, df)+.03, sprintf("observed t = %.2f (far left)", t_obs), pos = 4)
+} else {
+  abline(v = t_obs, lwd = 2)
+  text(t_obs, max(y)*0.8, sprintf("observed t = %.2f", t_obs), pos = 4)
+}
+
+# Optional: label acceptance region
+#text(0, max(y)*0.35, "Fail to reject H₀ region", cex = 0.9)
+#text(-3.2, dt(-3.2, df)*1.2, "Reject H₀", cex = 0.9)
+#text( 3.2, dt( 3.2, df)*1.2, "Reject H₀", cex = 0.9)
+```
+
+## {.iclicker} 
+<div style="font-size: 0.75em;">
+Dependent variable: Gas Price ($/gallon)
+
+| Variable                    | Estimate | Std. Error | t-stat | p-value |
+| --------------------- | -------- | ---------- | ------ | --------- |
+| Distance to Highway (miles) | -0.04    | 0.02       | -2.00  | 0.048   |
+| Constant                    | 3.50     | 0.10       | 35.00  | <0.001  |
+
+
+:::{.question}
+What does the coefficient on distance to highway mean?
+:::
+
+For every additional mile from the highway...
+
+:::{.choices}
+A. gas prices are expected to decrease by 4 cents.
+
+B. gas prices are expected to decrease by 0.02 cents.
+
+C. gas prices are expected to increase by 3.50 dollars.
+
+D. gas prices are expected to decrease by 4 dollars.
+:::
+</div>
+
+## {.iclicker} 
+<div style="font-size: 0.65em;">
+Dependent variable: Daily Mountain Bike Trail Visits
+
+| Variable          | Estimate | Std. Error | t-stat | p-value |
+| ----------------- | -------- | ---------- | ------ | ------- |
+| Temperature (°F)  | 12.5     | 8.3        | 1.51   | 0.130  |
+| Constant          | -300.0   | 150.0      | -2.00  | 0.048   |
+
+:::{.question}
+Which of the following is true about the relationship between temperature and daily mountain bike trail visits?
+:::
+
+:::{.choices}
+A. Each 1°F increase in temperature causes 12.5 more trail visits per day.
+
+B. A 1°F increase in temperature is associated with 12.5 more visits per day, and this relationship is statistically significant at the 5% level.
+
+C. A 1°F increase in temperature is associated with 12.5 more visits per day, but the estimate is not statistically significant at the 5% level.
+
+D. Temperature has no relationship with trail visits because the p-value is greater than 0.05.
+:::
+</div>
+
+
+## Summary
+
+- Regression is a powerful tool for quantifying relationships between variables.
+- Coefficient estimates tell us the expected change in the dependent variable for a one-unit change in the independent variable.
+- Standard errors and hypothesis tests help us understand the uncertainty around our estimates.
+- Interpretation of regression results requires careful consideration of the context and the assumptions underlying the model.
+
+## Lab Preview
+
+- We will use regression to analyze the relationship between drought conditions and corn yields.
+- We will learn how to fit a regression model, interpret the output, and evaluate the model's assumptions and performance.

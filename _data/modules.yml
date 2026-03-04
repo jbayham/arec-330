@@ -75,4 +75,18 @@
   readings:
   - title: "Forecasting: Principles and Practice (Ch 1-3 & 5.7)"
     url: "https://otexts.com/fpp3/"
+    
+- title: "Week 7: Regression"
+  dirname: modules/07_regression
+  desc: "This module will span two weeks and focus on regression methods to inform decision making."
+  slides: "slides.html"
+  #lab: "lab.html"
+  
+  materials:
+  - title: "Regression Explanation"
+    url: "https://youtu.be/dstJjA8s9Do?si=vTkh48CvY79BfxaI"
+  - title: "Uncertainty and Hypothesis Testing, Part 1"
+    url: "https://youtu.be/QdtBxOJvO_E?si=_LhrYGEls9VUWWZC"
+  - title: "Uncertainty and Hypothesis Testing, Part 2"
+    url: "https://youtu.be/FY-Qwsk-zRM?si=sDmemRpbLneDBz20"
 
