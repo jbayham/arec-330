@@ -81,7 +81,9 @@
   desc: "This module will span two weeks and focus on regression methods to inform decision making."
   slides: "slides.html"
   #lab: "lab.html"
-  
+  readings:
+  - title: "Introduction to Regression Analysis"
+    url: "https://inomics.com/terms/regression-analysis-1538159"
   materials:
   - title: "Regression Explanation"
     url: "https://youtu.be/dstJjA8s9Do?si=vTkh48CvY79BfxaI"
