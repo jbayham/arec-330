@@ -7,9 +7,56 @@ format:
     touch: true
 ---
 
-## 
+## {.iclicker} 
+<div style="font-size: 0.85em;">
+A monthly visitation series shows strong summer peaks, a gradual upward trend, and a sharp drop in 2020.
 
-<!-- clicker questions -->
+:::{.question}
+Why might we decompose the series before forecasting?
+:::
+
+:::{.choices}
+A. To eliminate randomness completely
+
+B. To separate long-run movement from seasonal patterns
+
+C. To guarantee a more accurate forecast
+
+D. To avoid using a training/test split
+:::
+</div>
+
+::::{.notes}
+- B: Decomposing the series allows us to model the trend and seasonality separately, which can improve forecast accuracy.
+:::
+
+## {.iclicker} 
+<!-- <div style="font-size: 0.65em;"> -->
+
+:::{.question}
+Why do we evaluate a forecasting model on a test set instead of the same data used to estimate it?
+:::
+
+:::{.choices}
+A. Because forecasting software requires it
+
+B. To reduce computation time
+
+C. To simulate how the model performs on unseen future data
+
+D. To remove seasonality
+:::
+<!-- </div> -->
+
+:::{.notes}
+- C: Evaluating on a test set simulates how the model will perform on future data
+:::
+
+## Explanatory Data Analysis
+
+- Many questions in economics and business are about explaining relationships between variables.
+- We can generate evidence of these relationships using regression analysis.
+- There are many other methods but regression is a good starting point.
 
 ## Motivating Questions
 :::{.incremental}
@@ -44,7 +91,7 @@ We seek a method that tells us how much corn yields change when drought conditio
 
 ## 
 :::{.main-point}
-Regression is a method for understanding relationships between quantitative variables
+Regression is a statistical method for understanding relationships between quantitative variables
 :::
 
 ## Example: Gas prices and highway proximity
@@ -52,6 +99,12 @@ Regression is a method for understanding relationships between quantitative vari
 - Do fuel stations closer to highways charge higher prices?
 - Can you tell by looking at a map of gas stations and highways?
 - <https://www.gasbuddy.com/gasprices/wyoming/cheyenne>
+
+## Explanation vs. Prediction
+- Regression can be used for both explanation and prediction.
+- Explanation focuses on understanding the relationship between variables (e.g., how does drought affect corn yields?).
+- Prediction focuses on accurately forecasting future values (e.g., what will corn yields be next year?).
+- A good explanation may provide a good prediction*
 
 ## How does regression work?
 
@@ -64,6 +117,8 @@ Regression is a method for understanding relationships between quantitative vari
 
 - What is the equation of a line?
 - The data give us our x and y values. Coordinates.
+- We can visualize the data as points on a scatterplot.
+- We want to find the line that best fits those points.
 
 Go to R
 
@@ -72,6 +127,7 @@ Go to R
 - experiment with the class moving the line
 - show how the line changes with different slopes and intercepts (parameters)
 - the solution is the line that minimizes the sum of squared errors. why squared errors? why not absolute errors?
+- End on seed=20 n=54
 
 :::
 
@@ -119,49 +175,78 @@ $$
 \hat{\beta} = \frac{\text{Cov}(x, y)}{\text{Var}(x)}
 $$  
 
-# Interpretting Regression Output
+# Interpretting Regression Results
 
-##
-- The regression output provides estimates of the coefficients (intercept and slope) along with their standard errors, t-values, and p-values.
+## Regression Results Overview
+- The regression results provides estimates of the coefficients (intercept and slope) along with their standard errors, t-values, and p-values.
+- The output is generally reported in a table
+- You need to understand how to read and interpret this table to draw meaningful conclusions from the regression analysis.
 
-## Example regression output:
+## Example regression output: Estimate
 
 <br>
 
-| Variable | Estimate | Std. Error | t-stat | p-value |
-|----------|:--------:|:----------:|:------:|:-------:|
-| x        | -4.23    | 0.23       | -18.39 | <0.001  |
-| Intercept | 4.48     | 0.27       | 16.59  | <0.001  |
+| Variable  | Estimate |
+|-----------|:--------:|
+| x         | -4.23    |
+| Intercept | 4.48     |
 
+<br>
+This is just an estimate of the true relationship between x and y. We need to understand uncertainty.
 
-## Interpreting Coefficient Estimates
+## Example regression output: Standard Errors
 
-- The coefficient estimates tell us the **expected change** in the dependent variable for a one-unit change in the independent variable
-- In our example, the slope of -4.23 means that for every one-unit increase in x, y is expected to decrease by 4.23 units.
-- If x was miles from the highway, this would mean that for every additional mile from the highway, gas prices are expected to decrease by 4.23 cents.
+<br>
 
-## Estimating Uncertainty: Standard Errors
+| Variable  | Estimate | Std. Error |
+|-----------|:--------:|:----------:|
+| x         | -4.23    | 0.23       |
+| Intercept | 4.48     | 0.27       |
 
-- The estimates are just that: estimates. They are subject to sampling variability.
-- What if we repeated the study with a different sample of gas stations? or a different period in time? Would we get the same estimates?
-- The standard error gives us a measure of how much the estimate would vary across different samples.
+<br>
+Does 0.23 seem small or large relative to the estimate of -4.23? 
 
-## Hypothesis Testing{.scrollable}
+## 
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-width: 8
+#| fig-height: 4.2
 
-- We make assumptions about the error term $\epsilon$ (e.g., it is normally distributed with mean 0 and constant variance) that allow us to perform hypothesis tests on the coefficients.
-- The null hypothesis is typically that the coefficient is equal to zero (no effect).
-- The t-statistic is the estimate divided by its standard error, and the p-value tells us the probability of observing such an extreme t-statistic if the null hypothesis were true.
-- In our example, the t-statistic of -18.39 for the slope indicates that the coefficient is highly statistically significant (p < 0.001), suggesting a strong relationship between distance from the highway and gas prices.
+beta_hat <- -4.23
+se_beta  <- 0.23
 
-:::{.notes}
-Imagine testing whether a coin is fair.
-If you flip 10 times and get 6 heads:
-Not that surprising.
-If you flip 100 times and get 95 heads:
-Very surprising if coin is fair.
-The p-value quantifies “how surprising.”
-:::
+x <- seq(beta_hat - 4 * se_beta, beta_hat + 4 * se_beta, length.out = 2000)
+y <- dnorm(x, mean = beta_hat, sd = se_beta)
 
+plot(x, y, type = "l", lwd = 2,
+     xlab = expression(beta), ylab = "Density",
+     main = expression("Sampling uncertainty around " * hat(beta)))
+
+# Shade ±1 standard error around estimate
+x_band <- x[x >= (beta_hat - se_beta) & x <= (beta_hat + se_beta)]
+y_band <- dnorm(x_band, mean = beta_hat, sd = se_beta)
+polygon(c(x_band, rev(x_band)), c(y_band, rep(0, length(y_band))),
+  col = "gray80", border = NA)
+lines(x, y, lwd = 2)
+
+abline(v = beta_hat, lwd = 2)
+abline(v = c(beta_hat - se_beta, beta_hat + se_beta), lty = 2)
+
+text(beta_hat, .5, expression(hat(beta) == -4.23), pos = 4)
+text(beta_hat - se_beta, max(y) * 0.80, expression(hat(beta) - SE), pos = 2)
+text(beta_hat + se_beta, max(y) * 0.80, expression(hat(beta) + SE), pos = 4)
+```
+
+The standard error indicates typical sampling variation around the estimate.
+
+## Hypothesis Testing
+- We need a way to determine if the observed relationship is statistically significant or if it could have occurred by random chance.
+- We use a standardized test statistic (t-statistic) to test the null hypothesis that the true coefficient is zero (no relationship).
+$$
+t = \frac{\hat{\beta} - 0}{SE(\hat{\beta})}
+$$
 
 ## 
 ```{r}
@@ -204,7 +289,7 @@ text( t_crit, max(y)*0.95, sprintf("t* = %.2f", t_crit), pos = 4)
 
 ```
 
-$t=(\beta - 0)/\sigma_\beta$
+null hypothesis ($H_0$: $\beta = 0$); $~~~~~~~ t=(\beta - 0)/\sigma_\beta$
 
 ## 
 ```{r}
@@ -257,6 +342,56 @@ if (t_obs < min(x)) {
 #text(-3.2, dt(-3.2, df)*1.2, "Reject H₀", cex = 0.9)
 #text( 3.2, dt( 3.2, df)*1.2, "Reject H₀", cex = 0.9)
 ```
+
+
+## Example regression output: t-statistics
+
+<br>
+
+| Variable  | Estimate | Std. Error | t-stat |
+|-----------|:--------:|:----------:|:------:|
+| x         | -4.23    | 0.23       | -18.39 |
+| Intercept | 4.48     | 0.27       | 16.59  |
+
+## Example regression output: p-values
+
+<br>
+
+| Variable  | Estimate | Std. Error | t-stat | p-value |
+|-----------|:--------:|:----------:|:------:|:-------:|
+| x         | -4.23    | 0.23       | -18.39 | <0.001  |
+| Intercept | 4.48     | 0.27       | 16.59  | <0.001  |
+
+
+## Interpreting Coefficient Estimates
+
+- The coefficient estimates tell us the **expected change** in the dependent variable for a one-unit change in the independent variable
+- In our example, the slope of -4.23 means that for every one-unit increase in x, y is expected to decrease by 4.23 units.
+- If x was miles from the highway, this would mean that for every additional mile from the highway, gas prices are expected to decrease by 4.23 cents.
+
+## Estimating Uncertainty: Standard Errors
+
+- The estimates are just that: estimates. They are subject to sampling variability.
+- What if we repeated the study with a different sample of gas stations? or a different period in time? Would we get the same estimates?
+- The standard error gives us a measure of how much the estimate would vary across different samples.
+
+## Hypothesis Testing{.scrollable}
+
+- We make assumptions about the error term $\epsilon$ (e.g., it is normally distributed with mean 0 and constant variance) that allow us to perform hypothesis tests on the coefficients.
+- The null hypothesis is typically that the coefficient is equal to zero (no effect).
+- The t-statistic is the estimate divided by its standard error, and the p-value tells us the probability of observing such an extreme t-statistic if the null hypothesis were true.
+- In our example, the t-statistic of -18.39 for the slope indicates that the coefficient is highly statistically significant (p < 0.001), suggesting a strong relationship between distance from the highway and gas prices.
+
+:::{.notes}
+Imagine testing whether a coin is fair.
+If you flip 10 times and get 6 heads:
+Not that surprising.
+If you flip 100 times and get 95 heads:
+Very surprising if coin is fair.
+The p-value quantifies “how surprising.”
+:::
+
+
 
 ## {.iclicker} 
 <div style="font-size: 0.75em;">
@@ -315,9 +450,25 @@ D. Temperature has no relationship with trail visits because the p-value is grea
 - Regression is a powerful tool for quantifying relationships between variables.
 - Coefficient estimates tell us the expected change in the dependent variable for a one-unit change in the independent variable.
 - Standard errors and hypothesis tests help us understand the uncertainty around our estimates.
-- Interpretation of regression results requires careful consideration of the context and the assumptions underlying the model.
+- Interpretation of regression results requires careful consideration of the context and the assumptions underlying the model. (Pirates vs. global warming example)
 
 ## Lab Preview
 
 - We will use regression to analyze the relationship between drought conditions and corn yields.
 - We will learn how to fit a regression model, interpret the output, and evaluate the model's assumptions and performance.
+
+# Part 2
+
+<!-- clicker questions -->
+
+## iid Assumption
+
+- The regression model relies on the assumption that the error terms ($\epsilon$) are independent and identically distributed (iid).
+- This means that the errors are uncorrelated with each other.
+- Is this assumption likely to hold in our corn and drought data? Why or why not?
+
+
+
+
+
+<!-- Lead into fixed effects and panel data regression in the next lecture. -->

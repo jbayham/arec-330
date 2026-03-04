@@ -333,9 +333,72 @@
 </div>
 
 </section>
-<section id="section" class="slide level2">
+<section id="section" class="slide level2 iclicker">
 <h2></h2>
-<!-- clicker questions -->
+<div style="font-size: 0.85em;">
+<p>A monthly visitation series shows strong summer peaks, a gradual upward trend, and a sharp drop in 2020.</p>
+<div class="question">
+<p>Why might we decompose the series before forecasting?</p>
+</div>
+<div class="choices">
+<p>A. To eliminate randomness completely</p>
+<p>B. To separate long-run movement from seasonal patterns</p>
+<p>C. To guarantee a more accurate forecast</p>
+<p>D. To avoid using a training/test split</p>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li>B: Decomposing the series allows us to model the trend and seasonality separately, which can improve forecast accuracy.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="section-1" class="slide level2 iclicker">
+<h2></h2>
+<!-- <div style="font-size: 0.65em;"> -->
+<div class="question">
+<p>Why do we evaluate a forecasting model on a test set instead of the same data used to estimate it?</p>
+</div>
+<div class="choices">
+<p>A. Because forecasting software requires it</p>
+<p>B. To reduce computation time</p>
+<p>C. To simulate how the model performs on unseen future data</p>
+<p>D. To remove seasonality</p>
+</div>
+<!-- </div> -->
+<aside class="notes">
+<ul>
+<li>C: Evaluating on a test set simulates how the model will perform on future data</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="explanatory-data-analysis" class="slide level2">
+<h2>Explanatory Data Analysis</h2>
+<ul>
+<li>Many questions in economics and business are about explaining relationships between variables.</li>
+<li>We can generate evidence of these relationships using regression analysis.</li>
+<li>There are many other methods but regression is a good starting point.</li>
+</ul>
 </section>
 <section id="motivating-questions" class="slide level2">
 <h2>Motivating Questions</h2>
@@ -373,10 +436,10 @@ flowchart LR
 <p><br></p>
 <p>We seek a method that tells us how much corn yields change when drought conditions change.</p>
 </section>
-<section id="section-1" class="slide level2">
+<section id="section-2" class="slide level2">
 <h2></h2>
 <div class="main-point">
-<p>Regression is a method for understanding relationships between quantitative variables</p>
+<p>Regression is a statistical method for understanding relationships between quantitative variables</p>
 </div>
 </section>
 <section id="example-gas-prices-and-highway-proximity" class="slide level2">
@@ -385,6 +448,15 @@ flowchart LR
 <li>Do fuel stations closer to highways charge higher prices?</li>
 <li>Can you tell by looking at a map of gas stations and highways?</li>
 <li><a href="https://www.gasbuddy.com/gasprices/wyoming/cheyenne" class="uri">https://www.gasbuddy.com/gasprices/wyoming/cheyenne</a></li>
+</ul>
+</section>
+<section id="explanation-vs.-prediction" class="slide level2">
+<h2>Explanation vs.&nbsp;Prediction</h2>
+<ul>
+<li>Regression can be used for both explanation and prediction.</li>
+<li>Explanation focuses on understanding the relationship between variables (e.g., how does drought affect corn yields?).</li>
+<li>Prediction focuses on accurately forecasting future values (e.g., what will corn yields be next year?).</li>
+<li>A good explanation may provide a good prediction*</li>
 </ul>
 </section>
 <section id="how-does-regression-work" class="slide level2">
@@ -401,6 +473,8 @@ flowchart LR
 <ul>
 <li>What is the equation of a line?</li>
 <li>The data give us our x and y values. Coordinates.</li>
+<li>We can visualize the data as points on a scatterplot.</li>
+<li>We want to find the line that best fits those points.</li>
 </ul>
 <p>Go to R</p>
 <aside class="notes">
@@ -409,6 +483,7 @@ flowchart LR
 <li>experiment with the class moving the line</li>
 <li>show how the line changes with different slopes and intercepts (parameters)</li>
 <li>the solution is the line that minimizes the sum of squared errors. why squared errors? why not absolute errors?</li>
+<li>End on seed=20 n=54</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -457,18 +532,120 @@ y - \alpha - \beta x = \epsilon
 \]</span></p>
 </section>
 <section>
-<section id="interpretting-regression-output" class="title-slide slide level1 center">
-<h1>Interpretting Regression Output</h1>
+<section id="interpretting-regression-results" class="title-slide slide level1 center">
+<h1>Interpretting Regression Results</h1>
 
 </section>
-<section id="section-2" class="slide level2">
-<h2></h2>
+<section id="regression-results-overview" class="slide level2">
+<h2>Regression Results Overview</h2>
 <ul>
-<li>The regression output provides estimates of the coefficients (intercept and slope) along with their standard errors, t-values, and p-values.</li>
+<li>The regression results provides estimates of the coefficients (intercept and slope) along with their standard errors, t-values, and p-values.</li>
+<li>The output is generally reported in a table</li>
+<li>You need to understand how to read and interpret this table to draw meaningful conclusions from the regression analysis.</li>
 </ul>
 </section>
-<section id="example-regression-output" class="slide level2">
-<h2>Example regression output:</h2>
+<section id="example-regression-output-estimate" class="slide level2">
+<h2>Example regression output: Estimate</h2>
+<p><br></p>
+<table>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th style="text-align: center;">Estimate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>x</td>
+<td style="text-align: center;">-4.23</td>
+</tr>
+<tr class="even">
+<td>Intercept</td>
+<td style="text-align: center;">4.48</td>
+</tr>
+</tbody>
+</table>
+<p><br> This is just an estimate of the true relationship between x and y. We need to understand uncertainty.</p>
+</section>
+<section id="example-regression-output-standard-errors" class="slide level2">
+<h2>Example regression output: Standard Errors</h2>
+<p><br></p>
+<table>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th style="text-align: center;">Estimate</th>
+<th style="text-align: center;">Std. Error</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>x</td>
+<td style="text-align: center;">-4.23</td>
+<td style="text-align: center;">0.23</td>
+</tr>
+<tr class="even">
+<td>Intercept</td>
+<td style="text-align: center;">4.48</td>
+<td style="text-align: center;">0.27</td>
+</tr>
+</tbody>
+</table>
+<p><br> Does 0.23 seem small or large relative to the estimate of -4.23?</p>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+
+<img data-src="slides_files/figure-revealjs/unnamed-chunk-2-1.png" width="768" class="r-stretch"><p>The standard error indicates typical sampling variation around the estimate.</p>
+</section>
+<section id="hypothesis-testing" class="slide level2">
+<h2>Hypothesis Testing</h2>
+<ul>
+<li>We need a way to determine if the observed relationship is statistically significant or if it could have occurred by random chance.</li>
+<li>We use a standardized test statistic (t-statistic) to test the null hypothesis that the true coefficient is zero (no relationship). <span class="math display">\[
+t = \frac{\hat{\beta} - 0}{SE(\hat{\beta})}
+\]</span></li>
+</ul>
+</section>
+<section id="section-4" class="slide level2">
+<h2></h2>
+
+<img data-src="slides_files/figure-revealjs/unnamed-chunk-3-1.png" width="768" class="r-stretch"><p>null hypothesis (<span class="math inline">\(H_0\)</span>: <span class="math inline">\(\beta = 0\)</span>); <span class="math inline">\(~~~~~~~ t=(\beta - 0)/\sigma_\beta\)</span></p>
+</section>
+<section id="section-5" class="slide level2">
+<h2></h2>
+
+<img data-src="slides_files/figure-revealjs/unnamed-chunk-4-1.png" width="768" class="r-stretch"></section>
+<section id="example-regression-output-t-statistics" class="slide level2">
+<h2>Example regression output: t-statistics</h2>
+<p><br></p>
+<table>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th style="text-align: center;">Estimate</th>
+<th style="text-align: center;">Std. Error</th>
+<th style="text-align: center;">t-stat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>x</td>
+<td style="text-align: center;">-4.23</td>
+<td style="text-align: center;">0.23</td>
+<td style="text-align: center;">-18.39</td>
+</tr>
+<tr class="even">
+<td>Intercept</td>
+<td style="text-align: center;">4.48</td>
+<td style="text-align: center;">0.27</td>
+<td style="text-align: center;">16.59</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="example-regression-output-p-values" class="slide level2">
+<h2>Example regression output: p-values</h2>
 <p><br></p>
 <table>
 <thead>
@@ -514,7 +691,7 @@ y - \alpha - \beta x = \epsilon
 <li>The standard error gives us a measure of how much the estimate would vary across different samples.</li>
 </ul>
 </section>
-<section id="hypothesis-testing" class="slide level2 scrollable">
+<section id="hypothesis-testing-1" class="slide level2 scrollable">
 <h2>Hypothesis Testing</h2>
 <ul>
 <li>We make assumptions about the error term <span class="math inline">\(\epsilon\)</span> (e.g., it is normally distributed with mean 0 and constant variance) that allow us to perform hypothesis tests on the coefficients.</li>
@@ -536,16 +713,7 @@ y - \alpha - \beta x = \epsilon
           display:block!important;
       }</style></aside>
 </section>
-<section id="section-3" class="slide level2">
-<h2></h2>
-
-<img data-src="slides_files/figure-revealjs/unnamed-chunk-2-1.png" width="768" class="r-stretch"><p><span class="math inline">\(t=(\beta - 0)/\sigma_\beta\)</span></p>
-</section>
-<section id="section-4" class="slide level2">
-<h2></h2>
-
-<img data-src="slides_files/figure-revealjs/unnamed-chunk-3-1.png" width="768" class="r-stretch"></section>
-<section id="section-5" class="slide level2 iclicker">
+<section id="section-6" class="slide level2 iclicker">
 <h2></h2>
 <div style="font-size: 0.75em;">
 <p>Dependent variable: Gas Price ($/gallon)</p>
@@ -595,7 +763,7 @@ y - \alpha - \beta x = \epsilon
 </div>
 </div>
 </section>
-<section id="section-6" class="slide level2 iclicker">
+<section id="section-7" class="slide level2 iclicker">
 <h2></h2>
 <div style="font-size: 0.65em;">
 <p>Dependent variable: Daily Mountain Bike Trail Visits</p>
@@ -643,7 +811,7 @@ y - \alpha - \beta x = \epsilon
 <li>Regression is a powerful tool for quantifying relationships between variables.</li>
 <li>Coefficient estimates tell us the expected change in the dependent variable for a one-unit change in the independent variable.</li>
 <li>Standard errors and hypothesis tests help us understand the uncertainty around our estimates.</li>
-<li>Interpretation of regression results requires careful consideration of the context and the assumptions underlying the model.</li>
+<li>Interpretation of regression results requires careful consideration of the context and the assumptions underlying the model. (Pirates vs.&nbsp;global warming example)</li>
 </ul>
 </section>
 <section id="lab-preview" class="slide level2">
@@ -652,6 +820,20 @@ y - \alpha - \beta x = \epsilon
 <li>We will use regression to analyze the relationship between drought conditions and corn yields.</li>
 <li>We will learn how to fit a regression model, interpret the output, and evaluate the model’s assumptions and performance.</li>
 </ul>
+</section></section>
+<section>
+<section id="part-2" class="title-slide slide level1 center">
+<h1>Part 2</h1>
+<!-- clicker questions -->
+</section>
+<section id="iid-assumption" class="slide level2">
+<h2>iid Assumption</h2>
+<ul>
+<li>The regression model relies on the assumption that the error terms (<span class="math inline">\(\epsilon\)</span>) are independent and identically distributed (iid).</li>
+<li>This means that the errors are uncorrelated with each other.</li>
+<li>Is this assumption likely to hold in our corn and drought data? Why or why not?</li>
+</ul>
+<!-- Lead into fixed effects and panel data regression in the next lecture. -->
 <div class="footer footer-default">
 
 </div>
