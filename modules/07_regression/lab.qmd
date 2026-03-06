@@ -140,7 +140,7 @@ ggplot(sim_dat, aes(x = drought, y = yield)) +
 ```
 
 :::{.callout-attention}
-**Question 2 (15%):** Interpret the estimated slope in one sentence with units.
+**Question 2 (7%):** Interpret the estimated slope in one sentence with units.
 
 Then answer:
 
@@ -246,7 +246,7 @@ modelsummary(
 Uncomment the `output` argument to export a Word document with the table into your current directory.
 
 :::{.callout-attention}
-**Question 3 (15%):**
+**Question 3 (7%):**
 
 - What is the unit of observation in `dat_2017`?
 - Interpret the slope estimate with units.
@@ -273,7 +273,7 @@ qqline(residuals(mod_2017), col = "red", lwd = 2)
 
 
 :::{.callout-attention}
-**Question 4 (15%):** Does your QQ plot suggest that residuals are approximately normal? Research why you might care about normality of residuals in linear regression and explain what you learn.
+**Question 4 (7%):** Does your QQ plot suggest that residuals are approximately normal? Research why you might care about normality of residuals in linear regression and explain what you learn.
 :::
 
 ---
@@ -294,7 +294,7 @@ Replicate the above steps for a different year. Specifically:
 # Taking a step back
 
 :::{.callout-attention}
-**Question 6 (20%):**
+**Question 6 (10%):**
 Our current drought measure is annual mean DSCI.
 
 - Is annual mean DSCI across the whole year the most relevant drought measure for assessing the impact on corn yield? Propose an alternative measure. Describe how you would create it and why it might be more relevant for understanding the relationship between drought and yield.
@@ -305,6 +305,8 @@ Our current drought measure is annual mean DSCI.
 ---
 
 # Deliverables (10%)
+
+This is a two-part lab. Wait until the end of the second session to submit your work. You will submit both a log file and a lab notebook.
 
 Submit on Canvas:
 
