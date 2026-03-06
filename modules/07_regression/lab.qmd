@@ -36,21 +36,19 @@ Open up a word processing document (e.g., Google Doc, Word, or plain text) to se
 
 # Section 0: Conceptual Recap
 
-Start with a class discussion.
-
-Draw axes on the board or screen:
-
-- x-axis: drought severity (for example, DSCI)
-- y-axis: corn yield (bu/acre)
-
-Then discuss:
+Before we dive into the data, take a moment to think about the relationship between drought and corn yield. Consider the following questions:
 
 - What would you expect the relationship to look like?
 - Linear or curved?
 - Strong or weak?
 
 :::{.callout-attention}
-Question 1 (5%): Write a few sentences about your hypothesis in your notebook before running any models.
+Question 1 (5%): Write a few sentences describing your expectations for the relationship between:
+
+1. drought and corn yield
+2. corn yield and farm GDP 
+
+Be sure to include the direction of the relationship, whether you expect it to be linear or non-linear, and how strong you think the relationship will be.
 :::
 
 ---
@@ -71,12 +69,13 @@ The simulation function is provided in a separate script. Source it and run it, 
 ```{r}
 #| eval: false
 library(tidyverse)
-library(modelsummary)
-library(broom)
-library(lubridate)
+library(modelsummary) #regression tables
+library(broom) #processing regression output
 ```
 
 ## Simulate and estimate
+
+Let's simulate some data and fit a regression model to it. The simulation function will generate a dataset with a known relationship between drought and yield, but you won't know the parameters until you inspect the function after estimation.
 
 ```{r}
 #| eval: false
@@ -84,7 +83,12 @@ library(lubridate)
 source("https://jbayham.github.io/arec-330/modules/07_regression/includes/simulate_lab07_data.R")
 
 sim_dat <- simulate_lab07_data()
+```
 
+Now we have a dataset `sim_dat` with two variables: `drought` (the independent variable) and `yield` (the dependent variable). We will first visualize the relationship with a scatterplot using `ggplot2`. The parameter `alpha` controls the transparency of the points, which can help visualize overlapping points.
+
+```{r}
+#| eval: false
 # Scatterplot
 ggplot(sim_dat, aes(x = drought, y = yield)) +
   geom_point(alpha = 0.7) +
@@ -93,7 +97,12 @@ ggplot(sim_dat, aes(x = drought, y = yield)) +
     x = "Drought index",
     y = "Yield (bu/acre)"
   )
+```
 
+Now we can fit a simple linear regression model to estimate the relationship between drought and yield. The function `lm()` fits a linear model, where `yield ~ drought` specifies that yield is the dependent variable and drought is the independent variable. The `~` symbol is used to separate the dependent variable from the independent variable(s) in the formula (like an equals sign). You can add additional variables to the model using `+`. After fitting the model, we use `summary()` to get detailed output about the coefficients, standard errors, t-statistics, and p-values.
+
+```{r}
+#| eval: false
 # Fit regression
 mod_sim <- lm(yield ~ drought, data = sim_dat)
 summary(mod_sim)
@@ -101,8 +110,11 @@ summary(mod_sim)
 
 ## Prediction and difference interpretation
 
+The function `predict()` generates predicted values from the fitted model. You can specify new data to get predictions for specific values of the independent variable. In this case, we will generate predicted yields for drought levels of 2 and 3, and then calculate the difference between those predictions to interpret the slope. Then we will generate predicted values for all the original data to visualize the fitted regression line on the scatterplot.
+
 ```{r}
 #| eval: false
+# Generate predicted values for drought = 2 and drought = 3
 pred_2_3 <- predict(
   mod_sim,
   newdata = tibble(drought = c(2, 3))
@@ -152,9 +164,11 @@ Interpretation prompts:
 
 Now apply the same workflow to real data.
 
-Data source used in prior labs:
+Read in the data created in prior labs:
 
 - [final_merged_data.csv](https://jbayham.github.io/arec-330/modules/05_EDA/includes/final_merged_data.csv)
+
+We will focus on the year 2017 for this section, but you will replicate the steps for a different year in Section 3.
 
 ```{r}
 #| eval: false
@@ -168,18 +182,23 @@ dat_2017 <- combined_dat %>%
 glimpse(dat_2017)
 ```
 
+
 ## Scatter plot and regression line
+
+Similar to before, we will start with a scatter plot to visualize the relationship between drought severity (mean DSCI) and corn yield (yield in bushels per acre). The `aes()` function specifies the aesthetics of the plot, where `x` is the independent variable (mean DSCI) and `y` is the dependent variable (yield). The `geom_point()` function adds points to the plot, and `labs()` adds titles and axis labels.
 
 ```{r}
 #| eval: false
 ggplot(dat_2017, aes(x = mean_dsci, y = yield_bu_per_acre)) +
-  geom_point(alpha = 0.75) +
+  geom_point(alpha = 0.7) +
   labs(
     title = "Corn yield and drought severity (2017)",
     x = "Mean DSCI (annual)",
     y = "Yield (bu/acre)"
   )
 ```
+
+Then, we can estimate a simple linear regression model to quantify the relationship between mean DSCI and yield. The formula `yield_bu_per_acre ~ mean_dsci` specifies that yield is the dependent variable and mean DSCI is the independent variable. After fitting the model, we use `summary()` to get detailed output about the coefficients, standard errors, t-statistics, and p-values.
 
 ```{r}
 #| eval: false
@@ -188,6 +207,8 @@ summary(mod_2017)
 ```
 
 ## Guided walkthrough of output
+
+Interpretation of the regression output is critical for understanding the relationship between drought and yield. The coefficient for `mean_dsci` tells us the estimated change in yield (in bushels per acre) for a one-unit increase in mean DSCI, holding all else constant. The standard error gives us a sense of the uncertainty around that estimate. The t-statistic and p-value help us assess whether the observed relationship is statistically significant, meaning it is unlikely to have occurred by random chance alone.
 
 The package `broom` provides tidy functions to extract pieces of the regression output. Use `tidy()` to get coefficient estimates, standard errors, t-statistics, and p-values. Use `glance()` to get overall model fit statistics.
 
@@ -252,7 +273,7 @@ qqline(residuals(mod_2017), col = "red", lwd = 2)
 
 
 :::{.callout-attention}
-**Question 4 (15%):** Does your QQ plot suggest that residuals are approximately normal? 
+**Question 4 (15%):** Does your QQ plot suggest that residuals are approximately normal? Research why you might care about normality of residuals in linear regression and explain what you learn.
 :::
 
 ---
@@ -276,9 +297,9 @@ Replicate the above steps for a different year. Specifically:
 **Question 6 (20%):**
 Our current drought measure is annual mean DSCI.
 
-- Is annual mean DSCI across the whole year the most relevant drought measure for corn yield?
-- Propose an alternative measure and justify it.
+- Is annual mean DSCI across the whole year the most relevant drought measure for assessing the impact on corn yield? Propose an alternative measure. Describe how you would create it and why it might be more relevant for understanding the relationship between drought and yield.
 
+- What other factors do you think are important for explaining variation in corn yield? 
 :::
 
 ---
