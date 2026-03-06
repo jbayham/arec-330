@@ -80,7 +80,7 @@
   dirname: modules/07_regression
   desc: "This module will span two weeks and focus on regression methods to inform decision making."
   slides: "slides.html"
-  #lab: "lab.html"
+  lab: "lab.html"
   readings:
   - title: "Introduction to Regression Analysis"
     url: "https://inomics.com/terms/regression-analysis-1538159"
