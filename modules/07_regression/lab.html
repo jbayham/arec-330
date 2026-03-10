@@ -68,6 +68,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="lab_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="lab_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../course-links.css">
 </head>
@@ -101,7 +103,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#try-a-different-year" id="toc-try-a-different-year" class="nav-link" data-scroll-target="#try-a-different-year">Try a different year</a></li>
   <li><a href="#taking-a-step-back" id="toc-taking-a-step-back" class="nav-link" data-scroll-target="#taking-a-step-back">Taking a step back</a></li>
-  <li><a href="#deliverables-10" id="toc-deliverables-10" class="nav-link" data-scroll-target="#deliverables-10">Deliverables (10%)</a></li>
+  <li><a href="#section-4-fixed-effects-regression" id="toc-section-4-fixed-effects-regression" class="nav-link" data-scroll-target="#section-4-fixed-effects-regression">Section 4: Fixed Effects Regression</a>
+  <ul class="collapse">
+  <li><a href="#demeaning-the-data" id="toc-demeaning-the-data" class="nav-link" data-scroll-target="#demeaning-the-data">Demeaning the data</a></li>
+  <li><a href="#estimate-the-fe-regression" id="toc-estimate-the-fe-regression" class="nav-link" data-scroll-target="#estimate-the-fe-regression">Estimate the FE regression</a></li>
+  <li><a href="#multiple-fixed-effects" id="toc-multiple-fixed-effects" class="nav-link" data-scroll-target="#multiple-fixed-effects">Multiple fixed effects</a></li>
+  </ul></li>
+  <li><a href="#section-5-drought-and-farm-gdp" id="toc-section-5-drought-and-farm-gdp" class="nav-link" data-scroll-target="#section-5-drought-and-farm-gdp">Section 5: Drought and Farm GDP</a>
+  <ul class="collapse">
+  <li><a href="#mechanisms" id="toc-mechanisms" class="nav-link" data-scroll-target="#mechanisms">Mechanisms</a></li>
+  </ul></li>
+  <li><a href="#section-6-limitations" id="toc-section-6-limitations" class="nav-link" data-scroll-target="#section-6-limitations">Section 6: Limitations</a></li>
+  <li><a href="#deliverables" id="toc-deliverables" class="nav-link" data-scroll-target="#deliverables">Deliverables</a></li>
   </ul>
 </nav>
 </div>
@@ -358,7 +371,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">residuals</span>(mod_2017), <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout-attention">
-<p><strong>Question 4 (7%):</strong> Does your QQ plot suggest that residuals are approximately normal? Research why you might care about normality of residuals in linear regression and explain what you learn.</p>
+<p><strong>Question 4 (6%):</strong> Does your QQ plot suggest that residuals are approximately normal? Research why you might care about normality of residuals in linear regression and explain what you learn.</p>
 </div>
 <hr>
 </section>
@@ -367,7 +380,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Try a different year</h1>
 <p>Replicate the above steps for a different year. Specifically: 1. Create a scatter plot with regression line for a different year. 2. Fit a regression model and interpret the slope, including statistical significance. 3. Generate a QQ plot and residuals vs fitted plot for the new model.</p>
 <div class="callout-attention">
-<p><strong>Question 5 (20%):</strong> Do you see similar patterns in the scatter plot, regression output, and diagnostics between 2017 and the other year you selected? Discuss why that may be the case and what it implies about the relationship between drought and yield.</p>
+<p><strong>Question 5 (12%):</strong> Do you see similar patterns in the scatter plot, regression output, and diagnostics between 2017 and the other year you selected? Discuss why that may be the case and what it implies about the relationship between drought and yield.</p>
 </div>
 <hr>
 </section>
@@ -382,13 +395,109 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <hr>
 </section>
-<section id="deliverables-10" class="level1">
-<h1>Deliverables (10%)</h1>
+<section id="section-4-fixed-effects-regression" class="level1">
+<h1>Section 4: Fixed Effects Regression</h1>
+<p>We have prepared a dataset with multiple years of data and state-level identifiers. You will use this dataset in the next session to explore how to control for unobserved differences across states that may be correlated with both drought and yield.</p>
+<p>Fixed effects regression is a common technique used in economics to account for these unobserved differences. By including state-level and time fixed effects, we can control for factors that vary across states but are constant over time, and vary across time but constant across states allowing us to isolate the impact of drought on corn yield more accurately.</p>
+<section id="demeaning-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="demeaning-the-data">Demeaning the data</h2>
+<p>The first step in fixed effects regression is to “demean” the data by subtracting the state-level means from each variable. This removes the between-state variation and allows us to focus on the within-state variation over time.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dat_demeaned <span class="ot">&lt;-</span> combined_dat <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(state_alpha) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">yield_bu_per_acre_dm =</span> yield_bu_per_acre <span class="sc">-</span> <span class="fu">mean</span>(yield_bu_per_acre),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_dsci_dm =</span> mean_dsci <span class="sc">-</span> <span class="fu">mean</span>(mean_dsci)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="estimate-the-fe-regression" class="level2">
+<h2 class="anchored" data-anchor-id="estimate-the-fe-regression">Estimate the FE regression</h2>
+<p>After demeaning the data, we can fit a regression model using the demeaned variables. The coefficient on the demeaned drought variable will now represent the within-state effect of drought on yield, controlling for any time-invariant differences across states.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Estimate fixed effects regression</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>fe_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield_bu_per_acre_dm <span class="sc">~</span> mean_dsci_dm, <span class="at">data =</span> dat_demeaned)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fe_model)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#use broom to extract coefficients and fit statistics</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(fe_model)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fe_model) <span class="sc">%&gt;%</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(r.squared, nobs)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#or use modelsummary to create a table</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="st">"FE model"</span> <span class="ot">=</span> fe_model),</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">statistic =</span> <span class="st">"({std.error})"</span>,</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>),</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">#output = "fe_model_results.docx"</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="callout-attention">
+<p><strong>Question 7 (15%):</strong> Compare the fixed effects regression results to the simple regression results from Section 2.</p>
+<ul>
+<li>How do the slope estimates, standard errors, and significance levels differ?</li>
+<li>What does this suggest about the importance of controlling for unobserved differences across states when estimating the relationship between drought and yield?</li>
+</ul>
+</div>
+</section>
+<section id="multiple-fixed-effects" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-fixed-effects">Multiple fixed effects</h2>
+<p>In addition to state fixed effects, we can also include year fixed effects to control for any time-specific factors that may be affecting yield across all states (e.g., technological improvements, national policies, etc.). You can add more fixed effects if your data permits.</p>
+<p>We introduce a new package called <code>fixest</code> that makes it easy to estimate models with multiple fixed effects without having to manually demean the data. The syntax for including fixed effects is to use the <code>|</code> symbol in the formula. For example, <code>yield_bu_per_acre ~ mean_dsci | state + year</code> specifies that we want to control for both state and year fixed effects. The function will handle the demeaning and estimation for you. <code>etable()</code> is a convenient function from <code>fixest</code> for summarizing the results in a table format.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fixest) </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>fe_model_multi <span class="ot">&lt;-</span> <span class="fu">feols</span>(yield_bu_per_acre <span class="sc">~</span> mean_dsci <span class="sc">|</span> state_alpha <span class="sc">+</span> year, <span class="at">data =</span> combined_dat)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">etable</span>(fe_model_multi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-attention">
+<p><strong>Question 8 (12%):</strong> Compare the results from the multiple fixed effects model (state and year) to the single fixed effects model (state only) and the simple regression model (no fixed effects).</p>
+</div>
+<hr>
+</section>
+</section>
+<section id="section-5-drought-and-farm-gdp" class="level1">
+<h1>Section 5: Drought and Farm GDP</h1>
+<p>Explore the relationship between drought and farm GDP using the same workflow as above. You can focus on a fixed effects regression, but you should think carefully about the choice of fixed effects. Create a scatter plot, fit a regression model, interpret the coefficients.</p>
+<div class="callout-attention">
+<p><strong>Question 9 (10%):</strong> Interpret the regression output for the relationship between drought and farm GDP. Think about what Farm GDP measures. Be sure to include the direction and size of the relationship, and statistical significance (assume <span class="math inline">\(\alpha=0.05\)</span>).</p>
+</div>
+<section id="mechanisms" class="level2">
+<h2 class="anchored" data-anchor-id="mechanisms">Mechanisms</h2>
+<p>The relationship between drought and farm GDP is likely to be mediated by changes in crop yields. Drought can reduce yields, which may also increase prices as supply decreases.</p>
+<div class="callout-attention">
+<p><strong>Question 10 (8%):</strong> Based on your understanding of the relationship between drought, yield, and farm GDP, propose a mechanism that could explain the observed relationship between drought and farm GDP. Do your analyses support this mechanism? What additional data or analyses would you need to further investigate this mechanism?</p>
+</div>
+<hr>
+</section>
+</section>
+<section id="section-6-limitations" class="level1">
+<h1>Section 6: Limitations</h1>
+<p>Regression is a powerful tool, but it has limitations. It relies on assumptions that may not always hold in real-world data. For example, omitted variable bias can occur when there are unobserved factors that affect both the independent and dependent variables, leading to biased estimates. Reverse causality can cause problems if the direction of causality is not clear. Additionally, measurement error in the independent variable can lead to attenuation bias, where the estimated effect is biased towards zero.</p>
+<div class="callout-attention">
+<p><strong>Question 11 (8%):</strong> Reflect on the limitations of regression analysis in the context of our drought and yield example.</p>
+<ul>
+<li><p>Discuss potential sources of bias in the relationship between drought and corn yield and categorize them (e.g., omitted variable bias, reverse causality, measurement error).</p></li>
+<li><p>How might we address these issues in future analyses?</p></li>
+</ul>
+</div>
+<hr>
+</section>
+<section id="deliverables" class="level1">
+<h1>Deliverables</h1>
 <p>This is a two-part lab. Wait until the end of the second session to submit your work. You will submit both a log file and a lab notebook.</p>
 <p>Submit on Canvas:</p>
 <ol type="1">
 <li><p><strong>Log file (<code>lab_07.log</code>)</strong> Use the sink-source-sink pattern. Your log should include code, output and comments explaining each step.</p></li>
-<li><p><strong>Lab notebook</strong> with answers to Questions 1-6, including the regression table, the two scatterplots with regression lines and the diagnostics plots. You should create the table and figures for 2017 and the other year you selected.</p></li>
+<li><p><strong>Lab notebook</strong> with answers to Questions 1-11, including the regression table, the two scatterplots with regression lines and the diagnostics plots. You should create the table and figures for 2017 and the other year you selected.</p></li>
 </ol>
 </section>
 

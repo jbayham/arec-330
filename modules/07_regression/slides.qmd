@@ -908,6 +908,10 @@ $$
 {Y}_{it} - \bar{Y}_i = \alpha_i + \beta \times ({D}_{it} - \bar{D}_i) + \epsilon_{it}
 $$
 
+## Discussion
+
+How does the fixed effects regression relate to a series of state-specific regressions?
+
 ## Summary
 
 - Regression can be a powerful tool for understanding relationships between variables, but it can also be misleading if we are not careful.

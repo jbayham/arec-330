@@ -273,7 +273,7 @@ qqline(residuals(mod_2017), col = "red", lwd = 2)
 
 
 :::{.callout-attention}
-**Question 4 (7%):** Does your QQ plot suggest that residuals are approximately normal? Research why you might care about normality of residuals in linear regression and explain what you learn.
+**Question 4 (6%):** Does your QQ plot suggest that residuals are approximately normal? Research why you might care about normality of residuals in linear regression and explain what you learn.
 :::
 
 ---
@@ -286,7 +286,7 @@ Replicate the above steps for a different year. Specifically:
 3. Generate a QQ plot and residuals vs fitted plot for the new model.
 
 :::{.callout-attention}
-**Question 5 (20%):** Do you see similar patterns in the scatter plot, regression output, and diagnostics between 2017 and the other year you selected? Discuss why that may be the case and what it implies about the relationship between drought and yield.
+**Question 5 (12%):** Do you see similar patterns in the scatter plot, regression output, and diagnostics between 2017 and the other year you selected? Discuss why that may be the case and what it implies about the relationship between drought and yield.
 :::
 
 ---
@@ -302,14 +302,123 @@ Our current drought measure is annual mean DSCI.
 - What other factors do you think are important for explaining variation in corn yield? 
 :::
 
+---
 
-# Part 2
+# Section 4: Fixed Effects Regression
+
+We have prepared a dataset with multiple years of data and state-level identifiers. You will use this dataset in the next session to explore how to control for unobserved differences across states that may be correlated with both drought and yield.
+
+Fixed effects regression is a common technique used in economics to account for these unobserved differences. By including state-level and time fixed effects, we can control for factors that vary across states but are constant over time, and vary across time but constant across states allowing us to isolate the impact of drought on corn yield more accurately.
+
+## Demeaning the data
+
+The first step in fixed effects regression is to "demean" the data by subtracting the state-level means from each variable. This removes the between-state variation and allows us to focus on the within-state variation over time. 
+
+```{r}
+#| eval: false
+#| code-fold: true
+dat_demeaned <- combined_dat %>%
+  group_by(state_alpha) %>%
+  mutate(
+    yield_bu_per_acre_dm = yield_bu_per_acre - mean(yield_bu_per_acre),
+    mean_dsci_dm = mean_dsci - mean(mean_dsci)
+  ) %>%
+  ungroup()
+```
+
+## Estimate the FE regression
+
+After demeaning the data, we can fit a regression model using the demeaned variables. The coefficient on the demeaned drought variable will now represent the within-state effect of drought on yield, controlling for any time-invariant differences across states.
+
+```{r}
+#| eval: false
+#| code-fold: true
+#Estimate fixed effects regression
+fe_model <- lm(yield_bu_per_acre_dm ~ mean_dsci_dm, data = dat_demeaned)
+summary(fe_model)
+
+#use broom to extract coefficients and fit statistics
+tidy(fe_model)
+glance(fe_model) %>%
+  select(r.squared, nobs)
+
+#or use modelsummary to create a table
+modelsummary(
+  list("FE model" = fe_model),
+  statistic = "({std.error})",
+  stars = TRUE,
+  gof_map = c("nobs", "r.squared"),
+  #output = "fe_model_results.docx"
+)
+```
+
+:::{.callout-attention}
+**Question 7 (15%):** Compare the fixed effects regression results to the simple regression results from Section 2. 
+
+- How do the slope estimates, standard errors, and significance levels differ?
+- What does this suggest about the importance of controlling for unobserved differences across states when estimating the relationship between drought and yield?
+:::
+
+## Multiple fixed effects
+
+In addition to state fixed effects, we can also include year fixed effects to control for any time-specific factors that may be affecting yield across all states (e.g., technological improvements, national policies, etc.). You can add more fixed effects if your data permits.
+
+We introduce a new package called `fixest` that makes it easy to estimate models with multiple fixed effects without having to manually demean the data. The syntax for including fixed effects is to use the `|` symbol in the formula. For example, `yield_bu_per_acre ~ mean_dsci | state + year` specifies that we want to control for both state and year fixed effects. The function will handle the demeaning and estimation for you. `etable()` is a convenient function from `fixest` for summarizing the results in a table format.
+
+```{r}
+#| eval: false
+library(fixest) 
+
+fe_model_multi <- feols(yield_bu_per_acre ~ mean_dsci | state_alpha + year, data = combined_dat)
+etable(fe_model_multi)
+
+```
+
+:::{.callout-attention}
+**Question 8 (12%):** Compare the results from the multiple fixed effects model (state and year) to the single fixed effects model (state only) and the simple regression model (no fixed effects).
+:::
+
+---
+
+# Section 5: Drought and Farm GDP
+
+Explore the relationship between drought and farm GDP using the same workflow as above. You can focus on a fixed effects regression, but you should think carefully about the choice of fixed effects. Create a scatter plot, fit a regression model, interpret the coefficients.
+
+:::{.callout-attention}
+**Question 9 (10%):** Interpret the regression output for the relationship between drought and farm GDP. Think about what Farm GDP measures. Be sure to include the direction and size of the relationship, and statistical significance (assume $\alpha=0.05$).
+
+:::
+
+## Mechanisms
+
+The relationship between drought and farm GDP is likely to be mediated by changes in crop yields. Drought can reduce yields, which may also increase prices as supply decreases. 
+
+:::{.callout-attention}
+**Question 10 (8%):** Based on your understanding of the relationship between drought, yield, and farm GDP, propose a mechanism that could explain the observed relationship between drought and farm GDP. Do your analyses support this mechanism? What additional data or analyses would you need to further investigate this mechanism?
+:::
+
+---
+
+# Section 6: Limitations
+
+Regression is a powerful tool, but it has limitations. It relies on assumptions that may not always hold in real-world data. For example, omitted variable bias can occur when there are unobserved factors that affect both the independent and dependent variables, leading to biased estimates. 
+Reverse causality can cause problems if the direction of causality is not clear. Additionally, measurement error in the independent variable can lead to attenuation bias, where the estimated effect is biased towards zero.
+
+:::{.callout-attention}
+**Question 11 (8%):** Reflect on the limitations of regression analysis in the context of our drought and yield example. 
+
+- Discuss potential sources of bias in the relationship between drought and corn yield and categorize them (e.g., omitted variable bias, reverse causality, measurement error).
+
+- How might we address these issues in future analyses?
+:::
+
+
 
 
 
 ---
 
-# Deliverables (10%)
+# Deliverables 
 
 This is a two-part lab. Wait until the end of the second session to submit your work. You will submit both a log file and a lab notebook.
 
@@ -318,6 +427,6 @@ Submit on Canvas:
 1. **Log file (`lab_07.log`)**
    Use the sink-source-sink pattern. Your log should include code, output and comments explaining each step.
 
-2. **Lab notebook** with answers to Questions 1-6, including the regression table, the two scatterplots with regression lines and the diagnostics plots. You should create the table and figures for 2017 and the other year you selected.
+2. **Lab notebook** with answers to Questions 1-11, including the regression table, the two scatterplots with regression lines and the diagnostics plots. You should create the table and figures for 2017 and the other year you selected.
 
 
