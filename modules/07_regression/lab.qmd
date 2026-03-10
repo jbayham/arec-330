@@ -302,6 +302,11 @@ Our current drought measure is annual mean DSCI.
 - What other factors do you think are important for explaining variation in corn yield? 
 :::
 
+
+# Part 2
+
+
+
 ---
 
 # Deliverables (10%)

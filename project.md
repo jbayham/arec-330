@@ -11,7 +11,7 @@ In this project, you will take on the role of a data analyst asked to support a 
 
 In many professional settings (e.g., business, policy, consulting, and research) analysts are rarely handed a perfectly defined problem. Instead, they are asked to clarify goals, make reasonable assumptions, work with imperfect data, and deliver insights that are useful under real constraints. This project is designed to mirror that experience.
 
-You will work in a team of **three** to investigate a question that genuinely interests you. You may choose a topic related to business, agriculture, environmental issues, public policy, as long as your question can be addressed using regression or forecasting methods and available data. Choosing a topic you care about is encouraged: analysts do better work when they are curious about the system they are studying.
+You will work in a team of **three** to investigate a question that genuinely interests you. You may choose a topic related to business, agriculture, environmental issues, public policy, as long as your question can be addressed using regression or forecasting methods and available data. I encourage you to choose a topic that you care about. The project will be more enjoyable and you will be motivated to work on it.
 
 Your task is not to build the most complex model possible. Your task is to build a model that helps someone make a better decision. This means thinking carefully about:
 
@@ -21,7 +21,6 @@ Your task is not to build the most complex model possible. Your task is to build
 
 By the end of the project, you should be able to explain not only what you did, but why you did it, and why someone should trust your results.
 
-**Group size: 3 students**
 
 Deliverables:
 
@@ -50,7 +49,8 @@ Core learning goals:
 
 The proposal defines the scope and direction of your project. Its purpose is to ensure that your team has a clear, feasible, and well-motivated plan before investing time in data collection and modeling.
 
-- Your proposal should be approximately 1–2 pages and must include:
+Your proposal should be 1–2 pages and must include:
+
 - A clear description of the decision problem or question
 - Identification of the intended decision maker
 - The outcome variable of interest and why it matters
@@ -100,13 +100,36 @@ Clear writing, well-designed tables and figures, and logical organization are es
 
 <br>
 
+**Replication Materials (Data and Code)**
+
+Reproducibility is a core professional standard in data analysis. You will develop replication materials for your project. Your replication materials must allow another analyst to reproduce your results. This includes cleaned data files and clearly written code used for data processing, analysis, and figure generation.
+
+Materials should include:
+
+- Raw or source data references
+- Cleaned datasets used in analysis
+- Well-organized, commented code
+- Clear file structure and naming conventions
+
+
+### Rubric
+
+| Level                          | Description                                                                                                                                                       |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Exceeds expectations**       | Materials are complete, well organized, and fully reproducible. Code is clear and well documented. A third party could easily reproduce the analysis and results. |
+| **Meets expectations**         | Materials are mostly complete and reproducible. Code runs with minimal effort, though documentation or organization could be improved.                            |
+| **Does not meet expectations** | Materials are incomplete, poorly organized, or not reproducible. Code does not run or key data files are missing.                                                 |
+
+
+<br>
+
 -------
 
 ## C. Oral Presentation 
 
 The oral presentation communicates your project’s key insights to an audience of decision makers. The goal is not to walk through every technical detail, but to explain what you found, why it matters, and what should be done as a result.
 
-Presentations should be 10–12 minutes and include:
+Presentations should be 8 minutes and include:
 
 - A clear statement of the problem and decision context
 - A brief overview of data and approach
@@ -127,31 +150,6 @@ All group members are expected to participate.
 
 <br>
 
--------
-
-## D. Replication Materials (Data and Code)
-
-Your replication materials must allow another analyst to reproduce your results. This includes cleaned data files and clearly written code used for data processing, analysis, and figure generation.
-
-Materials should include:
-
-- Raw or source data references
-- Cleaned datasets used in analysis
-- Well-organized, commented code
-- Clear file structure and naming conventions
-
-Reproducibility is a core professional standard in data analysis.
-
-### Rubric
-
-| Level                          | Description                                                                                                                                                       |
-| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Exceeds expectations**       | Materials are complete, well organized, and fully reproducible. Code is clear and well documented. A third party could easily reproduce the analysis and results. |
-| **Meets expectations**         | Materials are mostly complete and reproducible. Code runs with minimal effort, though documentation or organization could be improved.                            |
-| **Does not meet expectations** | Materials are incomplete, poorly organized, or not reproducible. Code does not run or key data files are missing.                                                 |
-
-
-<br>
 
 ---------
 

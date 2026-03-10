@@ -826,14 +826,236 @@ t = \frac{\hat{\beta} - 0}{SE(\hat{\beta})}
 <h1>Part 2</h1>
 <!-- clicker questions -->
 </section>
-<section id="iid-assumption" class="slide level2">
-<h2>iid Assumption</h2>
+<section id="section-8" class="slide level2 iclicker">
+<h2></h2>
+<div style="font-size: 0.65em;">
+<p>Dependent variable: Daily Mountain Bike Trail Visits</p>
+<table>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Estimate</th>
+<th>Std. Error</th>
+<th>t-stat</th>
+<th>p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Temperature (°F)</td>
+<td>12.5</td>
+<td>8.3</td>
+<td>1.51</td>
+<td>0.130</td>
+</tr>
+<tr class="even">
+<td>Constant</td>
+<td>-300.0</td>
+<td>150.0</td>
+<td>-2.00</td>
+<td>0.048</td>
+</tr>
+</tbody>
+</table>
+<div class="question">
+<p>Which of the following is true about the relationship between temperature and daily mountain bike trail visits?</p>
+</div>
+<div class="choices">
+<p>A. Each 1°F increase in temperature causes 12.5 more trail visits per day.</p>
+<p>B. A 1°F increase in temperature is associated with 12.5 more visits per day, and this relationship is statistically significant at the 5% level.</p>
+<p>C. A 1°F increase in temperature is associated with 12.5 more visits per day, but the estimate is not statistically significant at the 5% level.</p>
+<p>D. Temperature has no relationship with trail visits because the p-value is greater than 0.05.</p>
+</div>
+</div>
+</section>
+<section id="why-regression-can-go-wrong" class="slide level2">
+<h2>Why regression can go wrong</h2>
+<p>Regression finds patterns in the data.</p>
+<p>But patterns <strong>do not always</strong> reflect causal relationships.</p>
+<p>A regression coefficient can be misleading when:</p>
 <ul>
-<li>The regression model relies on the assumption that the error terms (<span class="math inline">\(\epsilon\)</span>) are independent and identically distributed (iid).</li>
-<li>This means that the errors are uncorrelated with each other.</li>
-<li>Is this assumption likely to hold in our corn and drought data? Why or why not?</li>
+<li><p>Important variables are missing</p></li>
+<li><p>The direction of cause and effect is unclear</p></li>
+<li><p>Differences across places or people are ignored</p></li>
 </ul>
-<!-- Lead into fixed effects and panel data regression in the next lecture. -->
+<!-- E conomists call these threats to identification. -->
+</section>
+<section id="problem-1-omitted-variables" class="slide level2">
+<h2>Problem 1: Omitted Variables</h2>
+<p>Suppose we estimate:</p>
+<p><span class="math display">\[\text{Gas Price} = \alpha + \beta \times \text{Distance to Highway} + \epsilon\]</span></p>
+<p>But what if we are missing an important variable that explains variation in gas prices?</p>
+<ul>
+<li><p>neighborhood income</p></li>
+<li><p>competition from nearby stations</p></li>
+<li><p>traffic volume</p></li>
+</ul>
+<p>If these factors affect both distance and price, the estimate of <span class="math inline">\(\beta\)</span> can be biased.</p>
+</section>
+<section id="ommitted-variable-example" class="slide level2">
+<h2>Ommitted Variable Example</h2>
+<p>Estimate a regression of ice cream sales ($1000s) on shark attacks</p>
+<table>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th style="text-align: center;">Estimate</th>
+<th style="text-align: center;">Std. Error</th>
+<th style="text-align: center;">t-stat</th>
+<th style="text-align: center;">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ice Cream</td>
+<td style="text-align: center;">2.1</td>
+<td style="text-align: center;">0.42</td>
+<td style="text-align: center;">5.00</td>
+<td style="text-align: center;">&lt;0.001</td>
+</tr>
+</tbody>
+</table>
+<p><br> Interpret the coefficient on ice cream sales.</p>
+<div>
+<ul>
+<li class="fragment">What could be missing from this regression that would explain the relationship between ice cream sales and shark attacks?</li>
+</ul>
+</div>
+<aside class="notes">
+<p>Each additional $1,000 in ice cream sales causes 2 more shark attacks.</p>
+<p>But the real story:</p>
+<p>Hot weather or increased popularity increases both.</p>
+<p>Temperature is the omitted variable.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="ommitted-variable-bias" class="slide level2">
+<h2>Ommitted Variable Bias</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Ommitting a variable correlated with both the independent and the dependent variable can <strong>biased estimates</strong> of the regression coefficients.</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="includes/shark_ice_cream.png"></p>
+</div>
+</div>
+<aside class="notes">
+<p>In the ice cream and shark attack example, the omitted variable (temperature) is positively correlated with both ice cream sales and shark attacks, leading to a spurious positive relationship between the two. True causal effect is zero.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="drought-and-corn-yields" class="slide level2">
+<h2>Drought and Corn Yields</h2>
+
+<img data-src="slides_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
+<section id="if-you-could-measure-soil-quality" class="slide level2">
+<h2>If you could measure soil quality</h2>
+
+<img data-src="slides_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+<section id="reverse-causality" class="slide level2">
+<h2>Reverse Causality</h2>
+<ul>
+<li>Sometimes the direction of cause and effect is unclear.</li>
+<li>For example, does higher wages lead to higher productivity, or does higher productivity lead to higher wages?</li>
+<li>This can lead to biased estimates if we do not account for the possibility of reverse causality.</li>
+</ul>
+<aside class="notes">
+<p>Reverse causality can be thought of as a feedback loop where the independent variable affects the dependent variable, and the dependent variable also affects the independent variable. This can make it difficult to determine the true causal relationship between the variables.</p>
+<p>The direction of the bias depends on the nature of the relationship. For example, if higher wages lead to higher productivity, but higher productivity also leads to higher wages, the bias could be positive or negative depending on the relative strength of these effects.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="measurement-error" class="slide level2">
+<h2>Measurement Error</h2>
+<ul>
+<li>If the independent variable is measured with error, it can bias the coefficient estimates toward zero.</li>
+<li>Suppose our drought variable is measured with error.</li>
+</ul>
+</section>
+<section id="true-relationship" class="slide level2">
+<h2>True relationship</h2>
+
+<img data-src="slides_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
+<section id="drought-measured-with-error" class="slide level2">
+<h2>Drought measured with error</h2>
+
+<img data-src="slides_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
+<section id="unobserved-differences" class="slide level2">
+<h2>Unobserved Differences</h2>
+<p>Places and people differ in ways that we may not be able to measure.</p>
+<p>Corn yield varies across states because of:</p>
+<ul>
+<li><p>soil quality</p></li>
+<li><p>farming practices</p></li>
+<li><p>irrigation infrastructure</p></li>
+</ul>
+<p>If we ignore them, regression may attribute these differences to drought.</p>
+</section>
+<section id="drought-reduces-yield" class="slide level2">
+<h2>Drought Reduces Yield</h2>
+
+<img data-src="slides_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
+<section id="what-if-its-variation-by-state" class="slide level2">
+<h2>What if its variation by state</h2>
+
+<img data-src="slides_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
+<section id="how-economists-address-this" class="slide level2">
+<h2>How economists address this</h2>
+<p>Economists try to create comparisons that mimic experiments.</p>
+<p>Instead of comparing different states, we compare the <strong>same state in different years</strong>.</p>
+<p>This helps control for things that do not change over time.</p>
+</section>
+<section id="fixed-effects-regression" class="slide level2">
+<h2>Fixed Effects Regression</h2>
+<p>Fixed effects regression compares each unit to itself over time.</p>
+<p><strong>Instead of asking:</strong> Do states with more drought have lower yields?</p>
+<p><strong>We ask:</strong> When drought becomes worse in a state, do yields fall in that same state?</p>
+<p>This removes constant differences like:</p>
+<ul>
+<li><p>soil quality</p></li>
+<li><p>elevation</p></li>
+</ul>
+</section>
+<section id="fe-regression-demeaned-data" class="slide level2">
+<h2>FE Regression (demeaned data)</h2>
+
+<img data-src="slides_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"><p><span class="math display">\[
+{Y}_{it} - \bar{Y}_i = \alpha_i + \beta \times ({D}_{it} - \bar{D}_i) + \epsilon_{it}
+\]</span></p>
+</section>
+<section id="summary-1" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li>Regression can be a powerful tool for understanding relationships between variables, but it can also be misleading if we are not careful.</li>
+<li>Omitted variables, reverse causality, and unobserved differences can all lead to biased estimates.</li>
+<li>Economists use techniques like fixed effects regression to try to control for these issues and get closer to the true causal relationships.</li>
+</ul>
 <div class="footer footer-default">
 
 </div>

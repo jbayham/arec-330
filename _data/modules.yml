@@ -84,6 +84,12 @@
   readings:
   - title: "Introduction to Regression Analysis"
     url: "https://inomics.com/terms/regression-analysis-1538159"
+  - title: "A Short Introduction to Econometrics with R"
+    url: "https://tinyurl.com/y3hk9zfb"
+  - title: "Yusuke Kuwayama, Alexandra Thompson, Richard Bernknopf, Benjamin Zaitchik, Peter Vail. Estimating the Impact of Drought on Agriculture Using the U.S. Drought Monitor, American Journal of Agricultural Economics, Volume 101, Issue 1, January 2019, Pages 193–210."
+    url: "https://academic.oup.com/ajae/article/101/1/193/5051676"
+  - title: "Lobell, David B., Jillian M. Deines, and Stefania Di Tommaso. Changes in the drought sensitivity of US maize yields. Nature Food 1.11 (2020): 729-735."
+    url: "https://www.nature.com/articles/s43016-020-00165-w"
   materials:
   - title: "Video: Regression Explanation"
     url: "https://youtu.be/dstJjA8s9Do?si=vTkh48CvY79BfxaI"
