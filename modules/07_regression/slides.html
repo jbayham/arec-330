@@ -858,18 +858,110 @@ t = \frac{\hat{\beta} - 0}{SE(\hat{\beta})}
 </tbody>
 </table>
 <div class="question">
+<p>The coefficient on temperature means:</p>
+</div>
+<div class="choices">
+<p>A. A 1°F increase in temperature is associated with an increase of 12.5 daily trail visits, on average.</p>
+<p>B. A 1°F increase in temperature changes trail visits by 8.3 per day.</p>
+<p>C. A 1°F increase in temperature changes trail visits by 0.130 per day.</p>
+<p>D. When temperature is 0°F, trail visits increase by 12.5 per day.</p>
+</div>
+</div>
+</section>
+<section id="section-9" class="slide level2 iclicker">
+<h2></h2>
+<div style="font-size: 0.65em;">
+<p>Dependent variable: Daily Mountain Bike Trail Visits</p>
+<table>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Estimate</th>
+<th>Std. Error</th>
+<th>t-stat</th>
+<th>p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Temperature (°F)</td>
+<td>12.5</td>
+<td>8.3</td>
+<td>1.51</td>
+<td>0.130</td>
+</tr>
+<tr class="even">
+<td>Constant</td>
+<td>-300.0</td>
+<td>150.0</td>
+<td>-2.00</td>
+<td>0.048</td>
+</tr>
+</tbody>
+</table>
+<div class="question">
 <p>Which of the following is true about the relationship between temperature and daily mountain bike trail visits?</p>
 </div>
 <div class="choices">
 <p>A. Each 1°F increase in temperature causes 12.5 more trail visits per day.</p>
-<p>B. A 1°F increase in temperature is associated with 12.5 more visits per day, and this relationship is statistically significant at the 5% level.</p>
-<p>C. A 1°F increase in temperature is associated with 12.5 more visits per day, but the estimate is not statistically significant at the 5% level.</p>
-<p>D. Temperature has no relationship with trail visits because the p-value is greater than 0.05.</p>
+<p>B. A 1°F increase in temperature is associated with 12.5 more visits per day, but the estimate is not statistically significant at the <span class="math inline">\(alpha=0.05\)</span> level.</p>
+<p>C. A 1°F increase in temperature is associated with 12.5 more visits per day, and this relationship is statistically significant at the <span class="math inline">\(alpha=0.05\)</span> level.</p>
+<p>D. If temperature was 0, the model would predict 0 visits.</p>
 </div>
 </div>
 </section>
-<section id="why-regression-can-go-wrong" class="slide level2">
-<h2>Why regression can go wrong</h2>
+<section id="section-10" class="slide level2 iclicker">
+<h2></h2>
+<div style="font-size: 0.65em;">
+<p>Dependent variable: Daily Mountain Bike Trail Visits</p>
+<table>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Estimate</th>
+<th>Std. Error</th>
+<th>t-stat</th>
+<th>p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Temperature (°F)</td>
+<td>12.5</td>
+<td>8.3</td>
+<td>1.51</td>
+<td>0.130</td>
+</tr>
+<tr class="even">
+<td>Constant</td>
+<td>-300.0</td>
+<td>150.0</td>
+<td>-2.00</td>
+<td>0.048</td>
+</tr>
+</tbody>
+</table>
+<div class="question">
+<p>The p-value tells you:</p>
+</div>
+<div class="choices">
+<p>A. The probability of getting a test statistic this extreme (or more extreme) if the true coefficient were 0.</p>
+<p>B. The probability that the null hypothesis is true.</p>
+<p>C. The probability that the true temperature effect is exactly 12.5 visits per day.</p>
+<p>D. The probability that temperature causes changes in trail visits.</p>
+</div>
+</div>
+</section>
+<section id="recap" class="slide level2">
+<h2>Recap</h2>
+<ul>
+<li>Regression is a useful tool for quantifying relationships between variables (explanatory analysis)</li>
+<li>Coefficient estimates tell us the expected change in the dependent variable for a one-unit change in the independent variable.</li>
+<li>Standard errors and hypothesis tests help us understand the uncertainty around our estimates.</li>
+</ul>
+</section>
+<section id="regression-can-mislead" class="slide level2">
+<h2>Regression can mislead</h2>
 <p>Regression finds patterns in the data.</p>
 <p>But patterns <strong>do not always</strong> reflect causal relationships.</p>
 <p>A regression coefficient can be misleading when:</p>
@@ -892,8 +984,8 @@ t = \frac{\hat{\beta} - 0}{SE(\hat{\beta})}
 </ul>
 <p>If these factors affect both distance and price, the estimate of <span class="math inline">\(\beta\)</span> can be biased.</p>
 </section>
-<section id="ommitted-variable-example" class="slide level2">
-<h2>Ommitted Variable Example</h2>
+<section id="omitted-variable-example" class="slide level2">
+<h2>Omitted Variable Example</h2>
 <p>Estimate a regression of ice cream sales ($1000s) on shark attacks</p>
 <table>
 <thead>
@@ -938,11 +1030,11 @@ t = \frac{\hat{\beta} - 0}{SE(\hat{\beta})}
           display:block!important;
       }</style></aside>
 </section>
-<section id="ommitted-variable-bias" class="slide level2">
-<h2>Ommitted Variable Bias</h2>
+<section id="omitted-variable-bias" class="slide level2">
+<h2>Omitted Variable Bias</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>Ommitting a variable correlated with both the independent and the dependent variable can <strong>biased estimates</strong> of the regression coefficients.</p>
+<p>Omitting a variable correlated with both the independent and the dependent variable can <strong>bias</strong> the estimates of the regression coefficients.</p>
 </div><div class="column" style="width:50%;">
 <p><img data-src="includes/shark_ice_cream.png"></p>
 </div>
@@ -961,8 +1053,8 @@ t = \frac{\hat{\beta} - 0}{SE(\hat{\beta})}
           display:block!important;
       }</style></aside>
 </section>
-<section id="drought-and-corn-yields" class="slide level2">
-<h2>Drought and Corn Yields</h2>
+<section id="another-example-drought-and-corn-yields" class="slide level2">
+<h2>Another Example: Drought and Corn Yields</h2>
 
 <img data-src="slides_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
 <section id="if-you-could-measure-soil-quality" class="slide level2">
@@ -990,6 +1082,21 @@ t = \frac{\hat{\beta} - 0}{SE(\hat{\beta})}
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section id="exploit-timing" class="slide level2">
+<h2>Exploit timing</h2>
+<div style="font-size: 0.80em;">
+<div class="columns">
+<div class="column" style="width:58%;">
+<ul>
+<li>If we have data over time, we can use the timing of events to help establish causality.</li>
+<li>For example, if wages increase <em>after</em> a productivity improvement, this supports the idea that productivity is driving wages rather than the other way around.</li>
+</ul>
+</div><div class="column" style="width:42%;">
+<p><img data-src="includes/timing.png"></p>
+</div>
+</div>
+</div>
 </section>
 <section id="measurement-error" class="slide level2">
 <h2>Measurement Error</h2>
@@ -1036,16 +1143,34 @@ t = \frac{\hat{\beta} - 0}{SE(\hat{\beta})}
 <p>Fixed effects regression compares each unit to itself over time.</p>
 <p><strong>Instead of asking:</strong> Do states with more drought have lower yields?</p>
 <p><strong>We ask:</strong> When drought becomes worse in a state, do yields fall in that same state?</p>
-<p>This removes constant differences like:</p>
+<p>This removes time-invariant differences like:</p>
 <ul>
 <li><p>soil quality</p></li>
 <li><p>elevation</p></li>
 </ul>
 </section>
+<section id="demeaning-the-data" class="slide level2">
+<h2>Demeaning the data</h2>
+<ul>
+<li>One way to implement fixed effects regression is to demean the data within each state.</li>
+<li>This means we subtract the state-specific mean from each observation, effectively centering the data around zero for each state.</li>
+<li>The regression is then run on the demeaned data, which controls for any time-invariant differences across states.</li>
+</ul>
+<p><span class="math display">\[
+{Y}_{it} - \bar{Y}_i = \alpha_i + \beta \times ({D}_{it} - \bar{D}_i) + \epsilon_{it}
+\]</span></p>
+</section>
+<section id="demeaned-data" class="slide level2">
+<h2>Demeaned data</h2>
+
+<img data-src="slides_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"><p><span class="math display">\[
+{Y}_{it} - \bar{Y}_i = \alpha_i + \beta \times ({D}_{it} - \bar{D}_i) + \epsilon_{it}
+\]</span></p>
+</section>
 <section id="fe-regression-demeaned-data" class="slide level2">
 <h2>FE Regression (demeaned data)</h2>
 
-<img data-src="slides_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"><p><span class="math display">\[
+<img data-src="slides_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"><p><span class="math display">\[
 {Y}_{it} - \bar{Y}_i = \alpha_i + \beta \times ({D}_{it} - \bar{D}_i) + \epsilon_{it}
 \]</span></p>
 </section>

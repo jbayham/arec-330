@@ -463,6 +463,33 @@ D. Temperature has no relationship with trail visits because the p-value is grea
 
 ## {.iclicker} 
 <div style="font-size: 0.65em;">
+
+Dependent variable: Daily Mountain Bike Trail Visits
+
+| Variable          | Estimate | Std. Error | t-stat | p-value |
+| ----------------- | -------- | ---------- | ------ | ------- |
+| Temperature (°F)  | 12.5     | 8.3        | 1.51   | 0.130  |
+| Constant          | -300.0   | 150.0      | -2.00  | 0.048   |
+
+:::{.question}
+The coefficient on temperature means:
+:::
+
+:::{.choices}
+A. A 1°F increase in temperature is associated with an increase of 12.5 daily trail visits, on average.
+
+B. A 1°F increase in temperature changes trail visits by 8.3 per day.
+
+C. A 1°F increase in temperature changes trail visits by 0.130 per day.
+
+D. When temperature is 0°F, trail visits increase by 12.5 per day.
+:::
+</div>
+
+
+
+## {.iclicker} 
+<div style="font-size: 0.65em;">
 Dependent variable: Daily Mountain Bike Trail Visits
 
 | Variable          | Estimate | Std. Error | t-stat | p-value |
@@ -477,17 +504,49 @@ Which of the following is true about the relationship between temperature and da
 :::{.choices}
 A. Each 1°F increase in temperature causes 12.5 more trail visits per day.
 
-B. A 1°F increase in temperature is associated with 12.5 more visits per day, and this relationship is statistically significant at the 5% level.
+B. A 1°F increase in temperature is associated with 12.5 more visits per day, but the estimate is not statistically significant at the $alpha=0.05$ level.
 
-C. A 1°F increase in temperature is associated with 12.5 more visits per day, but the estimate is not statistically significant at the 5% level.
+C. A 1°F increase in temperature is associated with 12.5 more visits per day, and this relationship is statistically significant at the $alpha=0.05$ level.
 
-D. Temperature has no relationship with trail visits because the p-value is greater than 0.05.
+D. If temperature was 0, the model would predict 0 visits.
 :::
 </div>
 
 
 
-## Why regression can go wrong
+## {.iclicker} 
+<div style="font-size: 0.65em;">
+
+Dependent variable: Daily Mountain Bike Trail Visits
+
+| Variable          | Estimate | Std. Error | t-stat | p-value |
+| ----------------- | -------- | ---------- | ------ | ------- |
+| Temperature (°F)  | 12.5     | 8.3        | 1.51   | 0.130  |
+| Constant          | -300.0   | 150.0      | -2.00  | 0.048   |
+
+:::{.question}
+The p-value tells you:
+:::
+
+:::{.choices}
+A. The probability of getting a test statistic this extreme (or more extreme) if the true coefficient were 0.
+
+B. The probability that the null hypothesis is true.
+
+C. The probability that the true temperature effect is exactly 12.5 visits per day.
+
+D. The probability that temperature causes changes in trail visits.
+:::
+</div>
+
+## Recap
+
+- Regression is a useful tool for quantifying relationships between variables (explanatory analysis)
+- Coefficient estimates tell us the expected change in the dependent variable for a one-unit change in the independent variable.
+- Standard errors and hypothesis tests help us understand the uncertainty around our estimates.
+
+
+## Regression can mislead
 
 Regression finds patterns in the data.
 
@@ -521,7 +580,7 @@ But what if we are missing an important variable that explains variation in gas 
 If these factors affect both distance and price, the estimate of $\beta$ can be biased.
 
 
-## Ommitted Variable Example
+## Omitted Variable Example
 
 Estimate a regression of ice cream sales ($1000s) on shark attacks
 
@@ -547,12 +606,12 @@ Temperature is the omitted variable.
 :::
 
 
-## Ommitted Variable Bias
+## Omitted Variable Bias
 
 ::::{.columns}
 
 ::: {.column width="50%"}
-Ommitting a variable correlated with both the independent and the dependent variable can **biased estimates** of the regression coefficients.
+Omitting a variable correlated with both the independent and the dependent variable can **bias** the estimates of the regression coefficients.
 :::
 
 ::: {.column width="50%"}
@@ -564,7 +623,7 @@ Ommitting a variable correlated with both the independent and the dependent vari
 In the ice cream and shark attack example, the omitted variable (temperature) is positively correlated with both ice cream sales and shark attacks, leading to a spurious positive relationship between the two. True causal effect is zero. 
 :::
 
-## Drought and Corn Yields
+## Another Example: Drought and Corn Yields
 ```{r}
 library(tidyverse)
 
@@ -668,6 +727,22 @@ Reverse causality can be thought of as a feedback loop where the independent var
 
 The direction of the bias depends on the nature of the relationship. For example, if higher wages lead to higher productivity, but higher productivity also leads to higher wages, the bias could be positive or negative depending on the relative strength of these effects.
 :::
+
+## Exploit timing
+
+<div style="font-size: 0.80em;">
+
+::::{.columns}
+::: {.column width="58%"}
+- If we have data over time, we can use the timing of events to help establish causality.
+- For example, if wages increase *after* a productivity improvement, this supports the idea that productivity is driving wages rather than the other way around.
+:::
+
+::: {.column width="42%"}
+![](includes/timing.png)
+:::
+::::
+</div>
 
 ## Measurement Error
 
@@ -879,11 +954,45 @@ Fixed effects regression compares each unit to itself over time.
 
 **We ask:** When drought becomes worse in a state, do yields fall in that same state?
 
-This removes constant differences like:
+This removes time-invariant differences like:
 
 - soil quality
 
 - elevation
+
+
+## Demeaning the data
+
+- One way to implement fixed effects regression is to demean the data within each state.
+- This means we subtract the state-specific mean from each observation, effectively centering the data around zero for each state.
+- The regression is then run on the demeaned data, which controls for any time-invariant differences across states.
+
+$$
+{Y}_{it} - \bar{Y}_i = \alpha_i + \beta \times ({D}_{it} - \bar{D}_i) + \epsilon_{it}
+$$
+
+## Demeaned data
+
+```{r}
+ggplot(df_dm, aes(drought_dm, yield_dm, color = state)) +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "gray60") +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "gray60") +
+  geom_point(size = 3) +
+  #geom_smooth(method = "lm", se = FALSE, color = "black", linewidth = 1.2) +
+  labs(
+    #title = "After demeaning by state, the relationship disappears",
+    #subtitle = paste("Slope =", dm_slope),
+    x = "Drought (demeaned within state)",
+    y = "Yield (demeaned within state)"
+  ) +
+  theme_minimal(base_size = 15) +
+  theme(legend.position = "none")
+```
+
+$$
+{Y}_{it} - \bar{Y}_i = \alpha_i + \beta \times ({D}_{it} - \bar{D}_i) + \epsilon_{it}
+$$
+
 
 
 ## FE Regression (demeaned data)
