@@ -281,6 +281,7 @@ qqline(residuals(mod_2017), col = "red", lwd = 2)
 # Try a different year 
 
 Replicate the above steps for a different year. Specifically:
+
 1. Create a scatter plot with regression line for a different year.
 2. Fit a regression model and interpret the slope, including statistical significance.
 3. Generate a QQ plot and residuals vs fitted plot for the new model.
