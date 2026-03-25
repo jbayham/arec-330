@@ -16,7 +16,7 @@ format:
 
 ## Exam Parameters{.scrollable}
 
-- The exam is on Friday in lab; about 1 hour; no calculators; 1 page of notes
+- The exam is on Friday in lab; about 1 hour; no calculators; 1 page of notes; you need a blue book
 - Expect 10 multiple choice, 3 multipart analytical questions
 - Provide an answer to every question. Demonstrate you reasoning, even if you are uncertain about the final answer. Partial credit is possible.
 - Write clearly. I need to be able to read your answer
