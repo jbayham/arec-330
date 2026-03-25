@@ -15,11 +15,11 @@
   lab: "lab.html"
   readings:
   - title: "Puntoni and De Langhe. Better Decisions with Data"
-    url: "https://knowledge.wharton.upenn.edu/article/better-decisions-with-data-asking-the-right-question/"
+    rel_url: "includes/puntoni.pdf"
   - title: "Heidari. Analytics starts by asking the right questions"
-    url: "https://www.cpaalberta.ca/-/media/Files/Services/Online-Resource-Centre/PDF-Asking-a-good-question-by-Sam-Heidari.pdf?la=en&hash=B62F68830E8F4F1FCD9A3BFC18A7B783FBF40DC6"
+    rel_url: "includes/heidari-asking.pdf"
   - title: "Raoufy. The Art of Asking the Right Questions"
-    url: "https://medium.com/@raoufysohaib/the-art-of-asking-the-right-questions-how-i-learned-to-start-every-data-analysis-the-right-way-89b25cf0eee0"
+    url: "includes/raoufy-art.pdf"
   
   
 - title: "Week 3: Data Processing Part 1"
@@ -98,3 +98,7 @@
   - title: "Video: Uncertainty and Hypothesis Testing, Part 2"
     url: "https://youtu.be/FY-Qwsk-zRM?si=sDmemRpbLneDBz20"
 
+- title: "Week 10: Midterm Review"
+  dirname: modules/midterm
+  desc: "Midterm review"
+  slides: "slides.html"

@@ -1,0 +1,169 @@
+---
+title: "Week 10: Midterm Review"
+format:
+  revealjs:
+    slide-number: true
+    theme: [night, ../custom.scss]
+    touch: true
+---
+
+
+## Review Goals
+
+- Clarify the exam format and expectations
+- Revisit the core logic from modules 1-7
+- Practice interpreting models and communicating insights in plain language
+
+## Exam Parameters{.scrollable}
+
+- The exam is on Friday in lab; about 1 hour; no calculators; 1 page of notes
+- Expect 10 multiple choice, 3 multipart analytical questions
+- Provide an answer to every question. Demonstrate you reasoning, even if you are uncertain about the final answer. Partial credit is possible.
+- Write clearly. I need to be able to read your answer
+- 30% of grade
+- Top score will be 100%, then everything relative to that
+- Cover *readings*, slides, and labs from modules 1-7
+
+## What Strong Answers Do
+
+- Answer the question that was actually asked
+- State the result in plain language
+- Reference specific evidence from the prompt
+- Acknowledge uncertainty or limitations when relevant
+
+
+## Big Picture: Course Logic
+
+```{mermaid}
+%%{init: {"themeVariables": {"fontSize": "24px"}}}%%
+flowchart LR
+  G[Goals] ==> P[Problem]
+  P ==> Q[Question]
+  Q ==> Da[Data]
+  Da ==> M[Model]
+  M ==> R[Result]
+  R ==> D[Decision]
+
+ 
+```
+
+## Module 1: Data + Analyst = Insight
+
+- Data are inputs, not conclusions
+- Analysis matters only if it informs a real problem or decision
+- Communication is part of analysis, not an optional final step
+- On the exam, do not stop at "the coefficient is negative"; explain what it means in context
+
+## Module 2: Asking the Right Question
+
+- Start from the problem and decision, not the dataset
+- A good question is decision-relevant, answerable, and specific about who, where, when, and compared to what
+- Know the difference between descriptive, exploratory, predictive, causal, and mechanistic questions
+- Many weak answers come from answering the wrong type of question
+
+## {.iclicker}
+
+:::{.question}
+A prompt asks: "What would happen to corn yields if drought intensity increased next season?"
+What type of question is this?
+:::
+
+:::{.choices}
+A. Descriptive
+
+B. Exploratory
+
+C. Predictive
+
+D. Causal (counterfactual)
+:::
+
+:::{.notes}
+- D: The prompt asks what would happen under a change in conditions, so it is a counterfactual question.
+:::
+
+## Module 3: Data Processing Part 1
+
+- Processing aligns raw data with the question
+- Tidy data makes variables, observations, and units explicit
+- Missing data, outliers, and aggregation are analytical choices with consequences
+- Different processing choices can change the pattern you see and the claim you can defend
+
+## Module 4: Data Processing Part 2
+
+- Let the target unit of observation define the join
+- Keys matter: duplicates or mismatched units can silently distort results
+- `inner_join()` changes the sample; `left_join()` preserves the primary sample
+- Before merging, check uniqueness, coverage, and whether the rows really mean the same thing
+
+## Module 5: Exploratory Data Analysis
+
+- EDA helps you understand structure, distributions, anomalies, and relationships
+- EDA can help generate hypotheses and refine the question
+- Summary statistics and visuals should tell a coherent story
+
+## Module 6: Forecasting
+
+- A forecast is a transparent prediction about future values based on past patterns
+- Evaluate forecasts on held-out data, not the same data used to fit the model
+- Benchmarks matter; more complex models are not automatically better
+- Forecasts are not just a prediction of a point estimate; the uncertainty around that estimate is often more important for decision-making
+
+## Practice: Communicating a Forecast
+
+Suppose the forecast for July visitation is **220,000** with an 80% prediction interval of **[190,000, 250,000]**.
+
+- Weak answer: "July visitation will be 220,000."
+- Stronger answer: "Expected July visitation is around 220,000, but a reasonable range is 190,000 to 250,000."
+- Best decision-oriented answer: "If understaffing is costly, planning should account for outcomes near the upper end of the interval."
+
+## Module 7: Regression Interpretation
+
+- Regression quantifies the relationship between an outcome and one **or more** predictors
+- A coefficient is an estimated change in the outcome for a one-unit change in the predictor (explanatory)
+- Standard errors measure uncertainty around *estimates*
+- t-statistics and p-values summarize how strongly the data are incompatible with a zero relationship
+- Statistical significance is not the same thing as practical importance
+
+## Practice: Interpreting Regression Output{.scrollable}
+Outcome: Corn yield (bushels per acre)
+
+| Variable         | Estimate | Std. Error | p-value |
+| ---------------- | :------: | :--------: | :-----: |
+| Drought severity |   -3.2   |    1.1     |  0.006  |
+| Soil quality     |    5.0   |    2.0     |  0.015  |
+| Hail damage      |   -1.5   |    2       |  0.45   |
+| Intercept        |  178.5   |    4.8     | <0.001  |
+
+A strong written answer would say:
+
+:::{.incremental}
+
+- A one-unit increase in drought severity is associated with about **3.2 fewer bushels per acre**
+- The estimate is fairly precise
+- The p-value indicates the null hypothesis of zero relationship is unlikely
+
+:::
+
+## When Regression Misleads
+
+- Omitted variables can create misleading relationships
+- Reverse causality makes direction ambiguous
+- Measurement error can bias estimates
+- Unobserved differences across places or people can distort pooled comparisons
+
+## Study Priorities
+
+- Identify the question type and decision context
+- Explain how data structure affects interpretation
+- Communicate insights from tables and figures
+- Distinguish prediction, explanation, and causation
+- Communicate uncertainty honestly
+- Make defensible claims without overclaiming
+
+## Final Advice
+
+- Read: Yusuke Kuwayama, Alexandra Thompson, Richard Bernknopf, Benjamin Zaitchik, Peter Vail. Estimating the Impact of Drought on Agriculture Using the U.S. Drought Monitor, American Journal of Agricultural Economics, Volume 101, Issue 1, January 2019, Pages 193–210.
+- Read the prompt carefully before writing
+- Write like you are explaining the result to an intelligent manager or policymaker
+- If you are uncertain, explain your reasoning and state the limitation
