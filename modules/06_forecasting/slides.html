@@ -454,7 +454,6 @@
 <li>Will those patterns continue?</li>
 <li>How uncertain are we?</li>
 </ol>
-<p>Forecasting requires statistical knowledge and good judgment.</p>
 </section>
 <section id="sources-of-predictability" class="slide level2">
 <h2>Sources of Predictability</h2>
@@ -471,13 +470,12 @@
 <li>Technological shifts</li>
 <li>Extreme shocks</li>
 </ul>
-<p>Application: reservation removal in 2026.</p>
 </section>
 <section id="the-role-of-benchmarks" class="slide level2">
 <h2>The Role of Benchmarks</h2>
-<p>Before complex models, ask:</p>
+<p>Benchmarks are simple forecasts that set a baseline for performance.</p>
 <blockquote>
-<p>Can you beat “same month last year”?</p>
+<p>Can you beat the guess: “this month-year will look like the same month last year”?</p>
 </blockquote>
 <p>Seasonal naive is strong because:</p>
 <ul>
@@ -485,8 +483,6 @@
 <li>No parameter estimation required</li>
 <li>It adapts automatically</li>
 </ul>
-<p>Lesson:</p>
-<p><strong>Complexity does not guarantee improvement.</strong></p>
 </section>
 <section id="traintest-split-and-honest-evaluation" class="slide level2">
 <h2>Train/Test Split and Honest Evaluation</h2>
@@ -498,8 +494,6 @@
 <li>Test set <span class="math inline">\(\rightarrow\)</span> simulate future performance</li>
 </ul>
 <p>Without out-of-sample evaluation, you reward overfitting.</p>
-<p>Connection to course workflow:</p>
-<p>EDA <span class="math inline">\(\rightarrow\)</span> Model <span class="math inline">\(\rightarrow\)</span> Evaluation <span class="math inline">\(\rightarrow\)</span> Decision</p>
 </section>
 <section id="what-makes-a-good-forecast" class="slide level2 scrollable">
 <h2>What Makes a Good Forecast?</h2>
@@ -508,14 +502,8 @@
 <ul>
 <li>Transparent</li>
 <li>Interpretable</li>
-<li>Robust to shocks</li>
 <li>Stable across samples</li>
 <li>Appropriate for the decision horizon</li>
-</ul>
-<p>Example:</p>
-<ul>
-<li>Short-term staffing decision</li>
-<li>10-year infrastructure expansion</li>
 </ul>
 <p>Different horizons imply different model choices.</p>
 </section>

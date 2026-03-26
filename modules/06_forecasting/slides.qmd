@@ -116,7 +116,6 @@ Every forecast must answer:
 2. Will those patterns continue?
 3. How uncertain are we?
 
-Forecasting requires statistical knowledge and good judgment.
 
 ## Sources of Predictability
 
@@ -133,13 +132,12 @@ Forecasting is harder with:
 - Technological shifts
 - Extreme shocks
 
-Application: reservation removal in 2026.
 
 ## The Role of Benchmarks
 
-Before complex models, ask:
+Benchmarks are simple forecasts that set a baseline for performance.
 
-> Can you beat "same month last year"?
+> Can you beat the guess: "this month-year will look like the same month last year"?
 
 Seasonal naive is strong because:
 
@@ -147,9 +145,6 @@ Seasonal naive is strong because:
 - No parameter estimation required
 - It adapts automatically
 
-Lesson:
-
-**Complexity does not guarantee improvement.**
 
 ## Train/Test Split and Honest Evaluation
 
@@ -160,9 +155,6 @@ Lesson:
 
 Without out-of-sample evaluation, you reward overfitting.
 
-Connection to course workflow:
-
-EDA $\rightarrow$ Model $\rightarrow$ Evaluation $\rightarrow$ Decision
 
 ## What Makes a Good Forecast?{.scrollable}
 
@@ -172,14 +164,9 @@ A good forecast is:
 
 - Transparent
 - Interpretable
-- Robust to shocks
 - Stable across samples
 - Appropriate for the decision horizon
 
-Example:
-
-- Short-term staffing decision
-- 10-year infrastructure expansion
 
 Different horizons imply different model choices.
 
