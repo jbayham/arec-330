@@ -10,7 +10,7 @@ format:
 # Forecasting for Decision-Making
 From patterns in data $\rightarrow$ real-world decisions
 
-## Opening Scenario: Arches National Park
+## Opening Scenario: Arches National Park{.scrollable}
 
 It is October. You must decide for next summer:
 
@@ -25,7 +25,7 @@ What information do you wish you had?
 
 Forecasting reduces uncertainty about the future.
 
-## What Is Forecasting?
+## What Is Forecasting?{.scrollable}
 
 Forecasting is:
 
@@ -45,28 +45,26 @@ Forecasting is:
 
 ## Why Forecasting Matters in Business and Policy{.scrollable}
 
-### Operations
+**Operations**
+
 - Staffing
 - Inventory
 - Capacity planning
 
-### Finance
+**Finance**
+
 - Revenue projections
 - Budgeting
 - Capital planning
 
-### Public policy
+**Public policy**
+
 - Emergency planning
 - Infrastructure investment
 - Tourism management
 
-Without forecasts:
 
-- Overstaffing $\rightarrow$ wasted money
-- Understaffing $\rightarrow$ congestion and poor experience
-- Misallocated budgets
-
-## Forecasting Is About Decisions, Not Accuracy Alone
+## Forecasting Is About Decisions{.scrollable}
 
 > A forecast is useful only relative to the decision it informs.
 
@@ -106,7 +104,7 @@ Economic context:
 Use the same raw series shown in lab to connect lecture and lab.
 :::
 
-## The Forecasting Problem
+## The Forecasting Problem{.scrollable}
 
 Every forecast must answer:
 
