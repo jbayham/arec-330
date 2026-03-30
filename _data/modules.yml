@@ -102,3 +102,11 @@
   dirname: modules/midterm
   desc: "Midterm review"
   slides: "slides.html"
+  
+- title: "Week 11: Storytelling with Data"
+  dirname: modules/11_storytelling
+  desc: "This module provides an overview of the second part of the course on communicating your data-driven insights. Note that you must access the book through the CSU library. Choose the version by O'Reilly Online Learning."
+  #slides: "slides.html"
+  materials:
+  - title: "Storytelling with Data: Introduction"
+    url: "https://colostate.primo.exlibrisgroup.com/permalink/01COLSU_INST/5j5t2p/alma991032977306003361"
