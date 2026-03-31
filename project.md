@@ -4,6 +4,17 @@ title: "Course Project"
 permalink: /project/
 ---
 
+<style>
+.project-proposal-template h4 {
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.project-proposal-template .sentence-starter {
+  margin-left: 1rem;
+}
+</style>
+
 
 ## Overview
 
@@ -49,15 +60,93 @@ Core learning goals:
 
 The proposal defines the scope and direction of your project. Its purpose is to ensure that your team has a clear, feasible, and well-motivated plan before investing time in data collection and modeling.
 
-Your proposal should be 1–2 pages and must include:
+Feeling uncertain at this stage is normal. In real analytical work, the hardest part is often turning a broad interest into a question that is specific, answerable, and useful. The goal of the proposal is not to have a perfect project from the start. The goal is to arrive at a feasible, decision-relevant question that you can investigate well.
 
-- A clear description of the decision problem or question
-- Identification of the intended decision maker
-- The outcome variable of interest and why it matters
-- Whether the goal is forecasting or explaining relationships
-- The unit of observation
-- Proposed data sources
-- A brief description of the planned regression or forecasting approach
+If you want a refresher on the decision-maker, outcome, and unit-of-observation framework, revisit the <a href="{{ site.url }}{{ site.baseurl }}/modules/02_framework_question/lab.html">Week 2 lab: <em>From Question to Data</em></a>. In that module, we emphasized that good analysis starts with a problem, then a decision, then a question. The same logic applies here.
+
+Your proposal should be 1–2 pages. Use the process below to move from an initial idea to a workable proposal.
+
+### Step 1: Identify the problem and generate 3 candidate ideas
+
+Do not stop at the first idea your group mentions. Start by sketching three possibilities, then compare them.
+
+| Candidate idea | Topic area | What is the problem? | Who is the decision maker? | What decision could they make? | What outcome do they care about? | Likely data source(s) | Main goal: forecasting or explaining relationships? |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Idea 1 |  |  |  |  |  |  |  |
+| Idea 2 |  |  |  |  |  |  |  |
+| Idea 3 |  |  |  |  |  |  |  |
+
+As you compare ideas, favor projects where you can clearly state the problem first. If you cannot name the underlying problem, it will be hard to specify a relevant question.
+
+### Step 2: Turn one problem into a workable question
+
+Choose the strongest candidate and refine it. A good project question is not just "interesting." It is rooted in a real problem, linked to a decision, and specific about the outcome and data structure.
+
+Use these prompts to refine your question:
+
+- What is the underlying problem faced by a firm or society?
+- Why does this problem matter?
+- Who is the decision maker, and what choice do they control?
+- What decision would be informed by your analysis?
+- Who or what is being observed?
+- Where is the question set (for example, a state, county, market, firm, or store)?
+- When is the relevant time period?
+- What is the outcome you want to explain or predict?
+- What is the unit of observation in the data?
+- Why would answering this question help someone make a decision?
+
+Try to write your question in one or two sentences. The question should follow naturally from the problem and the decision, not from the dataset alone.
+
+
+### Step 3: Feasibility screen
+
+Before you draft the proposal, test whether the question is realistic.
+
+- Have we identified a real firm or social problem that motivates the project?
+- Is there a decision someone could plausibly make in response to that problem?
+- Can we measure the outcome clearly with available data?
+- Can we observe the key predictors or explanatory variables we need?
+- Does the unit of observation match the claim we want to make?
+- Do we have enough time periods, observations, or variation to estimate something meaningful?
+- Are the data accessible now, not just theoretically available?
+- Can this question be addressed with regression or forecasting methods covered in this course?
+
+If your team has more than one `No` or `Unsure`, revise the question before moving forward.
+
+### Step 4: Draft the proposal
+
+Use the headings below to draft the actual 1–2 page proposal. If you can write a clear response under each heading, you are in good shape. You do not have to use the sentence starters. They are there to get your started.
+
+<div class="project-proposal-template">
+  <h4>Underlying problem</h4>
+  <p class="sentence-starter"><strong>Sentence starter:</strong> "The firm or social problem motivating this project is ..."</p>
+
+  <h4>Decision problem</h4>
+  <p class="sentence-starter"><strong>Sentence starter:</strong> "Because of this problem, the key decision is ..."</p>
+
+  <h4>Decision maker</h4>
+  <p class="sentence-starter"><strong>Sentence starter:</strong> "The primary decision maker is ... and they would use this analysis to ..."</p>
+
+  <h4>Empirical question</h4>
+  <p class="sentence-starter"><strong>Sentence starter:</strong> "Our empirical question is ..."</p>
+
+  <h4>Outcome variable</h4>
+  <p class="sentence-starter"><strong>Sentence starter:</strong> "The main outcome variable is ... because it captures ..."</p>
+
+  <h4>Unit of observation</h4>
+  <p class="sentence-starter"><strong>Sentence starter:</strong> "The unit of observation is ... which matches our question because ..."</p>
+
+  <h4>Data sources</h4>
+  <p class="sentence-starter"><strong>Sentence starter:</strong> "We plan to use data from ... These sources are appropriate because ..."</p>
+
+  <h4>Planned approach</h4>
+  <p class="sentence-starter"><strong>Sentence starter:</strong> "We plan to estimate a regression or forecasting model ... because ..."</p>
+
+  <h4>Why this is feasible and useful</h4>
+  <p class="sentence-starter"><strong>Sentence starter:</strong> "This project is feasible because ... and useful because ..."</p>
+</div>
+
+
 
 The proposal should demonstrate that your question is answerable with available data and methods covered in this course. Instructor feedback at this stage is intended to help refine your project, not to lock you into a final design.
 
@@ -182,6 +271,3 @@ Peer evaluations may be used to adjust individual grades.
 | **Does not meet expectations** | The reflection is superficial, incomplete, or missing. Contributions are unclear, reflection on the analysis is minimal or absent, or peer feedback is unconstructive or unprofessional.                                                                                                                               |
 
 <br>
-
-
-
