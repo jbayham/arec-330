@@ -147,6 +147,181 @@ Use the headings below to draft the actual 1–2 page proposal. If you can write
 </div>
 
 
+### Suggested in-class workshop plan (1 hour 40 minutes)
+
+Use the lab time to leave class with a real draft, not just a topic idea.
+
+| Time | Task | Concrete output |
+| --- | --- | --- |
+| 0–10 min | Re-read the proposal guidance as a team. Assign temporary roles: facilitator, recorder, and data scout. | Everyone understands the goal and one person is responsible for capturing the group's work. |
+| 10–25 min | Brainstorm 3 candidate project ideas using the table in Step 1. Do not evaluate too early. | A completed 3-idea table. |
+| 25–40 min | Compare the 3 ideas and choose the strongest one. Use the decision maker, outcome, and unit-of-observation framework to justify the choice. | One selected project idea and one rejected backup idea. |
+| 40–55 min | Refine the chosen idea into a 1-2 sentence empirical question using the prompts in Step 2. | A draft question, named decision maker, outcome variable, and unit of observation. |
+| 55–70 min | Conduct the feasibility screen. Search for actual data sources, not hypothetical ones. | A short list of candidate datasets and a decision about whether the project is feasible as currently framed. |
+| 70–90 min | Draft the proposal using the headings in Step 4. Keep writing even if some parts are rough. | A rough but complete 1-2 page draft. |
+| 90–100 min | Do a final review: identify the weakest section, revise it, and make a plan for what each group member will do next. | A stronger draft and a next-steps plan. |
+
+If your group gets stuck, use this rule: do not spend more than 10 minutes debating a broad topic without writing something down. Move to a more specific question, a narrower setting, or a more accessible dataset.
+
+### Checkpoints for today
+
+By the end of class, your team should have:
+
+- Three candidate ideas written down
+- One clearly chosen project direction
+- A named decision maker
+- A specific outcome variable
+- A clear unit of observation
+- At least one real data source you can access now
+- A rough proposal draft organized under the Step 4 headings
+
+### Instructor check-ins (Optional)
+
+Ask for feedback once your group can show all three of the following:
+
+- Your draft empirical question in one or two sentences
+- The decision maker, outcome, and unit of observation
+- The dataset or data source you think makes the project feasible
+
+That will make it much easier to give you useful feedback quickly.
+
+### Using AI tools effectively for the proposal
+
+AI tools can help you think faster at this stage, but they are most useful when you use them to sharpen your judgment, not replace it.
+
+Use AI tools for tasks like:
+
+- Generating and comparing possible project ideas
+- Stress-testing whether a question is too broad, too vague, or not decision-relevant
+- Revising a weak question into a clearer empirical question
+- Identifying likely decision makers, outcomes, and units of observation
+- Brainstorming keywords, agencies, repositories, and organizations to search for data
+- Comparing whether a question is better suited for regression or forecasting
+- Improving the clarity of your proposal draft
+
+Use AI tools carefully. Do not treat an AI response as automatically correct. AI tools can:
+
+- Invent data sources that do not exist
+- Suggest questions that sound impressive but are not feasible
+- Confuse correlation, causation, prediction, and explanation
+- Give generic answers that are not tied to a real decision problem
+
+Your job is to evaluate the output. If the AI suggests a dataset, check that it actually exists and that you can access it now. If it suggests a question, ask whether the decision maker, outcome, and unit of observation really line up.
+
+### Good prompting strategies
+
+Weak prompts usually produce weak answers. Give the model context, constraints, and a clear task.
+
+Instead of:
+
+- "Give us a project idea"
+
+Try prompts like:
+
+- "Critique this project idea. Tell us whether the decision maker, outcome, unit of observation, and likely data source are clearly defined."
+- "We are considering this question: [insert question]. Rewrite it so it is narrower, more decision-relevant, and easier to answer with available data."
+- "List likely public data sources for this topic. First, confirm they exist. For each source, explain what the unit of observation would be and whether it seems useful for regression or forecasting."
+- "Challenge this idea. What are the main feasibility risks, hidden assumptions, and reasons this project could fail?"
+
+Good prompts often include:
+
+- The course constraint: regression or forecasting methods covered in class
+- The decision context
+- The geographic setting
+- The time period
+- The likely outcome variable
+- The audience for the final analysis
+- A request for critique, not just idea generation
+
+### Smart ways to use AI during the workshop
+
+1. Start with idea generation, but ask for multiple alternatives.
+2. Use AI to critique each idea, not just praise it.
+3. Ask AI what would make the idea infeasible.
+4. Ask for likely datasets, then verify them yourself.
+5. Ask AI to help you revise the question after you have chosen an idea.
+6. Use AI to improve the writing of your proposal only after you have settled the substance.
+
+You will get more value from prompts like "What is wrong with this idea?" than from prompts like "Tell us if this is a good idea."
+
+### Data search and verification
+
+AI can help you search for data, but it should not be your final source of truth.
+
+When using AI for data search:
+
+- Ask for specific dataset names, agencies, repositories, or organizations
+- Ask what variables are likely available
+- Ask what the unit of observation probably is
+- Ask whether the data seem better for cross-sectional, panel, or time-series analysis
+- Verify every promising source by visiting the actual website
+
+For example, a strong workflow is:
+
+1. Ask AI for likely data sources and search terms.
+2. Visit the real source.
+3. Confirm the data exist, are accessible, and contain the variables you need.
+4. Decide whether the source actually matches your empirical question.
+
+### Submission requirement: AI conversation record
+
+Along with your proposal, your team must submit a record of your AI conversations related to developing the proposal.
+
+This is required because I want to see how you used AI as part of your analytical process, including brainstorming, critique, revision, and data search.
+
+Your submission should include the conversations that show how you:
+
+- Generated or compared project ideas
+- Refined your empirical question
+- Evaluated feasibility
+- Searched for data sources
+- Revised your writing or argument
+
+Do not curate only your best-looking exchange. Include the conversation record that reflects your actual process.
+
+### How to export or save your AI conversations
+
+Different AI tools handle exports differently, so use whichever of the following methods works for your platform.
+
+#### Option 1: Export directly from the platform
+
+If your AI tool has an export, share, print, or download feature, use it to save the relevant conversation as a PDF, HTML file, or text file.
+
+#### Option 2: Browser extension
+
+If needed, you may use a browser extension designed to export chats, such as <https://www.chatgptexporter.com/en>. This may let you save the conversation in formats such as PDF, Markdown, or JSON.
+
+#### Option 3: Print to PDF
+
+If there is no export button, use your browser's print function and save the conversation as a PDF.
+
+#### Option 4: Copy into a document
+
+If the other options do not work well, copy and paste the full conversation into a document and save it as a PDF or Word file. Make sure the prompts and responses are clearly labeled and remain in order.
+
+### What to submit
+
+Submit one file per group containing your AI conversation record. Acceptable formats are:
+
+- PDF
+- Word document
+- Plain text file
+- JSON
+
+Label the file clearly, for example:
+
+- `project_proposal_ai_record.pdf`
+
+If your group used more than one AI tool, combine the relevant conversations into one file if possible. If you submit a JSON export, make sure it still clearly preserves the conversation record.
+
+At minimum, the conversation record must show:
+
+- The prompts your group wrote
+- The AI responses
+- Enough of the conversation to show how your idea evolved
+
+If you quote, paraphrase, or directly use language from an AI tool in your proposal, that use should be visible in the submitted conversation record.
+
 
 The proposal should demonstrate that your question is answerable with available data and methods covered in this course. Instructor feedback at this stage is intended to help refine your project, not to lock you into a final design.
 
