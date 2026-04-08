@@ -121,8 +121,8 @@
     url: "https://colostate.primo.exlibrisgroup.com/permalink/01COLSU_INST/5j5t2p/alma991032977306003361"
 
 - title: "Week 12: Choosing the Right Visualization"
-  id: "choosing-visualization"
-  dirname: modules/12_visualization
+  id: "choosing"
+  dirname: modules/12_choosing
   desc: "This module focuses on how to choose the right data visualization to communicate your insights."
   slides: "slides.html"
   # lab: "lab.html"
