@@ -25,7 +25,14 @@ permalink: /schedule/
     {% endif %}
       <td>{{ item.week }}</td>
       <td>{{ item.date | date: "%b %d" }}</td>
-      <td> <a href="{{ site.url }}{{ site.baseurl }}/modules">{{ item.topic }}</a> </td>
+      {% assign module_anchor = item.module_id | default: "" %}
+      <td>
+        {% if module_anchor != "" %}
+        <a href="{{ site.url }}{{ site.baseurl }}/modules/#{{ module_anchor }}">{{ item.topic }}</a>
+        {% else %}
+        <a href="{{ site.url }}{{ site.baseurl }}/modules">{{ item.topic }}</a>
+        {% endif %}
+      </td>
       <td>{{ item.lab }}</td>
     </tr>
     {% endfor %}

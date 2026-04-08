@@ -39,7 +39,7 @@ The bottom right icons link to the Github directory for the lecture (<i class="f
 <ul id="archive">
 {% for modules in site.data.modules %}
       <li class="archiveposturl">
-<h3 class="module-title">{{ modules.title }}</h3>
+<h3 id="{{ modules.id | default: modules.title | slugify }}" class="module-title">{{ modules.title }}</h3>
 <span class = "postlower"> {{ modules.desc }} </span>
 <!--
 <strong style="font-size:100%; font-family: 'Titillium Web', sans-serif; float:right; padding-right: .5em">

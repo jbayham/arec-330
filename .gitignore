@@ -59,3 +59,9 @@ _site/
 .jekyll-metadata
 
 copilot-instructions.md
+
+# Local course assets/scripts not intended for version control
+modules/02_framework_question/includes/Drought_area_in_the_United_States.svg
+modules/03_data_processing/includes/proc_dat_lab.r
+modules/04_data_processing2/lab4.r
+modules/visual/includes/AETR_2025_0237 Final.pdf

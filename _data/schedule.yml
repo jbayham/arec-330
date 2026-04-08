@@ -3,78 +3,94 @@
   topic: Intro overview
   lab: 'Setup: github/AI, R/VScode, PowerBI'
   due: ''
+  module_id: intro
 - week: ' 2'
   date: '2026-01-28'
   topic: Asking the right question
   lab: Finding and acquiring data
   due: ''
+  module_id: right-questions
 - week: ' 3'
   date: '2026-02-04'
   topic: Processing Data Part 1
   lab: 'Processing Data: manipulating, aggregating'
   due: ''
+  module_id: data-processing-1
 - week: ' 4'
   date: '2026-02-11'
   topic: Processing Data Part 2
   lab: 'Processing Data: merging'
   due: ''
+  module_id: data-processing-2
 - week: ' 5'
   date: '2026-02-18'
   topic: Exploratory Data Analysis
   lab: Exploratory Data Analysis (Power BI)
   due: ''
+  module_id: eda
 - week: ' 6'
   date: '2026-02-25'
   topic: Forecasting (asynchronous)
   lab: Forecasting
   due: ''
+  module_id: forecasting
 - week: ' 7'
   date: '2026-03-04'
   topic: Explanatory Data Analysis Part 1
   lab: 'Explanatory Data Analysis: Intro to regression'
   due: ''
+  module_id: regression
 - week: ' 8'
   date: '2026-03-11'
   topic: Explanatory Data Analysis Part 2
   lab: 'Explanatory Data Analysis: regression details'
   due: ''
+  module_id: regression
 - week: ' 9'
   date: '2026-03-18'
   topic: Spring Break (no class)
   lab: ''
   due: ''
+  module_id: ''
 - week: '10'
   date: '2026-03-25'
   topic: Exam Review
   lab: Exam
   due: ''
+  module_id: ''
 - week: '11'
   date: '2026-04-01'
   topic: Storytelling with data
   lab: Understand the Context
   due: ''
+  module_id: storytelling
 - week: '12'
   date: '2026-04-08'
   topic: Choose Visual
   lab: Creating data visualizations
   due: ''
+  module_id: choosing-visualization
 - week: '13'
   date: '2026-04-15'
   topic: Making Maps
   lab: Creating maps
   due: ''
+  module_id: ''
 - week: '14'
   date: '2026-04-22'
   topic: Eliminate Clutter
   lab: Refining visuals
   due: ''
+  module_id: ''
 - week: '15'
   date: '2026-04-29'
   topic: Presenting
   lab: Projects
   due: ''
+  module_id: ''
 - week: '16'
   date: '2026-05-06'
   topic: Presentation
   lab: Presentation
   due: ''
+  module_id: ''

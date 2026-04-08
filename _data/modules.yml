@@ -1,4 +1,5 @@
 - title: "Week 1: Course Introduction"
+  id: "intro"
   dirname: modules/01_intro
   desc: "Introduction to the course and setting up software."
   slides: "slides.html"
@@ -9,6 +10,7 @@
   
   
 - title: "Week 2: Asking the Right Questions"
+  id: "right-questions"
   dirname: modules/02_framework_question
   desc: "Lecture will focus on a framework for data-driven decision making and how to ask the right questions. Lab will focus on finding data to answer your questions."
   slides: "slides.html"
@@ -23,6 +25,7 @@
   
   
 - title: "Week 3: Data Processing Part 1"
+  id: "data-processing-1"
   dirname: modules/03_data_processing
   desc: "Lecture will focus on the importance of data processing for overall analysis."
   slides: "slides.html"
@@ -39,6 +42,7 @@
     rel_url: "includes/dm_state_2000-2025.csv"
     
 - title: "Week 4: Data Processing Part 2"
+  id: "data-processing-2"
   dirname: modules/04_data_processing2
   desc: "Lecture will complete the unit on data processing with a focus on merging or joining."
   slides: "slides.html"
@@ -57,6 +61,7 @@
     rel_url: "../03_data_processing/includes/dm_state_2000-2025.csv"
     
 - title: "Week 5: Exploratory Data Analysis"
+  id: "eda"
   dirname: modules/05_EDA
   desc: "This module will focus on what exploratory data analysis is, why it is imporant, and how to do it in R and Power BI."
   slides: "slides.html"
@@ -68,6 +73,7 @@
     rel_url: "includes/drought_weekly.csv"
     
 - title: "Week 6: Forecasting"
+  id: "forecasting"
   dirname: modules/06_forecasting
   desc: "This module will focus on forecasting methods and how to do forecasting in R."
   slides: "slides.html"
@@ -77,6 +83,7 @@
     url: "https://otexts.com/fpp3/"
     
 - title: "Week 7-8: Regression"
+  id: "regression"
   dirname: modules/07_regression
   desc: "This module will span two weeks and focus on regression methods to inform decision making."
   slides: "slides.html"
@@ -99,11 +106,13 @@
     url: "https://youtu.be/FY-Qwsk-zRM?si=sDmemRpbLneDBz20"
 
 - title: "Week 10: Midterm Review"
+  id: "midterm-review"
   dirname: modules/midterm
   desc: "Midterm review"
   slides: "slides.html"
   
 - title: "Week 11: Storytelling with Data"
+  id: "storytelling"
   dirname: modules/11_storytelling
   desc: "This module provides an overview of the second part of the course on communicating your data-driven insights. Note that you must access the book through the CSU library. Choose the version by O'Reilly Online Learning."
   slides: "slides.html"
@@ -112,6 +121,7 @@
     url: "https://colostate.primo.exlibrisgroup.com/permalink/01COLSU_INST/5j5t2p/alma991032977306003361"
 
 - title: "Week 12: Choosing the Right Visualization"
+  id: "choosing-visualization"
   dirname: modules/12_visualization
   desc: "This module focuses on how to choose the right data visualization to communicate your insights."
   # slides: "slides.html"
