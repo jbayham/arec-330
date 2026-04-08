@@ -124,7 +124,7 @@
   id: "choosing-visualization"
   dirname: modules/12_visualization
   desc: "This module focuses on how to choose the right data visualization to communicate your insights."
-  # slides: "slides.html"
+  slides: "slides.html"
   # lab: "lab.html"
   materials:
   - title: "Storytelling with Data: Chapter 2: Choosing an Effective Visual"
