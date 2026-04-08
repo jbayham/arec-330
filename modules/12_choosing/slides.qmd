@@ -95,9 +95,11 @@ Repeat: audience + purpose before chart type.
 
 Instructions
 
-- Work in small groups
-- For each scenario, sketch the best visual
-- Be ready to share
+- Groups of 4
+- For each of scenario 4 scenarios, sketch the best visual
+- Come to the front and share
+- Vote on each scenario
+- Winner gets the peeps
 
 
 
@@ -150,7 +152,7 @@ Walk top to bottom with one example each.
 ::::
 
 
-## Same Data, Two Formats {.scrollable}
+## Table {.scrollable}
 
 ```{r}
 #| echo: false
@@ -274,7 +276,7 @@ ggplot2::ggplot(
 ## Mistake 3: 3D Effects{.scrollable}
 
 <div style="background: white; color: #222; border-radius: 14px; padding: 20px; min-height: 250px; display: flex; align-items: center; justify-content: center; text-align: center;">
-  ![](includes/3d-v-2d.webp)
+  ![](includes/3d-v-2d.png)
 </div>
 
 - 3D distorts lengths and areas
@@ -306,45 +308,68 @@ Index
 
 ![](includes/indexed.avif)
 
-# Activity 2: Fix This Visual
+## Another Example
 
-## Redesign Challenge{.scrollable}
+![](includes/russia_poland.jpeg)
 
-- Identify the main problem in each visual
-- Redesign it for faster audience understanding
-- Explain your redesign choice in one sentence
+## Other chart types
 
-:::: {.columns}
+- slopegraphs
+- sankey diagrams 
+- treemaps
+- heatmaps
 
-::: {.column width="33%"}
-<div style="background: white; color: #222; border-radius: 14px; padding: 12px; min-height: 210px; display: flex; align-items: center; justify-content: center; text-align: center;">
-  <strong>TODO: Pie chart placeholder</strong>
-</div>
+## Slopegraph{.scrollable}
+
+<iframe width="1060" height="815" src="https://ikashnitsky.phd/x/d3/05-experimental.html" title="Slopegraph" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Sankey
+
+![](includes/sankey_game.png)
+
+<https://sankeyflowstudio.com/>
+
+:::{.notes}
+Estimated revenue breakdown for Schedule 1, the indie hit built by a solo 20-year-old Australian developer in Unity. Data sourced from public Steam analytics and standard industry rates (Valve's 30% cut, ~3% payment processing). Tax estimate based on Australia's top marginal rate (45% + 2% Medicare levy).
 :::
 
-::: {.column width="33%"}
-<div style="background: white; color: #222; border-radius: 14px; padding: 12px; min-height: 210px; display: flex; align-items: center; justify-content: center; text-align: center;">
-  <strong>TODO: Misleading bar chart placeholder</strong>
-</div>
+
+## Treemap
+
+<https://veridion.com/us-federal-contractors/>
+
+## Heatmap {.scrollable}
+
+![](includes/march_madness.png){style="width: 70%; max-width: none; max-height: none; height: auto;"}
+
+## Data is... 
+
+::::{.columns}
+
+::: {.column width="50%"}
+
+[Beautiful](https://www.reddit.com/r/dataisbeautiful/)
+
 :::
 
-::: {.column width="33%"}
-<div style="background: white; color: #222; border-radius: 14px; padding: 12px; min-height: 210px; display: flex; align-items: center; justify-content: center; text-align: center;">
-  <strong>TODO: Cluttered table placeholder</strong>
-</div>
+::: {.column width="50%"}
+[Ugly](https://www.reddit.com/r/dataisugly/)
+
 :::
 
 ::::
 
-:::{.notes}
-Time: 1 minute setup, 6 minutes group redesign, 3 minutes report out.
-:::
+## Assortment
 
-# Wrap-Up
+[Press](https://www.reddit.com/r/dataisbeautiful/comments/1sdrmrs/oc_press_freedom_is_in_a_steady_decline_across/#lightbox)
 
-## Exit Prompt
+[Mary](https://www.reddit.com/r/dataisbeautiful/comments/1s6qi6h/oc_americas_most_popular_girl_name_18802008/#lightbox)
 
-What rule will you actually use in your next chart?
+[Names](https://www.reddit.com/r/dataisbeautiful/comments/1s52eh7/oc_50_us_names_highly_concentrated_within_a/#lightbox)
+
+## Kyoto Cherry Blossom (Sakura)
+
+![](includes/kyoto_cherry.png)
 
 ## Final Takeaway
 
