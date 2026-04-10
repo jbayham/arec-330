@@ -10,6 +10,8 @@ format:
     include-after-body: ../course-footer.html
 ---
 
+![](includes/lab_header.png)
+
 This lab is about choosing the right visual for the message, audience, and decision. You will first build a few basic charts from a synthetic dataset, then develop charts to answer a hypothetical question, and finally apply the same logic to your own data.
 
 
@@ -159,6 +161,7 @@ ggplot(irrigation_dat, aes(x = water_applied_mm, y = crop_yield_index)) +
 
 Save this chart using `ggsave()` and include it in your lab notebook.
 ```{r}
+#| eval: false
 ggsave("water_yield_scatter.png", width = 6, height = 4)
 ```
 
