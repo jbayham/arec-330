@@ -116,7 +116,7 @@
   dirname: modules/11_storytelling
   desc: "This module provides an overview of the second part of the course on communicating your data-driven insights. Note that you must access the book through the CSU library. Choose the version by O'Reilly Online Learning."
   slides: "slides.html"
-  materials:
+  readings:
   - title: "Storytelling with Data: Introduction"
     url: "https://colostate.primo.exlibrisgroup.com/permalink/01COLSU_INST/5j5t2p/alma991032977306003361"
 
@@ -125,7 +125,10 @@
   dirname: modules/12_choosing
   desc: "This module focuses on how to choose the right data visualization to communicate your insights."
   slides: "slides.html"
-  # lab: "lab.html"
-  materials:
+  lab: "lab.html"
+  readings:
   - title: "Storytelling with Data: Chapter 2: Choosing an Effective Visual"
     url: "https://colostate.primo.exlibrisgroup.com/permalink/01COLSU_INST/5j5t2p/alma991032977306003361"
+  materials:
+  - title: "Farm-Level Data for Lab"
+    rel_url: "includes/lab12_dat.csv"

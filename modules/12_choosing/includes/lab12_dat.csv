@@ -1,0 +1,19 @@
+farm,crop,zone,seasonal_water_acft,yield_bu_acre,drought_stress_index
+Farm 1,corn,North,185.3,103.2,79.7
+Farm 2,corn,North,151.2,112,88.3
+Farm 3,corn,North,122.2,136.1,61.9
+Farm 4,corn,North,164,102.6,82.1
+Farm 5,corn,North,162.2,111.6,77.7
+Farm 6,corn,North,100.3,145.2,74
+Farm 7,soybeans,Central,105.9,128.1,64.5
+Farm 8,soybeans,Central,117.4,133.4,65
+Farm 9,soybeans,Central,168.3,124.4,79.4
+Farm 10,soybeans,Central,165.3,102,74.6
+Farm 11,soybeans,Central,169,99.3,84.8
+Farm 12,soybeans,Central,155.1,107.7,81.7
+Farm 13,alfalfa,South,161.2,120.9,90.7
+Farm 14,alfalfa,South,145.5,104.2,86.8
+Farm 15,alfalfa,South,138.6,120.3,81.4
+Farm 16,alfalfa,South,129.9,125.4,69.2
+Farm 17,alfalfa,South,157.6,89.6,83.8
+Farm 18,alfalfa,South,163.4,103.9,76.4
