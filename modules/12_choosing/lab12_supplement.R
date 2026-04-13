@@ -2,7 +2,7 @@
 
 library(tidyverse)
 
-cut_mult=.75
+cut_mult=.85
 
 set.seed(331)
 
