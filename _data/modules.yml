@@ -132,3 +132,15 @@
   materials:
   - title: "Farm-Level Data for Lab"
     rel_url: "includes/lab12_dat.csv"
+    
+- title: "Week 13: Spatial Data in R and PowerBI"
+  id: "spatial"
+  dirname: modules/13_spatial
+  desc: "In this module, we will cover the basics of spatial data and how to create spatial visualizations in R and Power BI."
+  slides: "slides.html"
+  lab: "lab.html"
+  readings:
+  - title: "Geocomputation with R: Sections 2.1 (Introduction) - 2.2.5 (Vector Data up to 2.2.5, but not 2.2.6)"
+    url: "https://r.geocompx.org/spatial-class#intro-spatial-class"
+  - title: "Tips and tricks for Power BI map visualizations"
+    url: "https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-map-tips-and-tricks"
