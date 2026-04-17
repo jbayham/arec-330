@@ -137,7 +137,7 @@
   id: "spatial"
   dirname: modules/13_spatial
   desc: "In this module, we will cover the basics of spatial data and how to create spatial visualizations in R and Power BI."
-  slides: "slides.html"
+  slides: "slides.pdf"
   lab: "lab.html"
   readings:
   - title: "Geocomputation with R: Sections 2.1 (Introduction) - 2.2.5 (Vector Data up to 2.2.5, but not 2.2.6)"
