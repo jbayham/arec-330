@@ -67,46 +67,15 @@ Use the reading language:
 - clutter is anything that does not improve understanding enough to justify its presence
 :::
 
-## Common Sources of Clutter {.scrollable}
 
-:::: {.columns}
-
-::: {.column width="50%"}
-:::{.incremental}
-- borders and background shading
-- heavy gridlines
-- excessive labels
-- unnecessary legends
-:::
-:::
-
-::: {.column width="50%"}
-:::{.incremental}
-- too many colors
-- data markers that add no value
-- diagonal text when horizontal text would work
-- repeated detail that competes with the main point
-:::
-:::
-
-::::
-
-<!-- **Discussion prompt**
-
-- What could be removed without losing meaning? -->
-
-:::{.notes}
-Time: 2 minutes.
-
-Emphasize that clutter is not just "too much stuff."
-It is specifically stuff that costs attention but does not improve comprehension.
-:::
 
 ## Applied Example 1
 
-- Audience: board of directors
-- Decision: which region to conduct a pricing review
-- Goal: communicate that the West division has the lowest operating margin
+Audience: board of directors
+
+Decision: which region to conduct a pricing review
+
+Goal: communicate that the West division has the lowest operating margin
 
 ## Applied Example 1: Before
 
@@ -232,7 +201,40 @@ Key redesign moves:
 - rewrite the title so the audience gets the message immediately
 :::
 
-## Reduce Clutter
+## Common Sources of Clutter {.scrollable}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+:::{.incremental}
+- borders and background shading
+- heavy gridlines
+- excessive labels
+- unnecessary legends
+:::
+:::
+
+::: {.column width="50%"}
+:::{.incremental}
+- too many colors
+- data markers that add no value
+- diagonal text when horizontal text would work
+- repeated detail that competes with the main point
+:::
+:::
+
+::::
+
+
+
+:::{.notes}
+Time: 2 minutes.
+
+Emphasize that clutter is not just "too much stuff."
+It is specifically stuff that costs attention but does not improve comprehension.
+:::
+
+## Common Clutter Reduction Moves
 
 1. Remove chart border
 2. Remove gridlines
@@ -250,7 +252,7 @@ Key redesign moves:
 <!-- :::: {.columns}
 
 ::: {.column width="46%"} -->
-**Fast signals**: color, size, position
+**Fast signals**: color, size, position (preattentive attributes)
 <!-- :::
 
 ::: {.column width="54%"} -->
@@ -283,7 +285,9 @@ Key ideas:
 ## Applied Example 2
 
 Audience: IT director
+
 Decision: Increase capacity 
+
 Goal: communicate that the backlog of support tickets is growing
 
 ## Applied Example 2: Before
@@ -421,21 +425,17 @@ This slide demonstrates:
 
 ## Small-Group Activity {.scrollable}
 
-**Work in pairs or groups of three**
+**Work in small groups**
 
-1. Diagnose one cluttered visual
-2. Decide what to remove
-3. Decide what to mute or push to the background
-4. Decide what to highlight
-5. Write the first takeaway a decision-maker should see
-
-Be ready to give a 30-second redesign pitch.
+1. Declutter
+2. Focus attention
+3. Be ready to give a 30-second redesign pitch.
+4. Write your group members name on the sheet and submit it at the end of class.
 
 :::{.notes}
 Time: 2 minutes setup, 8 minutes group work.
 
-If helpful, assign half the room to Visual A and half to Visual B.
-You can also replace one of these with your own chart.
+
 :::
 
 ## Activity Visual A
@@ -543,8 +543,7 @@ ggplot(activity_b, aes(x = year, y = cost, color = channel, group = channel)) +
   )
 ```
 
-- What should a decision-maker notice first?
-- Would you keep one chart or split the story?
+
 
 :::{.notes}
 Possible redesign direction:
