@@ -144,3 +144,14 @@
     url: "https://r.geocompx.org/spatial-class#intro-spatial-class"
   - title: "Tips and tricks for Power BI map visualizations"
     url: "https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-map-tips-and-tricks"
+
+- title: "Week 14: Refining Data Visuals"
+  id: "refining"
+  dirname: modules/14_refining
+  desc: "This module focuses on reducing clutter, creating visual order, and directing audience attention so visuals communicate business-relevant takeaways clearly."
+  slides: "slides.html"
+  readings:
+  - title: "Storytelling with Data: Chapter 3: Clutter is your enemy"
+    url: "https://colostate.primo.exlibrisgroup.com/permalink/01COLSU_INST/5j5t2p/alma991032977306003361"
+  - title: "Storytelling with Data: Chapter 4: focus your audience's attention"
+    url: "https://colostate.primo.exlibrisgroup.com/permalink/01COLSU_INST/5j5t2p/alma991032977306003361"
