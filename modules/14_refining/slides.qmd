@@ -30,7 +30,7 @@ refine_theme <- theme_minimal(base_size = 15) +
   )
 ```
 
-## From Making Charts to Refining Charts
+## From Making to Refining Charts
 
 - Previously, the question was: **what visual should I use?**
 - Now, the question is: **what needs to change so the message is obvious?**
@@ -232,6 +232,19 @@ Key redesign moves:
 - rewrite the title so the audience gets the message immediately
 :::
 
+## Reduce Clutter
+
+1. Remove chart border
+2. Remove gridlines
+3. Remove data markers
+4. Clean up axis labels
+5. Label data directly
+6. Leverage consistent color
+
+##
+
+![](includes/it_compare.png)
+
 ## Focus Attention on Purpose
 
 <!-- :::: {.columns}
@@ -352,14 +365,14 @@ resolved <- data.frame(
 
 ggplot() +
   annotate("rect", xmin = 4.6, xmax = 8.55, ymin = 110, ymax = 155, fill = "gray96", color = NA) +
-  geom_line(data = received, aes(x = month_num, y = tickets), color = "gray45", linewidth = 1.5) +
+  geom_line(data = received, aes(x = month_num, y = tickets), color = "gray65", linewidth = 1.5) +
   geom_line(data = resolved, aes(x = month_num, y = tickets), color = accent, linewidth = 1.9) +
-  geom_point(data = received[8, ], aes(x = month_num, y = tickets), color = "gray35", size = 3) +
+  geom_point(data = received[8, ], aes(x = month_num, y = tickets), color = "gray55", size = 3) +
   geom_point(data = resolved[8, ], aes(x = month_num, y = tickets), color = accent, size = 3.4) +
-  annotate("segment", x = 8.1, xend = 8.1, y = 118, yend = 149, color = alert, linewidth = 1.1) +
-  annotate("text", x = 8.35, y = 149, label = "Received", hjust = 0, color = "gray30", size = 4) +
+  annotate("segment", x = 8, xend = 8, y = 118, yend = 149, color = alert, linewidth = .5, linetype = "dashed") +
+  annotate("text", x = 8.35, y = 149, label = "Received", hjust = 0, color = "gray50", size = 4) +
   annotate("text", x = 8.35, y = 118, label = "Resolved", hjust = 0, color = accent, size = 4) +
-  annotate("text", x = 7.0, y = 152, label = "Gap opens here", color = alert, size = 4.2) +
+  # annotate("text", x = 7.0, y = 152, label = "Gap opens here", color = alert, size = 4.2) +
   annotate("text", x = 8.28, y = 133.5, label = "31-ticket\ngap", hjust = 0, color = alert, size = 4.1) +
   scale_x_continuous(
     breaks = 1:8,
@@ -400,18 +413,9 @@ This slide demonstrates:
 - use title + annotation to guide attention
 :::
 
-## Reduce Clutter
 
-1. Remove chart border
-2. Remove gridlines
-3. Remove data markers
-4. Clean up axis labels
-5. Label data directly
-6. Leverage consistent color
 
-##
 
-![](includes/it_compare.png)
 
 # Activity: Visual Redesign
 

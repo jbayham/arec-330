@@ -30,21 +30,12 @@ handout_theme <- theme_minimal(base_size = 12) +
 
 # Visual Redesign Activity
 
-Work in pairs or groups of three. For each visual:
+Work in small groups. For each visual:
 
-1. Identify the audience.
-2. Identify the decision.
-3. Identify the goal of the visual.
-4. Decide what to remove, mute, or highlight.
-5. Rewrite the title so the takeaway is obvious.
 
-:::{.callout-note}
-Prompt template
+1. Declutter by removing unnecessary elements and simplifying the design.
+2. Focus attention on the purpose by muting less important details and highlighting key insights.
 
-Use this sentence frame before you redesign any chart:
-
-The audience is `______`. They need to decide `______`. The goal of the visual is to `______`.
-:::
 
 \newpage
 
@@ -115,8 +106,8 @@ Redesign checklist
 Scenario:
 
 - Audience: sales operations leadership
-- Decision: which customer acquisition channels to invest in
-- Goal: compare the cost-effectiveness of different customer acquisition channels
+- Decision: which customer acquisition channels needs more attention to improve efficiency
+- Goal: show that the social channel is becoming more expensive and may need attention to improve efficiency
 
 What would you remove, mute, highlight, and rewrite?
 
@@ -178,9 +169,4 @@ Redesign checklist
 ## Debrief
 
 Be ready to give a 30-second redesign pitch.
-
-- Who is the audience?
-- What decision depends on the visual?
-- What is the visual goal?
-- What did you remove, mute, or highlight?
-- What takeaway should the audience see before anything else?
+Explain your redesign choices and how they help the audience understand the message
