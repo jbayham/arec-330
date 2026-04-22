@@ -585,3 +585,17 @@ Time: 1 minute.
 
 Use this as the closing language for the day.
 :::
+
+# Project
+
+## Lab this week
+
+Lab will focus on how to redesign visuals
+
+Have a draft of your project visual for class. We will workshop them in small groups and give feedback to each other. 
+
+## Project checkin
+
+- Think carefully about your audience and decision. 
+- Does your analysis answer a question that matters to a real decision-maker?
+- What is the one key message you want to communicate with your visual?

@@ -170,3 +170,4 @@ Redesign checklist
 
 Be ready to give a 30-second redesign pitch.
 Explain your redesign choices and how they help the audience understand the message
+
