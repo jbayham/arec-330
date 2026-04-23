@@ -340,7 +340,10 @@ Note
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge with corn dataset by state name</span></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>corn_sf <span class="ot">&lt;-</span> corn_dat <span class="sc">%&gt;%</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(states, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"abbr"</span> <span class="ot">=</span> <span class="st">"state"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(states, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"abbr"</span> <span class="ot">=</span> <span class="st">"state"</span>))</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Make sure corn_sf is really an sf (simple features) object</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>corn_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(corn_sf) <span class="co"># this function converts non-sf objects to sf if a geometry column is present</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout-attention">
 <p>Look at the new merged dataset. Answer all parts of Question 4 in your lab notebook.</p>

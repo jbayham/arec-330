@@ -210,6 +210,9 @@ corn_dat <- corn_dat %>% filter(year == 2012)
 # Merge with corn dataset by state name
 corn_sf <- corn_dat %>%
   left_join(states, by = c("abbr" = "state"))
+
+# Make sure corn_sf is really an sf (simple features) object
+corn_sf <- st_as_sf(corn_sf) # this function converts non-sf objects to sf if a geometry column is present
 ```
 
 :::{.callout-attention}
