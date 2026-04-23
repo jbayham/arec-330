@@ -12,7 +12,7 @@ format:
 
 ![](includes/lab_header.png)
 
-This lab introduces spatial data as a tool for data-driven decision making. You will work with the dataset on corn yield and drought conditions in two settings. First, you will use **Power BI** to build an interactive map and scatterplot. Then you will use **R** to build a similar interactive version. The goal is not to become a GIS specialist in one lab (see other courses at CSU or free ArcGIS Online modules if you're interested in learning more). The goal is to learn how location can add meaning to a dataset and how interactive visuals can support exploration and communication.
+This lab introduces spatial data as a tool for data-driven decision making. You will work with the dataset on corn yield and drought conditions in two settings. First, you will use **Power BI** to build an interactive map and scatterplot (this portion of the lab is OPTIONAL). Then you will use **R** to build a similar interactive version (not optional). The goal is not to become a GIS specialist in one lab (see other courses at CSU or free ArcGIS Online modules if you're interested in learning more). The goal is to learn how location can add meaning to a dataset and how interactive visuals can support exploration and communication.
 
 Throughout the lab, keep asking yourself these questions:
 
@@ -151,7 +151,7 @@ Suggested improvements:
 - make tooltips informative but short
 - align the visuals neatly
 
-### Power BI reflection questions
+### Power BI reflection questions (OPTIONAL)
 
 :::{.callout-attention}
 Answer Questions 1-3 in your lab notebook.
@@ -234,7 +234,7 @@ Now create a simple interactive map colored by drought or yield.
 #| eval: false
 tm_shape(corn_sf) +
   tm_polygons(
-    col = "yield",
+    col = "yield_bu_per_acre",
     palette = "YlGn",
     title = "Corn Yield"
   ) +
@@ -244,7 +244,7 @@ tm_shape(corn_sf) +
   )
 ```
 
-You could also color by `farm_gdp` instead.
+You could also color by `farm_gdp` instead (or `mean_dsci`).
 
 ```{r}
 #| eval: false
@@ -301,13 +301,12 @@ Answer Questions 7-8 in your lab notebook.
 
 Submit on Canvas:
 
-1. **Log file (`lab_13.log`)**
+1. **Log file (`lab_9.log`)**
    Use the sink-source-sink pattern. Your log should include code, output, and brief comments.
 
-2. **Lab notebook** with answers to Questions 1-8
+2. **Lab notebook** with answers to Questions 4-8
 
 3. **Screenshots or exports** of:
-   - your Power BI report page with the map, scatterplot, and slicer
    - at least one interactive R visual
 
 ---
