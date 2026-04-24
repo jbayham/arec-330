@@ -91,7 +91,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#step-5-add-a-slicer-by-state" id="toc-step-5-add-a-slicer-by-state" class="nav-link" data-scroll-target="#step-5-add-a-slicer-by-state">Step 5: Add a slicer by state</a></li>
   <li><a href="#step-6-turn-on-interaction-between-visuals" id="toc-step-6-turn-on-interaction-between-visuals" class="nav-link" data-scroll-target="#step-6-turn-on-interaction-between-visuals">Step 6: Turn on interaction between visuals</a></li>
   <li><a href="#step-7-improve-readability" id="toc-step-7-improve-readability" class="nav-link" data-scroll-target="#step-7-improve-readability">Step 7: Improve readability</a></li>
-  <li><a href="#power-bi-reflection-questions" id="toc-power-bi-reflection-questions" class="nav-link" data-scroll-target="#power-bi-reflection-questions">Power BI reflection questions</a></li>
+  <li><a href="#power-bi-reflection-questions-optional" id="toc-power-bi-reflection-questions-optional" class="nav-link" data-scroll-target="#power-bi-reflection-questions-optional">Power BI reflection questions (OPTIONAL)</a></li>
   </ul></li>
   <li><a href="#part-2-build-an-interactive-spatial-visual-in-r" id="toc-part-2-build-an-interactive-spatial-visual-in-r" class="nav-link" data-scroll-target="#part-2-build-an-interactive-spatial-visual-in-r">Part 2: Build an Interactive Spatial Visual in R</a>
   <ul class="collapse">
@@ -143,7 +143,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p><img src="includes/lab_header.png" class="img-fluid"></p>
-<p>This lab introduces spatial data as a tool for data-driven decision making. You will work with the dataset on corn yield and drought conditions in two settings. First, you will use <strong>Power BI</strong> to build an interactive map and scatterplot. Then you will use <strong>R</strong> to build a similar interactive version. The goal is not to become a GIS specialist in one lab (see other courses at CSU or free ArcGIS Online modules if you’re interested in learning more). The goal is to learn how location can add meaning to a dataset and how interactive visuals can support exploration and communication.</p>
+<p>This lab introduces spatial data as a tool for data-driven decision making. You will work with the dataset on corn yield and drought conditions in two settings. First, you will use <strong>Power BI</strong> to build an interactive map and scatterplot (this portion of the lab is OPTIONAL). Then you will use <strong>R</strong> to build a similar interactive version (not optional). The goal is not to become a GIS specialist in one lab (see other courses at CSU or free ArcGIS Online modules if you’re interested in learning more). The goal is to learn how location can add meaning to a dataset and how interactive visuals can support exploration and communication.</p>
 <p>Throughout the lab, keep asking yourself these questions:</p>
 <ul>
 <li>What decision could this visual support?</li>
@@ -293,8 +293,8 @@ Note
 <li>align the visuals neatly</li>
 </ul>
 </section>
-<section id="power-bi-reflection-questions" class="level3">
-<h3 class="anchored" data-anchor-id="power-bi-reflection-questions">Power BI reflection questions</h3>
+<section id="power-bi-reflection-questions-optional" class="level3">
+<h3 class="anchored" data-anchor-id="power-bi-reflection-questions-optional">Power BI reflection questions (OPTIONAL)</h3>
 <div class="callout-attention">
 <p>Answer Questions 1-3 in your lab notebook.</p>
 <p><strong>Question 1.</strong> What does the map help you see that would be hard to notice in the scatterplot alone?</p>
@@ -340,7 +340,10 @@ Note
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge with corn dataset by state name</span></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>corn_sf <span class="ot">&lt;-</span> corn_dat <span class="sc">%&gt;%</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(states, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"abbr"</span> <span class="ot">=</span> <span class="st">"state"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(states, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"abbr"</span> <span class="ot">=</span> <span class="st">"state"</span>))</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Make sure corn_sf is really an sf (simple features) object</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>corn_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(corn_sf) <span class="co"># this function converts non-sf objects to sf if a geometry column is present</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout-attention">
 <p>Look at the new merged dataset. Answer all parts of Question 4 in your lab notebook.</p>
@@ -357,7 +360,7 @@ Note
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(corn_sf) <span class="sc">+</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">"yield"</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">"yield_bu_per_acre"</span>,</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="st">"YlGn"</span>,</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Corn Yield"</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
@@ -366,7 +369,7 @@ Note
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.outside =</span> <span class="cn">TRUE</span></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>You could also color by <code>farm_gdp</code> instead.</p>
+<p>You could also color by <code>farm_gdp</code> instead (or <code>mean_dsci</code>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(corn_sf) <span class="sc">+</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(</span>
@@ -414,11 +417,10 @@ Note
 <h2 class="anchored" data-anchor-id="deliverables">Deliverables</h2>
 <p>Submit on Canvas:</p>
 <ol type="1">
-<li><p><strong>Log file (<code>lab_13.log</code>)</strong> Use the sink-source-sink pattern. Your log should include code, output, and brief comments.</p></li>
-<li><p><strong>Lab notebook</strong> with answers to Questions 1-8</p></li>
+<li><p><strong>Log file (<code>lab_9.log</code>)</strong> Use the sink-source-sink pattern. Your log should include code, output, and brief comments.</p></li>
+<li><p><strong>Lab notebook</strong> with answers to Questions 4-8</p></li>
 <li><p><strong>Screenshots or exports</strong> of:</p>
 <ul>
-<li>your Power BI report page with the map, scatterplot, and slicer</li>
 <li>at least one interactive R visual</li>
 </ul></li>
 </ol>
