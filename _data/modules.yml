@@ -150,6 +150,7 @@
   dirname: modules/14_refining
   desc: "This module focuses on reducing clutter, creating visual order, and directing audience attention so visuals communicate business-relevant takeaways clearly."
   slides: "slides.html"
+  lab: "lab.html"
   readings:
   - title: "Storytelling with Data: Chapter 3: Clutter is your enemy"
     url: "https://colostate.primo.exlibrisgroup.com/permalink/01COLSU_INST/5j5t2p/alma991032977306003361"
