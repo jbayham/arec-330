@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>rubric</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="rubric_files/libs/clipboard/clipboard.min.js"></script>
+<script src="rubric_files/libs/quarto-html/quarto.js"></script>
+<script src="rubric_files/libs/quarto-html/popper.min.js"></script>
+<script src="rubric_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="rubric_files/libs/quarto-html/anchor.min.js"></script>
+<link href="rubric_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="rubric_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="rubric_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="rubric_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="rubric_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="lab-14-rubric-refining-data-visuals" class="level1">
+<h1>Lab 14 Rubric: <em>Refining Data Visuals</em></h1>
+<p><strong>Total weight:</strong> 100% of the assignment grade<br>
+<strong>Grading philosophy:</strong></p>
+<ul>
+<li>Emphasis on thoughtful refinement decisions, not polish alone</li>
+<li>Reward evidence that the student is moving a real project graph forward</li>
+<li>Partial credit encouraged when the student shows coherent revision logic, even if the final chart is still rough</li>
+<li>Penalize generic answers that are not clearly tied to the submitted graph</li>
+</ul>
+<hr>
+<section id="weight-summary" class="level2">
+<h2 class="anchored" data-anchor-id="weight-summary">Weight Summary</h2>
+<table class="table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Question</th>
+<th style="text-align: right;">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Q1. Reflection on the guided refinement demo</td>
+<td style="text-align: right;">20%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Q2. Communication goal for the project graph</td>
+<td style="text-align: right;">15%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Q3. Diagnosis of the rough draft graph</td>
+<td style="text-align: right;">20%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Q4. Before/after refinement explanation and evidence of revision</td>
+<td style="text-align: right;">25%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Code, notebook, graphs, and takeaway</td>
+<td style="text-align: right;">20%</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="part-1-guided-chart-refinement-demo" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-guided-chart-refinement-demo">Part 1: Guided Chart Refinement Demo</h2>
+<section id="q1.-reflection-on-the-guided-refinement-demo-20" class="level3">
+<h3 class="anchored" data-anchor-id="q1.-reflection-on-the-guided-refinement-demo-20">Q1. Reflection on the guided refinement demo (20%)</h3>
+<table class="table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 85%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Score</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">90-100%</td>
+<td>Clearly identifies two high-impact refinement moves from Steps 0-6 and explains, in specific terms, how those moves improved readability and made the message easier to see</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">60-89%</td>
+<td>Identifies two reasonable changes, but the explanation is somewhat generic, incomplete, or only partly connected to why the final version works better</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">30-59%</td>
+<td>Mentions at least one relevant change, but the response is vague, descriptive only, or does not clearly explain why the refinement mattered</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0-29%</td>
+<td>Missing, off-topic, or shows little understanding of the refinement process</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key indicators:</strong></p>
+<ul>
+<li>Names concrete changes such as title/message, clutter removal, axis cleanup, legend removal, emphasis, or layout</li>
+<li>Explains why those changes help the audience read the chart faster</li>
+<li>Focuses on communication improvement rather than just listing edits</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="part-2-refine-one-graph-for-your-project" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-refine-one-graph-for-your-project">Part 2: Refine One Graph for Your Project</h2>
+<section id="q2.-communication-goal-for-the-project-graph-15" class="level3">
+<h3 class="anchored" data-anchor-id="q2.-communication-goal-for-the-project-graph-15">Q2. Communication goal for the project graph (15%)</h3>
+<table class="table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 87%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Score</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">90-100%</td>
+<td>Clearly states the decision or question, identifies the audience, explains what they should notice first, and provides a focused one-sentence takeaway tied to the submitted graph</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">60-89%</td>
+<td>Most elements are present, but one part is vague, underdeveloped, or only loosely connected to the graph</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">30-59%</td>
+<td>Gives some project context, but the audience, decision, or takeaway is unclear</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0-29%</td>
+<td>Missing, generic, or not tied to a specific project graph</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key indicators:</strong></p>
+<ul>
+<li>Names a real project-related question or decision</li>
+<li>Identifies a plausible audience</li>
+<li>States what the graph is supposed to help that audience notice</li>
+<li>Gives a takeaway that could reasonably guide refinement choices</li>
+</ul>
+</section>
+<section id="q3.-diagnosis-of-the-rough-draft-graph-20" class="level3">
+<h3 class="anchored" data-anchor-id="q3.-diagnosis-of-the-rough-draft-graph-20">Q3. Diagnosis of the rough draft graph (20%)</h3>
+<table class="table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 88%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Score</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">90-100%</td>
+<td>Gives a concrete diagnosis of the original graph, including at least two sources of clutter, one specific label/axis/legend/layout issue, what stands out first, and whether that matches the intended message</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">60-89%</td>
+<td>Identifies several real issues, but some observations are broad, incomplete, or not clearly linked to the intended message</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">30-59%</td>
+<td>Shows some awareness that the original graph has problems, but the diagnosis is thin, vague, or missing required elements</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0-29%</td>
+<td>Minimal, generic, or missing diagnosis</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key indicators:</strong></p>
+<ul>
+<li>Refers to actual features of the submitted rough draft</li>
+<li>Distinguishes between visual clutter and communication problems</li>
+<li>Connects the diagnosis to message clarity, not just appearance</li>
+</ul>
+</section>
+<section id="q4.-beforeafter-refinement-explanation-and-evidence-of-revision-25" class="level3">
+<h3 class="anchored" data-anchor-id="q4.-beforeafter-refinement-explanation-and-evidence-of-revision-25">Q4. Before/after refinement explanation and evidence of revision (25%)</h3>
+<table class="table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 88%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Score</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">90-100%</td>
+<td>Includes both original and refined graphs and gives a specific explanation of what changed and why. The revisions visibly improve emphasis, clarity, or audience focus, and the response shows real project progress and engagement with the refinement workflow</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">60-89%</td>
+<td>Shows meaningful revision and a reasonable explanation, but the changes are modest, the rationale is somewhat generic, or the link to audience/message could be stronger</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">30-59%</td>
+<td>Includes some revision effort, but the before/after difference is limited, the explanation is vague, or it is hard to tell how the changes help communication</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0-29%</td>
+<td>Missing before/after evidence, little visible revision, or explanation is largely absent or off-topic</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Strong answers usually do all of the following:</strong></p>
+<ul>
+<li>Use a real graph from the group project, or a plausible in-progress draft if the project is still developing</li>
+<li>Make visible changes rather than only describing intended revisions</li>
+<li>Explain how the refinements help the audience notice the main message more quickly</li>
+<li>Show engagement with the process even if the final chart is not fully polished</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="deliverables-and-reproducibility" class="level2">
+<h2 class="anchored" data-anchor-id="deliverables-and-reproducibility">Deliverables and Reproducibility</h2>
+<section id="code-notebook-graphs-and-takeaway-20" class="level3">
+<h3 class="anchored" data-anchor-id="code-notebook-graphs-and-takeaway-20">Code, notebook, graphs, and takeaway (20%)</h3>
+<table class="table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 88%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Share of this category’s weight</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">90-100%</td>
+<td><code>lab_14.log</code> is present and readable, the notebook answers all required questions, both the original and refined graphs are included, and the one-sentence takeaway is easy to identify</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">60-89%</td>
+<td>Most deliverables are present and usable, with minor omissions, formatting problems, or organization issues</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">30-59%</td>
+<td>Deliverables are partly complete, but important pieces are missing, hard to follow, or weakly documented</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0-29%</td>
+<td>Major required deliverables are missing or unusable</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Required deliverables:</strong></p>
+<ul>
+<li><code>lab_14.log</code></li>
+<li>Lab notebook responses to Questions 1-4</li>
+<li>Original graph</li>
+<li>Refined graph</li>
+<li>Short explanation of refinements</li>
+<li>One-sentence takeaway</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="instructor-ta-notes" class="level2">
+<h2 class="anchored" data-anchor-id="instructor-ta-notes">Instructor / TA Notes</h2>
+<ul>
+<li>Prioritize evidence of project progress and engagement over visual polish alone</li>
+<li>A strong Part 2 submission may still be rough if the student shows real diagnosis, concrete revision choices, and clear audience-focused reasoning</li>
+<li>Deduct more heavily when students provide generic statements such as “it looks better” without tying them to visible changes in the graph</li>
+<li>Reward students who make the before/after comparison easy to inspect</li>
+</ul>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
