@@ -156,3 +156,13 @@
     url: "https://colostate.primo.exlibrisgroup.com/permalink/01COLSU_INST/5j5t2p/alma991032977306003361"
   - title: "Storytelling with Data: Chapter 4: focus your audience's attention"
     url: "https://colostate.primo.exlibrisgroup.com/permalink/01COLSU_INST/5j5t2p/alma991032977306003361"
+
+- title: "Week 15: Storytelling and Presenting Data-Driven Insights"
+  id: "presenting"
+  dirname: modules/15_presenting
+  desc: "This module focuses on how to present your data-driven insights in a compelling way."
+  slides: "slides.html"
+  # lab: "lab.html"
+  readings:
+  - title: "Storytelling with Data: Chapter 7: Lessons in Storytelling"
+    url: "https://colostate.primo.exlibrisgroup.com/permalink/01COLSU_INST/5j5t2p/alma991032977306003361"
