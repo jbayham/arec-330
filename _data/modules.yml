@@ -162,7 +162,7 @@
   dirname: modules/15_presenting
   desc: "This module focuses on how to present your data-driven insights in a compelling way."
   slides: "slides.html"
-  # lab: "lab.html"
+  lab: "lab.html"
   readings:
   - title: "Storytelling with Data: Chapter 7: Lessons in Storytelling"
     url: "https://colostate.primo.exlibrisgroup.com/permalink/01COLSU_INST/5j5t2p/alma991032977306003361"

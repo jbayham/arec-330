@@ -1,0 +1,163 @@
+---
+title: "Week 15 Lab: Storyboarding Final Presentations"
+format:
+  html:
+    theme: zephyr
+    code-copy: true
+    toc: true
+    css: ../course-links.css
+    include-before-body: ../course-links.html
+    include-after-body: ../course-footer.html
+---
+
+![](includes/lab_header_presenting.png)
+
+This workshop is about turning your project analysis into an 8-minute final presentation. The goal is not to build a polished deck during class. The goal is to leave with a clear storyboard, a stronger slide sequence, and a focused list of slide revisions to make before presenting.
+
+You will work on the printed storyboarding sheet handed out in class. The final presentation is the deliverable.
+
+## Preliminaries
+
+Work with your project team. You should have access to:
+
+- your project question or decision context
+- your current results or best available draft results
+- your Week 14 refined visual, or the rough visual you plan to refine
+- any draft slides your team has already created
+
+Start with the printed storyboard sheet. Storyboarding works best before you spend too much time adjusting slide layout.
+
+---
+
+## Part 1: Audience and Decision Frame
+
+Before deciding what slides to make, define who the presentation is for and what decision it supports.
+
+On your printed sheet, answer:
+
+1. Who needs to act?
+2. What decision or question do they face?
+3. What does this audience care about?
+4. What evidence would change their mind?
+
+Then write one sentence:
+
+> We want [audience] to understand [finding] so they can [decision/action].
+
+:::{.callout-note}
+The story should be about the audience's decision, not the order in which your team did the work.
+:::
+
+---
+
+## Part 2: Build the Story Arc
+
+Use a beginning, middle, and end structure to organize the presentation.
+
+| Story part | What it should do | Your project |
+|---|---|---|
+| Beginning | Establish the problem, context, imbalance, and audience stakes | What is happening now, and why does it matter? |
+| Middle | Show the key evidence and explain what it means | What did your analysis find? |
+| End | State the implication, recommendation, or call to action | What should the audience do next? |
+
+After you sketch the story arc, have one teammate say the 3-minute version aloud without using slides.
+
+As they speak, the rest of the team should listen for:
+
+- where the story starts to feel unclear
+- whether the audience and decision are obvious
+- whether the result leads naturally to the recommendation
+- what background can be shortened or removed
+
+---
+
+## Part 3: Draft the Headline Storyboard
+
+On the printed storyboard sheet, draft 6-8 assertion-style slide titles for your final presentation.
+
+Your storyboard should include these roles:
+
+- problem or decision context
+- why the issue matters
+- data and approach, written as a useful claim rather than "Methods"
+- key result
+- implication
+- recommendation or call to action
+
+Assertion titles should tell the audience what to take from the slide.
+
+| Label title | Assertion title |
+|---|---|
+| Results | Drought severity is associated with lower corn yields |
+| Forecast | Demand is projected to exceed current capacity by July |
+| Conclusion | The district should prioritize targeted water cuts |
+
+### Horizontal logic test
+
+Read only the slide titles in order.
+
+If the titles do not tell a coherent story, revise the titles or reorder the slides before building more slide content.
+
+:::{.callout-tip}
+If a title could fit almost any project, it is probably still too vague.
+:::
+
+---
+
+## Part 4: Match Evidence to Slides
+
+For each planned slide, identify what evidence belongs there.
+
+Use this checklist for each storyboard box:
+
+- What claim does this slide make?
+- What visual, number, or explanation supports that claim?
+- Is this slide essential for an 8-minute presentation?
+- What can move to backup, appendix, or Q&A?
+
+Mark where your Week 14 refined visual belongs. If that visual no longer supports the story, decide whether it should be revised, replaced, or moved to backup.
+
+:::{.callout-note}
+The presentation does not need to show every graph, model, or data source. It needs enough evidence for the audience to understand and trust your recommendation.
+:::
+
+---
+
+## Part 5: Slide Refinement Check
+
+Choose 2-3 priority slides that need the most revision before the final presentation.
+
+For each priority slide, check:
+
+- Does the slide make one main point?
+- Is the title an assertion rather than a label?
+- Does the visual or evidence support the title?
+- Can any text, labels, legends, or decoration be removed?
+- Does the slide avoid becoming a document pretending to be slides?
+- Does the slide avoid becoming a mystery slide that only makes sense with a long explanation?
+
+Write the revision you need to make directly on the storyboard sheet.
+
+Examples:
+
+- Rewrite "Data" as "County-level yield and drought data allow us to compare conditions over time."
+- Replace a dense regression table with a coefficient plot focused on the one estimate that matters most.
+- Move robustness checks to backup because they are useful for questions but not central to the 8-minute story.
+- Split a crowded slide into two slides because it is trying to make two different claims.
+
+---
+
+## Part 6: Peer Read-Through
+
+Swap storyboard sheets with another team.
+
+Read only their slide titles first. Then answer:
+
+- What do you think the main argument is?
+- Where does the story lose clarity?
+- Which slide seems least necessary?
+- Which title is still too vague or label-like?
+
+Return the sheet and discuss your feedback.
+
+After the peer read-through, revise your storyboard during class. Focus on changes that will make the final presentation clearer, shorter, and easier to follow.
