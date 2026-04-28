@@ -1,0 +1,343 @@
+---
+title: "Week 15: Presenting Data-Driven Insights"
+format:
+  revealjs:
+    slide-number: true
+    theme: [night, ../custom.scss]
+    touch: true
+---
+
+## From Chart to Presentation
+
+- Last week: refine visuals so the message is easier to see
+- This week: organize those visuals into a story someone can act on
+- A final presentation is not a report read aloud
+- It is a decision-focused argument
+
+:::{.notes}
+Time: 3 minutes.
+
+Connect directly to Week 14:
+
+- A refined visual can make one point clear.
+- A presentation has to connect several points into a coherent argument.
+- The final presentation should help a decision-maker understand what matters and what should happen next.
+:::
+
+## The Presentation Has a Job
+
+Your audience should leave knowing:
+
+1. What problem or decision motivated the analysis
+2. What evidence matters most
+3. What your results imply
+4. What should happen next
+
+:::{.notes}
+Time: 2 minutes.
+
+Emphasize that the goal is not to show all the work.
+The goal is to make the most important work usable.
+:::
+
+# Story Structure
+
+## Stories Need Tension
+
+Good data presentations usually start with an imbalance:
+
+**What is happening now?**
+
+**What should be happening instead?**
+
+The gap between those two states gives the audience a reason to care.
+
+:::{.notes}
+Time: 4 minutes.
+
+Use Knaflic's framing from the reading:
+
+- Stories have a beginning, middle, and end.
+- Conflict or tension helps make the story matter.
+- In a data presentation, the tension is often the difference between the current state and the desired state.
+:::
+
+## Beginning, Middle, End
+
+:::: {.columns}
+
+::: {.column width="33%"}
+**Beginning**
+
+Problem, audience, context, imbalance
+:::
+
+::: {.column width="33%"}
+**Middle**
+
+Evidence, interpretation, implications
+:::
+
+::: {.column width="33%"}
+**End**
+
+Recommendation or call to action
+:::
+
+::::
+
+:::{.notes}
+Time: 4 minutes.
+
+Tie this to their project presentations:
+
+- Beginning: why this project exists.
+- Middle: what the data show.
+- End: what the audience should do with the result.
+:::
+
+## The Audience Is the Main Character {.scrollable}
+
+The story is not mainly about:
+
+- how hard the project was
+- every dataset you found
+- every model you tried
+- every graph you made
+
+It is about the decision your audience needs to make.
+
+Before building slides, answer:
+
+- Who needs to act?
+- What decision or question do they face?
+- What evidence would change their mind?
+
+:::{.notes}
+Time: 4 minutes.
+
+This is the most important audience framing point.
+
+Ask students to think silently:
+
+- Who is the decision-maker for your project?
+- What do they care about?
+- What action could your analysis inform?
+:::
+
+## Example: Frame the Water-Cut Story {.scrollable}
+
+
+**Who needs to act?**
+
+The irrigation district board deciding how to allocate a 15% water cut.
+
+**What decision or question do they face?**
+
+Should the district apply the cut uniformly to all farms or target the cut to preserve higher-value water use?
+
+**What evidence would change their mind?**
+
+Evidence that one policy preserves more crop value than the other, and that the difference is large enough to matter for the district.
+
+**How this changes the deck**
+
+- lead with the policy choice
+- show the value comparison
+- end with a recommendation
+
+:::{.notes}
+Time: 3 minutes.
+
+Use this to model the thought process explicitly:
+
+- identify the audience in concrete terms
+- name the real decision they face
+- define what evidence would be persuasive
+
+Then point out how these answers shape the presentation structure.
+The deck is no longer "here is the analysis we ran."
+It becomes "here is the decision, the evidence, and the recommendation."
+:::
+
+# Slides Logic
+
+## Titles Carry the Argument
+
+Slide titles should be assertions, not labels.
+
+| **Weak** | **Stronger** |
+|---|---|
+| Results | Drought severity is associated with lower corn yields |
+| Forecast | Demand is projected to exceed current capacity by July |
+| Conclusion | The district should prioritize targeted water cuts |
+
+If someone reads only your slide titles in order, they should understand the story.
+
+:::{.notes}
+Time: 5 minutes.
+
+This combines the deck.md principle with Knaflic's horizontal logic.
+
+Key point:
+
+- The title should tell the audience what to take from the slide.
+- The chart, table, or bullets should support that claim.
+:::
+
+
+## One Slide, One Idea
+
+Each slide should make one claim.
+
+If you hear yourself saying: "*And also...*"
+
+you probably need another slide.
+
+:::{.notes}
+Time: 3 minutes.
+
+This is from deck.md.
+
+Emphasize that slides are cheap, but audience attention is limited.
+One idea per slide makes it easier for the speaker to present and easier for the audience to follow.
+:::
+
+## Avoid Two Failure Modes
+
+:::: {.columns}
+
+::: {.column width="50%"}
+**The document pretending to be slides**
+
+- too much text
+- too many full sentences
+- audience reads ahead
+- speaker becomes redundant
+:::
+
+::: {.column width="50%"}
+**The mystery slide**
+
+- too sparse
+- no context
+- no clear claim
+- useless without explanation
+:::
+
+::::
+
+:::{.notes}
+Time: 3 minutes.
+
+The target is the middle:
+
+- incomplete enough that the speaker matters
+- structured enough that the audience can follow
+- clear enough that the slide still communicates a point
+:::
+
+<!-- # Activity
+
+## Build the Headline Storyboard {.scrollable}
+
+Work with your project team.
+
+Draft 5-6 assertion-style slide titles:
+
+1. Problem or decision context
+2. Why the issue matters
+3. Data and approach
+4. Key result
+5. Implication
+6. Recommendation or call to action
+
+Then read only the titles. Do they tell a coherent story?
+
+:::{.notes}
+Time: 8 minutes.
+
+This is the only activity.
+
+Instructions:
+
+- Teams should write titles, not slide content.
+- Push them away from labels like "data," "methods," and "results."
+- Ask them to make each title a claim.
+- Circulate and help teams sharpen one or two weak titles.
+::: -->
+
+# Making It Fit
+
+## Eight Minutes Requires Choices {.scrollable}
+
+Your final presentation should include:
+
+- problem and decision context
+- brief data and approach
+- key results and interpretation
+- implications and recommendations
+- visuals that support the message
+
+It should not walk through every technical detail.
+
+For each slide, ask:
+
+- What claim does this slide make?
+- What evidence supports that claim?
+- What can move to backup, appendix, or Q&A?
+
+:::{.notes}
+Time: 5 minutes.
+
+This mirrors the project description.
+
+Emphasize that "brief data and approach" means enough to trust the analysis, not a full methods lecture.
+
+Connect to Week 14:
+
+- Use the refined visuals students already made.
+- Do not add visuals only because they were part of the work.
+:::
+
+## Slides Support the Speaker
+
+In a live presentation:
+
+- the slide shows the structure
+- the speaker supplies the explanation
+- transitions connect the ideas
+- visuals carry the key evidence
+
+If the slide says everything, the audience stops listening.
+
+:::{.notes}
+Time: 2 minutes.
+
+Keep this light.
+The lecture is not mainly about delivery mechanics, but students should understand the speaker-slide relationship.
+:::
+
+
+
+## Final Checklist
+
+Before presenting, check:
+
+1. Is the audience clear?
+2. Is the decision or problem clear?
+3. Do the titles tell the story?
+4. Does each slide make one point?
+5. Do visuals support the message?
+6. Is the call to action unmistakable?
+
+:::{.notes}
+Time: 2 minutes.
+
+Close with the core standard:
+
+The audience should not have to infer the point of the presentation.
+The team should make the point clear.
+:::
+
+
