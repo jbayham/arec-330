@@ -189,7 +189,7 @@ It becomes "here is the decision, the evidence, and the recommendation."
 :::
 
 
-## AI can analyze but not own the decision
+## AI can analyze but not own the decision{.scrollable}
 
 AI can tell you:
 
