@@ -312,7 +312,6 @@ Instructions:
 - Circulate and help teams sharpen one or two weak titles.
 ::: -->
 
-# Making It Fit
 
 ## Eight Minutes Requires Choices {.scrollable}
 
@@ -363,7 +362,7 @@ Keep this light.
 The lecture is not mainly about delivery mechanics, but students should understand the speaker-slide relationship.
 :::
 
-## Your Comparative Advantage in an AI World
+## Your Comparative Advantage in an AI World{.scrollable}
 
 Old value:
 
