@@ -30,8 +30,7 @@ Your audience should leave knowing:
 
 1. What problem or decision motivated the analysis
 2. What evidence matters most
-3. What your results imply
-4. What should happen next
+3. What your results imply about decisions or actions
 
 :::{.notes}
 Time: 2 minutes.
@@ -40,17 +39,35 @@ Emphasize that the goal is not to show all the work.
 The goal is to make the most important work usable.
 :::
 
+## Why This Skill Matters More Now
+
+AI can generate charts, summaries, and even draft presentations
+
+What it cannot do is:
+
+- decide what matters
+- persuade a specific audience
+- build trust around a recommendation
+
+**Your advantage is not producing analysis; it is ensuring the analysis informs decision-making**
+
+:::{.notes}
+There’s a growing argument that as AI gets better at analysis, the scarce skill shifts to persuasion. Not persuasion in a manipulative sense, but the ability to connect evidence to a decision and get someone to act.
+:::
+
 # Story Structure
 
 ## Stories Need Tension
 
-Good data presentations usually start with an imbalance:
+Good data presentations usually start with an imbalance[^1]:
 
 **What is happening now?**
 
 **What should be happening instead?**
 
 The gap between those two states gives the audience a reason to care.
+
+[^1]: Out of equilibrium. 
 
 :::{.notes}
 Time: 4 minutes.
@@ -61,6 +78,14 @@ Use Knaflic's framing from the reading:
 - Conflict or tension helps make the story matter.
 - In a data presentation, the tension is often the difference between the current state and the desired state.
 :::
+
+## Example Tension: Water cuts
+
+Drought has reduced water availability in the district by 15%.
+
+Water cuts are coming, but the district hasn’t decided how to apply them.
+
+
 
 ## Beginning, Middle, End
 
@@ -110,7 +135,7 @@ It is about the decision your audience needs to make.
 Before building slides, answer:
 
 - Who needs to act?
-- What decision or question do they face?
+- What decision do they face?
 - What evidence would change their mind?
 
 :::{.notes}
@@ -124,6 +149,9 @@ Ask students to think silently:
 - What do they care about?
 - What action could your analysis inform?
 :::
+
+
+
 
 ## Example: Frame the Water-Cut Story {.scrollable}
 
@@ -159,6 +187,23 @@ Then point out how these answers shape the presentation structure.
 The deck is no longer "here is the analysis we ran."
 It becomes "here is the decision, the evidence, and the recommendation."
 :::
+
+
+## AI can analyze but not own the decision
+
+AI can tell you:
+
+- what the data suggest
+- what policy might maximize value
+
+It cannot:
+
+- take responsibility for the outcome
+- understand stakeholder incentives
+- persuade a board, client, or public
+
+**That is your role**
+
 
 # Slides Logic
 
@@ -318,7 +363,36 @@ Keep this light.
 The lecture is not mainly about delivery mechanics, but students should understand the speaker-slide relationship.
 :::
 
+## Your Comparative Advantage in an AI World
 
+Old value:
+
+- running the model
+- producing the chart
+
+New value:
+
+- framing the decision
+- interpreting the result
+- persuading the audience
+
+**If AI can run the regression, your job is to explain why it matters**
+
+:::{.notes}
+The bottleneck is no longer solving the problem—it’s getting people to agree on what to do about it.
+:::
+
+## Timing
+
+A good 8-minute presentation might have:
+
+- 1.5 minutes for the problem and decision context
+- 2 minutes for data and approach 
+- 2 minutes for key results
+- 2 minutes for implications and recommendations
+
+
+1.5 minutes per slide is a good rule of thumb, but it depends on the content.
 
 ## Final Checklist
 
@@ -340,4 +414,14 @@ The audience should not have to infer the point of the presentation.
 The team should make the point clear.
 :::
 
+## Next Week: Project Presentations
 
+- Each team will have 8 minutes to present their project.
+- 4 minutes for questions on logic, evidence, and implications.
+- Written report also due Wed May 6.
+
+## Additional tips for presentations:
+
+- Practice with group members.
+- Time your presentation to ensure it fits within the allotted time.
+- Know your analysis so you can answer question
