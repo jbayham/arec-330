@@ -1,0 +1,232 @@
+---
+title: "Audit of the Water-Cut Example Deck"
+format:
+  html:
+    theme: zephyr
+    toc: true
+    toc-depth: 2
+---
+
+# Audit Summary
+
+This audit reviews `water_cut_example.pptx` against the slide-making guidance in `deck.md` and the Week 15 presenting lecture.
+
+Overall, the deck has a solid narrative spine:
+
+- it introduces a clear decision context
+- it moves from problem to evidence to recommendation
+- it ends with a direct claim about the better policy
+
+The main issues are structural rather than conceptual:
+
+- several slides use label-style or note-style phrasing instead of assertion-style titles
+- the data slide is too dense to work as a presentation slide without speaker-heavy explanation
+- a few slides stack multiple claims into one frame, which weakens the "one idea per slide" rule
+- the closing slide is a contact slide, which is fine as an endcard but not part of the argument
+
+## Highest-Priority Fixes
+
+1. Rewrite slide titles so each one states the claim the audience should take away.
+2. Split or simplify the data-heavy slide so it supports the story instead of asking the audience to decode a table.
+3. Make the comparison slide and conclusion slide more explicit about the decision tradeoff.
+4. Keep the contact slide separate from the argument so it does not compete with the conclusion.
+
+# Slide-by-Slide Audit
+
+## Slide 1: Title Slide
+
+**Current title:** `Allocating Water Cuts`
+
+### What works
+
+- The topic is immediately understandable.
+- The deck starts with the right decision domain rather than generic background.
+
+### Issues
+
+- The title is a topic label, not an assertion.
+- It does not yet tell the audience what the deck will argue.
+
+### Recommendation
+
+- Keep the opening frame simple, but make the title more specific if possible.
+- A stronger title would name the central tension or decision, such as the need to choose between allocation rules.
+
+## Slide 2: Problem Statement
+
+**Current title:** `We need to cut water allocations by 15%`
+
+### What works
+
+- This slide does the most important rhetorical job in the deck: it creates tension.
+- The visual support on the slide gives the audience a quick sense that there are two policy paths.
+
+### Issues
+
+- The title is close to a claim, but it is still more of a situation statement than a full takeaway.
+- The slide includes several short lines of text, so the audience has to assemble the point from fragments.
+
+### Recommendation
+
+- Keep this slide as the opening problem frame.
+- Tighten the copy so the title and body work together as one clear assertion.
+- If possible, elevate the choice into the title itself.
+
+## Slide 3: Data Table
+
+**Current title:** `Last year’s data to determine allocation`
+
+### What works
+
+- The slide shows the source of the decision rule.
+- The table signals that the recommendation is grounded in data, not intuition.
+
+### Issues
+
+- This is the weakest slide in the deck from a presentation-design standpoint.
+- It behaves like a reference table, not a slide.
+- The amount of text forces the audience to read rather than listen.
+- The title is vague and label-like.
+- The audience has to infer why these columns matter and how they lead to the next decision.
+
+### Recommendation
+
+- Replace the table with a simplified visual or a short summary that highlights only the variables relevant to the policy choice.
+- If the full table is necessary for backup, move it out of the main narrative.
+- Rewrite the title as a claim about why the data support the analysis.
+
+## Slide 4: Objective
+
+**Current title:** `Our goal is to maximize crop value within the district`
+
+### What works
+
+- This is a clear statement of the criterion being optimized.
+- It helps the audience understand the yardstick for comparing policies.
+
+### Issues
+
+- The slide is very short, so it risks feeling like a transition note rather than an argument step.
+- The title is functional, but not yet as strong as it could be in assertion form.
+
+### Recommendation
+
+- Keep the slide because it clarifies the objective function.
+- Consider folding this idea into a stronger transition from the data slide into the scenario comparison.
+
+## Slide 5: Scenario Construction
+
+**Current title:** `Construct two scenarios…`
+
+### What works
+
+- The slide clearly introduces the core comparison.
+- The two alternatives are easy to name and distinguish.
+
+### Issues
+
+- The ellipsis in the title makes it feel unfinished.
+- The slide contains multiple claims at once:
+  - the uniform cut assumption
+  - the targeted cut logic
+  - the fairness/impact tradeoff
+- Because of that, it is doing too much work for one frame.
+
+### Recommendation
+
+- Split this into two slides if possible:
+  - one slide for the uniform cut scenario
+  - one slide for the targeted cut scenario
+- If keeping one slide, reduce the text and make the title state the central contrast more directly.
+
+## Slide 6: Result
+
+**Current title:** `Targeted cut preserves $655 in value`
+
+### What works
+
+- This is the strongest slide in the deck.
+- The title is an assertion.
+- The result is concrete, numeric, and decision-relevant.
+
+### Issues
+
+- The deck would be stronger if this slide also showed the comparison basis more clearly.
+- Without context, the number is persuasive but slightly under-explained.
+
+### Recommendation
+
+- Keep the slide and keep the title style.
+- Add just enough framing so the audience understands what the $655 compares against.
+- If the underlying visual is not doing that work, replace it with a simpler comparison graphic.
+
+## Slide 7: Conclusion
+
+**Current title:** `Conclusions`
+
+### What works
+
+- The content is useful and balanced.
+- It acknowledges both the main finding and a real concern about fairness.
+
+### Issues
+
+- The title is label-like rather than argumentative.
+- The slide asks the audience to do extra interpretation work.
+- The rhetorical question at the end is a useful discussion prompt, but it weakens the finality of the conclusion slide if left unsupported.
+
+### Recommendation
+
+- Rewrite the title as a conclusion, not a section label.
+- Make the main recommendation or tradeoff explicit in the title and first line.
+- If fairness is a major caveat, keep it, but present it as a subordinate consideration after the main claim.
+
+## Slide 8: Contact Slide
+
+**Current title:** contact information block
+
+### What works
+
+- A closing contact slide is normal and useful.
+- It gives the audience a way to follow up.
+
+### Issues
+
+- It is not part of the argument.
+- If read too quickly, it can feel like another slide in the story rather than a closing appendix-style endcard.
+
+### Recommendation
+
+- Keep it, but treat it as a terminal endcard after the conclusion.
+- Do not rely on it to carry any presentation logic.
+
+# How the Deck Aligns With the Guidance
+
+## Strong alignment
+
+- The deck has a clear beginning-middle-end structure.
+- It centers a real decision, not a general topic.
+- It uses a concrete example rather than abstract framing.
+- It reaches a recommendation instead of stopping at analysis.
+
+## Weak alignment
+
+- Not every slide title is an assertion.
+- One slide is too document-like.
+- Some slides still read as notes to the speaker instead of claims to the audience.
+- The closing slide is functional but outside the story arc.
+
+## Bottom line
+
+This is a good draft of a decision-oriented deck. The core story is right. The main improvement is to make the narrative easier to read from the slides themselves, especially by tightening titles and reducing the density of the data slide.
+
+# Suggested Revision Order
+
+1. Rewrite slide 3 into a visual that emphasizes the policy-relevant data.
+2. Split or simplify slide 5 so each scenario gets its own clean frame.
+3. Revise slide 7 so the conclusion is a claim, not a section heading.
+4. Add a stronger assertion-style title to the opening frames where possible.
+
+# Final Note
+
+If the goal is a presentation that can stand alone for an audience, the deck needs less table, more hierarchy, and sharper titles. If the goal is mainly to brief the speaker, the current structure is usable, but it still leaves too much interpretation work on the audience.
