@@ -342,7 +342,7 @@ The proposal should demonstrate that your question is answerable with available 
 
 The written report presents your full analysis and is the primary record of your work. It should be written for an intelligent but non-technical audience and emphasize interpretation and decision relevance over technical detail.
 
-The report should be concise (approximately 6–8 pages, excluding tables and figures) and include:
+The report should be concise (double-spaced with 12 or 11 pt font approximately 6–8 pages, excluding tables and figures) and include:
 
 - An executive summary that highlights key findings and recommendations
 - Background and decision context
@@ -353,6 +353,17 @@ The report should be concise (approximately 6–8 pages, excluding tables and fi
 - Conclusions and actionable recommendations
 
 Clear writing, well-designed tables and figures, and logical organization are essential.
+
+Recommended sections:
+
+1. Executive Summary (one paragraph summary concisely describing your problem, research question, data used, key findings, recommendations. ~One sentence for each.)
+  - Example: "Producers are faced with uncertainty in XXX (rewrite this part for your specific decision maker). This report investigates how ZZZ affects XXX (again, adjust to be specific to your analysis). We use data from WWWW to estimate a regression/forecasting model (again adjust to your analysis) that [explain what model does]. Our analysis shows that [key findings]. We recommend YYY."
+2. Background and Decision Context (describe the problem, why it matters, and who the decision maker is. This should be a more detailed version of the first two sentences of your executive summary. Include citations for research papers and/or news articles when appropriate. Citation style is up to you, but should be consistent throughout the report.)
+3. Data (describe the data sources you used, where they come from, how you cleaned and processed the data, and any limitations or caveats about the data. If you use many data sources, can include a table with data sources to focus writing on describing cleaning process / data limitations (see Week 5 lab, question 8 (codebook) for example.))
+4. Modeling Approach (describe the model(s) you estimated, why you chose that model, and how it helps answer your question.)
+5. Results (present the results of your model, including key figures. Make sure these are explained well in the text (should be able to get the takeaway from the text absent the figure). Interpret key coefficients (including significance) or forecasts (can evaluate with accuracy metrics from Week 6 lab). Use tables and figures to support your explanation. Interpret the results in plain language and explain what they mean for the decision maker.)
+6. Discussion (discuss the assumptions, limitations, and uncertainty in your analysis. What are the main caveats that a decision maker should be aware of when interpreting your results? How might these limitations affect the conclusions you draw?)
+7. Conclusion and Recommendations (summarize the main findings and explain what you recommend the decision maker do as a result. Be specific about what action you think they should take, and why. If there are multiple possible actions, explain the tradeoffs between them and how your analysis informs those tradeoffs.)
 
 ### Rubric
 
