@@ -1,0 +1,124 @@
+---
+title: ""
+format:
+  pdf:
+    pdf-engine: xelatex
+    papersize: letter
+    geometry:
+      - margin=0.6in
+    colorlinks: false
+    number-sections: false
+    toc: false
+    include-in-header:
+      text: |
+        \usepackage{tabularx}
+        \usepackage{array}
+        \usepackage[table]{xcolor}
+        \pagestyle{empty}
+        \setlength{\parindent}{0pt}
+        \setlength{\parskip}{0pt}
+        \setlength{\tabcolsep}{4pt}
+        \renewcommand{\arraystretch}{1.45}
+        \setlength{\arrayrulewidth}{0.8pt}
+        \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+        \newcommand{\rubricpage}{
+          \thispagestyle{empty}
+          {\centering
+          {\LARGE \textbf{AREC 330 Final Presentation Rubric}\par}
+          \vspace{0.2em}
+          {\normalsize Score each category from 1 to 4. Total possible: 20.\par}
+          \par}
+          \vspace{0.8em}
+          \noindent
+          \begin{tabularx}{\linewidth}{@{}p{0.62\linewidth}p{0.12\linewidth}p{0.12\linewidth}p{0.12\linewidth}@{}}
+          \textbf{Team / Topic} \hrulefill & \textbf{Date} \hrulefill & \textbf{Total} \hrulefill & \\
+          \end{tabularx}
+          \vspace{0.8em}
+          \footnotesize
+          \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}p{1.45in}|Y|Y|Y|Y|>{\centering\arraybackslash}p{0.58in}|}
+          \hline
+          \rowcolor[gray]{0.93}
+          \textbf{Category} & \centering\textbf{4} & \centering\textbf{3} & \centering\textbf{2} & \centering\textbf{1} & \textbf{Score} \\
+          \hline
+          \textbf{Intro}\newline Problem motivation is clear, the decision-maker is identifiable, and the decision or question is framed up front.
+          & clear, strong, decision-focused
+          & mostly clear, minor gaps
+          & uneven or weakly connected
+          & unclear, missing, or inaccurate
+          & \\ \hline
+          \textbf{Methods and Data}\newline Data, outcome or unit, and empirical approach are described clearly and tied to the project goal or decision.
+          & clear, strong, decision-focused
+          & mostly clear, minor gaps
+          & uneven or weakly connected
+          & unclear, missing, or inaccurate
+          & \\ \hline
+          \textbf{Conclusions}\newline Main findings are clear, appropriately cautious, and consistent with the evidence shown.
+          & clear, strong, decision-focused
+          & mostly clear, minor gaps
+          & uneven or weakly connected
+          & unclear, missing, or inaccurate
+          & \\ \hline
+          \textbf{Slides}\newline Slides are readable, visually focused, uncluttered, and support the spoken message rather than duplicate it.
+          & clear, strong, decision-focused
+          & mostly clear, minor gaps
+          & uneven or weakly connected
+          & unclear, missing, or inaccurate
+          & \\ \hline
+          \textbf{Communication}\newline Delivery is clear and paced well, team participation is effective, and presenters explain and respond professionally.
+          & clear, strong, decision-focused
+          & mostly clear, minor gaps
+          & uneven or weakly connected
+          & unclear, missing, or inaccurate
+          & \\ \hline
+          \end{tabularx}
+          \normalsize
+          \vspace{1.0em}
+          \textbf{Strengths}\par
+          \vspace{0.35em}
+          \hrule
+          \vspace{1.15em}
+          \hrule
+          \vspace{1.15em}
+          \hrule
+          \vspace{1.15em}
+          \hrule
+          \vspace{1.35em}
+          \textbf{Suggestions}\par
+          \vspace{0.35em}
+          \hrule
+          \vspace{1.15em}
+          \hrule
+          \vspace{1.15em}
+          \hrule
+          \vspace{1.15em}
+          \hrule
+          \vspace{1.15em}
+          \hrule
+        }
+---
+
+```{=latex}
+\rubricpage
+\newpage
+\rubricpage
+\newpage
+\rubricpage
+\newpage
+\rubricpage
+\newpage
+\rubricpage
+\newpage
+\rubricpage
+\newpage
+\rubricpage
+\newpage
+\rubricpage
+\newpage
+\rubricpage
+\newpage
+\rubricpage
+\newpage
+\rubricpage
+\newpage
+\rubricpage
+```
